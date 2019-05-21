@@ -1,8 +1,8 @@
-##Method of building block designs##
+## Method of building block designs
 
 In experimental mathematics, the programs used to achieve various results rarely follow good software engineering practices, making these results difficult to replicate and evaluate. This section presents a formalization of a method for constructing combinatorial structures (called "block designs") and a validation of their properties.
 
-###Context###
+### Context
 
 This work is part of research into finite geometries called quantum geometries, because they are linked to _quantum_ contextuality. Planat et al. have shown how to construct these geometries, which are special cases of _block designs_, from groups of permutations, but without publishing a program for this construction.
 
