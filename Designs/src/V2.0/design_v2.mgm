@@ -1,0 +1,208 @@
+/**
+ * Compute orbits of stabilizers of a primitive group [KM02, Proposition 1].
+ *
+ * @param G::GrpPerm A primitive group
+ * @return Deltas::Assoc An associative array indexed by alpha
+ *		and containing the corresponding delta set
+ */
+AllDelta := function(G)
+	n := Degree(G);
+	Omega := {1..n};
+	Deltas := AssociativeArray();
+	for alpha in Omega do
+		Galpha := Stabilizer(G, alpha);
+		orbits := Orbits(Galpha);
+		Deltas[alpha] := { IndexedSetToSet(Delta) : Delta in orbits | Delta ne { alpha } };
+	end for;
+	return Deltas;
+end function;
+
+
+/**
+ * Builds all block designs from a primitive group [KM02, Proposition 1]
+ *
+ * @param G::GrpPerm A primitive group
+ * @return blocks::Assoc An associative array indexed by delta indexes
+ *		and containing corresponding block designs
+ */
+BlckDsgnsFromPrmtvGrp := function(G)
+	Deltas := AllDelta(G);
+	blocks := AssociativeArray();
+	for alpha in Keys(Deltas) do
+		for Delta in Deltas[alpha] do
+			blocks[Delta] := { Delta^g : g in G };
+		end for;
+	end for;
+	return blocks;
+end function;
+//return [ { delta^g : g in G } : delta in Deltas[alpha], alpha in Keys(Deltas) ];
+
+
+/**
+ * Characterization of t-(v,k,lambda) block designs
+ *
+ * @param blocks::Set The design blocks
+ * @param t::RngIntElt The number of elements distinct in lambda blocks
+ * @param v::RngIntElt The number of blocks
+ * @param k::RngIntElt The cardinality of blocks
+ * @param lambda::RngIntElt The number of blocks contains t elements distinct
+ * @return BoolElt Indicates that blocks design is a t-(v,k,lambda) block design
+ */
+CorrectDesign := function(blocks, t, v, k, lambda)
+	incidence := IncidenceStructure<v | blocks>;
+	if not IsDesign(incidence, t) then
+		return false;
+	end if;
+	record := Parameters(Design(incidence, t));
+	return record`v eq v and record`k eq k and record`lambda eq lambda;
+end function;
+
+
+/**
+ * Conditions of block designs in [KM02, proposition 1]
+ *
+ * @param n::RngIntElt The number of points of the design
+ * @param blocks::Set The design blocks
+ * @param Delta::Set The delta that generated the design blocks
+ * @return BoolElt Indicates whether the block design is a 1-(n,|delta|,|delta|) block
+ *		design and a block design self-dual
+ */
+CorrectConstructionKM02 := function(n, blocks, Delta)
+	return CorrectDesign(blocks, 1, n, #Delta, #Delta) and IsSelfDual(Design<1, n | blocks>);
+end function;
+
+
+/**
+ * Characterization of 1-(n,|delta|,|delta|) block designs that are BIBD symmetric
+ *
+ * @param n::RngIntElt The number of points of the design
+ * @param blocks::Set The design blocks
+ * @param Delta::Set The delta that generated the design blocks
+ * @return BoolElt Indicates whether the block design is a 1-(n,|delta|,|delta|) block
+ *		design and a BIBD symmetric
+ */
+CorrectConstructionKM08_MagmaSym := function(n, blocks, Delta)
+	if not CorrectDesign(blocks, 1, n, #Delta, #Delta) then
+		return false;
+	end if;
+	return IsSymmetric(Design<1, n | blocks>);
+end function;
+
+
+/**
+ * Characterization of 1-(n,|delta|,|delta|) block designs with the same
+ * numbers of blocks and elements
+ *
+ * @param n::RngIntElt The number of points of the design
+ * @param blocks::Set The design blocks
+ * @param Delta::Set The delta that generated the design blocks
+ * @return BoolElt Indicates whether the block design is a 1-(n,|delta|,|delta|) block
+ *		design and a block design symmetric according to Key and Moori
+ */
+CorrectConstructionKM08_KMSym := function(n, blocks, Delta)
+	if not CorrectDesign(blocks, 1, n, #Delta, #Delta) then
+		return false;
+	end if;
+	record := Parameters(Design<1, n | blocks>);
+	return record`b eq record`v;
+end function;
+
+
+/**
+ * Construct all graphs from a primitive group [KM02,KM08]
+ *
+ * @param G::GrpPerm A primitive group
+ * @return graphs::Assoc An associative array indexed by delta indexes
+ *		and containing the corresponding graph represented by a set of edges
+ */
+GraphFromPrmtvGrp := function(G)
+	Deltas := AllDelta(G);
+	graphs := AssociativeArray();
+	for alpha in Keys(Deltas) do
+		graphs[alpha] := AssociativeArray();
+		for Delta in Deltas[alpha] do
+			graphs[alpha][Delta] := [ { {alpha, delta}^g : g in G } : delta in Delta ];
+		end for;
+	end for;
+	return graphs;
+end function;
+//return [ { {alpha, delta}^g : g in G } : delta in Delta, Delta in Deltas[alpha], alpha in Keys(Deltas) ];
+
+
+/**
+ * Verifies a given graph is a regular connected graph of valency "v" [KM02,KM08]
+ *
+ * @param gamma::Grph A given graph
+ * @param v::RngIntElt The valency that the graph "gamma" must have
+ * @return BoolElt Indicates whether the graph satisfies with the conditions
+ *		given in the article [KM02,KM08]
+ */
+CorrectGraphKM := function(gamma, v)
+	return IsConnected(gamma)
+		and IsRegular(gamma)
+		and Valence(gamma) eq v;
+end function;
+
+
+/**
+ * Computes all delta bars of the proof of article [KM08]
+ * either all orbit of the action G on Omega x Omega
+ *
+ * @param G::GrpPerm A primitive group
+ * @return Set All the deltas bars
+ */
+AllDeltaBar := function(G)
+	Omega := {1..Degree(G)};
+	proCartActG := { [alpha, beta]^g : alpha in Omega, beta in Omega, g in G };
+	orbitals := Orbits(G, GSet(G, proCartActG));
+	return { IndexedSetToSet(DeltaBar) : DeltaBar in orbitals };
+end function;
+
+
+/**
+ * Computes all delta according to the method described in the proof of article [KM08]
+ * either Delta = { delta | (alpha,delta) in DeltaBar }
+ *
+ * @param G::GrpPerm A primitive group
+ * @return deltas::Assoc An associative array indexed by the alpha
+ *		and containing the corresponding delta sequence
+ */
+AllDeltaProof := function(G)
+	Omega := {1..Degree(G)};
+	DeltasBar := AllDeltaBar(G);
+	Exclude(~DeltasBar, { [alpha, alpha] : alpha in Omega });
+	Deltas := AssociativeArray();
+	for alpha in Omega do
+		Deltas[alpha] := { { pair[2] : pair in DeltaBar | pair[1] eq alpha } : DeltaBar in DeltasBar };
+	end for;
+	return Deltas;
+end function;
+
+
+/**
+ * Computes all delta bar star according to the method described in the proof of article [KM08]
+ * either DeltaBarStar = { (alpha, beta) | (beta, alpha) in DeltaBar }
+ *
+ * @param DeltasBar::Set A orbital
+ * @return Set Orbital's reverse
+ */
+DeltaBarToDeltaBarStar := function(DeltaBar)
+	return { [pair[2], pair[1]] : pair in DeltaBar };
+end function;
+
+
+/**
+ * Indicates whether all delta of a primitive group are self-paired [KM08]
+ *
+ * @param G::GrpPerm A primitive group
+ * @return BoolElt All delta are self-paired
+ */
+AllDeltaAreSelfPaired := function(G)
+	DeltasBar := AllDeltaBar(G);
+	isSP := true;
+	for DeltaBar in DeltasBar do
+		DeltaBarStar := DeltaBarToDeltaBarStar(DeltaBar);
+		isSP and:= DeltaBar eq DeltaBarStar;
+	end for;
+	return isSP;
+end function;

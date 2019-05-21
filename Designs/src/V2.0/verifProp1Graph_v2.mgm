@@ -1,0 +1,41 @@
+Attach("./design_v2.mgm");
+import "./design_v2.mgm":
+	IsSelfPaired,
+	CorrectGraphKM,
+	GraphFromPrmtvGrp;
+
+
+/**
+ * Test the graphs part of proposition 1 of KM02 and KM08
+ *
+ * @param nbGrp::RngIntElt The number of the first primitive groups tested
+ */
+procedure verifProp(nbGrp)
+	allG := PrimitiveGroups(:Warning := false);
+	assert nbGrp le #allG;
+
+	printf "degree,numGrp,alpha,Delta,isSelfPaired,isGrphKM,time\n";
+	for numGrp := 1 to nbGrp do
+		G := allG[numGrp];
+		n := Degree(G);
+		isSP := AllDeltaAreSelfPaired(G);
+
+		beginGrph := Realtime();
+		allGrph := GraphFromPrmtvGrp(G);
+		tGrph := Realtime(beginGrph);
+		for alpha in Keys(allGrph) do
+			for Delta in Keys(allGrph[alpha]) do
+				for edges in allGrph[alpha][Delta] do
+					printf "%o,%o,%o,%o,%o,%o,%o\n",
+						n, numGrp, alpha, Sprintf("\"%o\"", Delta), isSP,
+						CorrectGraphKM(Graph<n | edges>, #Delta),
+						tGrph;
+				end for;
+			end for;
+		end for;
+	end for;
+end procedure;
+
+SetOutputFile("statsGraphs.csv");
+verifProp(49);
+UnsetOutputFile();

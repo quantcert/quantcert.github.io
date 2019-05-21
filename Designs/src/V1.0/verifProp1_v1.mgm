@@ -1,0 +1,30 @@
+Attach("./design_v1.mgm");
+import "./design_v1.mgm":
+	BlckDsgnsFromPrmtvGrp,
+	CorrectConstructionKM08,
+	CorrectConstructionKM02;
+
+
+nameFileKM02 := "resultKM02.txt";
+nameFileKM08 := "resultKM08.txt";
+
+n := 1;
+while true do
+	prmtvGrps := PrimitiveGroups(n);
+	for G in prmtvGrps do
+		for alpha in [1..n] do
+			blckDsgns := BlckDsgnsFromPrmtvGrp(G, alpha);
+			for blckDsgn in blckDsgns do
+				if not CorrectConstructionKM02(n, blckDsgn);
+					Write(nameFileKM02, "Alpha: " cat Sprint(alpha));
+					Write(nameFileKM02, "Group: " cat Sprint(G));
+				end if;
+				if not CorrectConstructionKM08(n, blckDsgn);
+					Write(nameFileKM08, "Alpha: " cat Sprint(alpha));
+					Write(nameFileKM08, "Group: " cat Sprint(G));
+				end if;
+			end for;
+		end for;
+	end for;
+	n +:= 1;
+end while;

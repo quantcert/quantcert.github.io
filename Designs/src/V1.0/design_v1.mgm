@@ -1,0 +1,40 @@
+/**
+ * Gives the sequence of block designs built from a primitive group are build
+ *
+ * @param G::GrpPerm The primitive group with build a block designs
+ * @param alpha::RngIntElt
+ * @return SeqEnum Sequence of block designs corresponding to the primitive group
+ */
+BlckDsgnsFromPrmtvGrp := function(G, alpha)
+	Ga := Stabilizer(G, alpha);
+	orbits := Orbits(Ga);
+	return [ { IndexedSetToSet(delta)^g : g in G } : delta in orbits | delta ne { alpha } ];
+end function;
+
+
+/**
+ * Verifies a given design respects the conditions of the article [KM02]
+ *
+ * @param n::RngIntElt The number of points of the design
+ * @param blocks::Set The design blocks
+ * @return BoolElt Indicates whether the design satisfies with the conditions
+ *		given in the article [KM02]
+ */
+CorrectConstructionKM02 := function(n, blocks)
+	I := IncidenceStructure<n | blocks>;
+	return IsDesign(I, 1) and IsSelfDual(Design(I, 1));
+end function;
+
+
+/**
+ * Verifies a given design respects the conditions of the article [KM08]
+ *
+ * @param nbVertices::RngIntElt The number of points of the design
+ * @param blocks::SetIndx The design blocks
+ * @return BoolElt Indicates whether the design satisfies with the conditions
+ *		given in the article [KM08]
+ */
+CorrectConstructionKM08 := function(n, blocks)
+	I := IncidenceStructure<n | blocks>;
+	return IsDesign(I, 1) and IsSymmetric(Design(I, 1));
+end function;

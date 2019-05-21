@@ -1,0 +1,40 @@
+Attach("./design_v2.mgm");
+import "./design_v2.mgm":
+	BlckDsgnsFromPrmtvGrp,
+	CorrectConstructionKM02,
+	CorrectConstructionKM08_MagmaSym,
+	CorrectConstructionKM08_v2;
+
+
+/**
+ * Validation of Proposition 1 in [KM02] and [KM08]
+ *
+ * @param nbGrp::RngIntElt Number of smallest first primitive groups tested
+ */
+procedure verifProp(nbGrp)
+	allG := PrimitiveGroups(:Warning := false);
+	assert nbGrp le #allG;
+
+	printf "degree,numGrp,delta,isKM02,isKM08,isKM08_v2,time\n";
+	for numGrp := 1 to nbGrp do
+		G := allG[i];
+		n := Degree(G);
+
+		beginBlck := Realtime();
+		allBlck := BlckDsgnsFromPrmtvGrp(G);
+		tBlck := Realtime(beginBlck);
+		for Delta in Keys(allBlck) do
+			block := allBlck[Delta];
+			printf "%o,%o,%o,%o,%o,%o,%o\n",
+				n, numGrp, Sprintf("\"%o\"", Delta),
+				CorrectConstructionKM02(n, block, Delta),
+				CorrectConstructionKM08_MagmaSym(n, block, Delta),
+				CorrectConstructionKM08_KMSym(n, block, Delta),
+				tBlck;
+		end for;
+	end for;
+end procedure;
+
+SetOutputFile("statsBlocks.csv");
+verifProp(74);
+UnsetOutputFile();
