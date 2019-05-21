@@ -1,12 +1,5 @@
-An article on the formalization and validation of a block design construction method by a Magma program was submitted to participate in the eighteenth AFADL days. This article was co-written by Jessy Colonval and Henri de Boutray.
+***Context***
 
-**Title:**
-Formalisation and validation of a block design construction method
+This work is part of research into finite geometries called quantum geometries, because they are linked to _quantum_ contextuality. Planat et al. have shown how to construct these geometries, which are special cases of _block designs_, from groups of permutations, but without publishing a program for this construction.
 
-**Author keywords:**
-* Primitive group
-* Block design
-* Test validation
-
-**Abstract:**
-In the domain of experimental mathematics, the programs used to obtaining various results rarely follow the principles of software engineering, which is why which makes these results difficult to replicate and evaluate. This article presents a formalization of a method for building structures combinatorial (called "block systems") and a validation of their properties.
+A literature search on the origin of this method led to an earlier reference, which presents a simpler method of constructing block systems from primitive permutation groups. This article is completed by a program, but the latter does not contain a code to validate this method. This method was formalised and then validated by enumeration. More precisely, block systems built according to this method are validated if they have all the characteristics announced in a proposal of the Key and Moori article. We use the Magma environment, which consists of a structured imperative language and an extensive library of mathematical functions, particularly group theory and _designs_. This code is present in the [Designs/src](https://github.com/quantcert/quantcert.github.io/tree/master/Designs/src) part of this GitHub directory.
