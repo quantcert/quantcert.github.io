@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Formalisation and verification of a block design construction method
 permalink: /designs/
 ---
