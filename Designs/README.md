@@ -1,7 +1,3 @@
----
-title: Formalisation and verification of a block design construction method
----
-
 An article on the formalization and validation of a block design construction method by a Magma program was submitted to participate in the eighteenth AFADL days. This article was co-written by Jessy Colonval and Henri de Boutray.
 
 **Title:**
