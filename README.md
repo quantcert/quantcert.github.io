@@ -1,6 +1,6 @@
-## Projects related to the I-QUINS group
+## Projects related to the quantum certification
 
-This Git directory lists projects related to the I-QUINS working group.
+This Git repository lists projects related to our work around quantum certification.
 
 ### Method of constructing a block design by Key and Moori
 
