@@ -9,4 +9,4 @@ The linked source files are present in the [Designs](https://quantcert.github.io
 
 ### GT IQ 2019's days
 
-The annual meeting of GT IQ is organised in Besançon for 2019, more details can be found on [QT-IQ'19 (fr)](https://quantcert.github.io/QT-IQ'19)
+The annual meeting of GT IQ is organised in Besançon for 2019, more details can be found on [QT-IQ'19 (fr)](https://quantcert.github.io/GQT-IQ'19)
