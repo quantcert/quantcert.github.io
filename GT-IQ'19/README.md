@@ -11,3 +11,31 @@ Les Journées Informatique Quantique ont pour but de rassembler la communauté t
 ### Soumission
 
 Merci d'envoyer un titre et un abstract d'une demi-page au format PDF aux organisateurs: [Henri de Boutray](https://www.femto-st.fr/en/femto-people/hdeboutr), [Alain Giorgetti](http://members.femto-st.fr/alain-giorgetti/) [Frédéric Holweck](https://utbmfh.pagesperso-orange.fr/) et [Pierre-Alain Masson](http://members.femto-st.fr/pierre-alain-masson/)
+
+### Inscription
+
+L'inscription est gratuite mais obligatoire par e-mail aux organisateurs avant le \[TODO : insérer date\].
+
+### Dates importantes
+
+ * \[TODO : insérer date\]: date limite de soumission.
+ * \[TODO : insérer date\]: notifications d’acceptation.
+ * \[TODO : insérer date\]: date limite d’inscription.
+ * \[TODO : insérer date\]: journées informatique quantique à FEMTO-ST.
+
+### Programme
+
+\[TODO : insérer programme\]
+
+### Informations Pratiques
+
+Les journées se dérouleront au laboratoire FEMTO-ST, salle \[TODO : insérer salle\]. 
+
+Comment y venir à FEMTO-ST ? \[TODO : insérer lien\]
+Où se loger ? \[TODO : insérer lien\]
+
+
+#### Organisateurs
+
+[Henri de Boutray](https://www.femto-st.fr/en/femto-people/hdeboutr), [Alain Giorgetti](http://members.femto-st.fr/alain-giorgetti/) [Frédéric Holweck](https://utbmfh.pagesperso-orange.fr/) et [Pierre-Alain Masson](http://members.femto-st.fr/pierre-alain-masson/)
+
