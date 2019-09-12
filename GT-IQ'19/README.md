@@ -41,4 +41,4 @@ Où se loger ? \[TODO : insérer lien\]
 
 ![logo-femto](ressources/logo-femto.png)
 ![logo-gt-iq](ressources/logo-gt-iq.png)
-![logo-ubfc](ressources/logo-ubfc.png)
+![logo-ubfc](ressources/logo_ubfc.png)
