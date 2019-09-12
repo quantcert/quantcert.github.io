@@ -39,3 +39,4 @@ Où se loger ? \[TODO : insérer lien\]
 
 [Henri de Boutray](https://www.femto-st.fr/en/femto-people/hdeboutr), [Alain Giorgetti](http://members.femto-st.fr/alain-giorgetti/) [Frédéric Holweck](https://utbmfh.pagesperso-orange.fr/) et [Pierre-Alain Masson](http://members.femto-st.fr/pierre-alain-masson/)
 
+![logo-femto](ressources/logo-femto.png)
