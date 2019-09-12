@@ -10,7 +10,7 @@ Les Journées Informatique Quantique ont pour but de rassembler la communauté t
 
 ### Soumission
 
-Merci d'envoyer un titre et un abstract d'une demi-page au format PDF aux organisateurs: [Henri de Boutray](https://www.femto-st.fr/en/femto-people/hdeboutr), [Alain Giorgetti](http://members.femto-st.fr/alain-giorgetti/) [Frédéric Holweck](https://utbmfh.pagesperso-orange.fr/) et [Pierre-Alain Masson](http://members.femto-st.fr/pierre-alain-masson/)
+Merci d'envoyer un titre et un abstract d'une demi-page au format PDF aux organisateurs: [Henri de Boutray](https://www.femto-st.fr/en/femto-people/hdeboutr), [Alain Giorgetti](http://members.femto-st.fr/alain-giorgetti/), [Frédéric Holweck](https://utbmfh.pagesperso-orange.fr/) et [Pierre-Alain Masson](http://members.femto-st.fr/pierre-alain-masson/)
 
 ### Inscription
 
@@ -37,7 +37,7 @@ Où se loger ? \[TODO : insérer lien\]
 
 #### Organisateurs
 
-[Henri de Boutray](https://www.femto-st.fr/en/femto-people/hdeboutr), [Alain Giorgetti](http://members.femto-st.fr/alain-giorgetti/) [Frédéric Holweck](https://utbmfh.pagesperso-orange.fr/) et [Pierre-Alain Masson](http://members.femto-st.fr/pierre-alain-masson/)
+[Henri de Boutray](https://www.femto-st.fr/en/femto-people/hdeboutr), [Alain Giorgetti](http://members.femto-st.fr/alain-giorgetti/), [Frédéric Holweck](https://utbmfh.pagesperso-orange.fr/) et [Pierre-Alain Masson](http://members.femto-st.fr/pierre-alain-masson/)
 
 <pre>
 <img src="ressources/logo-femto.png" alt="logo-femto" width="200"/>              <img src="ressources/logo-gt-iq.png" alt="logo-gt-iq" width="200"/>              <img src="ressources/logo_ubfc.png" alt="logo-ubfc" width="200"/>
