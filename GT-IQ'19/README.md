@@ -1,10 +1,10 @@
-## Journées du groupe Informatique Quantique 2019
+## Journées Informatique Quantique 2019
 
 ### 28 et 29 Novembre 2019 - Besançon
 
 ![Besançon by night](ressources/Besançon-by-night-banière.jpeg)
 
-Les Journées Informatique Quantique sont organisées par le groupe de travail Informatique Quantique ([GT_IQ](https://members.loria.fr/SPerdrix/gt-iq/)) du [GdR IM](https://www.gdr-im.fr/) du CNRS. Elles se dérouleront au laboratoire [FEMTO-ST](https://www.femto-st.fr/fr) à Besançon.
+Les Journées Informatique Quantique sont organisées par le groupe de travail Informatique Quantique ([GT_IQ](https://members.loria.fr/SPerdrix/gt-iq/)) du [GdR IM](https://www.gdr-im.fr/) du CNRS. Elles se dérouleront à l'institut [FEMTO-ST](https://www.femto-st.fr/fr) à Besançon.
 
 ### Présentation
 
@@ -14,7 +14,7 @@ Les Journées Informatique Quantique ont pour but de rassembler la communauté t
 
 L’inscription est gratuite mais obligatoire, avant le 12 novembre 2019.
 
-L'inscription et la proposition d'exposé se font sur le formulaire suivant : [formulaire Google](https://forms.gle/DDh37Wy97u7jRGPD7)
+L'inscription et la proposition d'exposé se font sur le formulaire suivant : [https://forms.gle/DDh37Wy97u7jRGPD7](https://forms.gle/DDh37Wy97u7jRGPD7)
 
 <!--### Dates importantes
 
@@ -27,7 +27,7 @@ L'inscription et la proposition d'exposé se font sur le formulaire suivant : [f
 
 \[TODO : insérer programme\]
 
-### Informations Pratiques
+### Informations pratiques
 
 Les journées se dérouleront au laboratoire FEMTO-ST, salle \[TODO : insérer salle\]. 
 
@@ -35,9 +35,13 @@ Comment y venir à FEMTO-ST ? \[TODO : insérer lien\]
 Où se loger ? \[TODO : insérer lien\]-->
 
 
-#### Organisateurs
+### Organisateurs
 
 <!--[Henri de Boutray](https://www.femto-st.fr/en/femto-people/hdeboutr), [Alain Giorgetti](http://members.femto-st.fr/alain-giorgetti/), [Frédéric Holweck](https://utbmfh.pagesperso-orange.fr/) et [Pierre-Alain Masson](http://members.femto-st.fr/pierre-alain-masson/)-->
-Henri de Boutray, Alain Giorgetti, Frédéric Holweck et Pierre-Alain Masson. Joignables à l'adresse suivante : [pierre-alain.masson\[at\]femto-st.fr](mailto:pierre-alain.masson@femto-st.fr)
+Henri de Boutray, Alain Giorgetti, Frédéric Holweck et Pierre-Alain Masson.
+
+### Contact
+
+[pierre-alain.masson\[at\]femto-st.fr](mailto:pierre-alain.masson@femto-st.fr)
 
 <img src="ressources/logo-femto.png" alt="logo-femto" width="150"/> <img src="ressources/logo-gt-iq.png" alt="logo-gt-iq" width="150"/> <img src="ressources/logo_ubfc.png" alt="logo-ubfc" width="150"/> <img src="ressources/logo-cnrs.jpg" alt="logo-cnrs" width="150"/>
