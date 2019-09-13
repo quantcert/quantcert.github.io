@@ -12,7 +12,7 @@ Les Journées Informatique Quantique ont pour but de rassembler la communauté t
 
 L’inscription est gratuite mais obligatoire, avant le 12 novembre 2019.
 
-L'inscription et la proposition d'exposé se font sur le formulaire suivant : https://forms.gle/DDh37Wy97u7jRGPD7
+L'inscription et la proposition d'exposé se font sur le formulaire suivant : [formulaire Google](https://forms.gle/DDh37Wy97u7jRGPD7)
 
 <!--### Dates importantes
 
