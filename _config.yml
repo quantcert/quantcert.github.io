@@ -3,3 +3,5 @@ description: QuantCert is a project aroud quantum computing certification
 
 markdown: kramdown
 theme: jekyll-theme-slate
+
+show_downloads: true
