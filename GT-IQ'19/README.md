@@ -1,5 +1,3 @@
-# Journées du GT IQ 2019
-
 Date : 28-29 Novembre 2019
 
 Les Journées Informatique Quantique sont organisées par le groupe de travail Informatique Quantique ([GT_IQ](https://members.loria.fr/SPerdrix/gt-iq/)) du [GdR IM](https://www.gdr-im.fr/). Elles se dérouleront au laboratoire [FEMTO-ST](https://www.femto-st.fr/fr) à Besançon.
