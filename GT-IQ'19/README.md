@@ -39,4 +39,4 @@ Où se loger ? \[TODO : insérer lien\]
 
 [Henri de Boutray](https://www.femto-st.fr/en/femto-people/hdeboutr), [Alain Giorgetti](http://members.femto-st.fr/alain-giorgetti/), [Frédéric Holweck](https://utbmfh.pagesperso-orange.fr/) et [Pierre-Alain Masson](http://members.femto-st.fr/pierre-alain-masson/)
 
-<img src="ressources/logo-femto.png" alt="logo-femto" width="200"/> <img src="ressources/logo-gt-iq.png" alt="logo-gt-iq" width="200"/> <img src="ressources/logo_ubfc.png" alt="logo-ubfc" width="200"/> <img src="ressources/logo-cnrs.jpg" alt="logo-cnrs" width="200"/>
+<img src="ressources/logo-femto.png" alt="logo-femto" width="150"/> <img src="ressources/logo-gt-iq.png" alt="logo-gt-iq" width="150"/> <img src="ressources/logo_ubfc.png" alt="logo-ubfc" width="150"/> <img src="ressources/logo-cnrs.jpg" alt="logo-cnrs" width="150"/>
