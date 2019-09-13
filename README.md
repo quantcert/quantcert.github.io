@@ -1,8 +1,3 @@
----
-name: something
-title: null
----
-
 ## Projects related to the quantum certification
 
 This Git repository lists projects related to our work around quantum certification.
