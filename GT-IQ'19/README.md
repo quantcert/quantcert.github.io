@@ -36,6 +36,6 @@ Où se loger ? \[TODO : insérer lien\]-->
 #### Organisateurs
 
 <!--[Henri de Boutray](https://www.femto-st.fr/en/femto-people/hdeboutr), [Alain Giorgetti](http://members.femto-st.fr/alain-giorgetti/), [Frédéric Holweck](https://utbmfh.pagesperso-orange.fr/) et [Pierre-Alain Masson](http://members.femto-st.fr/pierre-alain-masson/)-->
-Henri de Boutray, Alain Giorgetti, Frédéric Holweck et Pierre-Alain Masson. Joignables à l'adresse suivante : `pierre-alain.masson\[at\]femto-st.fr`
+Henri de Boutray, Alain Giorgetti, Frédéric Holweck et Pierre-Alain Masson. Joignables à l'adresse suivante : `pierre-alain.masson[at]femto-st.fr`
 
 <img src="ressources/logo-femto.png" alt="logo-femto" width="150"/> <img src="ressources/logo-gt-iq.png" alt="logo-gt-iq" width="150"/> <img src="ressources/logo_ubfc.png" alt="logo-ubfc" width="150"/> <img src="ressources/logo-cnrs.jpg" alt="logo-cnrs" width="150"/>
