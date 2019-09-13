@@ -1,5 +1,5 @@
 ---
-title: GT IQ
+title-heading: false
 ---
 
 
