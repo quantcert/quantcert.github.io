@@ -1,5 +1,5 @@
 ---
-title: false
+title: nil
 ---
 
 ## Projects related to the quantum certification
