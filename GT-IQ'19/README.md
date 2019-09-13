@@ -1,4 +1,4 @@
-## Journées du GT IQ 2019
+# Journées du GT IQ 2019
 
 Date : 28-29 Novembre 2019
 
