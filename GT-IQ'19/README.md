@@ -2,7 +2,7 @@
 
 ### 28 et 29 Novembre 2019 - Besançon
 
-<img src="ressources/Besançon-by-night-banière.jpeg" alt="Besançon by night" width="98%"/>
+<img src="ressources/Besançon-by-night-banière.jpeg" alt="Besançon by night" width="100%"/>
 
 Les Journées Informatique Quantique sont organisées par le groupe de travail Informatique Quantique ([GT_IQ](https://members.loria.fr/SPerdrix/gt-iq/)) du [GdR IM](https://www.gdr-im.fr/) du CNRS. Elles se dérouleront à l'institut [FEMTO-ST](https://www.femto-st.fr/fr) à Besançon.
 
