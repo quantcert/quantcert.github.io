@@ -43,4 +43,4 @@ Henri de Boutray, Alain Giorgetti, Frédéric Holweck et Pierre-Alain Masson.
 
 pierre-alain.masson\[at\]femto-st.fr
 
-<img src="ressources/logo-femto.png" alt="logo-femto" width="22%"/> <img src="ressources/logo-gt-iq.png" alt="logo-gt-iq" width="22%"/> <img src="ressources/logo_ubfc.png" alt="logo-ubfc" width="22%"/> <img src="ressources/logo-cnrs.jpg" alt="logo-cnrs" width="22%"/>
+<img src="ressources/logo-femto.png" alt="logo-femto" width="24%"/> <img src="ressources/logo-gt-iq.png" alt="logo-gt-iq" width="24%"/> <img src="ressources/logo_ubfc.png" alt="logo-ubfc" width="24%"/> <img src="ressources/logo-cnrs.jpg" alt="logo-cnrs" width="24%"/>
