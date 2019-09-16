@@ -12,7 +12,7 @@ Les Journées Informatique Quantique ont pour but de rassembler la communauté t
 
 ### Soumission et inscription
 
-L’inscription est gratuite mais obligatoire, avant le 12 novembre 2019.
+L’inscription est gratuite mais obligatoire, avant le 5 novembre 2019.
 
 L'inscription et la proposition d'exposé se font sur le formulaire suivant : [https://forms.gle/DDh37Wy97u7jRGPD7](https://forms.gle/DDh37Wy97u7jRGPD7)
 
@@ -42,6 +42,6 @@ Henri de Boutray, Alain Giorgetti, Frédéric Holweck et Pierre-Alain Masson.
 
 ### Contact
 
-[pierre-alain.masson\[at\]femto-st.fr](mailto:pierre-alain.masson@femto-st.fr)
+pierre-alain.masson\[at\]femto-st.fr
 
 <img src="ressources/logo-femto.png" alt="logo-femto" width="150"/> <img src="ressources/logo-gt-iq.png" alt="logo-gt-iq" width="150"/> <img src="ressources/logo_ubfc.png" alt="logo-ubfc" width="150"/> <img src="ressources/logo-cnrs.jpg" alt="logo-cnrs" width="150"/>
