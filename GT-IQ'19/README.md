@@ -16,23 +16,11 @@ L’inscription est gratuite mais obligatoire, avant le 5 novembre 2019.
 
 L'inscription et la proposition d'exposé se font sur le formulaire suivant : [https://forms.gle/DDh37Wy97u7jRGPD7](https://forms.gle/DDh37Wy97u7jRGPD7)
 
-<!--### Dates importantes
-
- * \[TODO : insérer date\]: date limite de soumission.
- * \[TODO : insérer date\]: notifications d’acceptation.
- * \[TODO : insérer date\]: date limite d’inscription.
- * \[TODO : insérer date\]: journées informatique quantique à FEMTO-ST.
-
+<!-- section to complete later (see private depots)
+### Dates importantes
 ### Programme
-
-\[TODO : insérer programme\]
-
 ### Informations pratiques
-
-Les journées se dérouleront au laboratoire FEMTO-ST, salle \[TODO : insérer salle\]. 
-
-Comment y venir à FEMTO-ST ? \[TODO : insérer lien\]
-Où se loger ? \[TODO : insérer lien\]-->
+-->
 
 
 ### Organisateurs
