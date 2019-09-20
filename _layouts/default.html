@@ -16,9 +16,7 @@
     {% if page.title != "Journées Informatique Quantique 2019" %}
     <div id="header_wrap" class="outer">
         <header class="inner">
-          {% if site.github.is_project_page %}
             <a id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a>
-          {% endif %}
 
           <h1 id="project_title">{{ site.title | default: site.github.repository_name }}</h1>
           <h2 id="project_tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
