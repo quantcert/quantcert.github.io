@@ -5,10 +5,3 @@ markdown: kramdown
 theme: jekyll-theme-slate
 
 show_downloads: true
-
-plugins:
-  - jekyll-maps
-  
-maps:
-  google:
-    api_key: AIzaSyAeRfw7BxDPwcPGeKJSoSv1zN7ScMFjL5E
