@@ -36,6 +36,10 @@ L'inscription et la proposition d'exposé se font sur le formulaire suivant : [h
 12h00 Déjeuner<br/>
 14h00 - 18h00 Réunion du projet ANR I-QUINS (Integrated QUantum Information at the NanoScale)
 
+location:
+  latitude: 51.5285582
+  longitude: -0.2416807
+
 <!--
  * \[TODO : insérer date\]: journées informatique quantique à FEMTO-ST.
 
