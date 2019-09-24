@@ -36,21 +36,11 @@ L'inscription et la proposition d'exposé se font sur le formulaire suivant : [h
 12h00 Déjeuner<br/>
 14h00 - 18h00 Réunion du projet ANR I-QUINS (Integrated QUantum Information at the NanoScale)
 
-location:
-  latitude: 51.5285582
-  longitude: -0.2416807
-
-<!--
- * \[TODO : insérer date\]: journées informatique quantique à FEMTO-ST.
-
-
 ### Informations pratiques
 
-Les journées se dérouleront au laboratoire FEMTO-ST, salle \[TODO : insérer salle\]. 
+Les journées se dérouleront au laboratoire FEMTO-ST, salle 007, 008 et amphi Gagnepain. 
 
-Comment y venir à FEMTO-ST ? \[TODO : insérer lien\]
-Où se loger ? \[TODO : insérer lien\]-->
-
+Comment venir à FEMTO-ST ? [Plan Google Maps](https://www.google.com/maps/place/Femto-St/@47.2513906,5.9921962,15z/data=!4m5!3m4!1s0x0:0x5333e4848eb61e36!8m2!3d47.2535171!4d5.996359)
 
 ### Organisateurs
 
