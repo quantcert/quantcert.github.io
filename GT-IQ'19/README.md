@@ -31,7 +31,7 @@ L'inscription se fait sur le formulaire suivant : [https://forms.gle/DDh37Wy97u7
 <br/>
 *Afternoon session: Programs, entanglement and contextuality*
 
-14.00 **Mladen Pavacic** (CEMS, Croatia). [Hypergraph-Based Contextuality](https://quantcert.github.io/GT-IQ'19/abstracts/Pavicic.pdf), *invited talk*<br/>
+14.00 **Mladen Pavičić** (CEMS, Croatia). [Hypergraph-Based Contextuality](https://quantcert.github.io/GT-IQ'19/abstracts/Pavicic.pdf), *invited talk*<br/>
 15.00 **Jessy Colonval** (FEMTO-ST, UFC). [Methods and programs for the generation of contextual finite geometries](https://quantcert.github.io/GT-IQ'19/abstracts/Colonval.pdf)<br/>
 15.30 **Henri de Boutray** (FEMTO-ST, UFC). [Quantitative estimation of the evolution of entanglement in the Grover algorithm](https://quantcert.github.io/GT-IQ'19/abstracts/deBoutray.pdf)<br/>
 16.00 Coffee break<br/>
