@@ -70,4 +70,4 @@ Henri de Boutray, Alain Giorgetti, Frédéric Holweck et Pierre-Alain Masson.
 
 pierre-alain.masson\[at\]femto-st.fr
 
-<img src="ressources/logo-femto.png" alt="logo-femto" width="30%"/> <img src="ressources/logo_ubfc.png" alt="logo-ubfc" width="30%"/> <img src="ressources/logo-GDR_IM.png" alt="logo-cnrs" width="39%"/>
+<img src="ressources/logo-femto.png" alt="logo-femto" width="25%"/> <img src="ressources/logo_ubfc.png" alt="logo-ubfc" width="25%"/> <img src="ressources/logo-GDR_IM.png" alt="logo-cnrs" width="45%"/>
