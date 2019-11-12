@@ -51,7 +51,7 @@ L'inscription se fait sur le formulaire suivant : [https://forms.gle/DDh37Wy97u7
 *Afternoon: open ANR I-QUINS (Integrated QUantum Information at the NanoScale) project meeting*
 
 14.00 **Ion Nechita** (LPT). Quantum de Finetti theorems and Reznick’s Positivstellensatz, *invited talk*<br/>
-15.00 **Quentin Ansel** (UTINAM). [Generating non-classical states of spins coupled to a cavity by optimal collective fields](https://quantcert.github.io/GT-IQ'19/abstracts/Ansel.pdf), *invited talk*<br/>
+15.00 **Quentin Ansel** (UTINAM). [Controllability and optimal control of spins coupled to a dissipative cavity](https://quantcert.github.io/GT-IQ'19/abstracts/Ansel.pdf), *invited talk*<br/>
 16.00 Coffee break<br/>
 16.30 Open discussions
 
