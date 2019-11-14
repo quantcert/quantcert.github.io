@@ -62,6 +62,26 @@ des Montboucons à Besançon, dans les salles 007 et 008 et dans l'amphi Gagnepa
 
 [Comment venir à FEMTO-ST ?/How to come to FEMTO-ST?](https://www.femto-st.fr/en/The-institute/Access)
 
+**Où so loger ?**<br/>
+*Près du site TEMIS ( 5 minutes de marche; mais 20 minuntes en bus du centre-ville)*
+  - [All Suites Hotel](https://www.allsuites-apparthotel.com/residences-hotelieres/hotel-all-suites-besancon)
+  - [Hôtel Restaurant Vesontio](http://hotel-vesontio.com/fr/homepage/)
+  - [Ethic Etapes CIS Besançon](https://www.cis-besancon.com/)
+
+*Près de la gare à côté du centre ville (10 minutes en du site TEMIS, 10 minutes à pied du centre-ville):*
+  - [Hotel Victor Hugo](https://www.logishotels.com/fr/hotel/logis-hotel-victor-hugo-10030?partid=661)
+  - [Hotel Ibis Budget Besançon centre gare](https://www.accorhotels.com/fr/hotel-3500-ibis-budget-besancon-centre-gare/index.shtml)
+
+*Centre-ville (20 minutes en bus du site TEMIS)*
+  - [Hotel du Nord](http://www.hotel-du-nord-besancon.com/fr/index.php)
+  - [Hotel de Paris](https://www.besanconhoteldeparis.com/)
+  - [Hotel Granvelle - Best Western Citadelle](https://www.bestwesterncitadelle.com/)
+  - [Hotel Ibis Besançon centre ville](https://hotel-ibis-besancon-centre-ville.business.site/)
+  - [Hotel Mercure](https://www.accorhotels.com/fr/hotel-1220-hotel-mercure-besancon-parc-micaud/index.shtml)
+
+*Here is an additional selection of hotels you might be interested in:*<br/>
+[https://www.besancon-tourisme.com/fr/sejourner/hotels.html](https://www.besancon-tourisme.com/fr/sejourner/hotels.html)
+
 ### Organisateurs
 
 Henri de Boutray, Alain Giorgetti, Frédéric Holweck et Pierre-Alain Masson.
