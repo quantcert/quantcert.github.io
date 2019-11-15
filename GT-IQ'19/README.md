@@ -62,13 +62,13 @@ des Montboucons à Besançon, dans les salles 007 et 008 et dans l'amphi Gagnepa
 
 [Comment venir à FEMTO-ST ?/How to come to FEMTO-ST?](https://www.femto-st.fr/en/The-institute/Access)
 
-**Où so loger ?**<br/>
+**Où se loger ?**<br/>
 *Près du site TEMIS ( 5 minutes de marche; mais 20 minuntes en bus du centre-ville)*
   - [All Suites Hotel](https://www.allsuites-apparthotel.com/residences-hotelieres/hotel-all-suites-besancon)
   - [Hôtel Restaurant Vesontio](http://hotel-vesontio.com/fr/homepage/)
   - [Ethic Etapes CIS Besançon](https://www.cis-besancon.com/)
 
-*Près de la gare à côté du centre ville (10 minutes en du site TEMIS, 10 minutes à pied du centre-ville):*
+*Près de la gare à côté du centre ville (10 minutes en bus du site TEMIS, 10 minutes à pied du centre-ville):*
   - [Hotel Victor Hugo](https://www.logishotels.com/fr/hotel/logis-hotel-victor-hugo-10030?partid=661)
   - [Hotel Ibis Budget Besançon centre gare](https://www.accorhotels.com/fr/hotel-3500-ibis-budget-besancon-centre-gare/index.shtml)
 
