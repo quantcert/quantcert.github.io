@@ -25,7 +25,7 @@ L'inscription se fait sur le formulaire suivant : [https://forms.gle/DDh37Wy97u7
 
 ### Programme
 
-**Jeudi 28 novembre (salles 007 et 008)**
+**Jeudi 28 novembre (amphi Gagnepain)**
 
 12.00 Lunch<br/>
 <br/>
@@ -47,7 +47,7 @@ L'inscription se fait sur le formulaire suivant : [https://forms.gle/DDh37Wy97u7
 10.30 Coffee break<br/>
 11.00 **Christophe Chareton** (CEA LIST). [Qbricks, un environnement noyau pour la vérification de programmes quantiques](https://quantcert.github.io/GT-IQ'19/abstracts/Chareton.pdf)<br/>
 11.30 **Vladimir Zamdzhiev** (LORIA, CNRS). [Quantum Programming with Inductive Datatypes: Causality and Affine Type Theory](https://quantcert.github.io/GT-IQ'19/abstracts/Zamdzhiev.pdf)<br/>
-12.00 Déjeuner<br/>
+12.00 Lunch<br/>
 *Afternoon: open ANR I-QUINS (Integrated QUantum Information at the NanoScale) project meeting*
 
 14.00 **Ion Nechita** (LPT). Quantum de Finetti theorems and Reznick’s Positivstellensatz, *invited talk*<br/>
@@ -58,17 +58,17 @@ L'inscription se fait sur le formulaire suivant : [https://forms.gle/DDh37Wy97u7
 ### Informations pratiques
 
 Les journées se dérouleront sur le site TEMIS de l'institut FEMTO-ST, 15B avenue 
-des Montboucons à Besançon, dans les salles 007 et 008 et dans l'amphi Gagnepain.
+des Montboucons à Besançon, dans l'amphi Gagnepain.
 
 [Comment venir à FEMTO-ST ?/How to come to FEMTO-ST?](https://www.femto-st.fr/en/The-institute/Access)
 
 **Où se loger ?**<br/>
-*Près du site TEMIS ( 5 minutes de marche; mais 20 minuntes en bus du centre-ville)*
+*Près du site TEMIS (à 5 minutes de marche, mais à 20 minutes en bus du centre-ville)*
   - [All Suites Hotel](https://www.allsuites-apparthotel.com/residences-hotelieres/hotel-all-suites-besancon)
   - [Hôtel Restaurant Vesontio](http://hotel-vesontio.com/fr/homepage/)
   - [Ethic Etapes CIS Besançon](https://www.cis-besancon.com/)
 
-*Près de la gare à côté du centre ville (10 minutes en bus du site TEMIS, 10 minutes à pied du centre-ville):*
+*Près de la gare à côté du centre-ville (à 10 minutes du site TEMIS, à 10 minutes à pied du centre-ville)*
   - [Hotel Victor Hugo](https://www.logishotels.com/fr/hotel/logis-hotel-victor-hugo-10030?partid=661)
   - [Hotel Ibis Budget Besançon centre gare](https://www.accorhotels.com/fr/hotel-3500-ibis-budget-besancon-centre-gare/index.shtml)
 
