@@ -36,7 +36,7 @@ L'inscription se fait sur le formulaire suivant : [https://forms.gle/DDh37Wy97u7
 15.30 **Henri de Boutray** (FEMTO-ST, UFC). Quantitative estimation of the evolution of entanglement in the Grover algorithm([abstract](abstract/deBoutray.pdf),[slides](slides/deBoutray.pdf))<br/>
 16.00 Coffee break<br/>
 16.30 **Hamza Jaffali** (FEMTO-ST, UTBM). Learning Algebraic Models of Quantum Entanglement([abstract](abstract/Jaffali.pdf),[slides](slides/Jaffali.pdf))<br/>
-17.00 **Marc Bataille** (LITIS). [Optimisation de circuits quantiques composés de portes c − Z et SWAP](https://quantcert.github.io/GT-IQ'19/abstracts/Bataille.pdf)<br/>
+17.00 **Marc Bataille** (LITIS). Optimisation de circuits quantiques composés de portes c − Z et SWAP([abstract](abstract/Bataille.pdf),[slides](slides/Bataille.pdf))<br/>
 
 
 **Vendredi 29 novembre (amphi Gagnepain)**
