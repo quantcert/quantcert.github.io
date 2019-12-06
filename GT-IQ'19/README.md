@@ -31,27 +31,27 @@ L'inscription se fait sur le formulaire suivant : [https://forms.gle/DDh37Wy97u7
 <br/>
 *Afternoon session: Programs, entanglement and contextuality*
 
-14.00 **Mladen Pavičić** (CEMS, Croatia). [Hypergraph-Based Contextuality](https://quantcert.github.io/GT-IQ'19/abstracts/Pavicic.pdf), *invited talk*<br/>
-15.00 **Jessy Colonval** (FEMTO-ST, UFC). [Methods and programs for the generation of contextual finite geometries](https://quantcert.github.io/GT-IQ'19/abstracts/Colonval.pdf)<br/>
-15.30 **Henri de Boutray** (FEMTO-ST, UFC). [Quantitative estimation of the evolution of entanglement in the Grover algorithm](https://quantcert.github.io/GT-IQ'19/abstracts/deBoutray.pdf)<br/>
+14.00 **Mladen Pavičić** (CEMS, Croatia). Hypergraph-Based Contextuality([abstract](abstracts/Pavicic.pdf),[slides](slides/Pavicic.pdf)), *invited talk*<br/>
+15.00 **Jessy Colonval** (FEMTO-ST, UFC). Methods and programs for the generation of contextual finite geometries ([abstract](abstracts/Colonval.pdf),[slides](slides/Colonval.pdf))<br/>
+15.30 **Henri de Boutray** (FEMTO-ST, UFC). Quantitative estimation of the evolution of entanglement in the Grover algorithm([abstract](abstract/deBoutray.pdf),[slides](slides/deBoutray.pdf))<br/>
 16.00 Coffee break<br/>
-16.30 **Hamza Jaffali** (FEMTO-ST, UTBM). [Learning Algebraic Models of Quantum Entanglement](https://quantcert.github.io/GT-IQ'19/abstracts/Jaffali.pdf)<br/>
-17.00 **Marc Bataille** (LITIS). [Optimization in quantum circuits of c − Z and SWAP gates](https://quantcert.github.io/GT-IQ'19/abstracts/Bataille.pdf)<br/>
+16.30 **Hamza Jaffali** (FEMTO-ST, UTBM). Learning Algebraic Models of Quantum Entanglement([abstract](abstract/Jaffali.pdf),[slides](slides/Jaffali.pdf))<br/>
+17.00 **Marc Bataille** (LITIS). [Optimisation de circuits quantiques composés de portes c − Z et SWAP](https://quantcert.github.io/GT-IQ'19/abstracts/Bataille.pdf)<br/>
 
 
 **Vendredi 29 novembre (amphi Gagnepain)**
 
-09.00 **Alexandre Clément** (LORIA). [A graphical language for beam splitters](https://quantcert.github.io/GT-IQ'19/abstracts/Clement.pdf)<br/>
-09.30 **Titouan Carette** (LORIA). [SZX: scalable graphical calculus](https://quantcert.github.io/GT-IQ'19/abstracts/Carette.pdf)<br/>
-10.00 **Dong-Ho Lee** (CEA LIST, LRI). [Formalization of a Programming Language for Quantum Circuits with Measurement and Classical Control](https://quantcert.github.io/GT-IQ'19/abstracts/Lee.pdf)<br/>
+09.00 **Alexandre Clément** (LORIA). A graphical language for beam splitters([abstract](abstract/Clement.pdf),[slides](slides/Clement.pdf))<br/>
+09.30 **Titouan Carette** (LORIA). SZX: scalable graphical calculus([abstract](abstract/Carette.pdf),[slides](slides/Carette.pdf))<br/>
+10.00 **Dong-Ho Lee** (CEA LIST, LRI). Formalization of a Programming Language for Quantum Circuits with Measurement and Classical Control([abstract](abstract/Lee.pdf),[slides](slides/Lee.pdf))<br/>
 10.30 Coffee break<br/>
-11.00 **Christophe Chareton** (CEA LIST). [Qbricks, un environnement noyau pour la vérification de programmes quantiques](https://quantcert.github.io/GT-IQ'19/abstracts/Chareton.pdf)<br/>
-11.30 **Vladimir Zamdzhiev** (LORIA, CNRS). [Quantum Programming with Inductive Datatypes: Causality and Affine Type Theory](https://quantcert.github.io/GT-IQ'19/abstracts/Zamdzhiev.pdf)<br/>
+11.00 **Christophe Chareton** (CEA LIST). Qbricks, un environnement noyau pour la vérification de programmes quantiques([abstract](abstract/Chareton.pdf),[slides](slides/Chareton.pdf))<br/>
+11.30 **Vladimir Zamdzhiev** (LORIA, CNRS). Quantum Programming with Inductive Datatypes: Causality and Affine Type Theory([abstract](abstract/Zamdzhiev.pdf),[slides](slides/Zamdzhiev.pdf))<br/>
 12.00 Lunch<br/>
 *Afternoon: open ANR I-QUINS (Integrated QUantum Information at the NanoScale) project meeting*
 
 14.00 **Ion Nechita** (LPT). Quantum de Finetti theorems and Reznick’s Positivstellensatz, *invited talk*<br/>
-15.00 **Quentin Ansel** (UTINAM). [Controllability and optimal control of spins coupled to a dissipative cavity](https://quantcert.github.io/GT-IQ'19/abstracts/Ansel.pdf), *invited talk*<br/>
+15.00 **Quentin Ansel** (UTINAM). Generating non-classical states of spins coupled to a cavity by optimal collective fields([abstract](abstract/Ansel.pdf),[slides](slides/Ansel.pdf)), *invited talk*<br/>
 16.00 Coffee break<br/>
 16.30 Open discussions
 
