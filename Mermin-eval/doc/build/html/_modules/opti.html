@@ -1,0 +1,266 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>opti &#8212; A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/MathJax.js?config=TeX-AMS_HTML-full,../mathjax_sage.js"></script>
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for opti</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module is an simple optimization module that helps find the point of </span>
+<span class="sd">maximum value for a given function.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">sage.all</span> <span class="k">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="optimize"><a class="viewcode-back" href="../opti.html#opti.optimize">[docs]</a><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args_init</span><span class="p">,</span> <span class="n">step_init</span><span class="p">,</span> <span class="n">step_min</span><span class="p">,</span> <span class="n">iter_max</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Optimization function finding the maximum reaching coordinates for ``func``</span>
+<span class="sd">  with a random walk. </span>
+<span class="sd">  </span>
+<span class="sd">  :param function func: The function to be optimized, each of its arguments must </span>
+<span class="sd">    be numerical and will be tweaked to find ``func``&#39;s maximum. </span>
+<span class="sd">  :param tuple args_init: Initial coordinates for the random walk. </span>
+<span class="sd">  :param real step_init: The step size will vary with time in this function, so</span>
+<span class="sd">    this is the initial value for the step size. </span>
+<span class="sd">  :param real step_min: The limit size for the step.</span>
+<span class="sd">  :param int iter_max: Upper iterations bound for each loop to avoid infinite </span>
+<span class="sd">    loops.</span>
+<span class="sd">  :param bool verbose: If ``verbose`` then extra run information will be </span>
+<span class="sd">    displayed in terminal.</span>
+<span class="sd">  :returns: vector, complex -- The coordinates of the optimum found for </span>
+<span class="sd">    ``func`` and the value of ``func`` at this point.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">solution</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">CC</span><span class="p">,</span> <span class="n">args_init</span><span class="p">)</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span>
+  <span class="n">solution_temp</span> <span class="o">=</span> <span class="n">solution</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+  <span class="n">value_temp</span> <span class="o">=</span> <span class="n">value</span>
+
+  <span class="n">step_current</span> <span class="o">=</span> <span class="n">step_init</span>
+
+  <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial solution : &quot;</span> <span class="o">+</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> 
+      <span class="nb">str</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+  <span class="n">iter_nb</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">step_current</span> <span class="o">&gt;</span> <span class="n">step_min</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">value_temp</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="n">iter_max</span><span class="p">:</span>
+      <span class="n">direction</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args_init</span><span class="p">))]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span>
+      <span class="n">solution_temp</span> <span class="o">=</span> <span class="n">solution</span> <span class="o">+</span> <span class="n">direction</span><span class="o">*</span><span class="n">step_current</span>
+      <span class="n">value_temp</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">solution_temp</span><span class="p">)</span>
+      <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">value_temp</span> <span class="o">&gt;</span> <span class="n">value</span><span class="p">:</span>
+      <span class="n">solution</span> <span class="o">=</span> <span class="n">solution_temp</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">value_temp</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">step_current</span> <span class="o">=</span> <span class="n">step_current</span><span class="o">/</span><span class="mi">2</span>
+  
+  <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final solution : &quot;</span> <span class="o">+</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> 
+      <span class="nb">str</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+  <span class="k">return</span> <span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="optimize_normalized"><a class="viewcode-back" href="../opti.html#opti.optimize_normalized">[docs]</a><span class="k">def</span> <span class="nf">optimize_normalized</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">normalizer_func</span><span class="p">,</span> <span class="n">args_init</span><span class="p">,</span> <span class="n">step_init</span><span class="p">,</span> <span class="n">step_min</span><span class="p">,</span> <span class="n">iter_max</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Optimization function finding the maximum reaching coordinates for ``func``</span>
+<span class="sd">  with a random walk. </span>
+<span class="sd">  </span>
+<span class="sd">  :param function func: The function to be optimized, each of its arguments must </span>
+<span class="sd">    be numerical and will be tweaked to find ``func``&#39;s maximum. </span>
+<span class="sd">  :param tuple args_init: Initial coordinates for the random walk. </span>
+<span class="sd">  :param real step_init: The step size will vary with time in this function, so</span>
+<span class="sd">    this is the initial value for the step size. </span>
+<span class="sd">  :param real step_min: The limit size for the step.</span>
+<span class="sd">  :param int iter_max: Upper iterations bound for each loop to avoid infinite </span>
+<span class="sd">    loops.</span>
+<span class="sd">  :param bool verbose: If ``verbose`` then extra run information will be </span>
+<span class="sd">    displayed in terminal. </span>
+<span class="sd">  :returns: vector, complex -- The coordinates of the optimum found for </span>
+<span class="sd">    ``func`` and the value of ``func`` at this point.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">solution</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">CC</span><span class="p">,</span> <span class="n">normalizer_func</span><span class="p">(</span><span class="n">args_init</span><span class="p">))</span>
+  <span class="n">solution_temp</span> <span class="o">=</span> <span class="n">solution</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+  <span class="n">value_temp</span> <span class="o">=</span> <span class="n">value</span>
+
+  <span class="n">step_current</span> <span class="o">=</span> <span class="n">step_init</span>
+
+  <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial solution : &quot;</span> <span class="o">+</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> 
+      <span class="nb">str</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+  <span class="n">iter_nb</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">step_current</span> <span class="o">&gt;</span> <span class="n">step_min</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">value_temp</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="n">iter_max</span><span class="p">:</span>
+      <span class="n">direction</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args_init</span><span class="p">))]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span>
+      <span class="n">solution_temp</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">normalizer_func</span><span class="p">(</span><span class="n">solution</span> <span class="o">+</span> <span class="n">direction</span><span class="o">*</span><span class="n">step_current</span><span class="p">))</span>
+      <span class="n">value_temp</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">solution_temp</span><span class="p">)</span>
+      <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">value_temp</span> <span class="o">&gt;</span> <span class="n">value</span><span class="p">:</span>
+      <span class="n">solution</span> <span class="o">=</span> <span class="n">solution_temp</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">value_temp</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">step_current</span> <span class="o">=</span> <span class="n">step_current</span><span class="o">/</span><span class="mi">2</span>
+      <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;optimization, current step: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">step_current</span><span class="p">))</span>
+  
+  <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final solution : &quot;</span> <span class="o">+</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> 
+      <span class="nb">str</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+  <span class="k">return</span> <span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="optimize_2spheres"><a class="viewcode-back" href="../opti.html#opti.optimize_2spheres">[docs]</a><span class="k">def</span> <span class="nf">optimize_2spheres</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args_init</span><span class="p">,</span> <span class="n">step_init</span><span class="p">,</span> <span class="n">step_min</span><span class="p">,</span> <span class="n">iter_max</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Optimization function finding the maximum reaching coordinates for ``func``</span>
+<span class="sd">  with a random walk on a two sphere of dimension half the size of </span>
+<span class="sd">  ``args_init``. (Work in progress !)</span>
+
+<span class="sd">    For now, this function is in project and is not used, it can be ignored.</span>
+<span class="sd">  </span>
+<span class="sd">  :param function func: The function to be optimized, each of its arguments must be </span>
+<span class="sd">    numerical and will be tweaked to find ``func``&#39;s maximum. </span>
+<span class="sd">  :param tuple args_init: Initial coordinates for the random walk.</span>
+<span class="sd">  :param real step_init: The step size will vary with time in this function, so</span>
+<span class="sd">    this is the initial value for the step size. </span>
+<span class="sd">  :param real step_min: The limit size for the step.</span>
+<span class="sd">  :param int iter_max: Upper iterations bound for each loop to avoid infinite </span>
+<span class="sd">    loops.</span>
+<span class="sd">  :param real radius: Sphere radius.</span>
+<span class="sd">  :param bool verbose: If ``verbose`` then extra run information will be displayed in </span>
+<span class="sd">    terminal.</span>
+<span class="sd">  :returns: vector, complex -- The coordianates of the optimum found for </span>
+<span class="sd">    ``func`` and the value of ``func`` at this point.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">def</span> <span class="nf">unwrap</span><span class="p">(</span><span class="n">vector_tuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Takes in vectors and returns a list of their coefficients</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">arguments_unwraped</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">vector_instance</span> <span class="ow">in</span> <span class="n">vector_tuple</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">coefficient</span> <span class="ow">in</span> <span class="n">vector_instance</span><span class="p">:</span>
+        <span class="n">arguments_unwraped</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coefficient</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">arguments_unwraped</span>
+
+  <span class="k">def</span> <span class="nf">point_on_cone</span><span class="p">(</span><span class="n">cone_center</span><span class="p">,</span> <span class="n">cone_spherical_radius</span><span class="p">,</span> <span class="n">sphere_radius</span><span class="p">):</span> <span class="c1"># TODO</span>
+    <span class="n">dimension</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cone_center</span><span class="p">)</span>
+    <span class="n">rotation_cone_center_to_Z</span> <span class="o">=</span> <span class="n">rotation_to_Z</span><span class="p">(</span><span class="n">cone_center</span><span class="p">)</span> <span class="c1"># matrix</span>
+    <span class="n">point_random_angles</span> <span class="o">=</span> <span class="p">[</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">pi</span><span class="p">,</span><span class="n">pi</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">dimension</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="n">cone_angle</span> <span class="o">=</span> <span class="n">cone_spherical_radius</span><span class="o">/</span><span class="n">sphere_radius</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">vector_from_pherical</span><span class="p">(</span><span class="n">sphere_radius</span><span class="p">,</span> <span class="n">cone_angle</span><span class="p">,</span> <span class="o">*</span><span class="n">point_random_angles</span><span class="p">)</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">rotation_cone_center_to_Z</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span> <span class="o">*</span> <span class="n">point</span>
+    <span class="k">return</span> <span class="n">point</span>
+
+  <span class="n">dimension</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args_init</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+  <span class="n">solution</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">CC</span><span class="p">,</span> <span class="n">args_init</span><span class="p">[:</span><span class="n">dimension</span><span class="p">])</span><span class="o">.</span><span class="n">normalized</span><span class="p">(),</span> \
+    <span class="n">vector</span><span class="p">(</span><span class="n">CC</span><span class="p">,</span> <span class="n">args_init</span><span class="p">[</span><span class="n">dimension</span><span class="p">:])</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">unwrap</span><span class="p">(</span><span class="n">solution</span><span class="p">))</span>
+  <span class="n">value_temp</span> <span class="o">=</span> <span class="n">value</span>
+
+  <span class="n">step_current</span> <span class="o">=</span> <span class="n">step_init</span>
+
+  <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial solution : &quot;</span> <span class="o">+</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> 
+      <span class="nb">str</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+  <span class="n">iter_nb</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">step_current</span> <span class="o">&gt;</span> <span class="n">step_min</span><span class="p">:</span>
+    <span class="n">solution_temp</span> <span class="o">=</span> <span class="n">solution</span> <span class="c1"># initialization</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">CC</span><span class="p">(</span><span class="n">value_temp</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">CC</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="n">iter_max</span><span class="p">:</span>
+      <span class="n">solution_temp</span> <span class="o">=</span> <span class="n">point_on_cone</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">step_current</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">value_temp</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">unwrap</span><span class="p">(</span><span class="n">solution_temp</span><span class="p">))</span>
+      <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">CC</span><span class="p">(</span><span class="n">value_temp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">CC</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+      <span class="n">solution</span> <span class="o">=</span> <span class="n">solution_temp</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">value_temp</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">step_current</span> <span class="o">=</span> <span class="n">step_current</span><span class="o">/</span><span class="mi">2</span>
+  
+  <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final solution : &quot;</span> <span class="o">+</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> 
+      <span class="nb">str</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+  <span class="k">return</span> <span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Henri de Boutray.
+    </div>
+  </body>
+</html>

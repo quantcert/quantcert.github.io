@@ -1,0 +1,134 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>vector_to_ket &#8212; A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/MathJax.js?config=TeX-AMS_HTML-full,../mathjax_sage.js"></script>
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for vector_to_ket</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module is an ease of life adding to SageMath: it complements the ``latex``</span>
+<span class="sd">method to quantum ket notations. </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">sage.all</span> <span class="k">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="vector_to_ket"><a class="viewcode-back" href="../vector_to_ket.html#vector_to_ket.vector_to_ket">[docs]</a><span class="k">def</span> <span class="nf">vector_to_ket</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Transform a sage vector to a Latex ket notation</span>
+<span class="sd">  </span>
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; v = vector(SR,[1,0,0,1])</span>
+<span class="sd">    &gt;&gt;&gt; vector_to_ket(v)</span>
+<span class="sd">    1 \ket{00} + 1 \ket{11}</span>
+
+<span class="sd">  :param vector v: the vector corresponding to a pure state (size must be a power of </span>
+<span class="sd">    two) </span>
+<span class="sd">  :returns: str -- a string corresponding to the Latex code for the ket </span>
+<span class="sd">    notation of the input vector</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">nb_qubits</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="o">/</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">nb_qubits</span><span class="o">.</span><span class="n">is_integer</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;v should be a vector with a dimension equal to a &quot;</span> <span class="o">+</span> 
+      <span class="s2">&quot;power of two but the given vector has a size of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+  <span class="n">latex_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">first</span> <span class="o">=</span> <span class="kc">True</span>
+  <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+        <span class="n">latex_str</span> <span class="o">+=</span> <span class="n">latex</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="n">int_index_to_ket</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">nb_qubits</span><span class="p">)</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="kc">False</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">latex_str</span> <span class="o">+=</span> <span class="s2">&quot;+&quot;</span> <span class="o">+</span> <span class="n">latex</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="n">int_index_to_ket</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">nb_qubits</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">latex_str</span></div>
+
+<div class="viewcode-block" id="int_index_to_ket"><a class="viewcode-back" href="../vector_to_ket.html#vector_to_ket.int_index_to_ket">[docs]</a><span class="k">def</span> <span class="nf">int_index_to_ket</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">register_size</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Makes a int from a register into a binary ket notation.</span>
+<span class="sd">  IMPORTANT: this notation requires the *physics* package in Latex</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; int_index_to_ket(2,2)</span>
+<span class="sd">    &#39;\\ket{10}&#39;</span>
+
+<span class="sd">  :param int index: the index to be transformed </span>
+<span class="sd">  :param int register_size: the number of qubits in the system </span>
+<span class="sd">  :returns: string -- a string in latex format</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">ket</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">register_size</span><span class="p">):</span>
+    <span class="n">ket</span> <span class="o">=</span> <span class="nb">str</span><span class="p">((</span><span class="n">index</span> <span class="o">&amp;</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">k</span> <span class="p">))</span> <span class="o">&gt;&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">ket</span>
+  <span class="k">return</span>  <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">ket{&quot;</span> <span class="o">+</span> <span class="n">ket</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Henri de Boutray.
+    </div>
+  </body>
+</html>

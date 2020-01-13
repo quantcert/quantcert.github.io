@@ -1,0 +1,409 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qft &#8212; A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/MathJax.js?config=TeX-AMS_HTML-full,../mathjax_sage.js"></script>
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for qft</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module is aimed to provide the user means to study the QFT and especially </span>
+<span class="sd">how entanglement changes during its execution using the Mermin evaluation.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">sage.all</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">mermin_eval</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">run_circuit</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="qft_main"><a class="viewcode-back" href="../qft.html#qft.qft_main">[docs]</a><span class="k">def</span> <span class="nf">qft_main</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  Prints in terminal or in file ``file_name`` the Mermin evaluation of each </span>
+<span class="sd">  step of the QFT. </span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; grover(periodic_state(0,11,4))0,1.99823485241887</span>
+<span class="sd">    1.99933058720672</span>
+<span class="sd">    1.99761683801972</span>
+<span class="sd">    1.84600827724524</span>
+<span class="sd">    1.66149864543535</span>
+<span class="sd">    1.66010335826574</span>
+<span class="sd">    1.66127978203391</span>
+<span class="sd">    2.17163453049907</span>
+<span class="sd">    2.17187381801221</span>
+<span class="sd">    1.54230165695219</span>
+<span class="sd">    1.54129902140376</span>
+<span class="sd">    1.54169705834015</span>
+
+<span class="sd">  :param vector[int] state: State on which the operator wants the QFT performed </span>
+<span class="sd">    of, this is usually a periodic state.</span>
+<span class="sd">  :param bool verbose: If *verbose* then extra run information will be displayed </span>
+<span class="sd">    in terminal.</span>
+<span class="sd">  :param str file_name: File name for the registration of the Mermin evaluation </span>
+<span class="sd">    for each step of the algorithm, in csv format.</span>
+<span class="sd">  :returns: any -- Result of this function depends on file_name. If a file name</span>
+<span class="sd">    is given `qft_main` returns None, otherwise, it returns an array with the </span>
+<span class="sd">    evaluation values .</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">states</span> <span class="o">=</span> <span class="n">qft_run</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">qft_evaluate</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="qft_run"><a class="viewcode-back" href="../qft.html#qft.qft_run">[docs]</a><span class="k">def</span> <span class="nf">qft_run</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  Runs a simulation of the QFT.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; qft_run(periodic_state(2,1,3))</span>
+<span class="sd">    [(0, 0, 1/6*sqrt(6), 1/6*sqrt(6), 1/6*sqrt(6), 1/6*sqrt(6), 1/6*sqrt(6), 1/6*sqrt(6)),</span>
+<span class="sd">     (1/12*sqrt(6)*sqrt(2), 1/12*sqrt(6)*sqrt(2), 1/6*sqrt(6)*sqrt(2), 1/6*sqrt(6)*sqrt(2), -1/12*sqrt(6)*sqrt(2), -1/12*sqrt(6)*sqrt(2), 0, 0),</span>
+<span class="sd">     (1/12*sqrt(6)*sqrt(2), 1/12*sqrt(6)*sqrt(2), 1/6*sqrt(6)*sqrt(2), 1/6*sqrt(6)*sqrt(2), -1/12*sqrt(6)*sqrt(2), -1/12*sqrt(6)*sqrt(2), 0, 0),</span>
+<span class="sd">     (1/12*sqrt(6)*sqrt(2), 1/12*sqrt(6)*sqrt(2), 1/6*sqrt(6)*sqrt(2), 1/6*sqrt(6)*sqrt(2), -1/12*sqrt(6)*sqrt(2), -(1/12*I + 1/12)*sqrt(6), 0, 0),</span>
+<span class="sd">     (1/4*sqrt(6), 1/4*sqrt(6), -1/12*sqrt(6), -1/12*sqrt(6), -1/12*sqrt(6), -(1/24*I + 1/24)*sqrt(6)*sqrt(2), -1/12*sqrt(6), -(1/24*I + 1/24)*sqrt(6)*sqrt(2)),</span>
+<span class="sd">     (1/4*sqrt(6), 1/4*sqrt(6), -1/12*sqrt(6), -1/12*I*sqrt(6), -1/12*sqrt(6), -(1/24*I + 1/24)*sqrt(6)*sqrt(2), -1/12*sqrt(6), -(1/24*I - 1/24)*sqrt(6)*sqrt(2)),</span>
+<span class="sd">     (1/4*sqrt(6)*sqrt(2), 0, -(1/24*I + 1/24)*sqrt(6)*sqrt(2), (1/24*I - 1/24)*sqrt(6)*sqrt(2), -1/24*sqrt(6)*sqrt(2) - (1/24*I + 1/24)*sqrt(6), -1/24*sqrt(6)*sqrt(2) + (1/24*I + 1/24)*sqrt(6), -1/24*sqrt(6)*sqrt(2) - (1/24*I - 1/24)*sqrt(6), -1/24*sqrt(6)*sqrt(2) + (1/24*I - 1/24)*sqrt(6)),</span>
+<span class="sd">     (1/4*sqrt(6)*sqrt(2), -1/24*sqrt(6)*sqrt(2) - (1/24*I + 1/24)*sqrt(6), -(1/24*I + 1/24)*sqrt(6)*sqrt(2), -1/24*sqrt(6)*sqrt(2) - (1/24*I - 1/24)*sqrt(6), 0, -1/24*sqrt(6)*sqrt(2) + (1/24*I + 1/24)*sqrt(6), (1/24*I - 1/24)*sqrt(6)*sqrt(2), -1/24*sqrt(6)*sqrt(2) + (1/24*I - 1/24)*sqrt(6))]</span>
+<span class="sd">  </span>
+<span class="sd">  :param vector[int] state: State on which the operator wants the QFT performed </span>
+<span class="sd">    of, this is usually a periodic state.</span>
+<span class="sd">  :param bool verbose: If ``verbose`` then extra run information will be </span>
+<span class="sd">    displayed in terminal.</span>
+<span class="sd">  :returns: list[vectors] -- the list of states after each step.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">layers</span> <span class="o">=</span> <span class="n">qft_layers</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="s2">&quot;Layers completed&quot;</span>
+
+  <span class="n">states</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="s2">&quot;Run completed&quot;</span>
+
+  <span class="k">return</span> <span class="n">states</span></div>
+
+
+<div class="viewcode-block" id="qft_layers"><a class="viewcode-back" href="../qft.html#qft.qft_layers">[docs]</a><span class="k">def</span> <span class="nf">qft_layers</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Computes the circuit for the QFT using the circuit format  used for the </span>
+<span class="sd">  ``run`` function from ``run_circuit.sage``.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; qft_layers(periodic_state(2,1,3))</span>
+<span class="sd">    [</span>
+<span class="sd">      [</span>
+<span class="sd">        [ 1/2*sqrt(2)  1/2*sqrt(2)]  [1 0]  [1 0]</span>
+<span class="sd">        [ 1/2*sqrt(2) -1/2*sqrt(2)], [0 1], [0 1]</span>
+<span class="sd">      ],[</span>
+<span class="sd">        [1 0 0 0 0 0 0 0]</span>
+<span class="sd">        [0 1 0 0 0 0 0 0]</span>
+<span class="sd">        [0 0 1 0 0 0 0 0]</span>
+<span class="sd">        [0 0 0 1 0 0 0 0]</span>
+<span class="sd">        [0 0 0 0 1 0 0 0]</span>
+<span class="sd">        [0 0 0 0 0 1 0 0]</span>
+<span class="sd">        [0 0 0 0 0 0 I 0]</span>
+<span class="sd">        [0 0 0 0 0 0 0 I]</span>
+<span class="sd">      ],[</span>
+<span class="sd">        [1 0 0 0 0                     0 0                     0]</span>
+<span class="sd">        [0 1 0 0 0                     0 0                     0]</span>
+<span class="sd">        [0 0 1 0 0                     0 0                     0]</span>
+<span class="sd">        [0 0 0 1 0                     0 0                     0]</span>
+<span class="sd">        [0 0 0 0 1                     0 0                     0]</span>
+<span class="sd">        [0 0 0 0 0 (1/2*I + 1/2)*sqrt(2) 0                     0]</span>
+<span class="sd">        [0 0 0 0 0                     0 1                     0]</span>
+<span class="sd">        [0 0 0 0 0                     0 0 (1/2*I + 1/2)*sqrt(2)]</span>
+<span class="sd">      ],[</span>
+<span class="sd">        [1 0]  [ 1/2*sqrt(2)  1/2*sqrt(2)]  [1 0]</span>
+<span class="sd">        [0 1], [ 1/2*sqrt(2) -1/2*sqrt(2)], [0 1]</span>
+<span class="sd">      ],[</span>
+<span class="sd">        [1 0 0 0 0 0 0 0]</span>
+<span class="sd">        [0 1 0 0 0 0 0 0]</span>
+<span class="sd">        [0 0 1 0 0 0 0 0]</span>
+<span class="sd">        [0 0 0 I 0 0 0 0]</span>
+<span class="sd">        [0 0 0 0 1 0 0 0]</span>
+<span class="sd">        [0 0 0 0 0 1 0 0]</span>
+<span class="sd">        [0 0 0 0 0 0 1 0]</span>
+<span class="sd">        [0 0 0 0 0 0 0 I]</span>
+<span class="sd">      ],[</span>
+<span class="sd">        [1 0]  [1 0]  [ 1/2*sqrt(2)  1/2*sqrt(2)]</span>
+<span class="sd">        [0 1], [0 1], [ 1/2*sqrt(2) -1/2*sqrt(2)]</span>
+<span class="sd">      ],[</span>
+<span class="sd">        [1 0 0 0 0 0 0 0]</span>
+<span class="sd">        [0 0 0 0 1 0 0 0]</span>
+<span class="sd">        [0 0 1 0 0 0 0 0]</span>
+<span class="sd">        [0 0 0 0 0 0 1 0]</span>
+<span class="sd">        [0 1 0 0 0 0 0 0]</span>
+<span class="sd">        [0 0 0 0 0 1 0 0]</span>
+<span class="sd">        [0 0 0 1 0 0 0 0]</span>
+<span class="sd">        [0 0 0 0 0 0 0 1]</span>
+<span class="sd">      ]</span>
+<span class="sd">    ]</span>
+
+<span class="sd">  </span>
+<span class="sd">  :param vector[int] state: State on which the operator wants the QFT performed </span>
+<span class="sd">    of, this is usually a periodic state.</span>
+<span class="sd">  :returns: (list[list[matrix]],int) -- Circuit for the QFT.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">H</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span> 
+                     <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="n">I2</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">wire1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">wire2</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">size</span><span class="p">)</span>
+    <span class="c1"># matrix uses little endian and bit values modification uses big endian so </span>
+    <span class="c1"># we need to convert between the two</span>
+    <span class="n">w1_big</span> <span class="o">=</span> <span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">wire1</span>
+    <span class="n">w2_big</span> <span class="o">=</span> <span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">wire2</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">size</span><span class="p">):</span>
+      <span class="c1"># we exchange the bit corresponding to each wire</span>
+      <span class="n">result</span><span class="p">[</span>
+        <span class="n">set_bit_value</span><span class="p">(</span>
+          <span class="n">set_bit_value</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">w1_big</span><span class="p">,</span><span class="n">bit_value</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">w2_big</span><span class="p">)),</span>
+          <span class="n">w2_big</span><span class="p">,</span><span class="n">bit_value</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">w1_big</span><span class="p">)</span>
+        <span class="p">),</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+  <span class="k">def</span> <span class="nf">R</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="n">control</span><span class="p">,</span><span class="n">size</span><span class="p">):</span>
+    <span class="n">cR</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">cR</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">k</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">kronecker</span><span class="p">(</span><span class="n">cR</span><span class="p">,</span> <span class="n">matrix</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">size</span><span class="o">-</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="n">result</span> <span class="o">=</span> \
+      <span class="n">swap</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="n">swap</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">*</span> \
+      <span class="n">result</span> <span class="o">*</span>\
+      <span class="n">swap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="n">swap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+  <span class="n">nWires</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="p">))</span><span class="o">/</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">for</span> <span class="n">wire</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nWires</span><span class="p">):</span>
+    <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">I2</span><span class="p">]</span><span class="o">*</span><span class="n">wire</span> <span class="o">+</span> <span class="p">[</span><span class="n">H</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">I2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">nWires</span><span class="o">-</span><span class="n">wire</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">nWires</span><span class="o">-</span><span class="p">(</span><span class="n">wire</span><span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
+      <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">R</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">wire</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="p">(</span><span class="n">wire</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">nWires</span><span class="p">)])</span>
+
+  <span class="n">global_swap</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">nWires</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">wire</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nWires</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">global_swap</span> <span class="o">*=</span> <span class="n">swap</span><span class="p">(</span><span class="n">wire</span><span class="p">,</span> <span class="n">nWires</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">wire</span><span class="p">,</span> <span class="n">nWires</span><span class="p">)</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">global_swap</span><span class="p">])</span>
+
+  <span class="k">return</span> <span class="n">layers</span></div>
+
+
+<div class="viewcode-block" id="qft_evaluate"><a class="viewcode-back" href="../qft.html#qft.qft_evaluate">[docs]</a><span class="k">def</span> <span class="nf">qft_evaluate</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  Computes the Mermin Evaluation for each state in ``states``.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; qft_evaluate([periodic_state(1,5,4)])</span>
+<span class="sd">    [1.33201398251237]</span>
+<span class="sd">  </span>
+<span class="sd">  :param list[vector] states: The states after each step of the QFT.</span>
+<span class="sd">  :param bool verbose: If `verbose` then extra run information will be displayed </span>
+<span class="sd">    in terminal.</span>
+<span class="sd">  :param str file_name: File name for the registration of the Mermin evaluation </span>
+<span class="sd">    for each step of the algorithm, in csv format.</span>
+<span class="sd">  :returns: any -- Result of this function depends on file_name. If a file name</span>
+<span class="sd">    is given `qft_main` returns None, otherwise, it returns an array with the </span>
+<span class="sd">    evaluation values.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+    <span class="c1"># we are setting the calculations in floating numbers (instead on symbolic</span>
+    <span class="c1"># to speed them up)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mermin_coef_opti_all</span><span class="p">(</span><span class="n">vector</span><span class="p">(</span><span class="n">CC</span><span class="p">,</span><span class="n">state</span><span class="p">),</span> <span class="n">verbose</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="k">if</span> <span class="n">file_name</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">result</span>
+  <span class="k">else</span> <span class="p">:</span>
+    <span class="n">lines</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;iteration&quot;</span><span class="p">,</span> <span class="s2">&quot;intricationValue&quot;</span><span class="p">]],</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+      <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">value</span><span class="p">])</span>
+      <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">file_name</span><span class="p">))</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+      <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">file_name</span><span class="p">))</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writeFile</span><span class="p">:</span>
+      <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">writeFile</span><span class="p">)</span>
+      <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+    <span class="n">writeFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="qft_matrix"><a class="viewcode-back" href="../qft.html#qft.qft_matrix">[docs]</a><span class="k">def</span> <span class="nf">qft_matrix</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  This function should compute a matrix equivalent to the whole QFT operation. </span>
+<span class="sd">  It has not been tester much though and should not be relied on for now.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; qft_matrix(3)</span>
+<span class="sd">    [   1/4*sqrt(2)    1/4*sqrt(2)    1/4*sqrt(2)    1/4*sqrt(2)    1/4*sqrt(2)    1/4*sqrt(2)    1/4*sqrt(2)    1/4*sqrt(2)]</span>
+<span class="sd">    [   1/4*sqrt(2)    1/4*I + 1/4  1/4*I*sqrt(2)    1/4*I - 1/4   -1/4*sqrt(2)   -1/4*I - 1/4 -1/4*I*sqrt(2)   -1/4*I + 1/4]</span>
+<span class="sd">    [   1/4*sqrt(2)  1/4*I*sqrt(2)   -1/4*sqrt(2) -1/4*I*sqrt(2)    1/4*sqrt(2)  1/4*I*sqrt(2)   -1/4*sqrt(2) -1/4*I*sqrt(2)]</span>
+<span class="sd">    [   1/4*sqrt(2)    1/4*I - 1/4 -1/4*I*sqrt(2)    1/4*I + 1/4   -1/4*sqrt(2)   -1/4*I + 1/4  1/4*I*sqrt(2)   -1/4*I - 1/4]</span>
+<span class="sd">    [   1/4*sqrt(2)   -1/4*sqrt(2)    1/4*sqrt(2)   -1/4*sqrt(2)    1/4*sqrt(2)   -1/4*sqrt(2)    1/4*sqrt(2)   -1/4*sqrt(2)]</span>
+<span class="sd">    [   1/4*sqrt(2)   -1/4*I - 1/4  1/4*I*sqrt(2)   -1/4*I + 1/4   -1/4*sqrt(2)    1/4*I + 1/4 -1/4*I*sqrt(2)    1/4*I - 1/4]</span>
+<span class="sd">    [   1/4*sqrt(2) -1/4*I*sqrt(2)   -1/4*sqrt(2)  1/4*I*sqrt(2)    1/4*sqrt(2) -1/4*I*sqrt(2)   -1/4*sqrt(2)  1/4*I*sqrt(2)]</span>
+<span class="sd">    [   1/4*sqrt(2)   -1/4*I + 1/4 -1/4*I*sqrt(2)   -1/4*I - 1/4   -1/4*sqrt(2)    1/4*I - 1/4  1/4*I*sqrt(2)    1/4*I + 1/4]</span>
+
+<span class="sd">  :param int size: The size of the QFT (number of qubits).</span>
+<span class="sd">  :returns: matrix -- The matrix corresponding to the QFT.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">N</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">size</span>
+  <span class="n">w</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">SR</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+      <span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">l</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="periodic_state"><a class="viewcode-back" href="../qft.html#qft.periodic_state">[docs]</a><span class="k">def</span> <span class="nf">periodic_state</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">nWires</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  Returns the periodic state `|\varphi^{l,r}&gt;` of size `2^{nWires}`. We have:</span>
+<span class="sd">    </span>
+<span class="sd">    `|\varphi^{l,r}&gt; = \sum_{i=0}^{A-1}|l+ir&gt;/sqrt(A)` with</span>
+<span class="sd">    `A = floor((2^{nWires}-l)/r)+1`</span>
+
+<span class="sd">    In this definition, ``l`` is the shift of the state, and ``r`` is the period </span>
+<span class="sd">    of the state.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    Since</span>
+<span class="sd">    `|\varphi^{1,5}&gt; = (|1&gt;+|6&gt;+|11&gt;)/sqrt(3)=(|0001&gt;+|0110&gt;+|1011&gt;)/sqrt(3)`,</span>
+
+<span class="sd">    &gt;&gt;&gt; periodic_state(1,5,4)</span>
+<span class="sd">    (0, 1/3*sqrt(3), 0, 0, 0, 0, 1/3*sqrt(3), 0, 0, 0, 0, 1/3*sqrt(3), 0, 0, 0, 0)</span>
+
+<span class="sd">  :param int l: The shift of the state.</span>
+<span class="sd">  :param int r: The period of the state.</span>
+<span class="sd">  :param int nWires: The size of the system (number of qubits).</span>
+<span class="sd">  :returns: vector -- The state defined by ``l``, ``r`` and ``nWires`` according</span>
+<span class="sd">    to the definition given above.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">N</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">nWires</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">SR</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ceil</span><span class="p">((</span><span class="n">N</span><span class="o">-</span><span class="n">l</span><span class="p">)</span><span class="o">/</span><span class="n">r</span><span class="p">)):</span>
+    <span class="n">result</span><span class="p">[</span><span class="n">l</span><span class="o">+</span><span class="n">k</span><span class="o">*</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="bit_value"><a class="viewcode-back" href="../qft.html#qft.bit_value">[docs]</a><span class="k">def</span> <span class="nf">bit_value</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  Returns the value of the ``k`` `^{th}` digit of the integer ``n`` given in </span>
+<span class="sd">  base ``base``.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; bit_value(5, 0)</span>
+<span class="sd">    1</span>
+<span class="sd">    &gt;&gt;&gt; bit_value(5, 1)</span>
+<span class="sd">    0</span>
+<span class="sd">    &gt;&gt;&gt; bit_value(15, 0, base=10)</span>
+<span class="sd">    5</span>
+
+<span class="sd">  :param int n: Integer studied.</span>
+<span class="sd">  :param int k: Digit desired.</span>
+<span class="sd">  :param int base: Base in which ``n`` is studied.</span>
+<span class="sd">  :returns: int -- Value of the ``k`` `^{th}` digit of the integer ``n`` given </span>
+<span class="sd">    in base ``base``.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">floor</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">base</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="p">))</span> <span class="o">-</span> <span class="n">floor</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">base</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">base</span></div>
+
+
+<div class="viewcode-block" id="set_bit_value"><a class="viewcode-back" href="../qft.html#qft.set_bit_value">[docs]</a><span class="k">def</span> <span class="nf">set_bit_value</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  Returns ``n`` with its ``k`` `^{th}` bit set to ``value`` in base ``base``.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; set_bit_value(5, 0, 0)</span>
+<span class="sd">    4</span>
+<span class="sd">    &gt;&gt;&gt; set_bit_value(5, 1, 0)</span>
+<span class="sd">    5</span>
+<span class="sd">    &gt;&gt;&gt; set_bit_value(15, 0, 9, base=10)</span>
+<span class="sd">    19</span>
+
+<span class="sd">  :param int n: Integer modified.</span>
+<span class="sd">  :param int k: Digit to change.</span>
+<span class="sd">  :param int value: Value wanted for the ``k`` `^{th}` digit of ``n`` (must be </span>
+<span class="sd">    between 0 and ``base-1``).</span>
+<span class="sd">  :param int base: Base in which ``n`` is modified.</span>
+<span class="sd">  :returns: int -- ``n`` with its ``k`` `^{th}` bit set to ``value`` in base </span>
+<span class="sd">    ``base``.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">n</span> <span class="o">-</span> <span class="n">bit_value</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">value</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">k</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Henri de Boutray.
+    </div>
+  </body>
+</html>

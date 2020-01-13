@@ -1,0 +1,55 @@
+\indexentry{grover (module)|hyperpage}{3}
+\indexentry{diffusion\_artificial() (in module grover)|hyperpage}{3}
+\indexentry{grover() (in module grover)|hyperpage}{3}
+\indexentry{grover\_artifical() (in module grover)|hyperpage}{3}
+\indexentry{grover\_evaluate() (in module grover)|hyperpage}{4}
+\indexentry{grover\_layers\_kopt() (in module grover)|hyperpage}{4}
+\indexentry{grover\_optimize() (in module grover)|hyperpage}{4}
+\indexentry{grover\_run() (in module grover)|hyperpage}{4}
+\indexentry{grover\_vanilla() (in module grover)|hyperpage}{4}
+\indexentry{oracle() (in module grover)|hyperpage}{5}
+\indexentry{oracle\_artificial() (in module grover)|hyperpage}{5}
+\indexentry{target\_state\_ket\_list\_to\_vector() (in module grover)|hyperpage}{5}
+\indexentry{target\_state\_ket\_string\_to\_vector() (in module grover)|hyperpage}{5}
+\indexentry{target\_state\_ket\_vector\_to\_string() (in module grover)|hyperpage}{6}
+\indexentry{time\_step() (in module grover)|hyperpage}{6}
+\indexentry{qft (module)|hyperpage}{6}
+\indexentry{bit\_value() (in module qft)|hyperpage}{6}
+\indexentry{periodic\_state() (in module qft)|hyperpage}{7}
+\indexentry{qft\_evaluate() (in module qft)|hyperpage}{7}
+\indexentry{qft\_layers() (in module qft)|hyperpage}{7}
+\indexentry{qft\_main() (in module qft)|hyperpage}{8}
+\indexentry{qft\_matrix() (in module qft)|hyperpage}{9}
+\indexentry{qft\_run() (in module qft)|hyperpage}{9}
+\indexentry{set\_bit\_value() (in module qft)|hyperpage}{10}
+\indexentry{run\_circuit (module)|hyperpage}{10}
+\indexentry{digit() (in module run\_circuit)|hyperpage}{10}
+\indexentry{int\_name() (in module run\_circuit)|hyperpage}{11}
+\indexentry{kronecker() (in module run\_circuit)|hyperpage}{11}
+\indexentry{kronecker\_power() (in module run\_circuit)|hyperpage}{11}
+\indexentry{layers\_to\_matrix() (in module run\_circuit)|hyperpage}{11}
+\indexentry{layers\_to\_printable() (in module run\_circuit)|hyperpage}{12}
+\indexentry{output\_commant() (in module run\_circuit)|hyperpage}{12}
+\indexentry{print\_circuit() (in module run\_circuit)|hyperpage}{12}
+\indexentry{run() (in module run\_circuit)|hyperpage}{13}
+\indexentry{opti (module)|hyperpage}{14}
+\indexentry{optimize() (in module opti)|hyperpage}{14}
+\indexentry{optimize\_2spheres() (in module opti)|hyperpage}{14}
+\indexentry{optimize\_normalized() (in module opti)|hyperpage}{15}
+\indexentry{mermin\_eval (module)|hyperpage}{15}
+\indexentry{M() (in module mermin\_eval)|hyperpage}{15}
+\indexentry{M\_all() (in module mermin\_eval)|hyperpage}{15}
+\indexentry{M\_eval() (in module mermin\_eval)|hyperpage}{16}
+\indexentry{M\_eval\_all() (in module mermin\_eval)|hyperpage}{16}
+\indexentry{M\_from\_coef() (in module mermin\_eval)|hyperpage}{16}
+\indexentry{M\_from\_coef\_all() (in module mermin\_eval)|hyperpage}{16}
+\indexentry{M\_prime() (in module mermin\_eval)|hyperpage}{17}
+\indexentry{M\_prime\_all() (in module mermin\_eval)|hyperpage}{17}
+\indexentry{coefficients\_packing() (in module mermin\_eval)|hyperpage}{17}
+\indexentry{coefficients\_unpacking() (in module mermin\_eval)|hyperpage}{17}
+\indexentry{mermin\_coef\_opti() (in module mermin\_eval)|hyperpage}{17}
+\indexentry{mermin\_coef\_opti\_all() (in module mermin\_eval)|hyperpage}{17}
+\indexentry{mermin\_operator\_opti() (in module mermin\_eval)|hyperpage}{18}
+\indexentry{vector\_to\_ket (module)|hyperpage}{18}
+\indexentry{int\_index\_to\_ket() (in module vector\_to\_ket)|hyperpage}{18}
+\indexentry{vector\_to\_ket() (in module vector\_to\_ket)|hyperpage}{18}

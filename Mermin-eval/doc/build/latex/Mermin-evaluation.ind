@@ -1,0 +1,103 @@
+\begin{sphinxtheindex}
+\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
+
+  \bigletter B
+  \item bit\_value() (in module qft), \hyperpage{6}
+
+  \indexspace
+  \bigletter C
+  \item coefficients\_packing() (in module mermin\_eval), \hyperpage{17}
+  \item coefficients\_unpacking() (in module mermin\_eval), \hyperpage{17}
+
+  \indexspace
+  \bigletter D
+  \item diffusion\_artificial() (in module grover), \hyperpage{3}
+  \item digit() (in module run\_circuit), \hyperpage{10}
+
+  \indexspace
+  \bigletter G
+  \item grover (module), \hyperpage{3}
+  \item grover() (in module grover), \hyperpage{3}
+  \item grover\_artifical() (in module grover), \hyperpage{3}
+  \item grover\_evaluate() (in module grover), \hyperpage{4}
+  \item grover\_layers\_kopt() (in module grover), \hyperpage{4}
+  \item grover\_optimize() (in module grover), \hyperpage{4}
+  \item grover\_run() (in module grover), \hyperpage{4}
+  \item grover\_vanilla() (in module grover), \hyperpage{4}
+
+  \indexspace
+  \bigletter I
+  \item int\_index\_to\_ket() (in module vector\_to\_ket), \hyperpage{18}
+  \item int\_name() (in module run\_circuit), \hyperpage{11}
+
+  \indexspace
+  \bigletter K
+  \item kronecker() (in module run\_circuit), \hyperpage{11}
+  \item kronecker\_power() (in module run\_circuit), \hyperpage{11}
+
+  \indexspace
+  \bigletter L
+  \item layers\_to\_matrix() (in module run\_circuit), \hyperpage{11}
+  \item layers\_to\_printable() (in module run\_circuit), \hyperpage{12}
+
+  \indexspace
+  \bigletter M
+  \item M() (in module mermin\_eval), \hyperpage{15}
+  \item M\_all() (in module mermin\_eval), \hyperpage{15}
+  \item M\_eval() (in module mermin\_eval), \hyperpage{16}
+  \item M\_eval\_all() (in module mermin\_eval), \hyperpage{16}
+  \item M\_from\_coef() (in module mermin\_eval), \hyperpage{16}
+  \item M\_from\_coef\_all() (in module mermin\_eval), \hyperpage{16}
+  \item M\_prime() (in module mermin\_eval), \hyperpage{17}
+  \item M\_prime\_all() (in module mermin\_eval), \hyperpage{17}
+  \item mermin\_coef\_opti() (in module mermin\_eval), \hyperpage{17}
+  \item mermin\_coef\_opti\_all() (in module mermin\_eval), \hyperpage{17}
+  \item mermin\_eval (module), \hyperpage{15}
+  \item mermin\_operator\_opti() (in module mermin\_eval), \hyperpage{18}
+
+  \indexspace
+  \bigletter O
+  \item opti (module), \hyperpage{14}
+  \item optimize() (in module opti), \hyperpage{14}
+  \item optimize\_2spheres() (in module opti), \hyperpage{14}
+  \item optimize\_normalized() (in module opti), \hyperpage{15}
+  \item oracle() (in module grover), \hyperpage{5}
+  \item oracle\_artificial() (in module grover), \hyperpage{5}
+  \item output\_commant() (in module run\_circuit), \hyperpage{12}
+
+  \indexspace
+  \bigletter P
+  \item periodic\_state() (in module qft), \hyperpage{7}
+  \item print\_circuit() (in module run\_circuit), \hyperpage{12}
+
+  \indexspace
+  \bigletter Q
+  \item qft (module), \hyperpage{6}
+  \item qft\_evaluate() (in module qft), \hyperpage{7}
+  \item qft\_layers() (in module qft), \hyperpage{7}
+  \item qft\_main() (in module qft), \hyperpage{8}
+  \item qft\_matrix() (in module qft), \hyperpage{9}
+  \item qft\_run() (in module qft), \hyperpage{9}
+
+  \indexspace
+  \bigletter R
+  \item run() (in module run\_circuit), \hyperpage{13}
+  \item run\_circuit (module), \hyperpage{10}
+
+  \indexspace
+  \bigletter S
+  \item set\_bit\_value() (in module qft), \hyperpage{10}
+
+  \indexspace
+  \bigletter T
+  \item target\_state\_ket\_list\_to\_vector() (in module grover), \hyperpage{5}
+  \item target\_state\_ket\_string\_to\_vector() (in module grover), \hyperpage{5}
+  \item target\_state\_ket\_vector\_to\_string() (in module grover), \hyperpage{6}
+  \item time\_step() (in module grover), \hyperpage{6}
+
+  \indexspace
+  \bigletter V
+  \item vector\_to\_ket (module), \hyperpage{18}
+  \item vector\_to\_ket() (in module vector\_to\_ket), \hyperpage{18}
+
+\end{sphinxtheindex}

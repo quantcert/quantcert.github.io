@@ -1,0 +1,475 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>run_circuit &#8212; A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/MathJax.js?config=TeX-AMS_HTML-full,../mathjax_sage.js"></script>
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for run_circuit</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module provides a simple quantum circuit simulator.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">sage.all</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">copy</span> <span class="k">as</span> <span class="nn">cp</span>
+
+<span class="kn">from</span> <span class="nn">vector_to_ket</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">field</span> <span class="o">=</span> <span class="n">SR</span>
+<span class="c1"># field = UniversalCyclotomicField()</span>
+<span class="c1"># e8 = field.gen(8)</span>
+<span class="c1"># sqrt2 = e8 + conjugate(e8) # fix for UniversalCyclotomicField</span>
+
+
+<div class="viewcode-block" id="kronecker"><a class="viewcode-back" href="../run_circuit.html#run_circuit.kronecker">[docs]</a><span class="k">def</span> <span class="nf">kronecker</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Computes the Kronecker product of ``a`` and ``b``.</span>
+<span class="sd">  </span>
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; a = matrix([[1,0],[0,1]])</span>
+<span class="sd">    &gt;&gt;&gt; b = matrix([[1,2],[3,4]])</span>
+<span class="sd">    &gt;&gt;&gt; kronecker(a,b)</span>
+<span class="sd">    [1 2 0 0]</span>
+<span class="sd">    [3 4 0 0]</span>
+<span class="sd">    [0 0 1 2]</span>
+<span class="sd">    [0 0 3 4]</span>
+
+<span class="sd">  :param matrix,vector a,b: Operands for the kronecker operator. </span>
+<span class="sd">  :returns: matrix *or* vector --  The kronecker product of ``a`` and ``b`` </span>
+<span class="sd">    (return type is the same a type of ``a``).</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">a_matrix</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+  <span class="n">b_matrix</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+  <span class="n">ma</span><span class="p">,</span> <span class="n">na</span> <span class="o">=</span> <span class="n">a_matrix</span><span class="o">.</span><span class="n">nrows</span><span class="p">(),</span> <span class="n">a_matrix</span><span class="o">.</span><span class="n">ncols</span><span class="p">()</span>
+  <span class="n">mb</span><span class="p">,</span> <span class="n">nb</span> <span class="o">=</span> <span class="n">b_matrix</span><span class="o">.</span><span class="n">nrows</span><span class="p">(),</span> <span class="n">b_matrix</span><span class="o">.</span><span class="n">ncols</span><span class="p">()</span>
+  <span class="n">mr</span><span class="p">,</span> <span class="n">nr</span> <span class="o">=</span> <span class="n">ma</span> <span class="o">*</span> <span class="n">mb</span><span class="p">,</span> <span class="n">na</span> <span class="o">*</span> <span class="n">nb</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">mr</span><span class="p">,</span> <span class="n">nr</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mr</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nr</span><span class="p">):</span>
+      <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">a_matrix</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="n">mb</span><span class="p">,</span> <span class="n">j</span> <span class="o">//</span> <span class="n">nb</span><span class="p">]</span> <span class="o">*</span> <span class="n">b_matrix</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">mb</span><span class="p">,</span> <span class="n">j</span> <span class="o">%</span> <span class="n">nb</span><span class="p">]</span>
+  <span class="k">if</span> <span class="s2">&quot;Vector&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">parent</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="n">vector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="s2">&quot;Matrix&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">parent</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="n">matrix</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input type of first parameter must be Vector or &quot;</span> <span class="o">+</span> 
+      <span class="s2">&quot;Matrix but &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">parent</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; was given&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="kronecker_power"><a class="viewcode-back" href="../run_circuit.html#run_circuit.kronecker_power">[docs]</a><span class="k">def</span> <span class="nf">kronecker_power</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Computes the ``n`` `^{th}` Kronecker power of ``a``.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; a = matrix([[1,0],[0,2]])</span>
+<span class="sd">    &gt;&gt;&gt; kronecker_power(a,2)</span>
+<span class="sd">    [1 0 0 0]</span>
+<span class="sd">    [0 2 0 0]</span>
+<span class="sd">    [0 0 2 0]</span>
+<span class="sd">    [0 0 0 4]</span>
+<span class="sd">  </span>
+<span class="sd">  :param matrix,vector a: The matrix (or vector) to be elevated to the </span>
+<span class="sd">    ``n`` `^{th}` power.</span>
+<span class="sd">  :param int n: The power ``a`` has to be elevated to. </span>
+<span class="sd">  :returns: matrix *or* vector -- The ``n`` `^{th}` kronecker power of ``a`` </span>
+<span class="sd">    (return type is the same a type of ``a``).</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">a</span>
+  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">kronecker</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+  <span class="k">if</span> <span class="s2">&quot;Vector&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">parent</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="n">vector</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="s2">&quot;Matrix&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">parent</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="n">matrix</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input type must be Vector or Matrix but &quot;</span> <span class="o">+</span> 
+      <span class="nb">str</span><span class="p">(</span><span class="n">parent</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; was given&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="output_commant"><a class="viewcode-back" href="../run_circuit.html#run_circuit.output_commant">[docs]</a><span class="k">def</span> <span class="nf">output_commant</span><span class="p">(</span><span class="n">command_name</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_to_file</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">w_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  This function is used to print useful informations in various ways, see </span>
+<span class="sd">  arguments details for more information.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; output_commant(&quot;test&quot;,vector(SR,[1,0,0,1]), output=True)</span>
+<span class="sd">    \newcommand{\test}{1 \ket{00} + 1 \ket{11}}</span>
+
+<span class="sd">  :param str command_name: The command name. </span>
+<span class="sd">  :param any command: The command content (if type is ``str``, will be printed </span>
+<span class="sd">    as such; if ``vector``, ``vector_to_ket`` will be called on it and if </span>
+<span class="sd">    ``matrix``, ``latex`` method from SageMath will be called on it).</span>
+<span class="sd">  :param bool output: disables or enables the output.</span>
+<span class="sd">  :param bool output_to_file: Whether the output should be in the standard </span>
+<span class="sd">    output or in a file.</span>
+<span class="sd">  :param file w_file: The opened file to write the output to.</span>
+<span class="sd">  :returns: None</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">output</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">&quot;Vector&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">parent</span><span class="p">(</span><span class="n">command</span><span class="p">)):</span>
+      <span class="n">latex_command</span> <span class="o">=</span> <span class="n">vector_to_ket</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s2">&quot;str&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">parent</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+      <span class="n">latex_command</span> <span class="o">=</span> <span class="n">command</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">latex_command</span> <span class="o">=</span> <span class="n">latex</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+    <span class="n">newcommand</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">newcommand{</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">command_name</span> <span class="o">+</span> <span class="s2">&quot;}{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">latex_command</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">output_to_file</span><span class="p">:</span>
+      <span class="n">w_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">newcommand</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="n">newcommand</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../run_circuit.html#run_circuit.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">matrix_layers</span><span class="p">,</span> <span class="n">V_init</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vector_name</span><span class="o">=</span><span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="n">matrix_name</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  Runs the algorithm specified by the matrix_layers.</span>
+
+<span class="sd">  Example:  </span>
+<span class="sd">    &gt;&gt;&gt; I2 = matrix.identity(2)</span>
+<span class="sd">    &gt;&gt;&gt; I4 = matrix.identity(4)</span>
+<span class="sd">    &gt;&gt;&gt; H = matrix([[1,1],[1,-1]])/sqrt(2)</span>
+<span class="sd">    &gt;&gt;&gt; swap = matrix([[1,0,0,0],[0,0,1,0],[0,1,0,0],[0,0,0,1]])</span>
+<span class="sd">    &gt;&gt;&gt; v = vector([1, 0, 0, 0, 0, 0, 0, 0])</span>
+<span class="sd">    &gt;&gt;&gt; layers = [[I4,H],[H,H,I2],[I2,swap]]</span>
+<span class="sd">    &gt;&gt;&gt; run(layers,v)</span>
+<span class="sd">    ([(1, 0, 0, 0, 0, 0, 0, 0),</span>
+<span class="sd">      (1/2*sqrt(2), 1/2*sqrt(2), 0, 0, 0, 0, 0, 0),</span>
+<span class="sd">      (1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2)),</span>
+<span class="sd">      (1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2), 1/4*sqrt(2))],</span>
+<span class="sd">     [</span>
+<span class="sd">    [ 1/2*sqrt(2)  1/2*sqrt(2)            0            0            0            0            0            0]</span>
+<span class="sd">    [ 1/2*sqrt(2) -1/2*sqrt(2)            0            0            0            0            0            0]</span>
+<span class="sd">    [           0            0  1/2*sqrt(2)  1/2*sqrt(2)            0            0            0            0]</span>
+<span class="sd">    [           0            0  1/2*sqrt(2) -1/2*sqrt(2)            0            0            0            0]</span>
+<span class="sd">    [           0            0            0            0  1/2*sqrt(2)  1/2*sqrt(2)            0            0]</span>
+<span class="sd">    [           0            0            0            0  1/2*sqrt(2) -1/2*sqrt(2)            0            0]</span>
+<span class="sd">    [           0            0            0            0            0            0  1/2*sqrt(2)  1/2*sqrt(2)]</span>
+<span class="sd">    [           0            0            0            0            0            0  1/2*sqrt(2) -1/2*sqrt(2)],</span>
+<span class="sd">    [ 1/2    0  1/2    0  1/2    0  1/2    0]  [1 0 0 0 0 0 0 0]</span>
+<span class="sd">    [   0  1/2    0  1/2    0  1/2    0  1/2]  [0 0 1 0 0 0 0 0]</span>
+<span class="sd">    [ 1/2    0 -1/2    0  1/2    0 -1/2    0]  [0 1 0 0 0 0 0 0]</span>
+<span class="sd">    [   0  1/2    0 -1/2    0  1/2    0 -1/2]  [0 0 0 1 0 0 0 0]</span>
+<span class="sd">    [ 1/2    0  1/2    0 -1/2    0 -1/2    0]  [0 0 0 0 1 0 0 0]</span>
+<span class="sd">    [   0  1/2    0  1/2    0 -1/2    0 -1/2]  [0 0 0 0 0 0 1 0]</span>
+<span class="sd">    [ 1/2    0 -1/2    0 -1/2    0  1/2    0]  [0 0 0 0 0 1 0 0]</span>
+<span class="sd">    [   0  1/2    0 -1/2    0 -1/2    0  1/2], [0 0 0 0 0 0 0 1]</span>
+<span class="sd">    ])</span>
+
+<span class="sd">  </span>
+<span class="sd">  :param array[array[matrix]] matrix_layers: Algorithm described as it would </span>
+<span class="sd">    be in a circuit.</span>
+<span class="sd">  :param vector V_init: Initial input of the algorithm.</span>
+<span class="sd">  :param bool output: If true, outputs are enabled.</span>
+<span class="sd">  :param bool output_to_file: If true, trace is returned in file, else it is </span>
+<span class="sd">    printed.</span>
+<span class="sd">  :param file file: File to output the commands to.</span>
+<span class="sd">  :param str vector_name: Base name used for the vectors commands. </span>
+<span class="sd">  :param str matrix_name: Base name used for the matrices commands. </span>
+<span class="sd">  :returns: vector -- The states along the execution of the algorithm as well as</span>
+<span class="sd">    the matrix corresponding to each layer.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">V_running</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">V_init</span><span class="p">)</span>
+  <span class="n">vectors_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">V_running</span><span class="p">]</span>
+  <span class="n">output_commant</span><span class="p">(</span><span class="n">vector_name</span> <span class="o">+</span> <span class="n">int_name</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">V_running</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+  <span class="n">matrices_list</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matrix_layers</span><span class="p">)):</span>
+    <span class="n">layerMatrix</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="k">for</span> <span class="n">running_matrix</span> <span class="ow">in</span> <span class="n">matrix_layers</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+      <span class="n">layerMatrix</span> <span class="o">=</span> <span class="n">kronecker</span><span class="p">(</span><span class="n">layerMatrix</span><span class="p">,</span> <span class="n">running_matrix</span><span class="p">)</span>
+    <span class="n">V_running</span> <span class="o">=</span> <span class="n">layerMatrix</span><span class="o">*</span><span class="n">V_running</span>
+    <span class="n">matrices_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layerMatrix</span><span class="p">)</span>
+    <span class="n">output_commant</span><span class="p">(</span><span class="n">matrix_name</span> <span class="o">+</span> <span class="n">int_name</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">layerMatrix</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">vectors_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">V_running</span><span class="p">)</span>
+    <span class="n">output_commant</span><span class="p">(</span><span class="n">vector_name</span> <span class="o">+</span> <span class="n">int_name</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">V_running</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">vectors_list</span><span class="p">,</span> <span class="n">matrices_list</span></div>
+
+
+<div class="viewcode-block" id="int_name"><a class="viewcode-back" href="../run_circuit.html#run_circuit.int_name">[docs]</a><span class="k">def</span> <span class="nf">int_name</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  Converts a number to a string composed of the list of its digits in English.</span>
+<span class="sd">  </span>
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; int_name(152)</span>
+<span class="sd">    &#39;onefivetwo&#39;</span>
+<span class="sd">    </span>
+<span class="sd">  :param int num: Number to be converted to a list of digits.</span>
+<span class="sd">  :returns: str -- List of digits of ``num`` in base 10 concatenated.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">digit_str</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;zero&quot;</span><span class="p">,</span> <span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="s2">&quot;three&quot;</span><span class="p">,</span> <span class="s2">&quot;four&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;five&quot;</span><span class="p">,</span> <span class="s2">&quot;six&quot;</span><span class="p">,</span> <span class="s2">&quot;seven&quot;</span><span class="p">,</span> <span class="s2">&quot;eight&quot;</span><span class="p">,</span> <span class="s2">&quot;nine&quot;</span><span class="p">]</span>
+
+  <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">digit_str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="k">while</span> <span class="n">num</span><span class="o">+</span><span class="mi">1</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="n">k</span><span class="p">:</span>
+    <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
+  <span class="k">while</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="n">digit_str</span><span class="p">[</span><span class="n">digit</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">k</span><span class="p">)]</span>
+    <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="digit"><a class="viewcode-back" href="../run_circuit.html#run_circuit.digit">[docs]</a><span class="k">def</span> <span class="nf">digit</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Computes the digit ``k`` for the integer ``n`` in its representation in base</span>
+<span class="sd">  ``base``.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; digit(152, 1)</span>
+<span class="sd">    5</span>
+<span class="sd">    &gt;&gt;&gt; digit(152, 0)</span>
+<span class="sd">    2</span>
+
+<span class="sd">  :param int n: The integer for which the digit is needed.</span>
+<span class="sd">  :param int k: The number of the digit.</span>
+<span class="sd">  :param int base: The base used for the representation of ``n``. </span>
+<span class="sd">  :returns: int -- The ``k`` `^{th}` digit of ``n`` in base ``base``.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">floor</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">base</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="p">))</span> <span class="o">-</span> <span class="n">floor</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">base</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">base</span></div>
+
+
+<div class="viewcode-block" id="print_circuit"><a class="viewcode-back" href="../run_circuit.html#run_circuit.print_circuit">[docs]</a><span class="k">def</span> <span class="nf">print_circuit</span><span class="p">(</span><span class="n">name_layers</span><span class="p">,</span> <span class="n">to_latex</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Each name is a tuple with the name of the gate and its dimension </span>
+<span class="sd">  </span>
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; circuit = [[(&#39;I&#39;,2),(&#39;H&#39;,1)],[(&#39;H&#39;,1),(&#39;H&#39;,1),(&#39;I&#39;,1)],[(&#39;I&#39;,1),(&#39;S&#39;,2)]]</span>
+<span class="sd">    &gt;&gt;&gt; print_circuit(circuit, to_latex=False)</span>
+<span class="sd">    ---H---</span>
+<span class="sd">    ---H-S-</span>
+<span class="sd">    -H---|-</span>
+<span class="sd">    &gt;&gt;&gt; print_circuit(circuit, to_latex=True)</span>
+<span class="sd">    \begin{align*}</span>
+<span class="sd">     \Qcircuit @C=1em @R=.7em {</span>
+<span class="sd">      &amp; \qw       &amp; \gate{H}  &amp; \qw               &amp; \qw\\</span>
+<span class="sd">      &amp; \qw       &amp; \gate{H}  &amp; \multigate{1}{S}  &amp; \qw\\</span>
+<span class="sd">      &amp; \gate{H}  &amp; \qw       &amp; \ghost{S}         &amp; \qw</span>
+<span class="sd">     }</span>
+<span class="sd">    \end{align*}</span>
+<span class="sd">  </span>
+<span class="sd">  ``@multi-gost_``, ``@multi-source_`` and ``@multi-size_`` are reserved names, </span>
+<span class="sd">  they should not be used as a gate name.</span>
+
+<span class="sd">  :param list[List[(str,int)]] name_layers: Circuit name formalism in the shape </span>
+<span class="sd">    of the example given above. </span>
+<span class="sd">    First layer should not be empty.</span>
+<span class="sd">    sum([item[1] for item in layer]) should be constant for layer in layers</span>
+<span class="sd">  :param bool latex: If true, a string is returned containing the circuit in</span>
+<span class="sd">    the format given by the LaTeX package ``qcircuit``. Otherwise, the string</span>
+<span class="sd">    returned is under a custom format meant to be easily readable in the </span>
+<span class="sd">    terminal.</span>
+<span class="sd">  :returns: str -- The circuit in the format described above.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">def</span> <span class="nf">gate_name_to_string</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">_to_latex</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Converts the gate name to the printed result, the reserved names are used </span>
+<span class="sd">    as follow :</span>
+
+<span class="sd">    For a multi gate, the first wire will have as gate name </span>
+<span class="sd">    ``@multi-source_*name*@multi-size_*n*`` </span>
+<span class="sd">    where *name* is the actual name of the gate and *n* is the number of other </span>
+<span class="sd">    wires affected by this gate</span>
+<span class="sd">    the *n* other wires will have as gate name</span>
+<span class="sd">    ``@multi-ghost_*name*``</span>
+
+<span class="sd">    Some examples :</span>
+
+<span class="sd">    &gt;&gt;&gt; gate_name_to_string(&#39;I&#39;)</span>
+<span class="sd">    &#39;--&#39;</span>
+<span class="sd">    &gt;&gt;&gt; gate_name_to_string(&#39;I&#39;, True)</span>
+<span class="sd">    &#39;&amp; \\qw &#39;</span>
+<span class="sd">    &gt;&gt;&gt; gate_name_to_string(&#39;H&#39;, False)</span>
+<span class="sd">    &#39;H-&#39;</span>
+<span class="sd">    &gt;&gt;&gt; gate_name_to_string(&#39;H&#39;, True)</span>
+<span class="sd">    &#39;&amp; \\gate{H}&#39;</span>
+<span class="sd">    &gt;&gt;&gt; gate_name_to_string(&#39;@multi-source_S@multi-size_1&#39;)</span>
+<span class="sd">    &#39;S-&#39;</span>
+<span class="sd">    &gt;&gt;&gt; gate_name_to_string(&#39;@multi-source_S@multi-size_1&#39;, True)</span>
+<span class="sd">    &#39;&amp; \\multigate{1}{S} &#39;</span>
+<span class="sd">    &gt;&gt;&gt; gate_name_to_string(&#39;@multi-ghost_S&#39;)</span>
+<span class="sd">    &#39;|-&#39;</span>
+<span class="sd">    &gt;&gt;&gt; gate_name_to_string(&#39;@multi-ghost_S&#39;, True)</span>
+<span class="sd">    &#39;&amp; \\ghost{S} &#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">_to_latex</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;I&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&amp; </span><span class="se">\\</span><span class="s2">qw &quot;</span>
+      <span class="k">elif</span> <span class="s2">&quot;@multi-source_&quot;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="p">[</span><span class="n">source_name</span><span class="p">,</span> <span class="n">size</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@multi-source_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@multi-size_&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;&amp; </span><span class="se">\\</span><span class="s2">multigate{&quot;</span> <span class="o">+</span> <span class="n">size</span> <span class="o">+</span> <span class="s2">&quot;}{&quot;</span> <span class="o">+</span> <span class="n">source_name</span> <span class="o">+</span> <span class="s2">&quot;} &quot;</span>
+      <span class="k">elif</span> <span class="s2">&quot;@multi-ghost_&quot;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="n">source_name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@multi-ghost_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="s2">&quot;&amp; </span><span class="se">\\</span><span class="s2">ghost{&quot;</span> <span class="o">+</span> <span class="n">source_name</span> <span class="o">+</span> <span class="s2">&quot;} &quot;</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&amp; </span><span class="se">\\</span><span class="s2">gate{&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;I&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;--&quot;</span>
+      <span class="k">elif</span> <span class="s2">&quot;@multi-source_&quot;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="n">source_name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@multi-source_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@multi-size_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">source_name</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span>
+      <span class="k">elif</span> <span class="s2">&quot;@multi-ghost_&quot;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;|-&quot;</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span>
+
+  <span class="k">def</span> <span class="nf">flatten_name_layers</span><span class="p">(</span><span class="n">_name_layers</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot; Flatten the list _name_layers to make it more easily usable</span>
+
+<span class="sd">    &gt;&gt;&gt; circuit = [[(&#39;I&#39;,2),(&#39;H&#39;,1)],[(&#39;H&#39;,1),(&#39;H&#39;,1),(&#39;I&#39;,1)],[(&#39;I&#39;,1),(&#39;S&#39;,2)]]</span>
+<span class="sd">    &gt;&gt;&gt; flatten_name_layers(circuit)</span>
+<span class="sd">    [[&#39;I&#39;, &#39;I&#39;, &#39;H&#39;],</span>
+<span class="sd">     [&#39;H&#39;, &#39;H&#39;, &#39;I&#39;],</span>
+<span class="sd">     [&#39;I&#39;, &#39;@multi-source_S@multi-size_1&#39;, &#39;@multi-ghost_S&#39;]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_name_layers_flattened</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">_name_layers</span><span class="p">:</span>
+      <span class="n">layer_flattened</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">layer</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+          <span class="n">layer_flattened</span> <span class="o">+=</span> <span class="p">[</span><span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">elif</span> <span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;I&quot;</span><span class="p">:</span>
+          <span class="n">layer_flattened</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+          <span class="n">layer_flattened</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;@multi-source_&quot;</span> <span class="o">+</span> <span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;@multi-size_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+          <span class="n">layer_flattened</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;@multi-ghost_&quot;</span> <span class="o">+</span> <span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">*</span><span class="p">(</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+      <span class="n">_name_layers_flattened</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer_flattened</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_name_layers_flattened</span>
+
+  <span class="n">flattened_name_layers</span> <span class="o">=</span> <span class="n">flatten_name_layers</span><span class="p">(</span><span class="n">name_layers</span><span class="p">)</span>
+  <span class="n">n_wires</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">flattened_name_layers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="n">n_layers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">flattened_name_layers</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">to_latex</span><span class="p">:</span>
+    <span class="n">circuit_string</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">begin{align*}</span><span class="se">\n</span><span class="s2">  </span><span class="se">\\</span><span class="s2">Qcircuit @C=1em @R=.7em {</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">circuit_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="k">for</span> <span class="n">n_wire</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_wires</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">to_latex</span><span class="p">:</span>
+      <span class="n">wire_string</span> <span class="o">=</span> <span class="s2">&quot;    &quot;</span>
+    <span class="k">else</span><span class="p">:</span> 
+      <span class="n">wire_string</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+    <span class="k">for</span> <span class="n">n_layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_layers</span><span class="p">):</span>
+      <span class="n">wire_string</span> <span class="o">+=</span> <span class="n">gate_name_to_string</span><span class="p">(</span><span class="n">flattened_name_layers</span><span class="p">[</span><span class="n">n_layer</span><span class="p">][</span><span class="n">n_wire</span><span class="p">],</span> <span class="n">to_latex</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">to_latex</span><span class="p">:</span>
+      <span class="n">circuit_string</span> <span class="o">+=</span> <span class="n">wire_string</span> <span class="o">+</span> <span class="s2">&quot;&amp; </span><span class="se">\\</span><span class="s2">qw </span><span class="se">\\\\\n</span><span class="s2">&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">circuit_string</span> <span class="o">+=</span> <span class="n">wire_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="k">if</span> <span class="n">to_latex</span><span class="p">:</span>
+    <span class="n">circuit_string</span> <span class="o">+=</span> <span class="s2">&quot;  }</span><span class="se">\n\\</span><span class="s2">end{align*}&quot;</span> 
+  <span class="k">return</span> <span class="n">circuit_string</span></div>
+
+
+<div class="viewcode-block" id="layers_to_printable"><a class="viewcode-back" href="../run_circuit.html#run_circuit.layers_to_printable">[docs]</a><span class="k">def</span> <span class="nf">layers_to_printable</span><span class="p">(</span><span class="n">layers</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;layers is the same as matrix_layers but with matrix names embedded in them</span>
+<span class="sd">  </span>
+<span class="sd">  Example:  </span>
+<span class="sd">    &gt;&gt;&gt; I2 = matrix.identity(2)</span>
+<span class="sd">    &gt;&gt;&gt; I4 = matrix.identity(4)</span>
+<span class="sd">    &gt;&gt;&gt; H = matrix([[1,1],[1,-1]])/sqrt(2)</span>
+<span class="sd">    &gt;&gt;&gt; swap = matrix([[1,0,0,0],[0,0,1,0],[0,1,0,0],[0,0,0,1]])</span>
+<span class="sd">    &gt;&gt;&gt; layers = [[(&#39;I&#39;,I4),(&#39;H&#39;,H)],[(&#39;H&#39;,H),(&#39;H&#39;,H),(&#39;I&#39;,I2)],[(&#39;I&#39;,I2),(&#39;S&#39;,swap)]]</span>
+<span class="sd">    [[(&#39;I&#39;,2),(&#39;H&#39;,1)],[(&#39;H&#39;,1),(&#39;H&#39;,1),(&#39;I&#39;,1)],[(&#39;I&#39;,1),(&#39;S&#39;,2)]]</span>
+
+<span class="sd">  :param list[list[(str,matrix)]] layers: Circuit under the format described </span>
+<span class="sd">    above.</span>
+<span class="sd">  :returns: list[List[(str,int)]] -- Circuit under the ready-to-print format </span>
+<span class="sd">    described above.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="p">[[(</span><span class="n">gate</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">log</span><span class="p">(</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">nrows</span><span class="p">())</span><span class="o">/</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">layer</span><span class="p">]</span> <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layers</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="layers_to_matrix"><a class="viewcode-back" href="../run_circuit.html#run_circuit.layers_to_matrix">[docs]</a><span class="k">def</span> <span class="nf">layers_to_matrix</span><span class="p">(</span><span class="n">layers</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;layers is the same as matrix_layers but with matrix names embedded in them</span>
+<span class="sd">  </span>
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; I2 = matrix.identity(2)</span>
+<span class="sd">    &gt;&gt;&gt; I4 = matrix.identity(4)</span>
+<span class="sd">    &gt;&gt;&gt; H = matrix([[1,1],[1,-1]])/sqrt(2)</span>
+<span class="sd">    &gt;&gt;&gt; swap = matrix([[1,0,0,0],[0,0,1,0],[0,1,0,0],[0,0,0,1]])</span>
+<span class="sd">    &gt;&gt;&gt; layers = [[(&#39;I&#39;,I4),(&#39;H&#39;,H)],[(&#39;H&#39;,H),(&#39;H&#39;,H),(&#39;I&#39;,I2)],[(&#39;I&#39;,I2),(&#39;S&#39;,swap)]]</span>
+<span class="sd">    &gt;&gt;&gt; layers_to_matrix(layers)</span>
+<span class="sd">    [[I4,H],[H,H,I2],[I2,swap]]</span>
+
+<span class="sd">  :param list[list[(str,matrix)]] layers: Circuit under the format described </span>
+<span class="sd">    above.</span>
+<span class="sd">  :returns: list[List[(str,int)]] -- Circuit under the ready-to-run format </span>
+<span class="sd">    described above.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="p">[[</span><span class="n">gate</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">layer</span><span class="p">]</span> <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layers</span><span class="p">]</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A sage package to study entanglement in Grover&#39;s algorithm and in the QFT 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Henri de Boutray.
+    </div>
+  </body>
+</html>

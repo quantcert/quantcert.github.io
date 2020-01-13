@@ -1,0 +1,11 @@
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Grover entanglement}{3}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Grover main}{3}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}QFT main}{6}{section.1.2}% 
+\contentsline {section}{\numberline {1.3}Run circuit}{10}{section.1.3}% 
+\contentsline {section}{\numberline {1.4}Optimization}{14}{section.1.4}% 
+\contentsline {section}{\numberline {1.5}Mermin evaluation}{15}{section.1.5}% 
+\contentsline {section}{\numberline {1.6}Vector to Ket}{18}{section.1.6}% 
+\contentsline {chapter}{\numberline {2}Indices and Tables}{21}{chapter.2}% 
+\contentsline {chapter}{Python Module Index}{23}{chapter*.53}% 
+\contentsline {chapter}{Index}{25}{chapter*.55}% 
