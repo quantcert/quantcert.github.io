@@ -5,3 +5,4 @@ markdown: kramdown
 theme: jekyll-theme-slate
 
 show_downloads: true
+include: ["_static", "_sources", "_modules"]
