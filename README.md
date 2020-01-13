@@ -13,8 +13,7 @@ The annual meeting of GT IQ is organised in Besançon for 2019, more details can
 
 ### Mermin polynomials for Entanglement Evaluation in Grover’s algorithm and Quantum Fourier Transform
 
-_Paper abstract:_
-
+_Paper abstract:_<br/>
 The entanglement of a quantum system can be valuated using Mermin polynomials.
 This gives us a means to study entanglement evolution during the execution of quantum al-
 gorithms. We first consider Grover’s quantum search algorithm, noticing that states during the
