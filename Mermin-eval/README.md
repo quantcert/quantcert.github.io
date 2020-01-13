@@ -8,7 +8,7 @@ Documentation
 
 The code has been developed to study entanglement in Grover's algorithm and in
 the QFT, using Mermin polynomials. The framework used for this project is 
-SageMath. See file `INSTALL.md` for its installation and execution.
+SageMath. See file [INSTALL.md](INSTALL.md) for its installation and execution.
 
 In an effort to check properties of quantum algorithms, we focus here on the 
 entanglement property, the Grover's quantum search algorithm and the QFT. Our
@@ -27,7 +27,8 @@ A more literal description of the code can be found in the article
 Copyright
 =========
 
-This program is distributed under the GNU LGPL 3. See the enclosed file LICENSE.
+This program is distributed under the GNU LGPL 3. See the enclosed file 
+[LICENSE](LICENSE).
 
 References
 ==========
