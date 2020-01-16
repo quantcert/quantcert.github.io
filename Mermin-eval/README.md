@@ -34,6 +34,6 @@ References
 ==========
 
 <a id="BJH19"/>[BJH+19] Henri de Boutray, Hamza Jaffali, Frédéric 
-  Holweck, Alain Giorgetti and Pierre-Alain Masson. Mermin polynomials for 
-  Entanglement Evaluation in Grover’s algorithm and Quantum Fourier Transform. 
-  <!-- TODO: add arXiv URL and date here. -->
+  Holweck, Alain Giorgetti and Pierre-Alain Masson. **Mermin Polynomials for 
+  Entanglement Evaluation in Grover’s algorithm and Quantum Fourier Transform.**
+  [	arXiv:2001.05192][https://arxiv.org/abs/2001.05192]
