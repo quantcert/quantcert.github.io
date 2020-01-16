@@ -11,7 +11,7 @@ The linked source files are present in the [Designs](Designs) part of this GitHu
 
 The annual meeting of GT IQ is organised in Besançon for 2019, more details can be found on [GT-IQ'19 (fr)](https://quantcert.github.io/GT-IQ'19)
 
-### Mermin polynomials for Entanglement Evaluation in Grover’s algorithm and Quantum Fourier Transform
+### Mermin Polynomials for Entanglement Evaluation in Grover’s algorithm and Quantum Fourier Transform
 
 _Paper abstract:_<br/>
 The entanglement of a quantum system can be valuated using Mermin polynomials.
