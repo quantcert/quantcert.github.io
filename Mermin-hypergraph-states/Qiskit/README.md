@@ -36,7 +36,7 @@ Two examples are given here on how to use this module:
 ## Documentation
 
 The code documentation can be found
-[in pdf format](app/doc/build/latex/Mermin-hypergraphs.pdf) or 
+[in pdf format](app/doc/build/latex/QiskitMerminEvaluation.pdf) or 
 [as a website](app/doc/build/html). It is generated from the code using 
 [Sphinx](http://www.sphinx-doc.org).
 
