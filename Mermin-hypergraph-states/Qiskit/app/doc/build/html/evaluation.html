@@ -1,0 +1,243 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Evaluation &#8212; Qiskit Mermin Evaluation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Basis Change" href="basis_change.html" />
+    <link rel="prev" title="Welcome to Qiskit Mermin Evaluation’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-mermin_on_qiskit.evaluation">
+<span id="evaluation"></span><h1>Evaluation<a class="headerlink" href="#module-mermin_on_qiskit.evaluation" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="mermin_on_qiskit.evaluation.evaluate_monomial">
+<code class="descclassname">mermin_on_qiskit.evaluation.</code><code class="descname">evaluate_monomial</code><span class="sig-paren">(</span><em>n</em>, <em>n_measure</em>, <em>circuit</em>, <em>a_a_p_coeffs</em>, <em>shots</em>, <em>is_simulation=True</em>, <em>monitor=False</em>, <em>local=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/evaluation.html#evaluate_monomial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.evaluation.evaluate_monomial" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Draws the circuit if there are some additions and runs it to get the </dt>
+<dd>measurement of a monomial</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>int</em>) – The number of qubits.</li>
+<li><strong>n_measure</strong> (<em>int</em>) – The measurement to be performed. Dictates whether a_i 
+or a’_i is used on each wire.</li>
+<li><strong>circuit</strong> (<em>QuantumCircuit</em>) – The original quantum circuit.</li>
+<li><strong>a_a_p_coeffs</strong> (<em>array</em><em>[</em><em>float</em><em>]</em>) – The coefficients of the matrices used to 
+calculate Mermin operators.</li>
+<li><strong>shots</strong> (<em>int</em>) – The number of repetitions of each circuit. Default: 1024.</li>
+<li><strong>is_simulation</strong> (<em>boolean</em>) – This determines if we are in a case of a local
+test or a real IBM machine test.</li>
+<li><strong>monitor</strong> (<em>boolean</em>) – If true a monitor is attached to the job.</li>
+<li><strong>local</strong> (<em>boolean</em>) – If true, the job run on a local simulator.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">float – The result of the measurement probabilities on one 
+monomial.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.evaluation.evaluate_polynomial">
+<code class="descclassname">mermin_on_qiskit.evaluation.</code><code class="descname">evaluate_polynomial</code><span class="sig-paren">(</span><em>n</em>, <em>circuit</em>, <em>a_a_p_coeffs</em>, <em>shots=1024</em>, <em>is_simulation=True</em>, <em>monitor=False</em>, <em>local=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/evaluation.html#evaluate_polynomial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.evaluation.evaluate_polynomial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes all the implementation and calculation</p>
+<dl class="docutils">
+<dt>Caution! <span class="classifier-delimiter">:</span> <span class="classifier"></span></dt>
+<dd>The IBMQ account must be loaded before the execution of this 
+function if the variable is_simulation is set to False.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>int</em>) – The number of qubits.</li>
+<li><strong>circuit</strong> (<em>QuantumCircuit</em>) – The original quantum circuit.</li>
+<li><strong>a_a_p_coeffs</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>any</em><em>]</em><em>]</em>) – Lists of lists of elements as described 
+above (packed coefficients).</li>
+<li><strong>shots</strong> (<em>int</em>) – The number of times that the measurements are made. This 
+is only in case of a local test.</li>
+<li><strong>is_simulation</strong> (<em>boolean</em>) – To specify if the codes are to run locally or 
+on the IBM machine.</li>
+<li><strong>monitor</strong> (<em>boolean</em>) – If true a monitor is attached to the job.</li>
+<li><strong>local</strong> (<em>boolean</em>) – If true, the job run on a local simulator.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">float – The result of all the calculations.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.evaluation.measures_exploitation">
+<code class="descclassname">mermin_on_qiskit.evaluation.</code><code class="descname">measures_exploitation</code><span class="sig-paren">(</span><em>measures_dictionary</em>, <em>shots</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/evaluation.html#measures_exploitation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.evaluation.measures_exploitation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the measurements probabilities</p>
+<p>For every possible cases (for example, with n = 2 : 00 01 10 11), the 
+probability to get this combination when measuring is calculated.</p>
+<p>In order to obtain this probabilities, we sum the values of the cases where 
+the number of 1 in the measurement is even and when it’s then odd.</p>
+<p>For example :
+even_results = values of 00 and 11 measurements
+odd_results = values of 01 and 10 measurements</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>measures_dictionary</strong> (<em>dict</em>) – the dictionary containing the measurements 
+and their values.</li>
+<li><strong>shots</strong> (<em>int</em>) – the number of times that the measurements are made. This 
+is only in case of a local test.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">float – The total probability of the dictionary measurement.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.evaluation.mermin_IBM">
+<code class="descclassname">mermin_on_qiskit.evaluation.</code><code class="descname">mermin_IBM</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/evaluation.html#mermin_IBM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.evaluation.mermin_IBM" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns the Mermin polynomials under a vector form. This form helps to </dt>
+<dd>form the corrects monomials that involves in every mermin evaluation.</dd>
+<dt>Example :</dt>
+<dd>In this case, the involving monomials are only the second one, the third 
+one, the fith one and the last one because the others are equal to zero.
+&gt;&gt;&gt; mermin_IBM(3)
+[0.0, 0.5, 0.5, 0.0, 0.5, 0.0, 0.0, -0.5]</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>int</em>) – The number of qubits.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list(float) – The list of numbers corresponding to the existence 
+and the value each monomial.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Qiskit Mermin Evaluation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basis_change.html">Basis Change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coefficients_shapes.html">Coefficients shapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QFT.html">QFT main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypergraphstates.html">Hypergraphstates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypergraphstates-opti.html">Hypergraphstates used for optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mermin_polynomials-opti.html">Mermin polynomials used for optimization</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Qiskit Mermin Evaluation’s documentation!</a></li>
+      <li>Next: <a href="basis_change.html" title="next chapter">Basis Change</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Henri de Boutray and Grâce Amouzou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/evaluation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

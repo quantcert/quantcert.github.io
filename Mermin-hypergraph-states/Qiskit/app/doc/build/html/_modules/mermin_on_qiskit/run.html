@@ -1,0 +1,177 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>mermin_on_qiskit.run &#8212; Qiskit Mermin Evaluation  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../../_static/icon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for mermin_on_qiskit.run</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit.tools.monitor</span> <span class="k">import</span> <span class="n">job_monitor</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq</span> <span class="k">import</span> <span class="n">least_busy</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.ibmq.exceptions</span> <span class="k">import</span> <span class="n">IBMQAccountError</span>
+
+<div class="viewcode-block" id="runCircuit"><a class="viewcode-back" href="../../run.html#mermin_on_qiskit.run.runCircuit">[docs]</a><span class="k">def</span> <span class="nf">runCircuit</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">simulation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_count</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+                <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; Runs the QuantumCircuit `qc` in IBM Quantum Experience.</span>
+
+<span class="sd">  :param QuantumCircuit qc: Quantum circuit to be executed</span>
+<span class="sd">  :param bool simulation: If `True`, the experience runs on a simulator, which </span>
+<span class="sd">    substantially faster than on a quantum processor (due to the demand on</span>
+<span class="sd">    those). Otherwise, runs on one of the quantum processors.</span>
+<span class="sd">  :param bool return_count: If the circuit contains measures, and return_count</span>
+<span class="sd">    is set to `True`, then the count of the result will be returned, otherwise,</span>
+<span class="sd">    the result will be directly returned.</span>
+<span class="sd">  :param bool monitor: If `True`, a `job_monitor` will be displayed after the</span>
+<span class="sd">    job is submitted.</span>
+
+<span class="sd">  TODO : add local and shots docs</span>
+<span class="sd">  </span>
+<span class="sd">  :returns: dict[str:int] or Result -- Depending on return_count, `runCircuit`</span>
+<span class="sd">    either returns the result (of type Result) of the run or the count of this</span>
+<span class="sd">    result, which would be the equivalent of calling `result.get_counts()`.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">n</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">num_qubits</span>
+  <span class="k">if</span> <span class="n">local</span><span class="p">:</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">least_busy</span><span class="p">(</span><span class="n">IBMQ</span><span class="o">.</span><span class="n">get_provider</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;open&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">backends</span><span class="p">(</span>
+      <span class="n">simulator</span><span class="o">=</span><span class="n">simulation</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">n_qubits</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">))</span>
+  <span class="n">job_exp</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">monitor</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Backend name : &quot;</span><span class="p">,</span> <span class="n">backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">backend_name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Job ID : &quot;</span><span class="p">,</span> <span class="n">job_exp</span><span class="o">.</span><span class="n">job_id</span><span class="p">())</span>
+    <span class="n">job_monitor</span><span class="p">(</span><span class="n">job_exp</span><span class="p">)</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">job_exp</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_count</span> <span class="k">else</span> <span class="n">job_exp</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+  <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="load_IBMQ_account"><a class="viewcode-back" href="../../run.html#mermin_on_qiskit.run.load_IBMQ_account">[docs]</a><span class="k">def</span> <span class="nf">load_IBMQ_account</span><span class="p">():</span>
+  <span class="sd">&quot;&quot;&quot; Loads the IMBQ account. If it fails a first time, the IBMQ token will be</span>
+<span class="sd">  prompted and the account loading will be attempted a second time. If it fails</span>
+<span class="sd">  a second time. Exits by letting the `Error` be raised.</span>
+
+<span class="sd">  Raises:</span>
+<span class="sd">    IBMQAccountCredentialsInvalidFormat: If the default provider stored on</span>
+<span class="sd">      disk could not be parsed.</span>
+<span class="sd">    IBMQAccountCredentialsNotFound: If no IBM Quantum Experience credentials</span>
+<span class="sd">      can be found.</span>
+<span class="sd">    IBMQAccountMultipleCredentialsFound: If multiple IBM Quantum Experience</span>
+<span class="sd">      credentials are found.</span>
+<span class="sd">    IBMQAccountCredentialsInvalidUrl: If invalid IBM Quantum Experience</span>
+<span class="sd">      credentials are found.</span>
+<span class="sd">    IBMQProviderError: If the default provider stored on disk could not</span>
+<span class="sd">      be found.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
+  <span class="k">except</span> <span class="n">IBMQAccountError</span><span class="p">:</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Account loading failure, please enter your IBM Quantum </span><span class="se">\</span>
+<span class="s2">Experience token:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span>
+    <span class="n">IBMQ</span><span class="o">.</span><span class="n">save_account</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+    <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Qiskit Mermin Evaluation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basis_change.html">Basis Change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../run.html">Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../coefficients_shapes.html">Coefficients shapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../QFT.html">QFT main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hypergraphstates.html">Hypergraphstates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hypergraphstates-opti.html">Hypergraphstates used for optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mermin_polynomials-opti.html">Mermin polynomials used for optimization</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Henri de Boutray and Grâce Amouzou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

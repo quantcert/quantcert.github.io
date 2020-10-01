@@ -1,0 +1,238 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>mermin_on_qiskit.evaluation &#8212; Qiskit Mermin Evaluation  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../../_static/icon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for mermin_on_qiskit.evaluation</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">run</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">basis_change</span>
+
+
+<div class="viewcode-block" id="mermin_IBM"><a class="viewcode-back" href="../../evaluation.html#mermin_on_qiskit.evaluation.mermin_IBM">[docs]</a><span class="k">def</span> <span class="nf">mermin_IBM</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns the Mermin polynomials under a vector form. This form helps to </span>
+<span class="sd">        form the corrects monomials that involves in every mermin evaluation.</span>
+
+<span class="sd">    Example :</span>
+<span class="sd">        In this case, the involving monomials are only the second one, the third </span>
+<span class="sd">        one, the fith one and the last one because the others are equal to zero.</span>
+<span class="sd">        &gt;&gt;&gt; mermin_IBM(3)</span>
+<span class="sd">        [0.0, 0.5, 0.5, 0.0, 0.5, 0.0, 0.0, -0.5]</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :returns: list(float) -- The list of numbers corresponding to the existence </span>
+<span class="sd">        and the value each monomial.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># M1 is equal to |0&gt;</span>
+        <span class="n">mn</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Recursion formula</span>
+        <span class="n">mn</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">mermin_IBM</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">mermin_IBM</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">mn</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="measures_exploitation"><a class="viewcode-back" href="../../evaluation.html#mermin_on_qiskit.evaluation.measures_exploitation">[docs]</a><span class="k">def</span> <span class="nf">measures_exploitation</span><span class="p">(</span><span class="n">measures_dictionary</span><span class="p">,</span> <span class="n">shots</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Calculates the measurements probabilities</span>
+
+<span class="sd">    For every possible cases (for example, with n = 2 : 00 01 10 11), the </span>
+<span class="sd">    probability to get this combination when measuring is calculated.</span>
+
+<span class="sd">    In order to obtain this probabilities, we sum the values of the cases where </span>
+<span class="sd">    the number of 1 in the measurement is even and when it&#39;s then odd.</span>
+<span class="sd">    </span>
+<span class="sd">    For example :</span>
+<span class="sd">    even_results = values of 00 and 11 measurements</span>
+<span class="sd">    odd_results = values of 01 and 10 measurements</span>
+
+<span class="sd">    :param dict measures_dictionary: the dictionary containing the measurements </span>
+<span class="sd">        and their values.</span>
+<span class="sd">    :param int shots: the number of times that the measurements are made. This </span>
+<span class="sd">        is only in case of a local test.</span>
+<span class="sd">    :returns: float -- The total probability of the dictionary measurement.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">even_results</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">odd_results</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">measures_dictionary</span><span class="p">:</span>
+        <span class="n">number_of_1</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">number_of_1</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">even_results</span> <span class="o">+=</span> <span class="n">measures_dictionary</span><span class="p">[</span><span class="n">measure</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">odd_results</span> <span class="o">+=</span> <span class="n">measures_dictionary</span><span class="p">[</span><span class="n">measure</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">even_results</span> <span class="o">-</span> <span class="n">odd_results</span><span class="p">)</span> <span class="o">/</span> <span class="n">shots</span></div>
+
+
+<div class="viewcode-block" id="evaluate_monomial"><a class="viewcode-back" href="../../evaluation.html#mermin_on_qiskit.evaluation.evaluate_monomial">[docs]</a><span class="k">def</span> <span class="nf">evaluate_monomial</span><span class="p">(</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">n_measure</span><span class="p">,</span> <span class="n">circuit</span><span class="p">,</span> <span class="n">a_a_p_coeffs</span><span class="p">,</span> <span class="n">shots</span><span class="p">,</span> 
+        <span class="n">is_simulation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Draws the circuit if there are some additions and runs it to get the </span>
+<span class="sd">        measurement of a monomial</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :param int n_measure: The measurement to be performed. Dictates whether a_i </span>
+<span class="sd">        or a&#39;_i is used on each wire.</span>
+<span class="sd">    :param QuantumCircuit circuit: The original quantum circuit.</span>
+<span class="sd">    :param array[float] a_a_p_coeffs: The coefficients of the matrices used to </span>
+<span class="sd">        calculate Mermin operators.</span>
+<span class="sd">    :param int shots: The number of repetitions of each circuit. Default: 1024.</span>
+<span class="sd">    :param boolean is_simulation: This determines if we are in a case of a local</span>
+<span class="sd">        test or a real IBM machine test.</span>
+<span class="sd">    :param boolean monitor: If true a monitor is attached to the job.</span>
+<span class="sd">    :param boolean local: If true, the job run on a local simulator.</span>
+<span class="sd">    :returns: float -- The result of the measurement probabilities on one </span>
+<span class="sd">        monomial.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">circuit_size</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">num_qubits</span>
+    <span class="n">circuit_aux</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">circuit_size</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="n">basis_change</span><span class="o">.</span><span class="n">U3_gates_placement</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n_measure</span><span class="p">,</span> <span class="n">a_a_p_coeffs</span><span class="p">,</span> <span class="n">circuit_aux</span><span class="p">)</span>
+    <span class="n">circuit_mesure</span> <span class="o">=</span> <span class="n">circuit</span> <span class="o">+</span> <span class="n">circuit_aux</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">runCircuit</span><span class="p">(</span>
+        <span class="n">circuit_mesure</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">,</span> 
+        <span class="n">simulation</span><span class="o">=</span><span class="n">is_simulation</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="n">monitor</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="n">local</span><span class="p">)</span>
+
+    <span class="n">measure_monomial</span> <span class="o">=</span> <span class="n">measures_exploitation</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">shots</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">measure_monomial</span></div>
+
+
+<div class="viewcode-block" id="evaluate_polynomial"><a class="viewcode-back" href="../../evaluation.html#mermin_on_qiskit.evaluation.evaluate_polynomial">[docs]</a><span class="k">def</span> <span class="nf">evaluate_polynomial</span><span class="p">(</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">circuit</span><span class="p">,</span> <span class="n">a_a_p_coeffs</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> 
+        <span class="n">is_simulation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Makes all the implementation and calculation</span>
+
+<span class="sd">    Caution! : </span>
+<span class="sd">        The IBMQ account must be loaded before the execution of this </span>
+<span class="sd">        function if the variable is_simulation is set to False.</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :param QuantumCircuit circuit: The original quantum circuit.</span>
+<span class="sd">    :param list[list[any]] a_a_p_coeffs: Lists of lists of elements as described </span>
+<span class="sd">        above (packed coefficients).</span>
+<span class="sd">    :param int shots: The number of times that the measurements are made. This </span>
+<span class="sd">        is only in case of a local test.</span>
+<span class="sd">    :param boolean is_simulation: To specify if the codes are to run locally or </span>
+<span class="sd">        on the IBM machine.</span>
+<span class="sd">    :param boolean monitor: If true a monitor is attached to the job.</span>
+<span class="sd">    :param boolean local: If true, the job run on a local simulator.</span>
+<span class="sd">    :return: float -- The result of all the calculations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mermin_polynomial</span> <span class="o">=</span> <span class="n">mermin_IBM</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">total_result</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">mermin_polynomial</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">measure_monomial</span> <span class="o">=</span> <span class="n">evaluate_monomial</span><span class="p">(</span>
+                <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">circuit</span><span class="p">,</span> <span class="n">a_a_p_coeffs</span><span class="p">,</span> <span class="n">shots</span><span class="p">,</span> <span class="n">is_simulation</span><span class="p">,</span> 
+                <span class="n">monitor</span><span class="o">=</span><span class="n">monitor</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="n">local</span><span class="p">)</span>
+            <span class="n">total_result</span> <span class="o">+=</span> <span class="n">mermin_polynomial</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">measure_monomial</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">total_result</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Qiskit Mermin Evaluation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basis_change.html">Basis Change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../run.html">Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../coefficients_shapes.html">Coefficients shapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../QFT.html">QFT main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hypergraphstates.html">Hypergraphstates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hypergraphstates-opti.html">Hypergraphstates used for optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mermin_polynomials-opti.html">Mermin polynomials used for optimization</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Henri de Boutray and Grâce Amouzou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

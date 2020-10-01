@@ -1,0 +1,240 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates &#8212; Qiskit Mermin Evaluation  documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../../../_static/icon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.mermin_polynomials</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="convert_in_binary"><a class="viewcode-back" href="../../../hypergraphstates-opti.html#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.convert_in_binary">[docs]</a><span class="k">def</span> <span class="nf">convert_in_binary</span><span class="p">(</span><span class="n">number_to_convert</span><span class="p">,</span> <span class="n">number_of_bits</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Converts an int into a string containing its bits.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; convert_in_binary(5,3)</span>
+<span class="sd">         101</span>
+<span class="sd">         and</span>
+<span class="sd">        &gt;&gt;&gt; convert_in_binary(5,3)</span>
+<span class="sd">        00101</span>
+
+<span class="sd">    :param int number_to_convert: the number that is going to be converted.</span>
+<span class="sd">    :param int number_of_bits: the number of bits required.</span>
+<span class="sd">    :returns: String number : The converted number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">format</span><span class="p">(</span><span class="n">number_to_convert</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="n">number_of_bits</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="putting_in_list"><a class="viewcode-back" href="../../../hypergraphstates-opti.html#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.putting_in_list">[docs]</a><span class="k">def</span> <span class="nf">putting_in_list</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Puts every figure of the number in a list.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; putting_in_list(000)</span>
+<span class="sd">         [0, 0, 0]</span>
+
+<span class="sd">    :param int number: The number to split.</span>
+<span class="sd">    :returns: list(int) -- The list with every digit of the number in a case.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">number_in_caracters</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">number_in_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">caracter</span> <span class="ow">in</span> <span class="n">number_in_caracters</span><span class="p">:</span>
+        <span class="n">number_in_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">caracter</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">number_in_list</span></div>
+
+
+<div class="viewcode-block" id="states_formation"><a class="viewcode-back" href="../../../hypergraphstates-opti.html#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.states_formation">[docs]</a><span class="k">def</span> <span class="nf">states_formation</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Calculates every state for n qubits.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; states_formation(3)</span>
+<span class="sd">         [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :returns: list(list(int)) -- A list of all the possible states of the qubits </span>
+<span class="sd">        which are also contained in a list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">list_of_states</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">maximum</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">n</span>  <span class="c1"># Maximum</span>
+    <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maximum</span><span class="p">):</span>
+        <span class="n">list_of_states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">putting_in_list</span><span class="p">(</span><span class="n">convert_in_binary</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>  <span class="c1"># Putting numbers in a tab</span>
+    <span class="k">return</span> <span class="n">list_of_states</span></div>
+
+
+<div class="viewcode-block" id="state_vector_initialisation"><a class="viewcode-back" href="../../../hypergraphstates-opti.html#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.state_vector_initialisation">[docs]</a><span class="k">def</span> <span class="nf">state_vector_initialisation</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Initializes the state vector; which is to create an array with the size </span>
+<span class="sd">        of 2 to the power of n. Every number in the array is equal to 1 over the</span>
+<span class="sd">        square root of 2 to the power of n.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; state_vector_initialisation(3)</span>
+<span class="sd">        [0.35355339 0.35355339 0.35355339 0.35355339 0.35355339 0.35355339</span>
+<span class="sd">         0.35355339 0.35355339]</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :returns: list(int) -- The initialized state vector.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">state_vector_init</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">n</span><span class="p">)</span>  <span class="c1"># Array full of zeros</span>
+    <span class="n">maximum</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">n</span>  <span class="c1"># Maximum</span>
+    <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maximum</span><span class="p">):</span>
+        <span class="n">state_vector_init</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">n</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">state_vector_init</span></div>
+
+
+<div class="viewcode-block" id="hyperedges_computation"><a class="viewcode-back" href="../../../hypergraphstates-opti.html#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.hyperedges_computation">[docs]</a><span class="k">def</span> <span class="nf">hyperedges_computation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">state_vector</span><span class="p">,</span> <span class="n">hyperedges</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Puts the phases in the right places. Wherever there is an edge or an </span>
+<span class="sd">        hyperedge between some vertices, a minus sign is put where those </span>
+<span class="sd">        vertices are all in state 1.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; hyperedges_computation(2, [0.5, 0.5, 0.5, 0.5], [[0,1]])</span>
+<span class="sd">        [0.5, 0.5, 0.5, -0.5]</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :param list(int) state_vector: The initialized state vector.</span>
+<span class="sd">    :param list[list[int] hyperedges: a list containing the lists of the </span>
+<span class="sd">        vertices which are linked by an hyperedge.</span>
+<span class="sd">    :returns: list(int) -- The correct state vector.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">max_hyperedges</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hyperedges</span><span class="p">)</span>
+    <span class="n">max_state_vector</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">n</span>
+    <span class="c1"># Writing every state in a binary form</span>
+    <span class="n">state_vector_en_binaire</span> <span class="o">=</span> <span class="n">states_formation</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  
+    <span class="k">for</span> <span class="n">counter_hyperedges</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_hyperedges</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">counter_state_vector</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_state_vector</span><span class="p">):</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">state_vector_en_binaire</span><span class="p">[</span><span class="n">counter_state_vector</span><span class="p">]</span>
+            <span class="c1"># Throws True if the state matches an edge and False if not</span>
+            <span class="n">verified_state</span> <span class="o">=</span> <span class="n">corresponding_state_determination</span><span class="p">(</span>
+                <span class="n">n</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">hyperedges</span><span class="p">[</span><span class="n">counter_hyperedges</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">verified_state</span><span class="p">:</span>
+            <span class="c1"># If True is returned, apply a phase to the corresponding element</span>
+                <span class="n">state_vector</span><span class="p">[</span><span class="n">counter_state_vector</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">state_vector</span></div>
+
+
+<div class="viewcode-block" id="corresponding_state_determination"><a class="viewcode-back" href="../../../hypergraphstates-opti.html#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.corresponding_state_determination">[docs]</a><span class="k">def</span> <span class="nf">corresponding_state_determination</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">hyperedges</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Determines the states corresponding to an hyperedge. That is the states </span>
+<span class="sd">        where the vertices linked by the hyperedge are equal to 1.</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :param list(int) state: The state of the vector.</span>
+<span class="sd">    :param list(list(int)) hyperedges: a list containing the lists of the </span>
+<span class="sd">        vertices which are linked by an hyperedge.</span>
+<span class="sd">    :param: boolean -- True if the state is in an hyperedge.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">maximum</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hyperedges</span><span class="p">)</span>
+    <span class="n">verified_state</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maximum</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">hyperedges</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
+        <span class="c1"># n - x - 1 :returns the index where the digit (either 0 or 1) of the </span>
+        <span class="c1"># state, must be checked</span>
+        <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">verified_state</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># If the sum is greater than the number of hyperedges, it means that the </span>
+    <span class="c1"># state checks the condition of the hyperedge</span>
+    <span class="k">return</span> <span class="n">verified_state</span> <span class="o">&gt;=</span> <span class="n">maximum</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Qiskit Mermin Evaluation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basis_change.html">Basis Change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../run.html">Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../coefficients_shapes.html">Coefficients shapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QFT.html">QFT main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hypergraphstates.html">Hypergraphstates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hypergraphstates-opti.html">Hypergraphstates used for optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mermin_polynomials-opti.html">Mermin polynomials used for optimization</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Henri de Boutray and Grâce Amouzou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

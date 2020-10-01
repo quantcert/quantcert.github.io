@@ -1,2 +1,6 @@
 # python compilation products
 *.pyc
+
+# python temp files
+__logs__/
+__pycache__/
