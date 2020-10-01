@@ -14,6 +14,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="_static/icon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -38,33 +39,40 @@
   <div class="section" id="module-mermin_on_qiskit.coefficients_shapes">
 <span id="coefficients-shapes"></span><h1>Coefficients shapes<a class="headerlink" href="#module-mermin_on_qiskit.coefficients_shapes" title="Permalink to this headline">¶</a></h1>
 <p>There are three format used for the algorithms:</p>
-<p>1. A flat list of coefficients, organized as such: 
+<ol class="arabic simple">
+<li>A flat list of coefficients, organized as such: 
 <span class="math notranslate nohighlight">\([x1,y1,z1, x2,y2, ..., xn,yn,zn, x'1,y'1,z'1, x'2,y'2, ..., x'n,y'n,z'n]\)</span>.
 This format is called the <em>unpacked coefficients</em> and is used for the QFT 
-optimization.
-2. A list of coefficients grouped by families of operators:
+optimization.</li>
+<li>A list of coefficients grouped by families of operators:
 <span class="math notranslate nohighlight">\([[[x1,y1,z1], [x2,y2, ..., [xn,yn,zn]], [[x'1,y'1,z'1], [x'2,y'2, ..., [x'n,y'n,z'n]]]\)</span>
 in other words, you have the whole <span class="math notranslate nohighlight">\(a\)</span> family and the the whole <span class="math notranslate nohighlight">\(a'\)</span> family,
 and in a family, you have <span class="math notranslate nohighlight">\(a1\)</span>, <span class="math notranslate nohighlight">\(a2\)</span>, and so on… Each <span class="math notranslate nohighlight">\(a\)</span> is described by
 it’s three coefficients: <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>.
 This format is called <em>packed coefficients</em> and is used to easily manipulate
-coefficients.
-3. A list of coefficients grouped by operator:
+coefficients.</li>
+<li>A list of coefficients grouped by operator:
 <span class="math notranslate nohighlight">\([[x1,y1,z1], [x'1,y'1,z'1], [x2,y2,z2], [x'2,y'2,z'2], ...]\)</span>
 in other words, the list is formed as such: <span class="math notranslate nohighlight">\([a1, a'1, a2, a'2, ...]\)</span>
 This format was previously used for evaluation in Qiskit, allowing for a
 simpler data flow. But it has the inconvenient of being less true to the 
 maths behind all this so it has been dropped. 
-This format is called <em>mixed</em></p>
+This format is called <em>mixed</em></li>
+</ol>
 <p>With the functions of this module, one may switch between <em>1.</em> and <em>2.</em> and 
 between <em>2.</em> and <em>3.</em>, allowing tho switch freely between the three formats.</p>
 <dl class="function">
 <dt id="mermin_on_qiskit.coefficients_shapes.coefficients_format_mixed_to_packed">
 <code class="descclassname">mermin_on_qiskit.coefficients_shapes.</code><code class="descname">coefficients_format_mixed_to_packed</code><span class="sig-paren">(</span><em>_a_a_prime_coeffs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/coefficients_shapes.html#coefficients_format_mixed_to_packed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.coefficients_shapes.coefficients_format_mixed_to_packed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Format the coefficients in the shape previously used for evaluation</p>
-<p>Example:
-&gt;&gt;&gt;  coefficients_format_mixed_to_packed([[1, 2, 3], [7, 8, 9], [4, 5, 6], [10, 11, 12]])                   
-([[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]])</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coefficients_format_mixed_to_packed</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>                   
+<span class="go">([[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -83,9 +91,14 @@ coefficients).</td>
 <dt id="mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_mixed">
 <code class="descclassname">mermin_on_qiskit.coefficients_shapes.</code><code class="descname">coefficients_format_packed_to_mixed</code><span class="sig-paren">(</span><em>_a_coeffs</em>, <em>_a_prime_coeffs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/coefficients_shapes.html#coefficients_format_packed_to_mixed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_mixed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Format the coefficients in the shape now used for evaluation</p>
-<p>Example:
-&gt;&gt;&gt;  coefficients_format_packed_to_mixed([[1,2,3],[4,5,6]], [[7,8,9],[10,11,12]])                           
-[[1, 2, 3], [7, 8, 9], [4, 5, 6], [10, 11, 12]]</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coefficients_format_packed_to_mixed</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]])</span>                           
+<span class="go">[[1, 2, 3], [7, 8, 9], [4, 5, 6], [10, 11, 12]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -103,9 +116,14 @@ elements as described above (packed coefficients).</td>
 <dt id="mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_unpacked">
 <code class="descclassname">mermin_on_qiskit.coefficients_shapes.</code><code class="descname">coefficients_format_packed_to_unpacked</code><span class="sig-paren">(</span><em>_a_coeffs</em>, <em>_a_prime_coeffs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/coefficients_shapes.html#coefficients_format_packed_to_unpacked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_unpacked" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unpacks two lists of lists of three elements to one list of elements</p>
-<p>Example:
-&gt;&gt;&gt;  coefficients_format_packed_to_unpacked([[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]])
-[1,2,3,4,5,6,7,8,9,10,11,12]</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coefficients_format_packed_to_unpacked</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]],[[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]])</span>
+<span class="go">[1,2,3,4,5,6,7,8,9,10,11,12]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -123,9 +141,14 @@ elements as described above (packed coefficients).</td>
 <dt id="mermin_on_qiskit.coefficients_shapes.coefficients_format_unpacked_to_packed">
 <code class="descclassname">mermin_on_qiskit.coefficients_shapes.</code><code class="descname">coefficients_format_unpacked_to_packed</code><span class="sig-paren">(</span><em>_a_a_prime_coeffs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/coefficients_shapes.html#coefficients_format_unpacked_to_packed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.coefficients_shapes.coefficients_format_unpacked_to_packed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Packs a list of elements in two lists of lists of three elements</p>
-<p>Example:
-&gt;&gt;&gt;  coefficients_format_unpacked_to_packed([1,2,3,4,5,6,7,8,9,10,11,12])
-([[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]])</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coefficients_format_unpacked_to_packed</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
+<span class="go">([[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

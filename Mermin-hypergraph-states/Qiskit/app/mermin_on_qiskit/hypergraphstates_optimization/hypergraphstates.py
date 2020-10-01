@@ -6,8 +6,7 @@ def convert_in_binary(number_to_convert, number_of_bits=0):
 
     Example:
         >>> convert_in_binary(5,3)
-         101
-         and
+        101
         >>> convert_in_binary(5,3)
         00101
 

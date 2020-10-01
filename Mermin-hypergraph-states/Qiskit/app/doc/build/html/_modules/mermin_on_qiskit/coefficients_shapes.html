@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../_static/icon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,26 +37,26 @@
   <h1>Source code for mermin_on_qiskit.coefficients_shapes</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;There are three format used for the algorithms:</span>
+<span class="sa">r</span><span class="sd">&quot;&quot;&quot;There are three format used for the algorithms: </span>
 
-<span class="sd">1. A flat list of coefficients, organized as such: </span>
-<span class="sd">`[x1,y1,z1, x2,y2, ..., xn,yn,zn, x&#39;1,y&#39;1,z&#39;1, x&#39;2,y&#39;2, ..., x&#39;n,y&#39;n,z&#39;n]`.</span>
-<span class="sd">This format is called the *unpacked coefficients* and is used for the QFT </span>
-<span class="sd">optimization.</span>
-<span class="sd">2. A list of coefficients grouped by families of operators:</span>
-<span class="sd">`[[[x1,y1,z1], [x2,y2, ..., [xn,yn,zn]], [[x&#39;1,y&#39;1,z&#39;1], [x&#39;2,y&#39;2, ..., [x&#39;n,y&#39;n,z&#39;n]]]`</span>
-<span class="sd">in other words, you have the whole `a` family and the the whole `a&#39;` family,</span>
-<span class="sd">and in a family, you have `a1`, `a2`, and so on... Each `a` is described by</span>
-<span class="sd">it&#39;s three coefficients: `x`, `y` and `z`.</span>
-<span class="sd">This format is called *packed coefficients* and is used to easily manipulate</span>
-<span class="sd">coefficients.</span>
-<span class="sd">3. A list of coefficients grouped by operator:</span>
-<span class="sd">`[[x1,y1,z1], [x&#39;1,y&#39;1,z&#39;1], [x2,y2,z2], [x&#39;2,y&#39;2,z&#39;2], ...]`</span>
-<span class="sd">in other words, the list is formed as such: `[a1, a&#39;1, a2, a&#39;2, ...]`</span>
-<span class="sd">This format was previously used for evaluation in Qiskit, allowing for a</span>
-<span class="sd">simpler data flow. But it has the inconvenient of being less true to the </span>
-<span class="sd">maths behind all this so it has been dropped. </span>
-<span class="sd">This format is called *mixed*</span>
+<span class="sd">1.  A flat list of coefficients, organized as such: </span>
+<span class="sd">    `[x1,y1,z1, x2,y2, ..., xn,yn,zn, x&#39;1,y&#39;1,z&#39;1, x&#39;2,y&#39;2, ..., x&#39;n,y&#39;n,z&#39;n]`.</span>
+<span class="sd">    This format is called the *unpacked coefficients* and is used for the QFT </span>
+<span class="sd">    optimization.</span>
+<span class="sd">2.  A list of coefficients grouped by families of operators:</span>
+<span class="sd">    `[[[x1,y1,z1], [x2,y2, ..., [xn,yn,zn]], [[x&#39;1,y&#39;1,z&#39;1], [x&#39;2,y&#39;2, ..., [x&#39;n,y&#39;n,z&#39;n]]]`</span>
+<span class="sd">    in other words, you have the whole `a` family and the the whole `a&#39;` family,</span>
+<span class="sd">    and in a family, you have `a1`, `a2`, and so on... Each `a` is described by</span>
+<span class="sd">    it&#39;s three coefficients: `x`, `y` and `z`.</span>
+<span class="sd">    This format is called *packed coefficients* and is used to easily manipulate</span>
+<span class="sd">    coefficients.</span>
+<span class="sd">3.  A list of coefficients grouped by operator:</span>
+<span class="sd">    `[[x1,y1,z1], [x&#39;1,y&#39;1,z&#39;1], [x2,y2,z2], [x&#39;2,y&#39;2,z&#39;2], ...]`</span>
+<span class="sd">    in other words, the list is formed as such: `[a1, a&#39;1, a2, a&#39;2, ...]`</span>
+<span class="sd">    This format was previously used for evaluation in Qiskit, allowing for a</span>
+<span class="sd">    simpler data flow. But it has the inconvenient of being less true to the </span>
+<span class="sd">    maths behind all this so it has been dropped. </span>
+<span class="sd">    This format is called *mixed*</span>
 
 <span class="sd">With the functions of this module, one may switch between *1.* and *2.* and </span>
 <span class="sd">between *2.* and *3.*, allowing tho switch freely between the three formats.</span>
@@ -63,74 +64,74 @@
 
 
 <div class="viewcode-block" id="coefficients_format_unpacked_to_packed"><a class="viewcode-back" href="../../coefficients_shapes.html#mermin_on_qiskit.coefficients_shapes.coefficients_format_unpacked_to_packed">[docs]</a><span class="k">def</span> <span class="nf">coefficients_format_unpacked_to_packed</span><span class="p">(</span><span class="n">_a_a_prime_coeffs</span><span class="p">):</span>
-  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  Packs a list of elements in two lists of lists of three elements</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Packs a list of elements in two lists of lists of three elements</span>
 
-<span class="sd">  Example:</span>
-<span class="sd">  &gt;&gt;&gt;  coefficients_format_unpacked_to_packed([1,2,3,4,5,6,7,8,9,10,11,12])</span>
-<span class="sd">  ([[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]])</span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; coefficients_format_unpacked_to_packed([1,2,3,4,5,6,7,8,9,10,11,12])</span>
+<span class="sd">        ([[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]])</span>
 
-<span class="sd">  :param list[any] _a_a_prime_coeffs: List of elements (unpacked coefficients).</span>
-<span class="sd">  :returns: tuple[list[list[any]]] -- Lists of lists of elements as described </span>
-<span class="sd">    above (packed coefficients). </span>
-<span class="sd">  &quot;&quot;&quot;</span>
-  <span class="n">_a_a_prime_coeffs_packed</span> <span class="o">=</span> <span class="p">[[</span><span class="n">_a_a_prime_coeffs</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">_i</span><span class="p">],</span> <span class="n">_a_a_prime_coeffs</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">_i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> 
-    <span class="n">_a_a_prime_coeffs</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">_i</span><span class="o">+</span><span class="mi">2</span><span class="p">]]</span> <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_a_a_prime_coeffs</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">))]</span>
-  <span class="n">_a_coeffs</span> <span class="o">=</span> <span class="n">_a_a_prime_coeffs_packed</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_a_a_prime_coeffs_packed</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
-  <span class="n">_a_prime_coeffs</span> <span class="o">=</span> <span class="n">_a_a_prime_coeffs_packed</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_a_a_prime_coeffs_packed</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">):]</span>
-  <span class="k">return</span> <span class="n">_a_coeffs</span><span class="p">,</span> <span class="n">_a_prime_coeffs</span></div>
+<span class="sd">    :param list[any] _a_a_prime_coeffs: List of elements (unpacked coefficients).</span>
+<span class="sd">    :returns: tuple[list[list[any]]] -- Lists of lists of elements as described </span>
+<span class="sd">        above (packed coefficients). </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_a_a_prime_coeffs_packed</span> <span class="o">=</span> <span class="p">[[</span><span class="n">_a_a_prime_coeffs</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">_i</span><span class="p">],</span> <span class="n">_a_a_prime_coeffs</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">_i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> 
+        <span class="n">_a_a_prime_coeffs</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">_i</span><span class="o">+</span><span class="mi">2</span><span class="p">]]</span> <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_a_a_prime_coeffs</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">))]</span>
+    <span class="n">_a_coeffs</span> <span class="o">=</span> <span class="n">_a_a_prime_coeffs_packed</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_a_a_prime_coeffs_packed</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+    <span class="n">_a_prime_coeffs</span> <span class="o">=</span> <span class="n">_a_a_prime_coeffs_packed</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_a_a_prime_coeffs_packed</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">):]</span>
+    <span class="k">return</span> <span class="n">_a_coeffs</span><span class="p">,</span> <span class="n">_a_prime_coeffs</span></div>
 
 
 <div class="viewcode-block" id="coefficients_format_packed_to_unpacked"><a class="viewcode-back" href="../../coefficients_shapes.html#mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_unpacked">[docs]</a><span class="k">def</span> <span class="nf">coefficients_format_packed_to_unpacked</span><span class="p">(</span><span class="n">_a_coeffs</span><span class="p">,</span> <span class="n">_a_prime_coeffs</span><span class="p">):</span>
-  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  Unpacks two lists of lists of three elements to one list of elements</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Unpacks two lists of lists of three elements to one list of elements</span>
 
-<span class="sd">  Example:</span>
-<span class="sd">  &gt;&gt;&gt;  coefficients_format_packed_to_unpacked([[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]])</span>
-<span class="sd">  [1,2,3,4,5,6,7,8,9,10,11,12]</span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; coefficients_format_packed_to_unpacked([[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]])</span>
+<span class="sd">        [1,2,3,4,5,6,7,8,9,10,11,12]</span>
 
-<span class="sd">  :param list[list[any]] _a_coeffs, _a_prime_coeffs: Lists of lists of </span>
-<span class="sd">    elements as described above (packed coefficients). </span>
-<span class="sd">  :returns: list[any] -- List of elements (unpacked coefficients).</span>
-<span class="sd">  &quot;&quot;&quot;</span>
-  <span class="n">_a_a_prime_coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">_a_coeffs</span><span class="o">+</span><span class="n">_a_prime_coeffs</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">element</span><span class="p">]</span>
-  <span class="k">return</span> <span class="n">_a_a_prime_coeffs</span></div>
-  
+<span class="sd">    :param list[list[any]] _a_coeffs, _a_prime_coeffs: Lists of lists of </span>
+<span class="sd">        elements as described above (packed coefficients). </span>
+<span class="sd">    :returns: list[any] -- List of elements (unpacked coefficients).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_a_a_prime_coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">_a_coeffs</span><span class="o">+</span><span class="n">_a_prime_coeffs</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">element</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">_a_a_prime_coeffs</span></div>
+    
 
 <div class="viewcode-block" id="coefficients_format_mixed_to_packed"><a class="viewcode-back" href="../../coefficients_shapes.html#mermin_on_qiskit.coefficients_shapes.coefficients_format_mixed_to_packed">[docs]</a><span class="k">def</span> <span class="nf">coefficients_format_mixed_to_packed</span><span class="p">(</span><span class="n">_a_a_prime_coeffs</span><span class="p">):</span>
-  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Format the coefficients in the shape previously used for evaluation</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Format the coefficients in the shape previously used for evaluation</span>
 
-<span class="sd">  Example:</span>
-<span class="sd">  &gt;&gt;&gt;  coefficients_format_mixed_to_packed([[1, 2, 3], [7, 8, 9], [4, 5, 6], [10, 11, 12]])                   </span>
-<span class="sd">  ([[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]])</span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; coefficients_format_mixed_to_packed([[1, 2, 3], [7, 8, 9], [4, 5, 6], [10, 11, 12]])                   </span>
+<span class="sd">        ([[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]])</span>
 
-<span class="sd">  :param list[list[any]] _a_a_prime_coeffs: List of lists of elements as </span>
-<span class="sd">    described above (mixed coefficients). </span>
-<span class="sd">  :returns: tuple(list[list[any]]) -- Tuple of list of list of elements (packed</span>
-<span class="sd">    coefficients).</span>
-<span class="sd">  &quot;&quot;&quot;</span>
-  <span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_a_a_prime_coeffs</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-  <span class="n">_a_coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">_a_a_prime_coeffs</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">)]</span>
-  <span class="n">_a_p_coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">_a_a_prime_coeffs</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">)]</span>
-  <span class="k">return</span> <span class="n">_a_coeffs</span><span class="p">,</span> <span class="n">_a_p_coeffs</span></div>
+<span class="sd">    :param list[list[any]] _a_a_prime_coeffs: List of lists of elements as </span>
+<span class="sd">        described above (mixed coefficients). </span>
+<span class="sd">    :returns: tuple(list[list[any]]) -- Tuple of list of list of elements (packed</span>
+<span class="sd">        coefficients).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_a_a_prime_coeffs</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">_a_coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">_a_a_prime_coeffs</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">)]</span>
+    <span class="n">_a_p_coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">_a_a_prime_coeffs</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">_a_coeffs</span><span class="p">,</span> <span class="n">_a_p_coeffs</span></div>
 
 
 <div class="viewcode-block" id="coefficients_format_packed_to_mixed"><a class="viewcode-back" href="../../coefficients_shapes.html#mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_mixed">[docs]</a><span class="k">def</span> <span class="nf">coefficients_format_packed_to_mixed</span><span class="p">(</span><span class="n">_a_coeffs</span><span class="p">,</span> <span class="n">_a_prime_coeffs</span><span class="p">):</span>
-  <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Format the coefficients in the shape now used for evaluation</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Format the coefficients in the shape now used for evaluation</span>
 
-<span class="sd">  Example:</span>
-<span class="sd">  &gt;&gt;&gt;  coefficients_format_packed_to_mixed([[1,2,3],[4,5,6]], [[7,8,9],[10,11,12]])                           </span>
-<span class="sd">  [[1, 2, 3], [7, 8, 9], [4, 5, 6], [10, 11, 12]]</span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; coefficients_format_packed_to_mixed([[1,2,3],[4,5,6]], [[7,8,9],[10,11,12]])                           </span>
+<span class="sd">        [[1, 2, 3], [7, 8, 9], [4, 5, 6], [10, 11, 12]]</span>
 
-<span class="sd">  :param list[list[any]] _a_coeffs, _a_prime_coeffs: Lists of lists of </span>
-<span class="sd">    elements as described above (packed coefficients). </span>
-<span class="sd">  :returns: list[any] -- List of list of elements (mixed coefficients).</span>
-<span class="sd">  &quot;&quot;&quot;</span>
-  <span class="n">_a_a_prime_coeffs</span> <span class="o">=</span> <span class="p">[]</span>
-  <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_a_coeffs</span><span class="p">)):</span>
-    <span class="n">_a_a_prime_coeffs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_a_coeffs</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
-    <span class="n">_a_a_prime_coeffs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_a_prime_coeffs</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
-  <span class="k">return</span> <span class="n">_a_a_prime_coeffs</span></div>
+<span class="sd">    :param list[list[any]] _a_coeffs, _a_prime_coeffs: Lists of lists of </span>
+<span class="sd">        elements as described above (packed coefficients). </span>
+<span class="sd">    :returns: list[any] -- List of list of elements (mixed coefficients).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_a_a_prime_coeffs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_a_coeffs</span><span class="p">)):</span>
+        <span class="n">_a_a_prime_coeffs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_a_coeffs</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+        <span class="n">_a_a_prime_coeffs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_a_prime_coeffs</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">_a_a_prime_coeffs</span></div>
 </pre></div>
 
           </div>

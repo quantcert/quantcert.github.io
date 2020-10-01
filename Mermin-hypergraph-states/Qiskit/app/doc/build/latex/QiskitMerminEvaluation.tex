@@ -428,10 +428,14 @@ between \sphinxstyleemphasis{2.} and \sphinxstyleemphasis{3.}, allowing tho swit
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{coefficients_shapes:mermin_on_qiskit.coefficients_shapes.coefficients_format_mixed_to_packed}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{mermin\_on\_qiskit.coefficients\_shapes.}}\sphinxbfcode{\sphinxupquote{coefficients\_format\_mixed\_to\_packed}}}{\emph{\_a\_a\_prime\_coeffs}}{}
 Format the coefficients in the shape previously used for evaluation
+\begin{description}
+\item[{Example:}] \leavevmode
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{coefficients\PYGZus{}format\PYGZus{}mixed\PYGZus{}to\PYGZus{}packed}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{7}\PYG{p}{,} \PYG{l+m+mi}{8}\PYG{p}{,} \PYG{l+m+mi}{9}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{11}\PYG{p}{,} \PYG{l+m+mi}{12}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}                   
+\PYG{g+go}{([[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]])}
+\end{sphinxVerbatim}
 
-Example:
-\textgreater{}\textgreater{}\textgreater{}  coefficients\_format\_mixed\_to\_packed({[}{[}1, 2, 3{]}, {[}7, 8, 9{]}, {[}4, 5, 6{]}, {[}10, 11, 12{]}{]})                   
-({[}{[}1, 2, 3{]}, {[}4, 5, 6{]}{]}, {[}{[}7, 8, 9{]}, {[}10, 11, 12{]}{]})
+\end{description}
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
 \sphinxstyleliteralstrong{\sphinxupquote{\_a\_a\_prime\_coeffs}} (\sphinxstyleliteralemphasis{\sphinxupquote{list}}\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{list}}\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{any}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} List of lists of elements as 
@@ -450,10 +454,14 @@ coefficients).
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{coefficients_shapes:mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_mixed}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{mermin\_on\_qiskit.coefficients\_shapes.}}\sphinxbfcode{\sphinxupquote{coefficients\_format\_packed\_to\_mixed}}}{\emph{\_a\_coeffs}, \emph{\_a\_prime\_coeffs}}{}
 Format the coefficients in the shape now used for evaluation
+\begin{description}
+\item[{Example:}] \leavevmode
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{coefficients\PYGZus{}format\PYGZus{}packed\PYGZus{}to\PYGZus{}mixed}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{l+m+mi}{8}\PYG{p}{,}\PYG{l+m+mi}{9}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{l+m+mi}{11}\PYG{p}{,}\PYG{l+m+mi}{12}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}                           
+\PYG{g+go}{[[1, 2, 3], [7, 8, 9], [4, 5, 6], [10, 11, 12]]}
+\end{sphinxVerbatim}
 
-Example:
-\textgreater{}\textgreater{}\textgreater{}  coefficients\_format\_packed\_to\_mixed({[}{[}1,2,3{]},{[}4,5,6{]}{]}, {[}{[}7,8,9{]},{[}10,11,12{]}{]})                           
-{[}{[}1, 2, 3{]}, {[}7, 8, 9{]}, {[}4, 5, 6{]}, {[}10, 11, 12{]}{]}
+\end{description}
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
 \sphinxstyleliteralstrong{\sphinxupquote{\_a\_coeffs}}\sphinxstyleliteralstrong{\sphinxupquote{, }}\sphinxstyleliteralstrong{\sphinxupquote{\_a\_prime\_coeffs}} (\sphinxstyleliteralemphasis{\sphinxupquote{list}}\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{list}}\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{any}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Lists of lists of 
@@ -471,10 +479,14 @@ list{[}any{]} \textendash{} List of list of elements (mixed coefficients).
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{coefficients_shapes:mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_unpacked}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{mermin\_on\_qiskit.coefficients\_shapes.}}\sphinxbfcode{\sphinxupquote{coefficients\_format\_packed\_to\_unpacked}}}{\emph{\_a\_coeffs}, \emph{\_a\_prime\_coeffs}}{}
 Unpacks two lists of lists of three elements to one list of elements
+\begin{description}
+\item[{Example:}] \leavevmode
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{coefficients\PYGZus{}format\PYGZus{}packed\PYGZus{}to\PYGZus{}unpacked}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{l+m+mi}{8}\PYG{p}{,}\PYG{l+m+mi}{9}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{l+m+mi}{11}\PYG{p}{,}\PYG{l+m+mi}{12}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{[1,2,3,4,5,6,7,8,9,10,11,12]}
+\end{sphinxVerbatim}
 
-Example:
-\textgreater{}\textgreater{}\textgreater{}  coefficients\_format\_packed\_to\_unpacked({[}{[}1,2,3{]},{[}4,5,6{]}{]},{[}{[}7,8,9{]},{[}10,11,12{]}{]})
-{[}1,2,3,4,5,6,7,8,9,10,11,12{]}
+\end{description}
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
 \sphinxstyleliteralstrong{\sphinxupquote{\_a\_coeffs}}\sphinxstyleliteralstrong{\sphinxupquote{, }}\sphinxstyleliteralstrong{\sphinxupquote{\_a\_prime\_coeffs}} (\sphinxstyleliteralemphasis{\sphinxupquote{list}}\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{list}}\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{any}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Lists of lists of 
@@ -492,10 +504,14 @@ list{[}any{]} \textendash{} List of elements (unpacked coefficients).
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{coefficients_shapes:mermin_on_qiskit.coefficients_shapes.coefficients_format_unpacked_to_packed}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{mermin\_on\_qiskit.coefficients\_shapes.}}\sphinxbfcode{\sphinxupquote{coefficients\_format\_unpacked\_to\_packed}}}{\emph{\_a\_a\_prime\_coeffs}}{}
 Packs a list of elements in two lists of lists of three elements
+\begin{description}
+\item[{Example:}] \leavevmode
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{coefficients\PYGZus{}format\PYGZus{}unpacked\PYGZus{}to\PYGZus{}packed}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{l+m+mi}{8}\PYG{p}{,}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{l+m+mi}{11}\PYG{p}{,}\PYG{l+m+mi}{12}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{([[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]])}
+\end{sphinxVerbatim}
 
-Example:
-\textgreater{}\textgreater{}\textgreater{}  coefficients\_format\_unpacked\_to\_packed({[}1,2,3,4,5,6,7,8,9,10,11,12{]})
-({[}{[}1,2,3{]},{[}4,5,6{]}{]},{[}{[}7,8,9{]},{[}10,11,12{]}{]})
+\end{description}
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
 \sphinxstyleliteralstrong{\sphinxupquote{\_a\_a\_prime\_coeffs}} (\sphinxstyleliteralemphasis{\sphinxupquote{list}}\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{any}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} List of elements (unpacked coefficients).
@@ -749,8 +765,7 @@ Converts an int into a string containing its bits.
 \item[{Example:}] \leavevmode
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{convert\PYGZus{}in\PYGZus{}binary}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{)}
-\PYG{g+go}{ 101}
-\PYG{g+go}{ and}
+\PYG{g+go}{101}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{convert\PYGZus{}in\PYGZus{}binary}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{)}
 \PYG{g+go}{00101}
 \end{sphinxVerbatim}
