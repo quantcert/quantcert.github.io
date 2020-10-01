@@ -21,7 +21,7 @@ softwares are distributed in their respective folders: in the
 [Maple folder](Maple) and in the [Qiskit folder](Qiskit).
 
 A more literal description of the code can be found in the article 
-[[BJH+666]](#ABJ20).
+[[ABJ+20]](#ABJ20).
 
 ## Copyright
 
