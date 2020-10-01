@@ -81,4 +81,4 @@ This program is distributed under the GNU LGPL 3. See the enclosed file
 
 <a id="ABJ20"/>[ABJ+20] Grâce Amouzou, Jeoffrey Boffelli, Hamza Jaffali, Kossi
 Atchonouglo, Frédéric Holweck. **Entanglement and Non-Locality of Four-Qubit
-Connected Hypergraph States**  [arXiv:???](https://arxiv.org/abs/???)
+Connected Hypergraph States**  [arXiv:[Coming soon!]](https://arxiv.org/abs/???)
