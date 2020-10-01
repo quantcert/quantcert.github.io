@@ -65,7 +65,7 @@ def periodic_state(l,r,nWires):
 
   Example:
     Since
-    `|\varphi^{1,5}> = (|1>+|6>+|11>)/sqrt(3)=(|0001>+|0110>+|1011>)/sqrt(3)`,
+    `|\varphi^{1,5}> = (|1>+|6>+|11>)/\sqrt(3)=(|0001>+|0110>+|1011>)/\sqrt(3)`,
 
     >>> periodic_state(1,5,4)
     (0, 1/3*sqrt(3), 0, 0, 0, 0, 1/3*sqrt(3), 0, 0, 0, 0, 1/3*sqrt(3), 0, 0, 0, 0)
