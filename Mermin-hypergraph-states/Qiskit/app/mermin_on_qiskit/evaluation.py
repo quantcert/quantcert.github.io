@@ -37,9 +37,9 @@ def measures_exploitation(measures_dictionary, shots):
     In order to obtain this probabilities, we sum the values of the cases where 
     the number of 1 in the measurement is even and when it's then odd.
     
-    For example :
-    even_results = values of 00 and 11 measurements
-    odd_results = values of 01 and 10 measurements
+    Example :
+        even_results = values of 00 and 11 measurements
+        odd_results = values of 01 and 10 measurements
 
     :param dict measures_dictionary: the dictionary containing the measurements 
         and their values.
@@ -98,7 +98,7 @@ def evaluate_polynomial(
         is_simulation=True, monitor=False, local=True):
     """ Makes all the implementation and calculation
 
-    Caution! : 
+    Caution!: 
         The IBMQ account must be loaded before the execution of this 
         function if the variable is_simulation is set to False.
 

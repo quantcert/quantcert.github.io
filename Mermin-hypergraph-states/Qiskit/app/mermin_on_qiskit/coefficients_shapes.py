@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-r"""There are three format used for the algorithms: 
+r"""There are three format used for the algorithms:
 
 1.  A flat list of coefficients, organized as such: 
     `[x1,y1,z1, x2,y2, ..., xn,yn,zn, x'1,y'1,z'1, x'2,y'2, ..., x'n,y'n,z'n]`.

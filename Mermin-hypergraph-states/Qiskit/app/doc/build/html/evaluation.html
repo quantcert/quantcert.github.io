@@ -77,7 +77,7 @@ monomial.</p>
 <code class="descclassname">mermin_on_qiskit.evaluation.</code><code class="descname">evaluate_polynomial</code><span class="sig-paren">(</span><em>n</em>, <em>circuit</em>, <em>a_a_p_coeffs</em>, <em>shots=1024</em>, <em>is_simulation=True</em>, <em>monitor=False</em>, <em>local=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/evaluation.html#evaluate_polynomial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.evaluation.evaluate_polynomial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes all the implementation and calculation</p>
 <dl class="docutils">
-<dt>Caution! <span class="classifier-delimiter">:</span> <span class="classifier"></span></dt>
+<dt>Caution!: </dt>
 <dd>The IBMQ account must be loaded before the execution of this 
 function if the variable is_simulation is set to False.</dd>
 </dl>
@@ -114,9 +114,11 @@ on the IBM machine.</li>
 probability to get this combination when measuring is calculated.</p>
 <p>In order to obtain this probabilities, we sum the values of the cases where 
 the number of 1 in the measurement is even and when it’s then odd.</p>
-<p>For example :
-even_results = values of 00 and 11 measurements
-odd_results = values of 01 and 10 measurements</p>
+<dl class="docutils">
+<dt>Example :</dt>
+<dd>even_results = values of 00 and 11 measurements
+odd_results = values of 01 and 10 measurements</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

@@ -14,7 +14,7 @@ from . import run
 
 
 def build_QFT_0_to_k(nWires, k, measure=False):
-  """ Builds the QFT on nWires wires up to the `k^{th}` state generates.
+  r""" Builds the QFT on nWires wires up to the `k^{th}` state generates.
   Note that the whole QFT can be generated in Qiskit using the `QFT` method
   
   :param int nWires: number of wires
@@ -54,8 +54,8 @@ def all_QFT_circuits(nWires):
 
 
 def periodic_state(l,r,nWires):
-  r""" 
-  Returns the periodic state `|\varphi^{l,r}>` of size `2^{nWires}`. We have:
+  r""" Returns the periodic state `|\varphi^{l,r}>` of size `2^{nWires}`. We 
+    have:
     
     `|\varphi^{l,r}> = \sum_{i=0}^{A-1}|l+ir>/sqrt(A)` with
     `A = floor((2^{nWires}-l)/r)+1`
@@ -93,7 +93,7 @@ def get_coef_from_optimization_file(filename, iteration, evaluation=False):
     "intricationValue" column must contain real numbers.
 
   Example:
-    >>> get_coef_from_optimization_file("../Sage/grover_pac/examples/qft_optimization/1-1-4.csv",2)
+    >>> get_coef_from_optimization_file("../examples/QFT-optimized-coefficients/1-1-4.csv",2)
     ([(-0.197738971530022, -0.00983193840670331, 0.980205403028067), 
         (0.892812904656093, -0.035586934469795, 0.449019695976237), 
         (-0.892282320991669, -0.00788653439204609, -0.451408974457756), 
@@ -130,7 +130,7 @@ def _main(l, r, nWires, optimization_filepath, local=True, simulation=True, epsi
     QFT ran on IBM's quantum processor.
 
   Example:
-    >>> QFT._main(1,1,4,"../../Sage/grover_pac/examples/qft_optimization/1-1-4.csv")                        
+    >>> QFT._main(1,1,4,"../examples/QFT-optimized-coefficients/1-1-4.csv")                        
     0.99609375
     1.04541015625
     1.0166015625

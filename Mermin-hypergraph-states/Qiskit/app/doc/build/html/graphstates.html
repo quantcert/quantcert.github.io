@@ -15,9 +15,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Hypergraphstates" href="hypergraphstates.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -34,124 +34,8 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-mermin_on_qiskit.graphstates">
-<span id="graphstates-main"></span><h1>Graphstates main<a class="headerlink" href="#module-mermin_on_qiskit.graphstates" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
-<dt id="mermin_on_qiskit.graphstates.add_hadamard_system">
-<code class="descclassname">mermin_on_qiskit.graphstates.</code><code class="descname">add_hadamard_system</code><span class="sig-paren">(</span><em>n</em>, <em>circuit</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/graphstates.html#add_hadamard_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.graphstates.add_hadamard_system" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Places and Hadamard gate on every main (non additional) qubits wire. </dt>
-<dd>This is needed in order to place the qubits in a <a href="#id1"><span class="problematic" id="id2">|</span></a>+&gt; state which is 
-(<a href="#id3"><span class="problematic" id="id4">|</span></a>0&gt; + <a href="#id5"><span class="problematic" id="id6">|</span></a>1&gt;) / sqrt(2).</dd>
-</dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>n</strong> (<em>int</em>) – the initial number of qubits that are the number of the main 
-wires</li>
-<li><strong>circuit</strong> (<em>QuantumCircuit</em>) – the circuit that will be modified</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li></li>
-</ul>
-</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="mermin_on_qiskit.graphstates.circuit_creation">
-<code class="descclassname">mermin_on_qiskit.graphstates.</code><code class="descname">circuit_creation</code><span class="sig-paren">(</span><em>n</em>, <em>hyperedges</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/graphstates.html#circuit_creation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.graphstates.circuit_creation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates an empty circuit with the number of qubits required.</p>
-<dl class="docutils">
-<dt>Example :</dt>
-<dd>For the 3-qubits hyper graphstate called STAR, 
-&gt;&gt;&gt; hyperedges = [[0, 1], [0, 2]]</dd>
-</dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>n</strong> (<em>int</em>) – the number of qubits of which depends the number of wires to 
-create</li>
-<li><strong>hyperedges</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>int</em><em>]</em>) – a list containing the lists of the 
-vertices which are linked by an hyperedge</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a circuit with the required number of quantum wires and classical 
-wires</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="mermin_on_qiskit.graphstates.circuit_initialisation">
-<code class="descclassname">mermin_on_qiskit.graphstates.</code><code class="descname">circuit_initialisation</code><span class="sig-paren">(</span><em>n</em>, <em>hyperedges</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/graphstates.html#circuit_initialisation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.graphstates.circuit_initialisation" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Creates an empty circuit with the number of qubits required and places </dt>
-<dd>the circuit in the initial state before adding gates for calculations.</dd>
-<dt>:param int n <span class="classifier-delimiter">:</span> <span class="classifier">the number of qubits of which depends the number of wires to </span></dt>
-<dd>create</dd>
-</dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hyperedges</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>int</em><em>]</em>) – a list containing the lists of the 
-vertices which are linked by an hyperedge</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">QuantumCircuit circuit : the created and initialized circuit</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="mermin_on_qiskit.graphstates.edges_layout">
-<code class="descclassname">mermin_on_qiskit.graphstates.</code><code class="descname">edges_layout</code><span class="sig-paren">(</span><em>n</em>, <em>hyperedges</em>, <em>circuit</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/graphstates.html#edges_layout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.graphstates.edges_layout" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Disposes all the gates corresponding to the edges.</dt>
-<dd>In fact, for a two-vertices edge, there not much to do, as for a 
-three-vertices edge, too.
-For more an edge of than three vertices, things are a little different. 
-First, Toffoli gates are used to link qubits
-two by two. The target qubit here is an auxiliary qubit.
-Then, the last link is a simple CZ.
-But all the Toffoli gates that we put create an entanglement which is 
-removed by replacing exactly the same gates again after the CZ.</dd>
-</dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>n</strong> (<em>int</em>) – the number of qubits</li>
-<li><strong>hyperedges</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>int</em><em>]</em>) – the list of the vertices which are linked 
-by an hyperedge</li>
-<li><strong>circuit</strong> (<em>QuantumCircuit</em>) – the circuit that will be modified</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li></li>
-</ul>
-</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+  <div class="section" id="graphstates-main">
+<h1>Graphstates main<a class="headerlink" href="#graphstates-main" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -172,21 +56,21 @@ by an hyperedge</li>
 
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basis_change.html">Basis Change</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run.html">Run</a></li>
 <li class="toctree-l1"><a class="reference internal" href="coefficients_shapes.html">Coefficients shapes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="QFT.html">QFT main</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hypergraphstates.html">Hypergraphstates</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Graphstates main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypergraphstates-opti.html">Hypergraphstates used for optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mermin_polynomials-opti.html">Mermin polynomials used for optimization</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="hypergraphstates.html" title="previous chapter">Hypergraphstates</a></li>
   </ul></li>
 </ul>
 </div>

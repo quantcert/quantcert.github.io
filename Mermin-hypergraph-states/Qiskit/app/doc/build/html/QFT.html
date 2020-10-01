@@ -82,7 +82,7 @@ The “iteration” column must contain integers, the “coefficients” column
 must contain tuples of real numbers (the mermin coefficients) and the
 “intricationValue” column must contain real numbers.</dd>
 <dt>Example:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_coef_from_optimization_file</span><span class="p">(</span><span class="s2">&quot;../Sage/grover_pac/examples/qft_optimization/1-1-4.csv&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_coef_from_optimization_file</span><span class="p">(</span><span class="s2">&quot;../examples/QFT-optimized-coefficients/1-1-4.csv&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">([(-0.197738971530022, -0.00983193840670331, 0.980205403028067), </span>
 <span class="go">    (0.892812904656093, -0.035586934469795, 0.449019695976237), </span>
 <span class="go">    (-0.892282320991669, -0.00788653439204609, -0.451408974457756), </span>
@@ -121,14 +121,14 @@ with these coefficients.</p>
 <dl class="function">
 <dt id="mermin_on_qiskit.QFT.periodic_state">
 <code class="descclassname">mermin_on_qiskit.QFT.</code><code class="descname">periodic_state</code><span class="sig-paren">(</span><em>l</em>, <em>r</em>, <em>nWires</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/QFT.html#periodic_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.QFT.periodic_state" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the periodic state <span class="math notranslate nohighlight">\(|\varphi^{l,r}&gt;\)</span> of size <span class="math notranslate nohighlight">\(2^{nWires}\)</span>. We have:</p>
-<blockquote>
-<div><p><span class="math notranslate nohighlight">\(|\varphi^{l,r}&gt; = \sum_{i=0}^{A-1}|l+ir&gt;/sqrt(A)\)</span> with
+<dd><dl class="docutils">
+<dt>Returns the periodic state <span class="math notranslate nohighlight">\(|\varphi^{l,r}&gt;\)</span> of size <span class="math notranslate nohighlight">\(2^{nWires}\)</span>. We </dt>
+<dd><p class="first">have:</p>
+<p><span class="math notranslate nohighlight">\(|\varphi^{l,r}&gt; = \sum_{i=0}^{A-1}|l+ir&gt;/sqrt(A)\)</span> with
 <span class="math notranslate nohighlight">\(A = floor((2^{nWires}-l)/r)+1\)</span></p>
-<p>In this definition, <code class="docutils literal notranslate"><span class="pre">l</span></code> is the shift of the state, and <code class="docutils literal notranslate"><span class="pre">r</span></code> is the period 
+<p class="last">In this definition, <code class="docutils literal notranslate"><span class="pre">l</span></code> is the shift of the state, and <code class="docutils literal notranslate"><span class="pre">r</span></code> is the period 
 of the state.</p>
-</div></blockquote>
-<dl class="docutils">
+</dd>
 <dt>Example:</dt>
 <dd><p class="first">Since
 <span class="math notranslate nohighlight">\(|\varphi^{1,5}&gt; = (|1&gt;+|6&gt;+|11&gt;)/sqrt(3)=(|0001&gt;+|0110&gt;+|1011&gt;)/sqrt(3)\)</span>,</p>

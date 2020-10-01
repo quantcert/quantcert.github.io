@@ -51,7 +51,7 @@
 
 
 <div class="viewcode-block" id="build_QFT_0_to_k"><a class="viewcode-back" href="../../QFT.html#mermin_on_qiskit.QFT.build_QFT_0_to_k">[docs]</a><span class="k">def</span> <span class="nf">build_QFT_0_to_k</span><span class="p">(</span><span class="n">nWires</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot; Builds the QFT on nWires wires up to the `k^{th}` state generates.</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; Builds the QFT on nWires wires up to the `k^{th}` state generates.</span>
 <span class="sd">  Note that the whole QFT can be generated in Qiskit using the `QFT` method</span>
 <span class="sd">  </span>
 <span class="sd">  :param int nWires: number of wires</span>
@@ -91,8 +91,8 @@
 
 
 <div class="viewcode-block" id="periodic_state"><a class="viewcode-back" href="../../QFT.html#mermin_on_qiskit.QFT.periodic_state">[docs]</a><span class="k">def</span> <span class="nf">periodic_state</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">nWires</span><span class="p">):</span>
-  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">  Returns the periodic state `|\varphi^{l,r}&gt;` of size `2^{nWires}`. We have:</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; Returns the periodic state `|\varphi^{l,r}&gt;` of size `2^{nWires}`. We </span>
+<span class="sd">    have:</span>
 <span class="sd">    </span>
 <span class="sd">    `|\varphi^{l,r}&gt; = \sum_{i=0}^{A-1}|l+ir&gt;/sqrt(A)` with</span>
 <span class="sd">    `A = floor((2^{nWires}-l)/r)+1`</span>
@@ -130,7 +130,7 @@
 <span class="sd">    &quot;intricationValue&quot; column must contain real numbers.</span>
 
 <span class="sd">  Example:</span>
-<span class="sd">    &gt;&gt;&gt; get_coef_from_optimization_file(&quot;../Sage/grover_pac/examples/qft_optimization/1-1-4.csv&quot;,2)</span>
+<span class="sd">    &gt;&gt;&gt; get_coef_from_optimization_file(&quot;../examples/QFT-optimized-coefficients/1-1-4.csv&quot;,2)</span>
 <span class="sd">    ([(-0.197738971530022, -0.00983193840670331, 0.980205403028067), </span>
 <span class="sd">        (0.892812904656093, -0.035586934469795, 0.449019695976237), </span>
 <span class="sd">        (-0.892282320991669, -0.00788653439204609, -0.451408974457756), </span>
@@ -167,7 +167,7 @@
 <span class="sd">    QFT ran on IBM&#39;s quantum processor.</span>
 
 <span class="sd">  Example:</span>
-<span class="sd">    &gt;&gt;&gt; QFT._main(1,1,4,&quot;../../Sage/grover_pac/examples/qft_optimization/1-1-4.csv&quot;)                        </span>
+<span class="sd">    &gt;&gt;&gt; QFT._main(1,1,4,&quot;../examples/QFT-optimized-coefficients/1-1-4.csv&quot;)                        </span>
 <span class="sd">    0.99609375</span>
 <span class="sd">    1.04541015625</span>
 <span class="sd">    1.0166015625</span>
