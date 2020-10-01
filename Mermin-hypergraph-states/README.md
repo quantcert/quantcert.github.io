@@ -25,7 +25,7 @@ A more literal description of the code can be found in the article
 
 ## Copyright
 
-This program is distributed under the GNU LGPL 3. See the enclosed file 
+This program is distributed under the GNU GPL 3. See the enclosed file 
 [LICENSE](LICENSE).
 
 ## References
