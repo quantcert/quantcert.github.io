@@ -71,11 +71,6 @@ The folder `Others_cases` contains the following files :
 
     * `8_qubits_sing.mw` : Maple 17 Worksheet providing the code for computing simple singularities for 8-qubit systems
 
-## Copyright
-
-This program is distributed under the GNU LGPL 3. See the enclosed file 
-[LICENSE](LICENSE).
-
 ## References
 
 <a id="ABJ20"/>[ABJ+20] Grâce Amouzou, Jeoffrey Boffelli, Hamza Jaffali, Kossi

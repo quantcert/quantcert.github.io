@@ -1,20 +1,20 @@
-## Projects related to the quantum certification
+# Projects related to the quantum certification
 
 This Git repository lists projects related to our work around quantum
 certification.
 
-### Method of constructing a block design by Key and Moori
+## Method of constructing a block design by Key and Moori
 
 Key and Moori present a method of building a block designs completed with a part
 on graphs that we are not interested in for our work. The linked source files
 are present in the [Designs](Designs) part of this GitHub repository.
 
-### GT IQ 2019's days
+## GT IQ 2019's days
 
 The annual meeting of GT IQ is organised in Besançon for 2019, more details can
 be found on [GT-IQ'19 (fr)](https://quantcert.github.io/GT-IQ'19)
 
-### Mermin Polynomials for Entanglement Evaluation in Grover’s algorithm and Quantum Fourier Transform
+## Mermin Polynomials for Entanglement Evaluation in Grover’s algorithm and Quantum Fourier Transform
 
 _Paper abstract:_<br/> 
 The entanglement of a quantum system can be valuated
@@ -34,7 +34,7 @@ open-source code that we provide.
 More information related to this paper can be found in the
 [Mermin-eval](Mermin-eval) part of this GitHub repository.
 
-### Entanglement and non-locality of four-qubits connected hypergraph states
+## Entanglement and non-locality of four-qubits connected hypergraph states
 
 _Paper abstract:_<br/> 
 We study entanglement and non-locality of connected four-qubit hypergraph
@@ -46,3 +46,7 @@ inequalities on the IBM Quantum Experience.
 More information related to this paper can be found in the
 [Mermin-hypergraph-states](Mermin-hypergraph-states) part of this GitHub
 repository.
+
+### License
+
+The attached projects are all distributed under [GPLv3 License](LICENSE)
