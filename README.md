@@ -46,7 +46,3 @@ inequalities on the IBM Quantum Experience.
 More information related to this paper can be found in the
 [Mermin-hypergraph-states](Mermin-hypergraph-states) part of this GitHub
 repository.
-
-### License
-
-The attached projects are all distributed under [GPLv3 License](LICENSE)
