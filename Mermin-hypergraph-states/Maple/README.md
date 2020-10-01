@@ -4,18 +4,17 @@ Contact: hamza.jaffali[at]utbm.fr
 
 ## Version and execution
 
-The [Maple](http://www.maplesoft.com/) code provided was developed and executed
-the Maple 17 version of the software developed by Maplesoft. 
+The [*Maple*](http://www.maplesoft.com/) code provided was developed and
+executed the Maple 17 version of the software developed by Maplesoft. 
 
 Maple is available on Windows, MacOS and Linux.
 
-The provided code can executed using the graphical version of
-[Maple](http://www.maplesoft.com/), as well as the
-[Maple](http://www.maplesoft.com/) command prompt.
+The provided code can executed using the graphical version of *Maple*, as well
+as the *Maple* command prompt.
 
 The `.mpl` files can be opened as text files and their content can be
-copy/pasted in Maple, they can also be directly imported in Maple. The `.mw` are
-worksheets, which are usable by the graphical environment only (they bear
+copy/pasted in *Maple*, they can also be directly imported in *Maple*. The `.mw`
+are worksheets, which are usable by the graphical environment only (they bear
 execution information).
 
 ## Classification of 4-qubits
