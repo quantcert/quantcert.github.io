@@ -1,7 +1,7 @@
 .. nodoctest
 
-QFT main
-========
+QFT
+===
 
 .. automodule:: mermin_on_qiskit.QFT
    :members:
