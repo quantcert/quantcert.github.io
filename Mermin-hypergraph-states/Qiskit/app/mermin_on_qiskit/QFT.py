@@ -70,7 +70,7 @@ def periodic_state(l,r,nWires):
     r""" Returns the periodic state `|\varphi^{l,r}>` of size `2^{nWires}`. We 
         have:
         
-    `|\varphi^{l,r}> = \sum_{i=0}^{A-1}|l+ir>/sqrt(A)` with
+    `|\varphi^{l,r}> = \sum_{i=0}^{A-1}|l+ir>/\sqrt(A)` with
     `A = floor((2^{nWires}-l)/r)+1`
 
     In this definition, ``l`` is the shift of the state, and ``r`` is the period 
