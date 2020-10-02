@@ -63,3 +63,7 @@ html_theme = 'alabaster'
 html_static_path = ['_static']
 
 html_favicon = "ressources/icon.png"
+
+# If true, the current module name will be prepended to all description
+# unit titles (such as .. function::).
+add_module_names = False
