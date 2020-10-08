@@ -45,8 +45,7 @@ for n-qubits systems, with n=4,5,6,7,8.
 
 We use this code to determine the simple singularities associated with several 
 hypergraph and graph states, in order to characterize the entanglement class 
-related with these states. All the results are summed up in the article
-[[ABJ+20]](#ABJ20).
+related with these states.
 
 We regrouped the code into two folders. 
 
