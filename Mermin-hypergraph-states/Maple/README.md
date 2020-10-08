@@ -26,7 +26,7 @@ family of a given state, and  the second one determines the corresponding strata
 of the nullcone.
 
 We use these algorithms to study the entanglement class of four-qubit hypergraph
-states. All the results  are summed up in the article [[ABJ+20]](#ABJ20).
+states.
 
 We detail bellow the files provided in the related folder : 
 
@@ -45,8 +45,7 @@ for n-qubits systems, with n=4,5,6,7,8.
 
 We use this code to determine the simple singularities associated with several 
 hypergraph and graph states, in order to characterize the entanglement class 
-related with these states. All the results are summed up in the article
-[[ABJ+20]](#ABJ20).
+related with these states.
 
 We regrouped the code into two folders. 
 
@@ -70,9 +69,3 @@ The folder `Others_cases` contains the following files :
     * `7_qubits_sing.mw` : Maple 17 Worksheet providing the code for computing simple singularities for 7-qubit systems
 
     * `8_qubits_sing.mw` : Maple 17 Worksheet providing the code for computing simple singularities for 8-qubit systems
-
-## References
-
-<a id="ABJ20"/>[ABJ+20] Grâce Amouzou, Jeoffrey Boffelli, Hamza Jaffali, Kossi
-Atchonouglo, Frédéric Holweck. **Entanglement and Non-Locality of Four-Qubit
-Connected Hypergraph States**  [arXiv:[Coming soon!]](https://arxiv.org/abs/???)
