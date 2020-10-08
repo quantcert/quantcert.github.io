@@ -10,10 +10,18 @@ Contact: gamouzou[at]univ-lome.tg
 We study entanglement and non-locality of connected four-qubit hypergraph
 states. One obtains the SLOCC classification from the known LU-orbits. We then
 consider Mermin’s polynomials and show that all four-qubit hypergaph states
-exhibit non-local behavior. "Finally, we implement some of the corresponding
-inequalities on the IBM Quantum Experience. TODO: not accurate, implementation
-is not done on the IBM Quantum Experience but runs on it, and you don't speak
-about Maple in this paragraph, what is it's role ?"
+exhibit non-local behavior. Finally, we implement some of the corresponding
+inequalities on the IBM Quantum Experience. For a given hypergraph state, we
+calculate its maximum violation of Mermin's inequalities by optimization
+process.  We then construct the hypergraphstate on the IBM Quantum Experience
+and make the measurements to verify the theoretical results. Maple was also used
+to determine the orbit or SLOCC families of four-qubits hypergraph states. It is
+based on the evaluation of invariant  and covariant polynomials. Two algorithms
+were implemented : the first one determines the Verstraete family of a given
+state, and the second one determines the corresponding strata of the nullcone
+for nilpotent element. A third type of algorithms is proposed to determine the
+singular type of a hyperplane section which is a SLOCC invariant of the
+corresponding state.
 
 Two softwares where used for this study: [Maple](https://www.maplesoft.com/) and 
 the python library [Qiskit](https://www.qiskit.org/). The code used on those
