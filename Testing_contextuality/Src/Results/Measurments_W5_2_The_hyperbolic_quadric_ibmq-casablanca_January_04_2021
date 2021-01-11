@@ -1,0 +1,848 @@
+##Results provided by IBMQ Experience on January 5 2021 on the backend ibmq-casablanca (accessible via the research-q program)
+## The first vector [(a,b,c),n] provides the line/context in decimal notation with its sign \pm 1
+## The second vecteor [[p,q,r],[s,t,u],[v,w,x]] corresponds to the evaluated context in base 4 notation. The context is made of three measurements
+## {'1':nbr1, '0':nbr0} corresponds to the results obtained by the IBM quantum machine for 8192 shots
+## Then follws 4  figures: the probability of 1, the expectation of the measurement of the context, the sum of the expectation, the global standard deviation
+
+[(0, 3, 4), 1]
+[[0, 0, 1], [0, 1, 0], [0, 1, 1]]
+{'1': 702, '0': 7490}
+-0.085693359375
+0.82861328125
+0.82861328125
+0.0030926056819543034
+[(0, 11, 12), 1]
+[[0, 0, 1], [0, 3, 0], [0, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:15:30,925: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 930, '0': 7262}
+-0.113525390625
+0.77294921875
+1.6015625
+0.004674296297755155
+[(0, 15, 16), 1]
+[[0, 0, 1], [1, 0, 0], [1, 0, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:16:08,040: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1271, '0': 6921}
+-0.1551513671875
+0.689697265625
+2.291259765625
+0.006152231440342147
+[(0, 19, 20), 1]
+[[0, 0, 1], [1, 1, 0], [1, 1, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:16:44,656: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1530, '0': 6662}
+-0.186767578125
+0.62646484375
+2.917724609375
+0.007509371213847456
+[(0, 27, 28), 1]
+[[0, 0, 1], [1, 3, 0], [1, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:17:23,506: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1580, '0': 6612}
+-0.19287109375
+0.6142578125
+3.531982421875
+0.008682946825048984
+[(0, 39, 40), 1]
+[[0, 0, 1], [2, 2, 0], [2, 2, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:18:00,885: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1060, '0': 7132}
+-0.12939453125
+0.7412109375
+4.273193359375
+0.009441661926709864
+[(0, 47, 48), 1]
+[[0, 0, 1], [3, 0, 0], [3, 0, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:21:04,403: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 832, '0': 7360}
+-0.1015625
+0.796875
+5.070068359375
+0.010014169857291404
+[(0, 51, 52), 1]
+[[0, 0, 1], [3, 1, 0], [3, 1, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:21:49,476: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 938, '0': 7254}
+-0.114501953125
+0.77099609375
+5.841064453125
+0.010614163189707395
+[(0, 59, 60), 1]
+[[0, 0, 1], [3, 3, 0], [3, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:24:27,929: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 939, '0': 7253}
+-0.1146240234375
+0.770751953125
+6.61181640625
+0.011182522498205784
+[(2, 3, 6), 1]
+[[0, 0, 3], [0, 1, 0], [0, 1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:25:12,808: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 503, '0': 7689}
+-0.0614013671875
+0.877197265625
+7.489013671875
+0.011492774809130395
+[(2, 11, 14), 1]
+[[0, 0, 3], [0, 3, 0], [0, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:27:48,719: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 419, '0': 7773}
+-0.0511474609375
+0.897705078125
+8.38671875
+0.011747685548861462
+[(2, 15, 18), 1]
+[[0, 0, 3], [1, 0, 0], [1, 0, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:28:33,818: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 365, '0': 7827}
+-0.0445556640625
+0.910888671875
+9.297607421875
+0.011966816816822903
+[(2, 19, 22), 1]
+[[0, 0, 3], [1, 1, 0], [1, 1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:31:54,677: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 492, '0': 7700}
+-0.06005859375
+0.8798828125
+10.177490234375
+0.012251357646554465
+[(2, 27, 30), 1]
+[[0, 0, 3], [1, 3, 0], [1, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:32:30,710: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 558, '0': 7634}
+-0.068115234375
+0.86376953125
+11.041259765625
+0.012563607933762893
+[(2, 39, 42), 1]
+[[0, 0, 3], [2, 2, 0], [2, 2, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:33:07,842: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 519, '0': 7673}
+-0.0633544921875
+0.873291015625
+11.91455078125
+0.012848656823504483
+[(2, 47, 50), 1]
+[[0, 0, 3], [3, 0, 0], [3, 0, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:33:43,769: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 448, '0': 7744}
+-0.0546875
+0.890625
+12.80517578125
+0.013091929725360689
+[(2, 51, 54), 1]
+[[0, 0, 3], [3, 1, 0], [3, 1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:34:28,702: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 789, '0': 7403}
+-0.0963134765625
+0.807373046875
+13.612548828125
+0.01349160038739822
+[(2, 59, 62), 1]
+[[0, 0, 3], [3, 3, 0], [3, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:35:10,294: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 954, '0': 7238}
+-0.116455078125
+0.76708984375
+14.379638671875
+0.013949318887751364
+[(3, 15, 19), 1]
+[[0, 1, 0], [1, 0, 0], [1, 1, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:35:54,359: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 410, '0': 7782}
+-0.050048828125
+0.89990234375
+15.279541015625
+0.014155818641213175
+[(3, 16, 20), 1]
+[[0, 1, 0], [1, 0, 1], [1, 1, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:36:39,804: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 689, '0': 7503}
+-0.0841064453125
+0.831787109375
+16.111328125
+0.01448414957796414
+[(3, 18, 22), 1]
+[[0, 1, 0], [1, 0, 3], [1, 1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:37:24,361: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1305, '0': 6887}
+-0.1593017578125
+0.681396484375
+16.792724609375
+0.015037912751636654
+[(3, 33, 37), 1]
+[[0, 1, 0], [2, 0, 2], [2, 1, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:38:00,468: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 649, '0': 7543}
+-0.0792236328125
+0.841552734375
+17.63427734375
+0.015331128901189256
+[(3, 47, 51), 1]
+[[0, 1, 0], [3, 0, 0], [3, 1, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:38:41,910: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 576, '0': 7616}
+-0.0703125
+0.859375
+18.49365234375
+0.015589197708804193
+[(3, 48, 52), 1]
+[[0, 1, 0], [3, 0, 1], [3, 1, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:39:25,976: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 647, '0': 7545}
+-0.0789794921875
+0.842041015625
+19.335693359375
+0.015871442630125857
+[(3, 50, 54), 1]
+[[0, 1, 0], [3, 0, 3], [3, 1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:40:09,560: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 535, '0': 7657}
+-0.0653076171875
+0.869384765625
+20.205078125
+0.016104476773805942
+[(4, 9, 14), -1]
+[[0, 1, 1], [0, 2, 2], [0, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:40:54,893: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7496, '0': 696}
+-0.9150390625
+-0.830078125
+21.03515625
+0.01639647013164922
+[(4, 15, 20), 1]
+[[0, 1, 1], [1, 0, 0], [1, 1, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:41:41,194: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 2109, '0': 6083}
+-0.2574462890625
+0.485107421875
+21.520263671875
+0.017093277430869032
+[(4, 16, 19), 1]
+[[0, 1, 1], [1, 0, 1], [1, 1, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:42:22,866: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1015, '0': 7177}
+-0.1239013671875
+0.752197265625
+22.2724609375
+0.01747657985940453
+[(4, 25, 30), -1]
+[[0, 1, 1], [1, 2, 2], [1, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:43:07,100: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7236, '0': 956}
+-0.88330078125
+-0.7666015625
+23.0390625
+0.017832944618989408
+[(4, 42, 45), 1]
+[[0, 1, 1], [2, 2, 3], [2, 3, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:43:51,588: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1068, '0': 7124}
+-0.13037109375
+0.7392578125
+23.7783203125
+0.018216848546593962
+[(4, 47, 52), 1]
+[[0, 1, 1], [3, 0, 0], [3, 1, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:44:32,369: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 754, '0': 7438}
+-0.092041015625
+0.81591796875
+24.59423828125
+0.018494726868217258
+[(4, 48, 51), 1]
+[[0, 1, 1], [3, 0, 1], [3, 1, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:45:17,560: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 733, '0': 7459}
+-0.0894775390625
+0.821044921875
+25.415283203125
+0.0187616670391361
+[(4, 57, 62), -1]
+[[0, 1, 1], [3, 2, 2], [3, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:48:19,605: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7392, '0': 800}
+-0.90234375
+-0.8046875
+26.219970703125
+0.01904617877224234
+[(6, 9, 12), 1]
+[[0, 1, 3], [0, 2, 2], [0, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:49:05,204: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 583, '0': 7609}
+-0.0711669921875
+0.857666015625
+27.07763671875
+0.01925684419397026
+[(6, 15, 22), 1]
+[[0, 1, 3], [1, 0, 0], [1, 1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:52:45,684: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 577, '0': 7615}
+-0.0704345703125
+0.859130859375
+27.936767578125
+0.0194632583088383
+[(6, 18, 19), 1]
+[[0, 1, 3], [1, 0, 3], [1, 1, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:53:23,311: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 667, '0': 7525}
+-0.0814208984375
+0.837158203125
+28.77392578125
+0.019696401959142316
+[(6, 25, 28), 1]
+[[0, 1, 3], [1, 2, 2], [1, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:56:18,305: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 841, '0': 7351}
+-0.1026611328125
+0.794677734375
+29.568603515625
+0.019979829580249225
+[(6, 40, 45), -1]
+[[0, 1, 3], [2, 2, 1], [2, 3, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:56:53,897: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7231, '0': 961}
+-0.8826904296875
+-0.765380859375
+30.333984375
+0.020293686975267393
+[(6, 47, 54), 1]
+[[0, 1, 3], [3, 0, 0], [3, 1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:57:29,776: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 666, '0': 7526}
+-0.081298828125
+0.83740234375
+31.17138671875
+0.02051709240466009
+[(6, 50, 51), 1]
+[[0, 1, 3], [3, 0, 3], [3, 1, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:58:09,240: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 801, '0': 7391}
+-0.0977783203125
+0.804443359375
+31.975830078125
+0.020777869126484754
+[(6, 57, 60), 1]
+[[0, 1, 3], [3, 2, 2], [3, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:58:53,966: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1619, '0': 6573}
+-0.1976318359375
+0.604736328125
+32.58056640625
+0.021238572487956436
+[(9, 15, 25), 1]
+[[0, 2, 2], [1, 0, 0], [1, 2, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 08:59:39,231: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 877, '0': 7315}
+-0.1070556640625
+0.785888671875
+33.366455078125
+0.02151153742046869
+[(9, 20, 30), -1]
+[[0, 2, 2], [1, 1, 1], [1, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:00:23,893: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7172, '0': 1020}
+-0.87548828125
+-0.7509765625
+34.117431640625
+0.021818637675952643
+[(9, 22, 28), 1]
+[[0, 2, 2], [1, 1, 3], [1, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:02:03,559: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1243, '0': 6949}
+-0.1517333984375
+0.696533203125
+34.81396484375
+0.022175767532139526
+[(9, 33, 39), 1]
+[[0, 2, 2], [2, 0, 2], [2, 2, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:02:40,571: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1013, '0': 7179}
+-0.1236572265625
+0.752685546875
+35.566650390625
+0.02247204822421877
+[(9, 47, 57), 1]
+[[0, 2, 2], [3, 0, 0], [3, 2, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:03:17,100: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 840, '0': 7352}
+-0.1025390625
+0.794921875
+36.361572265625
+0.02272061724230449
+[(9, 52, 62), -1]
+[[0, 2, 2], [3, 1, 1], [3, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:03:54,759: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7303, '0': 889}
+-0.8914794921875
+-0.782958984375
+37.14453125
+0.02297903380580295
+[(9, 54, 60), 1]
+[[0, 2, 2], [3, 1, 3], [3, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:04:48,045: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1204, '0': 6988}
+-0.14697265625
+0.7060546875
+37.8505859375
+0.023309658010842137
+[(11, 15, 27), 1]
+[[0, 3, 0], [1, 0, 0], [1, 3, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:05:33,135: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 434, '0': 7758}
+-0.052978515625
+0.89404296875
+38.74462890625
+0.023440662170093503
+[(11, 16, 28), 1]
+[[0, 3, 0], [1, 0, 1], [1, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:06:12,054: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 717, '0': 7475}
+-0.0875244140625
+0.824951171875
+39.569580078125
+0.023647698685177843
+[(11, 18, 30), 1]
+[[0, 3, 0], [1, 0, 3], [1, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:07:05,892: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 611, '0': 7581}
+-0.0745849609375
+0.850830078125
+40.42041015625
+0.02382517986608457
+[(11, 33, 45), 1]
+[[0, 3, 0], [2, 0, 2], [2, 3, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:07:50,273: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 754, '0': 7438}
+-0.092041015625
+0.81591796875
+41.236328125
+0.02403831413830214
+[(11, 47, 59), 1]
+[[0, 3, 0], [3, 0, 0], [3, 3, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:08:30,342: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 495, '0': 7697}
+-0.0604248046875
+0.879150390625
+42.115478515625
+0.0241820372078956
+[(11, 48, 60), 1]
+[[0, 3, 0], [3, 0, 1], [3, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:09:14,939: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 599, '0': 7593}
+-0.0731201171875
+0.853759765625
+42.96923828125
+0.024352496049936653
+[(11, 50, 62), 1]
+[[0, 3, 0], [3, 0, 3], [3, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:09:58,911: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 513, '0': 7679}
+-0.0626220703125
+0.874755859375
+43.843994140625
+0.02449917667866172
+[(12, 15, 28), 1]
+[[0, 3, 1], [1, 0, 0], [1, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:10:44,026: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 820, '0': 7372}
+-0.10009765625
+0.7998046875
+44.643798828125
+0.02472257109679924
+[(12, 16, 27), 1]
+[[0, 3, 1], [1, 0, 1], [1, 3, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:11:29,587: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 565, '0': 7627}
+-0.0689697265625
+0.862060546875
+45.505859375
+0.024880595065602234
+[(12, 22, 25), 1]
+[[0, 3, 1], [1, 1, 3], [1, 2, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:12:14,206: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1084, '0': 7108}
+-0.13232421875
+0.7353515625
+46.2412109375
+0.025160672787905097
+[(12, 37, 42), -1]
+[[0, 3, 1], [2, 1, 2], [2, 2, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:12:55,567: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7129, '0': 1063}
+-0.8702392578125
+-0.740478515625
+46.981689453125
+0.025433127763838895
+[(12, 47, 60), 1]
+[[0, 3, 1], [3, 0, 0], [3, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:13:41,376: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 626, '0': 7566}
+-0.076416015625
+0.84716796875
+47.828857421875
+0.025601939310677183
+[(12, 48, 59), 1]
+[[0, 3, 1], [3, 0, 1], [3, 3, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:14:22,064: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 486, '0': 7706}
+-0.059326171875
+0.88134765625
+48.710205078125
+0.025734638578900765
+[(12, 54, 57), 1]
+[[0, 3, 1], [3, 1, 3], [3, 2, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:15:05,868: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 805, '0': 7387}
+-0.0982666015625
+0.803466796875
+49.513671875
+0.02594394547749941
+[(14, 15, 30), 1]
+[[0, 3, 3], [1, 0, 0], [1, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:15:50,878: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 518, '0': 7674}
+-0.063232421875
+0.87353515625
+50.38720703125
+0.026082926023074143
+[(14, 18, 27), 1]
+[[0, 3, 3], [1, 0, 3], [1, 3, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:16:30,726: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 963, '0': 7229}
+-0.1175537109375
+0.764892578125
+51.152099609375
+0.026324550780035292
+[(14, 20, 25), -1]
+[[0, 3, 3], [1, 1, 1], [1, 2, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:17:16,437: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7338, '0': 854}
+-0.895751953125
+-0.79150390625
+51.943603515625
+0.026540176098782127
+[(14, 37, 40), 1]
+[[0, 3, 3], [2, 1, 2], [2, 2, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:18:01,648: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1030, '0': 7162}
+-0.125732421875
+0.74853515625
+52.692138671875
+0.026791778170285885
+[(14, 47, 62), 1]
+[[0, 3, 3], [3, 0, 0], [3, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:18:43,563: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 390, '0': 7802}
+-0.047607421875
+0.90478515625
+53.596923828125
+0.026894872412843468
+[(14, 50, 59), 1]
+[[0, 3, 3], [3, 0, 3], [3, 3, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:19:21,001: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 629, '0': 7563}
+-0.0767822265625
+0.846435546875
+54.443359375
+0.027055264288257296
+[(14, 52, 57), -1]
+[[0, 3, 3], [3, 1, 1], [3, 2, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:19:56,499: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7456, '0': 736}
+-0.91015625
+-0.8203125
+55.263671875
+0.02723911233983551
+[(16, 33, 50), -1]
+[[1, 0, 1], [2, 0, 2], [3, 0, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:20:31,355: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7413, '0': 779}
+-0.9049072265625
+-0.809814453125
+56.073486328125
+0.02743124875545314
+[(16, 37, 54), -1]
+[[1, 0, 1], [2, 1, 2], [3, 1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:21:15,875: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7355, '0': 837}
+-0.8978271484375
+-0.795654296875
+56.869140625
+0.02763460426015446
+[(16, 42, 57), 1]
+[[1, 0, 1], [2, 2, 3], [3, 2, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:21:59,744: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1044, '0': 7148}
+-0.12744140625
+0.7451171875
+57.6142578125
+0.027879124499653515
+[(16, 45, 62), -1]
+[[1, 0, 1], [2, 3, 2], [3, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:22:45,830: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 6101, '0': 2091}
+-0.7447509765625
+-0.489501953125
+58.103759765625
+0.028292238831792573
+[(18, 33, 48), 1]
+[[1, 0, 3], [2, 0, 2], [3, 0, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:23:32,048: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 565, '0': 7627}
+-0.0689697265625
+0.862060546875
+58.9658203125
+0.028430428545791718
+[(18, 37, 52), 1]
+[[1, 0, 3], [2, 1, 2], [3, 1, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:24:12,981: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1593, '0': 6599}
+-0.1944580078125
+0.611083984375
+59.576904296875
+0.028764750310723175
+[(18, 40, 57), -1]
+[[1, 0, 3], [2, 2, 1], [3, 2, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:24:56,911: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7326, '0': 866}
+-0.894287109375
+-0.78857421875
+60.365478515625
+0.028964652665188228
+[(18, 45, 60), 1]
+[[1, 0, 3], [2, 3, 2], [3, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:25:39,514: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 693, '0': 7499}
+-0.0845947265625
+0.830810546875
+61.1962890625
+0.02912737614136001
+[(19, 39, 59), -1]
+[[1, 1, 0], [2, 2, 0], [3, 3, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:26:25,072: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 6757, '0': 1435}
+-0.8248291015625
+-0.649658203125
+61.845947265625
+0.029428583022954456
+[(19, 40, 60), -1]
+[[1, 1, 0], [2, 2, 1], [3, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:27:09,620: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7135, '0': 1057}
+-0.8709716796875
+-0.741943359375
+62.587890625
+0.029660744461808403
+[(19, 42, 62), -1]
+[[1, 1, 0], [2, 2, 3], [3, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:27:54,642: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7346, '0': 846}
+-0.896728515625
+-0.79345703125
+63.38134765625
+0.029850699565985798
+[(19, 45, 57), 1]
+[[1, 1, 0], [2, 3, 2], [3, 2, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:28:35,952: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 931, '0': 7261}
+-0.1136474609375
+0.772705078125
+64.154052734375
+0.030055958087803657
+[(20, 33, 54), -1]
+[[1, 1, 1], [2, 0, 2], [3, 1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:29:19,645: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 5214, '0': 2978}
+-0.636474609375
+-0.27294921875
+64.427001953125
+0.030522198416719142
+[(20, 37, 50), -1]
+[[1, 1, 1], [2, 1, 2], [3, 0, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:29:58,924: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7241, '0': 951}
+-0.8839111328125
+-0.767822265625
+65.19482421875
+0.030726706700350517
+[(20, 39, 60), -1]
+[[1, 1, 1], [2, 2, 0], [3, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:31:35,803: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7199, '0': 993}
+-0.8787841796875
+-0.757568359375
+65.952392578125
+0.03093757820244628
+[(20, 40, 59), -1]
+[[1, 1, 1], [2, 2, 1], [3, 3, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:32:21,505: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7218, '0': 974}
+-0.881103515625
+-0.76220703125
+66.714599609375
+0.031143568267683913
+[(22, 33, 52), 1]
+[[1, 1, 3], [2, 0, 2], [3, 1, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:33:03,671: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 789, '0': 7403}
+-0.0963134765625
+0.807373046875
+67.52197265625
+0.031313679143839826
+[(22, 37, 48), 1]
+[[1, 1, 3], [2, 1, 2], [3, 0, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:34:00,754: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 750, '0': 7442}
+-0.091552734375
+0.81689453125
+68.3388671875
+0.031475374356459064
+[(22, 39, 62), -1]
+[[1, 1, 3], [2, 2, 0], [3, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:34:37,773: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7423, '0': 769}
+-0.9061279296875
+-0.812255859375
+69.151123046875
+0.031639887870291816
+[(22, 42, 59), -1]
+[[1, 1, 3], [2, 2, 3], [3, 3, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:35:12,859: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7336, '0': 856}
+-0.8955078125
+-0.791015625
+69.942138671875
+0.03181988465420603
+[(25, 37, 59), 1]
+[[1, 2, 2], [2, 1, 2], [3, 3, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:35:58,808: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 790, '0': 7402}
+-0.096435546875
+0.80712890625
+70.749267578125
+0.031986586961777634
+[(25, 40, 50), 1]
+[[1, 2, 2], [2, 2, 1], [3, 0, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:36:40,171: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 747, '0': 7445}
+-0.0911865234375
+0.817626953125
+71.56689453125
+0.03214432921087457
+[(25, 42, 48), -1]
+[[1, 2, 2], [2, 2, 3], [3, 0, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:37:18,224: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7348, '0': 844}
+-0.89697265625
+-0.7939453125
+72.36083984375
+0.03231932469636281
+[(25, 45, 51), -1]
+[[1, 2, 2], [2, 3, 2], [3, 1, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:38:05,119: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7282, '0': 910}
+-0.888916015625
+-0.77783203125
+73.138671875
+0.032505268809690714
+[(27, 37, 57), -1]
+[[1, 3, 0], [2, 1, 2], [3, 2, 2]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:38:40,582: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 6611, '0': 1581}
+-0.8070068359375
+-0.614013671875
+73.752685546875
+0.03279641079851892
+[(27, 39, 51), 1]
+[[1, 3, 0], [2, 2, 0], [3, 1, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:39:14,904: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 543, '0': 7649}
+-0.0662841796875
+0.867431640625
+74.6201171875
+0.03291138958760055
+[(27, 40, 52), 1]
+[[1, 3, 0], [2, 2, 1], [3, 1, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:40:00,741: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 779, '0': 7413}
+-0.0950927734375
+0.809814453125
+75.429931640625
+0.033070587110122375
+[(27, 42, 54), 1]
+[[1, 3, 0], [2, 2, 3], [3, 1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:40:40,795: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1537, '0': 6655}
+-0.1876220703125
+0.624755859375
+76.0546875
+0.03335070752450195
+[(28, 33, 62), -1]
+[[1, 3, 1], [2, 0, 2], [3, 3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:41:24,296: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 6542, '0': 1650}
+-0.798583984375
+-0.59716796875
+76.65185546875
+0.033643787089202154
+[(28, 39, 52), 1]
+[[1, 3, 1], [2, 2, 0], [3, 1, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:42:10,270: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 892, '0': 7300}
+-0.10888671875
+0.7822265625
+77.43408203125
+0.033819357490994635
+[(28, 40, 51), 1]
+[[1, 3, 1], [2, 2, 1], [3, 1, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:43:14,866: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 790, '0': 7402}
+-0.096435546875
+0.80712890625
+78.2412109375
+0.03397625092855422
+[(28, 45, 50), -1]
+[[1, 3, 1], [2, 3, 2], [3, 0, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:44:01,158: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7331, '0': 861}
+-0.8948974609375
+-0.789794921875
+79.031005859375
+0.03414479567817559
+[(30, 33, 60), 1]
+[[1, 3, 3], [2, 0, 2], [3, 3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:44:45,290: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 647, '0': 7545}
+-0.0789794921875
+0.842041015625
+79.873046875
+0.03427457771966781
+[(30, 39, 54), 1]
+[[1, 3, 3], [2, 2, 0], [3, 1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:45:30,473: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 1338, '0': 6854}
+-0.163330078125
+0.67333984375
+80.54638671875
+0.034517068193477204
+[(30, 42, 51), 1]
+[[1, 3, 3], [2, 2, 3], [3, 1, 0]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:46:14,679: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 813, '0': 7379}
+-0.0992431640625
+0.801513671875
+81.347900390625
+0.03467477966933145
+[(30, 45, 48), 1]
+[[1, 3, 3], [2, 3, 2], [3, 0, 1]]
+ibmqfactory.load_account:WARNING:2021-01-05 09:46:54,891: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 706, '0': 7486}
+-0.086181640625
+0.82763671875
+82.175537109375
+0.034813128487930986
+
+Process finished with exit code 0
+
