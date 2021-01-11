@@ -14,7 +14,7 @@ Codes to test the inequalities on hyperbolic quadrics (subgeometries correspondi
  
 
 The codes are written using python and 
-the python library [Qiskit](https://www.qiskit.org/) and are available, as well as examples of results, in the following folder [Sources and Results](https://github.com/quantcert/quantcert.github.io/tree/master/Testing_Contextuality/Src).
+the python library [Qiskit](https://www.qiskit.org/) and are available, as well as examples of results, in the following folder [Sources and Results](https://github.com/quantcert/quantcert.github.io/tree/master/Testing_contextuality/Src).
 
 More details  can be found in the article 
 [[H21]](#H21).
