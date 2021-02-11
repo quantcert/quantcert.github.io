@@ -46,7 +46,7 @@ Installation with Docker
 `Successfully tested in October 2018 under Linux Ubuntu 16.04, with Docker
 18.03.1-ce.`
 
-`Direct Installation`
+Direct Installation
 -------------------
 
 To install Sagemath without going through docker, please follow the instructions
