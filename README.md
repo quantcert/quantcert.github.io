@@ -46,3 +46,22 @@ inequalities on the IBM Quantum Experience.
 More information related to this paper can be found in the
 [Mermin-hypergraph-states](Mermin-hypergraph-states) part of this GitHub
 repository.
+
+## Automated detection of contextuality proofs with intermediate numbers of observables
+
+_Paper abstract:_<br/> 
+Quantum contextuality takes an important place amongst the concepts of quantum
+computing that bring an advantage over its classical counterpart. For a large
+class of contextuality proofs, aka. observable-based proofs of the
+Kochen-Specker Theorem, we first formulate the contextuality property as the
+absence of solutions to a linear system. Then we explain why subgeometries of
+binary symplectic polar spaces are candidates for contextuality proofs. We
+report first results of a software that generates these subgeometries and
+decides their contextuality. The proofs we consider involve more contexts and
+observables than the smallest known proofs. This intermediate size property of
+those proofs is interesting for experimental tests, but could also be
+interesting in quantum game theory and also to characterize peculiar sets of
+observables.
+
+More information related to this paper can be found in the
+[Magma-contextuality](Magma-contextuality) part of this GitHub repository.
