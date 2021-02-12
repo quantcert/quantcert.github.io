@@ -60,8 +60,7 @@ report first results of a software that generates these subgeometries and
 decides their contextuality. The proofs we consider involve more contexts and
 observables than the smallest known proofs. This intermediate size property of
 those proofs is interesting for experimental tests, but could also be
-interesting in quantum game theory and also to characterize peculiar sets of
-observables.
+interesting in quantum game theory.
 
 More information related to this paper can be found in the
 [Magma-contextuality](Magma-contextuality) part of this GitHub repository.
