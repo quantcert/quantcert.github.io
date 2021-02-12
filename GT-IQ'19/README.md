@@ -31,8 +31,8 @@ L'inscription se fait sur le formulaire suivant : [https://forms.gle/DDh37Wy97u7
 <br/>
 *Afternoon session: Programs, entanglement and contextuality*
 
-14.00 **Mladen Pavičić** (CEMS, Croatia). Hypergraph-Based Contextuality ([abstract](abstractss/Pavicic.pdf),[slides](slides/Pavicic.pdf)), *invited talk*<br/>
-15.00 **Jessy Colonval** (FEMTO-ST, UFC). Methods and programs for the generation of contextual finite geometries ([abstract](abstractss/Colonval.pdf),[slides](slides/Colonval.pdf))<br/>
+14.00 **Mladen Pavičić** (CEMS, Croatia). Hypergraph-Based Contextuality ([abstract](abstracts/Pavicic.pdf),[slides](slides/Pavicic.pdf)), *invited talk*<br/>
+15.00 **Jessy Colonval** (FEMTO-ST, UFC). Methods and programs for the generation of contextual finite geometries ([abstract](abstracts/Colonval.pdf),[slides](slides/Colonval.pdf))<br/>
 15.30 **Henri de Boutray** (FEMTO-ST, UFC). Quantitative estimation of the evolution of entanglement in the Grover algorithm ([abstract](abstracts/deBoutray.pdf),[slides](slides/deBoutray.pdf))<br/>
 16.00 Coffee break<br/>
 16.30 **Hamza Jaffali** (FEMTO-ST, UTBM). Learning Algebraic Models of Quantum Entanglement ([abstract](abstracts/Jaffali.pdf),[slides](slides/Jaffali.pdf))<br/>
