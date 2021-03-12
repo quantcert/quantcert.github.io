@@ -71,22 +71,34 @@ end intrinsic;
 intrinsic SetSign(s::SetEnum[ModTupFldElt],f::Intrinsic) -> RngIntElt
 { Computes the sign of a set of elements of a quantum symplectic space given the
   interpretation intrinsic f. }
-  require &+s eq Parent(Random(s))!0: "The set must be linearly dependent.";
-  matProd := &*{f(elt) : elt in s};
-  require #Eigenvalues(matProd) eq 1: 
-    "Error in computation, there must be only one eigenvalue in set product, " 
-      cat Sprint(#Eigenvalues(matProd)) cat " found";
-  return Random(Eigenvalues(matProd))[1];
+  function fRelaxed(p)
+    return f(p);
+  end function;
+  return SetSign(s,fRelaxed);
 end intrinsic;
 
+// the usage of the blocks is meant to avoid commutativity checks between every
+// pairs of points, but for low dimensions, it is less efficient because of
+// the big number of blocks and the low number of points in each subspace, this
+// needs to be further investigated.
 intrinsic IsotropicSubspaces(SympSp::ModTupFld,k::RngIntElt) -> SetEnum[SetEnum[ModTupFldElt]]
 { Computes the set of all isotropic subspaces of dimension k for the 
   symplectic space SympSp. }
   SympInc := QuantumInc(SympSp);
   points := {@ elt : elt in SympSp @};
+  posPoints := { elt : elt in SympSp | not IsZero(elt) };
   B := Blocks(SympInc);
+  n := Degree(SympSp)/2;
+  // recursion initialization and special cases optimizations   
   if k eq 0 then 
     return { {point} : point in points | not IsZero(point) };
+  elif k eq 1 then
+    return { pair join {&+pair} : pair in Subsets(posPoints,2) |
+      InnerProduct(Setseq(pair)[1],Setseq(pair)[2]) eq 0 };
+      // there may be a problem here, the result of Setseq is not guarantied to
+      // be the same at each call ?
+  elif k eq n-1 then
+    return { { points[i] : i in Support(block) } : block in B };
   end if;
   subspaces := {};
   previousSubspace := IsotropicSubspaces(SympSp,k-1);

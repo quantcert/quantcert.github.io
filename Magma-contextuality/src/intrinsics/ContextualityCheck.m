@@ -1,16 +1,35 @@
 freeze;
 
-intrinsic IsContextual(geometry::SetEnum[SetEnum[ModTupFldElt]]) -> BoolElt
+intrinsic IsContextual(geometry::SetEnum[SetEnum[ModTupFldElt]],interpretation::UserProgram) 
+  -> BoolElt
 { Checks contextuality using the reformulation of the problem in terms of linear
-  algebra}
+  algebra, given the interpretation function (the interpretation function must 
+  transform point of the quantum symplectic space into a element of the Pauli 
+  group. }
   Z2 := GF(2);
   points := SetToIndexedSet(&join geometry);
   inc := IncidenceStructure<points|geometry>;
   mat := Matrix(Z2, IncidenceMatrix(inc));
-  vect := Vector(Z2, [ (SetSign(subspace,PauliOperatorCanonical) eq -1) 
+  vect := Vector(Z2, [ (SetSign(subspace,interpretation) eq -1) 
     select 1 else 0 : subspace in geometry ]);
-  // Note : we are shifting from ({-1,1},x,1) to ({Z/2Z},+,0) for the "sign" of
-  // the lines, hence the fact that -1 maps to 0 
   isConsistent, solution, kernel := IsConsistent(mat,vect);
   return not isConsistent;
+end intrinsic;
+
+intrinsic IsContextual(geometry::SetEnum[SetEnum[ModTupFldElt]],interpretation::Intrinsic) 
+  -> BoolElt
+{ Checks contextuality using the reformulation of the problem in terms of linear
+  algebra, given the interpretation function (the interpretation function must 
+  transform point of the quantum symplectic space into a element of the Pauli 
+  group. }
+  function interpretationRelaxed(p)
+    return interpretation(p);
+  end function;
+  return IsContextual(geometry,interpretationRelaxed);
+end intrinsic;
+
+intrinsic IsContextual(geometry::SetEnum[SetEnum[ModTupFldElt]]) -> BoolElt
+{ Checks contextuality using the reformulation of the problem in terms of linear
+  algebra. }
+  return IsContextual(geometry,PauliOperatorCanonical);
 end intrinsic;
