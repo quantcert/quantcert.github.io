@@ -1,3 +1,5 @@
+freeze;
+
 intrinsic Quadric(SympSp::ModTupFld, QuadForm::UserProgram, lines::SetEnum[SetEnum[ModTupFldElt]]) 
   -> SetEnum[ModTupFldElt], SetEnum[SetEnum[ModTupFldElt]]
 { Computes the plane defined by the quadratic form *QuadForm*. This plane is 
@@ -53,31 +55,31 @@ intrinsic Hyperbolics(SympSp::ModTupFld) -> SeqEnum[Tup]
   tuples is a point generating the hyperbolic, the points of this hyperbolic
   and the lines of this hyperbolic. }
   BaseQuadricPoints, BaseQuadric := Quadric(SympSp!0);
-  GQ := [<SympSp!0, BaseQuadricPoints, BaseQuadric>];
+  GQ := {<SympSp!0, BaseQuadricPoints, BaseQuadric>};
   lines := IsotropicSubspaces(SympSp,1);
   for point in BaseQuadricPoints do
     qPoints, qLines := Quadric(point,lines);
-    Append(~GQ,<point, qPoints, qLines>);
+    GQ join:= {<point, qPoints, qLines>};
   end for;
   return GQ;
 end intrinsic;
 
-intrinsic Elliptics(SympSp::ModTupFld) -> SeqEnum[Tup]
+intrinsic Elliptics(SympSp::ModTupFld) -> SetEnum[Tup]
 { Computes the elliptics in SympSp. Returns a list of tuples, where each 
   tuples is a point generating the elliptic, the points of this elliptic
   and the lines of this elliptic. 
   Caution ! On two qubits, there is no line in an elliptic. }
-  GQ := [];
+  GQ := {};
   BaseQuadricPoints, BaseQuadric := Quadric(SympSp!0);
   lines := IsotropicSubspaces(SympSp,1);
   for point in { point : point in SympSp } diff (BaseQuadricPoints join {SympSp!0}) do
     qPoints, qLines := Quadric(point,lines);
-    Append(~GQ,<point, qPoints, qLines>);
+    GQ join:= {<point, qPoints, qLines>};
   end for;
   return GQ;
 end intrinsic;
 
-intrinsic Quadrics(SympSp::ModTupFld) -> SeqEnum[Tup], SeqEnum[Tup]
+intrinsic Quadrics(SympSp::ModTupFld) -> SetEnum[Tup], SetEnum[Tup]
 { Computes all the quadrics in SympSp. Returns two list of tuples, where each 
   tuples is a point generating the quadric, the points of this quadric and the 
   lines of this quadric. The first list contains all the hyperbolics and the 
@@ -85,14 +87,14 @@ intrinsic Quadrics(SympSp::ModTupFld) -> SeqEnum[Tup], SeqEnum[Tup]
   Q0 := BaseQuadraticForm(SympSp);  
   BaseQuadricPoints := {a : a in SympSp | IsZero(Q0(a))};
   lines := IsotropicSubspaces(SympSp,1);
-  hyperbolics := [];
-  elliptics := [];
+  hyperbolics := {};
+  elliptics := {};
   for point in SympSp do
     qPoints, qLines := Quadric(point,lines);
     if point in BaseQuadricPoints then
-      Append(~hyperbolics,<point, qPoints, qLines>);
+      hyperbolics join:= {<point, qPoints, qLines>};
     else
-      Append(~elliptics,<point, qPoints, qLines>);
+      elliptics join:= {<point, qPoints, qLines>};
     end if;
   end for;
   return hyperbolics, elliptics;
@@ -120,12 +122,12 @@ intrinsic PerpSets(SympSp::ModTupFld) -> SeqEnum[Tup]
 { Computes the PerpSets in SympSp. Returns a list of tuples, where each 
   tuples is a point generating the PerpSet, the points of this PerpSet
   and the lines of this PerpSet. }
-  P := [];
+  P := {};
   lines := IsotropicSubspaces(SympSp,1);
   for point in { elt : elt in SympSp | not IsZero(elt) } do
     ps := PerpSet(point, lines);
     psPoints := &join ps;
-    Append(~P,<point, psPoints, ps>);
+    P join:= {<point, psPoints, ps>};
   end for;
   return P;
 end intrinsic;
@@ -149,4 +151,25 @@ intrinsic WBlocks(SympSp::ModTupFld) -> SeqEnum[Tup]
   n := Integers()!(Degree(SympSp)/2);
   blocks := IsotropicSubspaces(SympSp, n-1);
   return [<SympSp!0,points,blocks>];
+end intrinsic;
+
+intrinsic IsDoily1(geometry::SetEnum[SetEnum[ModTupFldElt]]) -> BoolElt
+{ Checks if the geometry correspond to the first definition of a doily :
+  a doily has 15 points, 15 lines, each line has 3 points, each point is in 3 
+  lines and all lines must have the product of their points equal to (0..0). }
+  return
+    #geometry eq 15
+      and
+    # &join geometry eq 15
+      and
+    &and{ #line eq 3 : line in geometry }
+      and
+    &and
+    { 
+      #{ line : line in geometry | point in line } eq 3 
+        : point in &join geometry 
+    } 
+      and
+    &and{ IsZero(&+ line) : line in geometry }
+  ;
 end intrinsic;

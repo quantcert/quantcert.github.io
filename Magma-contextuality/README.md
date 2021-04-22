@@ -1,4 +1,4 @@
-# Automated detection of contextuality proofs with intermediate numbers of observables
+# Automated detection of contextuality proofs with intermediate numbers of observables _and_ Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank
 
 Copyright (C) 2021 Henri de Boutray
 
@@ -6,15 +6,15 @@ Contact: henri.de_boutray[at]univ-fcomte.fr
 
 ## About
 
-The code has been developed to study contextuality in quantum geometries
-generated with symplectic polar spaces in correspondence with the Pauli group.
-The language chosen was [Magma](http://magma.maths.usyd.edu.au) since it is a
-well-established language for theoretical mathematics. See file
-[INSTALL.md](INSTALL.md) for its installation and execution.
+The code has been developed to study quantum geometries generated with
+symplectic polar spaces in correspondence with the Pauli group. In particular,
+contextuality for the article [[dJG+21]](#dJG21) and subspaces structures for
+the article  [[SdHG21]](#SdHG21). The language chosen was
+[Magma](http://magma.maths.usyd.edu.au) since it is a well-established language
+for theoretical mathematics. See file [INSTALL.md](INSTALL.md) for its
+installation and execution.
 
-This code was used to obtain the results presented in the article 
-[[dJG+21]](#dJG21), this article will also help the user to understand the
-various mathematical notions used in the code.
+Both articles are closely related to the content of the program files.
 
 ## Installation
 
@@ -53,3 +53,6 @@ This program is distributed under the GNU GPL 3. See the enclosed file
 
 <a id="dJG21"/>[dJG+21] Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and
   Pierre-Alain Masson. [TODO]
+
+<a id="SdHG21"/>[SdHG21] Metod Saniga, Henri de Boutray, Frédéric Holweck and
+  Alain Giorgetti [TODO]

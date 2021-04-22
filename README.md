@@ -64,3 +64,32 @@ interesting in quantum game theory.
 
 More information related to this paper can be found in the
 [Magma-contextuality](Magma-contextuality) part of this GitHub repository.
+
+## Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank
+
+_Paper abstract:_<br/> 
+We study certain physically-relevant subgeometries of binary symplectic polar
+spaces of small rank N , W(2N-1,2), when the points of these spaces are
+parametrized by canonical N -fold products of Pauli matrices and the associated
+identity matrix (i.e., N-qubit observables). Key characteristics of a subspace
+of such W(2N-1,2) are: the number of its negative lines, distribution of types
+of observables, character of the geometric hyperplane the subspace shares with
+the distinguished (non-singular) quadric of W(2N-1,2) and the structure of its
+Veldkamp space. W(3,2) features three negative lines of the same type and its
+W(1,2)’s are of five different types. W(5,2) is endowed with 90 negative lines
+of two types and its W(3,2)’s split into 13 types. 279 out of 480 W(3,2)’s with
+three negative lines are composite, i.e. they all originate from the two-qubit
+W(3,2) by selecting in the latter a geometric hyperplane and formally adding to
+each two-qubit observable, at the same position, the identity matrix if an
+observable lies on the hyperplane and the same Pauli matrix for any other
+observable. Further, given a W(3,2) and any of its geometric hyperplanes, there
+are other three W(3,2)’s possessing the same hyperplane. There is also a
+particular type of W(3,2)’s, a representative of which features a point each
+line through which is negative. Finally, W(7,2) is found to possess 1908
+negative lines of five types and its W(5,2)’s fall into as many as 29 types.
+1524 out of 1560 W(5,2)’s with 90 negative lines originate from the three-qubit
+W(5,2). Remarkably, the difference in the number of negative lines for any two
+distinct types of four-qubit W(5,2)’s is a multiple of four.
+
+More information related to this paper can be found in the
+[Magma-contextuality](Magma-contextuality) part of this GitHub repository.

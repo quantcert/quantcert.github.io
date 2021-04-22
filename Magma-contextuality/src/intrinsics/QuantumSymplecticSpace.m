@@ -13,6 +13,11 @@ intrinsic QuantumSymplecticSpace(n::RngIntElt) -> ModTupRng
   return SymplecticSpace(Jn);
 end intrinsic;
 
+intrinsic QSS(n::RngIntElt) -> ModTupRng
+{ Short for QuantumSymplecticSpace. }
+  return QuantumSymplecticSpace(n);
+end intrinsic;
+
 intrinsic QuantumInc(SympSp::ModTupFld) -> Inc
 { Computes incidence structures from a symplectic space, where the points are 
   the index of the elements for SympSp. }
@@ -31,6 +36,49 @@ intrinsic QuantumInc(n::RngIntElt) -> Inc
   the index of the elements for SympSp. The symplectic space itself is fixed
   by the number of qubits n. }
   return QuantumInc(QuantumSymplecticSpace(n));
+end intrinsic;
+
+intrinsic PauliOperatorInterpretation(vect::ModTupFldElt,interpretation::SeqEnum[FldCycElt]) 
+  -> AlgMat
+{ Returns the Pauli operator corresponding to the given vector form a 
+  symplectic space for the interpretation given. The phases correspond to the 
+  base matrices in the corresponding order: I,Z,X,Y. The canonical 
+  interpretation is [1,1,1,-i]. }
+  require #interpretation eq 4: "The interpretation must be the phase \
+associated to each combination of 0s and 1s, with the resulting operator being \
+on each qubit interpretation_j*Z^{a_i}*X^{b_i} and j corresponding to 1 for \
+(0,0), 2 for (0,1), 3 for (1,0) and 4 for (1,1)";
+  n := Ncols(vect) div 2;
+  Int := IntegerRing();
+  K<i> := Parent(interpretation[1]); 
+  require &and{ element^4 eq 1 : element in interpretation}: "The elements of \
+the interpretation must be in {1,-1,i,-i}";
+  result := ScalarMatrix(K, 1, 1);
+  X := Matrix(K, 2, 2, [0,1,1,0]);
+  Z := DiagonalMatrix(K, 2, [1,-1]);
+  for i := 1 to n do
+    a := Int!vect[2*i-1];
+    b := Int!vect[2*i];
+    j := a*1+b*2+1;
+    result := TensorProduct(result,interpretation[j]*Z^a*X^b);
+  end for;
+  return result;
+end intrinsic;
+
+intrinsic PauliOperatorPower(vect::ModTupFldElt) -> AlgMat
+{ Returns the Pauli operator corresponding to the given vector from a 
+  symplectic space.
+  PauliOperatorPower(a)=PauliOperatorInterpresation(a,[1,1,1,1]) }
+  n := Ncols(vect) div 2;
+  Int := IntegerRing();
+  K<i> := CyclotomicField(4);
+  result := ScalarMatrix(K, 1, 1);
+  X := Matrix(K, 2, 2, [0,1,1,0]);
+  Z := DiagonalMatrix(K, 2, [1,-1]);
+  for i := 1 to n do
+    result := TensorProduct(result,Z^Int!vect[2*i-1]*X^Int!vect[2*i]);
+  end for;
+  return result;
 end intrinsic;
 
 intrinsic PauliOperatorCanonical(vect::ModTupFldElt) -> AlgMat
@@ -75,6 +123,18 @@ intrinsic SetSign(s::SetEnum[ModTupFldElt],f::Intrinsic) -> RngIntElt
     return f(p);
   end function;
   return SetSign(s,fRelaxed);
+end intrinsic;
+
+intrinsic SetSign(s::SetEnum[ModTupFldElt]) -> RngIntElt
+{ Computes the sign of a set of elements of a quantum symplectic space for the
+  canonical interpretation. }
+  return SetSign(s,PauliOperatorCanonical);
+end intrinsic;
+
+intrinsic SetSign(s::SetIndx[ModTupFldElt]) -> RngIntElt
+{ Computes the sign of a set of elements of a quantum symplectic space for the
+  canonical interpretation. }
+  return SetSign(IndexedSetToSet(s),PauliOperatorCanonical);
 end intrinsic;
 
 // the usage of the blocks is meant to avoid commutativity checks between every
@@ -124,6 +184,12 @@ intrinsic Closure(s::SetEnum,f::Intrinsic) -> SetEnum
     end for;
   end while;
   return result;
+end intrinsic;
+
+intrinsic Lines(SympSp::ModTupFld) -> SetEnum[SetEnum[ModTupFldElt]]
+{ Computes the set of all isotropic subspaces of dimension 1 for the 
+  symplectic space SympSp. }
+  return IsotropicSubspaces(SympSp,1);
 end intrinsic;
 
 intrinsic IsotropicSubspaces(n::RngIntElt,k::RngIntElt) -> SetEnum[SetEnum[ModTupFldElt]]
