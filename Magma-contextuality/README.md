@@ -9,8 +9,7 @@ Contact: henri.de_boutray[at]univ-fcomte.fr
 The code has been developed to study contextuality in quantum geometries
 generated with symplectic polar spaces in correspondence with the Pauli group.
 The language chosen was [Magma](http://magma.maths.usyd.edu.au) since it is a
-well-established language for theoretical mathematics. See file
-[INSTALL.md](INSTALL.md) for its installation and execution.
+well-established language for theoretical mathematics.
 
 This code was used to obtain the results in the poster presented in QPL'21
 [[dHG+21]](#dHG21) and in the article [[dHG+21']](#dHG21b), this article will also 
