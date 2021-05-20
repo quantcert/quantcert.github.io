@@ -53,6 +53,6 @@ This program is distributed under the GNU GPL 3. See the enclosed file
 
 <a id="dHG21"/>[dHG+21] Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and
   Pierre-Alain Masson. *Automated detection of contextuality proofs with intermediate 
-  numbers of observables*. QPL'21
+  numbers of observables*. QPL'21 <br\>
 <a id="dHG21b"/>[dHG+21'] Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and
   Pierre-Alain Masson. *TBA*
