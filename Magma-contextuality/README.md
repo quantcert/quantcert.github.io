@@ -12,9 +12,9 @@ The language chosen was [Magma](http://magma.maths.usyd.edu.au) since it is a
 well-established language for theoretical mathematics. See file
 [INSTALL.md](INSTALL.md) for its installation and execution.
 
-This code was used to obtain the results presented in the article 
-[[dJG+21]](#dJG21), this article will also help the user to understand the
-various mathematical notions used in the code.
+This code was used to obtain the results in the poster presented in QPL'21
+[[dHG+21]](#dHG21) and in the article [[dHG+21']](#dHG21b), this article will also 
+help the user to understand the various mathematical notions used in the code.
 
 ## Installation
 
@@ -51,5 +51,8 @@ This program is distributed under the GNU GPL 3. See the enclosed file
 
 ## References
 
-<a id="dJG21"/>[dJG+21] Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and
-  Pierre-Alain Masson. [TODO]
+<a id="dHG21"/>[dHG+21] Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and
+  Pierre-Alain Masson. *Automated detection of contextuality proofs with intermediate 
+  numbers of observables*. QPL'21
+<a id="dHG21b"/>[dHG+21'] Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and
+  Pierre-Alain Masson. *TBA*
