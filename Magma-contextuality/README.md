@@ -22,8 +22,8 @@ we are not able to release a docker image containing all the elements necessary
 to run the code out of the box. Some manual work will be necessary.
 
 Two types of files are used in this project: 
-- files containing *intrinsics*, called *packages* in the folder `src/intrinsics`
-- and files containing "normal" function, called *scripts* in the folder `src/mains`
+- files containing *intrinsics*, called *packages*
+- and files containing "normal" function, called *scripts*
 
 The *intrinsics* are typed and compiled function, their use allow us a greater
 flexibility (as overloading), as well as the usual benefits of typing (earlier
