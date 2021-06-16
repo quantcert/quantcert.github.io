@@ -18,20 +18,21 @@ help the user to understand the various mathematical notions used in the code.
 ## Installation
 
 Unfortunately, Magma is a proprietary software, so unlike our previous projects,
-we are not able to release an docker image containing all the elements necessary
+we are not able to release a docker image containing all the elements necessary
 to run the code out of the box. Some manual work will be necessary.
 
-Two types of files are used in this project : 
-- files containing *intrinsics*, called *packages*
-- and files containing "normal" function, called *scripts*
+Two types of files are used in this project: 
+- files containing *intrinsics*, called *packages* in the folder `src/intrinsics`
+- and files containing "normal" function, called *scripts* in the folder `src/mains`
 
 The *intrinsics* are typed and compiled function, their use allow us a greater
 flexibility (as overloading), as well as the usual benefits of typing (earlier
 error detection, safer usage, ...). But since packages are compiled, they must
 be treaded differently to scripts. In order to deal with this, the simplest
-solution is to put these files in a Magma folder, which are listed in the system
-environment variable `MAGMA_SYSTEM_SPEC`. But this may be impossible for many
-reasons, in this case please refer to
+solution is to put these files in a Magma source code folder. These folders are 
+listed in the system environment variable `MAGMA_SYSTEM_SPEC` accessible through 
+the Magma prompt with the command `GetEnv("MAGMA_SYSTEM_SPEC");`. But this may 
+be impossible for many reasons, in this case please refer to
 [this](https://magma.maths.usyd.edu.au/magma/handbook/text/24) documentation
 page to understand how to attach a package in Magma. Since this project was my
 first use of Magma, I had the occasion of tinkering quite a bit with its various
