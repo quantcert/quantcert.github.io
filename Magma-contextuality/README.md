@@ -39,11 +39,13 @@ page to understand how to attach a package in Magma. Since this project was my
 first use of Magma, I had the occasion of tinkering quite a bit with its various
 components, so you can obviously contact me directly in case you cannot find out
 how to attach the packages on your system. All packages are in the 
-[src/intrinsics](src/intrinsics) folder.
+[src/intrinsics](https://github.com/quantcert/quantcert.github.io/tree/master/Magma-contextuality/src/intrinsics) 
+folder.
 
 Once the intrinsics attached, you can call them in scripts or in the Magma
 shell. The `Main_***.m` are such examples of scripts. All scripts are in the 
-[src/mains](src/mains) folder.
+[src/mains](https://github.com/quantcert/quantcert.github.io/tree/master/Magma-contextuality/src/mains) 
+folder.
 
 ## Copyright
 
