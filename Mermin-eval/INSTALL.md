@@ -17,7 +17,9 @@ Installation with Docker
 2. Build the Docker image (all Docker commands are encapsulated in Makefile 
    entries):
 
-    `make docker-build`
+    ```
+    make docker-build
+    ```
 
     Warnings: The Docker image is a large file, its construction can be very long.
     A network connection is required. If you already have a Docker image with this
@@ -33,7 +35,9 @@ Installation with Docker
 
     * If you want to open an interactive session, use:
 
-      `make interactive`
+      ```
+      make interactive
+      ```
 
       This will start a container and a SageMath interactive session.
       See in the `Execution` section how to run the tools.
@@ -43,8 +47,10 @@ Installation with Docker
     `exit` a first time will close the SageMath interactive session and `exit`
     a second time will quit the container.
 
-`Successfully tested in October 2018 under Linux Ubuntu 16.04, with Docker
-18.03.1-ce.`
+```
+Successfully tested in October 2018 under Linux Ubuntu 16.04, with Docker
+18.03.1-ce.
+```
 
 Direct Installation
 -------------------
