@@ -20,19 +20,23 @@ pre .btnIcon {
   cursor: pointer;
   border: 1px solid transparent;
   padding: 0;
-  color: #fff;
+  color: transparent;
   background-color: transparent;
   height: 30px;
   transition: all .25s ease-out;
+  width: 90%;
+  height: 90%;
 }
 
 pre .btnIcon:hover {
   text-decoration: none;
+  color: black;
 }
 
 .btnIcon__body {
-  align-items: center;
-  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .btnIcon svg {
@@ -58,11 +62,13 @@ window.addEventListener('load', function() {
     btn.setAttribute('type', 'button');
     btn.setAttribute('aria-label', ariaLabel);
     btn.innerHTML =
+      '<div class="btnMask">' +
       '<div class="btnIcon__body">' +
       icon +
       '<strong class="btnIcon__label">' +
       label +
       '</strong>' +
+      '</div>' +
       '</div>';
     return btn;
   }
