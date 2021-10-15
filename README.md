@@ -65,7 +65,22 @@ interesting in quantum game theory.
 More information related to this paper can be found in the
 [Magma-contextuality](Magma-contextuality) part of this GitHub repository.
 
-## Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank
+## Automated detection of contextuality proofs with intermediate numbers of observables _and_ Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank
+
+This projects resulted in two papers, described by the two following abstracts.
+
+_Paper abstract:_<br/> 
+Quantum contextuality takes an important place amongst the
+concepts of quantum computing that bring an advantage over its classical
+counterpart. For a large class of contextuality proofs, aka. observable-based
+proofs of the Kochen-Specker Theorem, we first formulate the contextuality
+property as the absence of solutions to a linear system. Then we explain why
+subgeometries of binary symplectic polar spaces are candidates for contextuality
+proofs. We report first results of a software that generates these subgeometries
+and decides their contextuality. The proofs we consider involve more contexts
+and observables than the smallest known proofs. This intermediate size property
+of those proofs is interesting for experimental tests, but could also be
+interesting in quantum game theory.
 
 _Paper abstract:_<br/> 
 We study certain physically-relevant subgeometries of binary symplectic polar
@@ -91,5 +106,5 @@ negative lines of five types and its W(5,2)’s fall into as many as 29 types.
 W(5,2). Remarkably, the difference in the number of negative lines for any two
 distinct types of four-qubit W(5,2)’s is a multiple of four.
 
-More information related to this paper can be found in the
+More information related to these papers can be found in the
 [Magma-contextuality](Magma-contextuality) part of this GitHub repository.

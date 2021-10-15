@@ -8,7 +8,7 @@ Contact: henri.de_boutray[at]univ-fcomte.fr
 
 The code has been developed to study quantum geometries generated with
 symplectic polar spaces in correspondence with the Pauli group. In particular,
-contextuality for the article [[dJG+21]](#dJG21) presented as
+contextuality for the article [[dJG+21]](#dJG21) presented as a poster
 [[dHG+21']](#dHG21b) for QPL'21 and subspaces structures for the article
 [[SdHG21]](#SdHG21). The language chosen was
 [Magma](http://magma.maths.usyd.edu.au) since it is a well-established language 
@@ -47,6 +47,20 @@ shell. The `Main_***.m` are such examples of scripts. All scripts are in the
 [src/mains](https://github.com/quantcert/quantcert.github.io/tree/master/Magma-contextuality/src/mains) 
 folder.
 
+## Scripts to articles matching
+
+As stated previously, the code follows closely the content of the corresponding 
+papers. 
+
+The main results of [[dJG+21]](#dJG21), descibed in Table 2 are given by the 
+script [Main_AllContextualityChecks-V2.m](src/mains/Main_AllContextualityChecks-V2.m).
+
+[[SdHG21]](#SdHG21) presenting a variety of results, several scripts were 
+written to generate them. In particular:
+- Sec. 4 is covered by the script [Main_GeometryIntersections_3qubits.m](src/mains/Main_GeometryIntersections_3qubits.m);
+- Sec. 5 is covered by the script [Main_Heptads.m](src/mains/Main_Heptads.m);
+- Sec. 6 is covered by the script [Main_GeometryIntersections_4qubits.m](src/mains/Main_GeometryIntersections_4qubits.m).
+
 ## Copyright
 
 This program is distributed under the GNU GPL 3. See the enclosed file 
@@ -54,8 +68,8 @@ This program is distributed under the GNU GPL 3. See the enclosed file
 
 ## References
 
-|                         |                                                     |
-|-------------------------|-----------------------------------------------------|
+|                         |                                                    |
+|-------------------------|----------------------------------------------------|
 |<a id="dHG21"/>[dHG+21]  |Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and Pierre-Alain Masson. *Automated synthesis of contextuality proofs from subspaces of symplectic polar spaces*. [arXiv:2105.13798](https://arxiv.org/abs/2105.13798)|
-|<a id="dHG21b"/>[dHG+21']|Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and Pierre-Alain Masson. *Automated detection of contextuality proofs with intermediate numbers of observables*. QPL'21, Poster|
-|<a id="SdHG21"/>[SdHG21] |Metod Saniga, Henri de Boutray, Frédéric Holweck and Alain Giorgetti. *Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank*. [arXiv:2105.03635](https://arxiv.org/abs/2105.03635)|
+|<a id="dHG21b"/>[dHG+21']|Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and Pierre-Alain Masson. *Automated detection of contextuality proofs with intermediate numbers of observables*. QPL'21, [Poster](poster-landscape.pdf)|
+|<a id="SdHG21"/>[SdHG21] |Metod Saniga, Henri de Boutray, Frédéric Holweck and Alain Giorgetti. *Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank*. [doi:10.3390/math9182272](https://doi.org/10.3390/math9182272)|
