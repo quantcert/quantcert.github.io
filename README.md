@@ -108,3 +108,19 @@ distinct types of four-qubit W(5,2)’s is a multiple of four.
 
 More information related to these papers can be found in the
 [Magma-contextuality](Magma-contextuality) part of this GitHub repository.
+
+## Testing quantum contextuality of binary symplectic polar spaces on a Noisy Intermediate Scale Quantum Computer
+
+_Paper abstract:_<br/> 
+The development of Noisy Intermediate Scale Quantum Computers (NISQC) provides 
+for the Quantum Information community new tools to perform quantum experiences 
+from an individual laptop. It facilitates interdisciplinary research in the sense 
+that theoretical descriptions of properties of quantum physics can be translated 
+to experiments easily implementable on a NISCQ. In this note I test large 
+state-independent inequalities for quantum contextuality on finite geometric 
+structures encoding the commutation relations of the generalized N-qubit Pauli 
+group. The bounds predicted by Non-Contextual Hidden Variables theories are 
+strongly violated in all conducted experiences.
+
+More information related to this paper can be found in the
+[Testing_contextuality](Testing_contextuality) part of this GitHub repository.
