@@ -34,7 +34,7 @@ embedded player bellow.
 <script type="text/javascript">
   new Twitch.Player("twitch-embed", {
     video: "1236738524",
-    width: 100%,
+    width: 700,
     height: 400
   });
 </script>
