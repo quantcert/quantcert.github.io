@@ -31,13 +31,12 @@ embedded player bellow.
 
 # Video
 
-<!-- Add a placeholder for the Twitch embed -->
 <div id="twitch-embed"></div>
 
-<!-- Load the Twitch embed script -->
-<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+The questions session is available on a different video, at 
+[twitch.tv/videos/1236738522](https://www.twitch.tv/videos/1236738522).
 
-<!-- Create a Twitch.Player object. This will render within the placeholder div -->
+<script src="https://player.twitch.tv/js/embed/v1.js"></script>
 <script type="text/javascript">
   new Twitch.Player("twitch-embed", {
     video: "1236738524",
