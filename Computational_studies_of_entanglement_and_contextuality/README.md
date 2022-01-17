@@ -4,8 +4,8 @@
 Cette page est dédiée à la soutenance de thèse d'Henri de Boutray. Le titre de 
 la thèse est *"Études calculatoires de l’intrication et de la contextualité 
 quantiques dans la perspective de leur vérification formelle"* et la soutenance
-a eu lieu à Besançon, France, le 16 décembre 2021. La soutenance s'est déroulée
-en anglais pour tenir compte d'un membre du jury non francophone : Péter Lévay.
+a eu lieu à Besançon, le 16 décembre 2021. La soutenance s'est déroulée en 
+anglais pour tenir compte d'un membre du jury non francophone : Péter Lévay.
 
 Vous trouverez dans le fichier [manuscript.pdf](manuscript.pdf) le manuscrit de 
 la thèse, et dans le fichier [slides.pdf](slides.pdf) les slides de la thèse.
