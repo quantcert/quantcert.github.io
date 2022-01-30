@@ -112,7 +112,7 @@ More information related to this paper can be found in the
 
 ## Computational studies of entanglement and quantum contextuality properties towards their formal verification
 
-_Paper abstract:_<br/> 
+_Thesis abstract:_<br/> 
 Although current quantum computers are limited to the use of a few quantum bits,
 the foundations of quantum programing have been growing over the last 20 years.
 These foundations have been theorized as early as in the 80’s but the complexity
