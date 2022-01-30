@@ -108,3 +108,50 @@ distinct types of four-qubit W(5,2)’s is a multiple of four.
 
 More information related to these papers can be found in the
 [Magma-contextuality](Magma-contextuality) part of this GitHub repository.
+
+## Testing quantum contextuality of binary symplectic polar spaces on a Noisy Intermediate Scale Quantum Computer
+
+_Paper abstract:_<br/> 
+The development of Noisy Intermediate Scale Quantum Computers (NISQC) provides 
+for the Quantum Information community new tools to perform quantum experiences 
+from an individual laptop. It facilitates interdisciplinary research in the sense 
+that theoretical descriptions of properties of quantum physics can be translated 
+to experiments easily implementable on a NISCQ. In this note I test large 
+state-independent inequalities for quantum contextuality on finite geometric 
+structures encoding the commutation relations of the generalized N-qubit Pauli 
+group. The bounds predicted by Non-Contextual Hidden Variables theories are 
+strongly violated in all conducted experiences.
+
+More information related to this paper can be found in the
+[Testing_contextuality](Testing_contextuality) part of this GitHub repository.
+
+## Computational studies of entanglement and quantum contextuality properties towards their formal verification
+
+_Paper abstract:_<br/> 
+Although current quantum computers are limited to the use of a few quantum bits,
+the foundations of quantum programing have been growing over the last 20 years.
+These foundations have been theorized as early as in the 80’s but the complexity
+of their implementation caused these leads to be out of reach until very
+recently. In this context, the objective of this thesis is to contribute to the
+adaptation of the methods of formal specification and deductive verification of
+classical programs to quantum programs. I thus present my contributions to the
+study of quantum properties with the end goal of formalizing them. I study in
+particular quantum entanglement and quantum contextuality. These properties
+allow to classify quantum states and protocols, and in particular to
+differentiate them from classical ones. My study of entanglement is based more
+specifically on the evolution of entanglement during two quantum algorithms: the
+Grover algorithm and the Quantum Fourier Transform. To quantify entanglement
+along those algorithms, I use Mermin’s polynomials, which have the advantage of
+being implementable in actual quantum computers. My study of contextuality, on
+the other hand, relies on finite geometries representing experiments, which are
+said to be contextual when no non-contextual classical theory can predict the
+results. These geometries are associated with the binary symplectic polar
+spaces. We study their structure, and eventually use this structure to get
+insights on quantum protocols using contextuality. The study of these properties
+led to interesting conjectures which we started to formalize in proof
+environments, such as Coq and Why3, but are left as perspective as these works
+have not reach a conclusion yet.
+
+More information related to this paper can be found in the
+[Computational_studies_of_entanglement_and_contextuality](Computational_studies_of_entanglement_and_contextuality) 
+part of this GitHub repository.
