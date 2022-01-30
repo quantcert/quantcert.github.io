@@ -65,22 +65,7 @@ interesting in quantum game theory.
 More information related to this paper can be found in the
 [Magma-contextuality](Magma-contextuality) part of this GitHub repository.
 
-## Automated detection of contextuality proofs with intermediate numbers of observables _and_ Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank
-
-This projects resulted in two papers, described by the two following abstracts.
-
-_Paper abstract:_<br/> 
-Quantum contextuality takes an important place amongst the
-concepts of quantum computing that bring an advantage over its classical
-counterpart. For a large class of contextuality proofs, aka. observable-based
-proofs of the Kochen-Specker Theorem, we first formulate the contextuality
-property as the absence of solutions to a linear system. Then we explain why
-subgeometries of binary symplectic polar spaces are candidates for contextuality
-proofs. We report first results of a software that generates these subgeometries
-and decides their contextuality. The proofs we consider involve more contexts
-and observables than the smallest known proofs. This intermediate size property
-of those proofs is interesting for experimental tests, but could also be
-interesting in quantum game theory.
+## Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank
 
 _Paper abstract:_<br/> 
 We study certain physically-relevant subgeometries of binary symplectic polar
@@ -155,3 +140,18 @@ have not reach a conclusion yet.
 More information related to this paper can be found in the
 [Computational_studies_of_entanglement_and_contextuality](Computational_studies_of_entanglement_and_contextuality) 
 part of this GitHub repository.
+
+## Three-Qubit-Embedded Split Cayley Hexagon is Contextuality Sensitive
+
+_Paper abstract:_<br/> 
+It is known that there are two non-equivalent embeddings of the split Cayley
+hexagon of order two into W(5, 2), the binary symplectic polar space of rank
+three, called classical and skew. Labelling the 63 points of W(5, 2) by the 63
+canonical observables of the three-qubit Pauli group subject to the symplectic
+polarity induced by the (commutation relations between the elements of the)
+group, the two types of embedding are found to be quantum contextuality
+sensitive. In particular, we show that the complement of a classically-
+embedded hexagon is not contextual, whereas that of a skewly-embedded one is.
+
+More information related to these papers can be found in the
+[Magma-contextuality](Magma-contextuality) part of this GitHub repository.

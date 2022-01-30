@@ -1,4 +1,4 @@
-# Automated detection of contextuality proofs with intermediate numbers of observables _and_ Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank
+# Automated detection of contextuality proofs with intermediate numbers of observables _and_ Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank _and_ Three-Qubit-Embedded Split Cayley Hexagon is Contextuality Sensitive
 
 Copyright (C) 2021 Henri de Boutray
 
@@ -9,10 +9,10 @@ Contact: henri.de_boutray[at]univ-fcomte.fr
 The code has been developed to study quantum geometries generated with
 symplectic polar spaces in correspondence with the Pauli group. In particular,
 contextuality for the article [[dJG+21]](#dJG21) presented as a poster
-[[dHG+21']](#dHG21b) for QPL'21 and subspaces structures for the article
-[[SdHG21]](#SdHG21). The language chosen was
-[Magma](http://magma.maths.usyd.edu.au){:target="_blank"} since it is a 
-well-established language for theoretical mathematics.
+[[dHG+21']](#dHG21b) for QPL'21, subspaces structures for the article
+[[SdHG21]](#SdHG21) and the Cayley hexagon for the article [[HdS22]](#HdS22). 
+The language chosen was [Magma](http://magma.maths.usyd.edu.au){:target="_blank"} 
+since it is a well-established language for theoretical mathematics.
 
 Both articles are closely related to the content of the program files.
 
@@ -61,6 +61,11 @@ written to generate them. In particular:
 - Sec. 5 is covered by the script [Main_Heptads.m](src/mains/Main_Heptads.m);
 - Sec. 6 is covered by the script [Main_GeometryIntersections_4qubits.m](src/mains/Main_GeometryIntersections_4qubits.m).
 
+[[HdS22]](#HdS22)'s results (numer of embedings and contextuality of their 
+complement) are obtainable by running the script 
+[Main_Skewed-Cayley-hexagon.m](src/mains/Main_Skewed-Cayley-hexagon.m)
+[Main_Skewed-Cayley-hexagon.m](src/mains/Main_Skewed-Cayley-hexagon.m)
+
 ## Copyright
 
 This program is distributed under the GNU GPL 3. See the enclosed file 
@@ -73,3 +78,4 @@ This program is distributed under the GNU GPL 3. See the enclosed file
 |<a id="dHG21"/>[dHG+21]  |Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and Pierre-Alain Masson. *Automated synthesis of contextuality proofs from subspaces of symplectic polar spaces*. [arXiv:2105.13798](https://arxiv.org/abs/2105.13798){:target="_blank"}|
 |<a id="dHG21b"/>[dHG+21']|Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and Pierre-Alain Masson. *Automated detection of contextuality proofs with intermediate numbers of observables*. QPL'21, [Poster](poster-landscape.pdf){:target="_blank"}|
 |<a id="SdHG21"/>[SdHG21] |Metod Saniga, Henri de Boutray, Frédéric Holweck and Alain Giorgetti. *Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank*. [doi:10.3390/math9182272](https://doi.org/10.3390/math9182272){:target="_blank"}|
+|<a id="HdS22"/>[HdS22]   |Frédéric Holweck, Henri de Boutray and Metod Saniga. *Three-Qubit-Embedded Split Cayley Hexagon is Contextuality Sensitive*. [TBA](){:target="_blank"}|

@@ -87,27 +87,31 @@ function transvection(p)
   return Tp;
 end function;
 
+// comment out the unused lines to speed up computation
 transformationClassic := {};
 transformationSkew := {};
 // identityPoints := {};
 for points in CartesianPower(W3,4) do
   transvections := [ transvection(p) : p in points ];
+  classicCopy := cayleyHexagon;
   skewCopy := skewCayleyHexagon;
-  // classicCopy := cayleyHexagon;
   for T in transvections do
+    classicCopy := { { T(x) : x in l } : l in classicCopy };
     skewCopy := { { T(x) : x in l } : l in skewCopy };
-    // classicCopy := { { T(x) : x in l } : l in classicCopy };
   end for;
-  // transformationClassic join:= { classicCopy };
+  transformationClassic join:= { classicCopy };
   transformationSkew join:= { skewCopy };
   // if skewCopy eq skewCayleyHexagon then
   //   identityPoints join:= { points };
   // end if;
 end for;
 
+"Number of classic embedding obtained:";
+#transformationClassic;
+"Are the complement of each one of them contextual ?";
+{ IsContextual(W3Lines diff hexa) : hexa in transformationClassic };
+
 "Number of skew embedding obtained:";
 #transformationSkew;
-// #transformationClassic;
 "Are the complement of each one of them contextual ?";
 { IsContextual(W3Lines diff hexa) : hexa in transformationSkew };
-// { IsContextual(W3Lines diff hexa) : hexa in transformationClassic };
