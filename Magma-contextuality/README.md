@@ -63,8 +63,7 @@ written to generate them. In particular:
 
 [[HdS22]](#HdS22)'s results (numer of embedings and contextuality of their 
 complement) are obtainable by running the script 
-[Main_Skewed-Cayley-hexagon.m](src/mains/Main_Skewed-Cayley-hexagon.m)
-[Main_Skewed-Cayley-hexagon.m](src/mains/Main_Skewed-Cayley-hexagon.m)
+[Main_Skewed-Cayley-hexagon.m](src/mains/Main_Skewed-Cayley-hexagon.m).
 
 ## Copyright
 
