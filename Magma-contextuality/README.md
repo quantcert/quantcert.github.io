@@ -1,4 +1,4 @@
-# Automated detection of contextuality proofs with intermediate numbers of observables <br> _and_ <br> Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank <br> _and_ <br> Three-Qubit-Embedded Split Cayley Hexagon is Contextuality Sensitive
+# Contextuality degree of quadrics in multi-qubit symplectic polar spaces <br> _and_ <br> Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank <br> _and_ <br> Three-Qubit-Embedded Split Cayley Hexagon is Contextuality Sensitive
 
 Copyright (C) 2021 Henri de Boutray
 
