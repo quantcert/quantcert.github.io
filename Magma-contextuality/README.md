@@ -1,4 +1,8 @@
-# Automated detection of contextuality proofs with intermediate numbers of observables _and_ Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank _and_ Three-Qubit-Embedded Split Cayley Hexagon is Contextuality Sensitive
+# Automated detection of contextuality proofs with intermediate numbers of observables 
+## _and_ 
+# Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank 
+## _and_ 
+# Three-Qubit-Embedded Split Cayley Hexagon is Contextuality Sensitive
 
 Copyright (C) 2021 Henri de Boutray
 
@@ -74,7 +78,7 @@ This program is distributed under the GNU GPL 3. See the enclosed file
 
 |                         |                                                    |
 |-------------------------|----------------------------------------------------|
-|<a id="dHG21"/>[dHG+21]  |Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and Pierre-Alain Masson. *Automated synthesis of contextuality proofs from subspaces of symplectic polar spaces*. [arXiv:2105.13798](https://arxiv.org/abs/2105.13798){:target="_blank"}|
+|<a id="dHG21"/>[dHG+21]  |Henri de Boutray, Frédéric  Holweck, Alain Giorgetti, Pierre-Alain Masson and Metod Saniga. *Contextuality degree of quadrics in multi-qubit symplectic polar spaces*. [arXiv:2105.13798](https://arxiv.org/abs/2105.13798){:target="_blank"}|
 |<a id="dHG21b"/>[dHG+21']|Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and Pierre-Alain Masson. *Automated detection of contextuality proofs with intermediate numbers of observables*. QPL'21, [Poster](poster-landscape.pdf){:target="_blank"}|
 |<a id="SdHG21"/>[SdHG21] |Metod Saniga, Henri de Boutray, Frédéric Holweck and Alain Giorgetti. *Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank*. [doi:10.3390/math9182272](https://doi.org/10.3390/math9182272){:target="_blank"}|
-|<a id="HdS22"/>[HdS22]   |Frédéric Holweck, Henri de Boutray and Metod Saniga. *Three-Qubit-Embedded Split Cayley Hexagon is Contextuality Sensitive*. [TBA](){:target="_blank"}|
+|<a id="HdS22"/>[HdS22]   |Frédéric Holweck, Henri de Boutray and Metod Saniga. *Three-Qubit-Embedded Split Cayley Hexagon is Contextuality Sensitive*. [arXiv:2202.00726](https://arxiv.org/abs/2202.00726){:target="_blank"}|
