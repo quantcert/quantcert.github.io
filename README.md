@@ -5,9 +5,15 @@ certification.
 
 ## Method of constructing a block design by Key and Moori
 
-Key and Moori present a method of building a block designs completed with a part
-on graphs that we are not interested in for our work. The linked source files
-are present in the [Designs](Designs) part of this GitHub repository.
+_Paper abstract:_<br/> 
+In the field of experimental mathematics, the programs used to obtain various
+results rarely follow good software engineering practices, making these results
+difficult to reproduce and evaluate. This article presents a formalization of a
+method for of combinatorial structures (called block systems) and a validation
+of their properties.
+
+More information related to this paper can be found in the
+[Designs](Designs) part of this GitHub repository.
 
 ## GT IQ 2019's days
 
