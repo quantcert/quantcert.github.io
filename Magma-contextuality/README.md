@@ -34,7 +34,7 @@ solution is to put these files in a Magma source code folder. These folders are
 listed in the system environment variable `MAGMA_SYSTEM_SPEC` accessible through 
 the Magma prompt with the command `GetEnv("MAGMA_SYSTEM_SPEC");`. But this may 
 be impossible for many reasons, in this case please refer to
-[this](https://magma.maths.usyd.edu.au/magma/handbook/text/24) documentation
+[this](http://magma.maths.usyd.edu.au/magma/handbook/text/24) documentation
 page to understand how to attach a package in Magma. Since this project was my
 first use of Magma, I had the occasion of tinkering quite a bit with its various
 components, so you can obviously contact me directly in case you cannot find out
@@ -46,6 +46,21 @@ Once the intrinsics attached, you can call them in scripts or in the Magma
 shell. The `Main_***.m` are such examples of scripts. All scripts are in the 
 [src/mains](https://github.com/quantcert/quantcert.github.io/tree/master/Magma-contextuality/src/mains) 
 folder.
+
+Assuming Magma is installed on your computer, here is a list of command you may
+use to run our programs. Please keep in mind hey are not the only ones that 
+will work and they are only meant to work on Unix systems. (You should 
+understand commands copied from the web before running them !)
+
+```bash
+$ git clone https://github.com/quantcert/quantcert.github.io.git
+$ cd quantcert.github.io/Magma-contextuality/scr
+$ touch ~/.bashrc
+$ echo "MAGMA_SYSTEM_SPEC=$(pwd)/intrinsics.spec" >> ~/.bashrc
+$ source ~/.bashrc
+$ cd mains
+$ magma Main_AllContextualityChecks-V2.m
+```
 
 ## Scripts to articles matching
 
