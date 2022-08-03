@@ -56,7 +56,7 @@ understand commands copied from the web before running them !)
 $ git clone https://github.com/quantcert/quantcert.github.io.git
 $ cd quantcert.github.io/Magma-contextuality/scr
 $ touch ~/.bashrc
-$ echo "MAGMA_SYSTEM_SPEC=$(pwd)/intrinsics.spec" >> ~/.bashrc
+$ echo "export \"MAGMA_SYSTEM_SPEC=$(pwd)/intrinsics.spec\"" >> ~/.bashrc
 $ source ~/.bashrc
 $ cd mains
 $ magma Main_AllContextualityChecks-V2.m
