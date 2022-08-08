@@ -47,14 +47,14 @@ shell. The `Main_***.m` are such examples of scripts. All scripts are in the
 [src/mains](https://github.com/quantcert/quantcert.github.io/tree/master/Magma-contextuality/src/mains) 
 folder.
 
-Assuming Magma is installed on your computer, here is a list of command you may
-use to run our programs. Please keep in mind hey are not the only ones that 
-will work and they are only meant to work on Unix systems. (You should 
-understand commands copied from the web before running them !)
+Assuming Magma is installed on your computer, here is a list of commands you may
+use to run our programs. Please keep in mind that they are not the only ones that 
+will work and they are only meant to work on Unix-like systems. (You should 
+understand commands copied from the web before running them!)
 
 ```bash
 $ git clone https://github.com/quantcert/quantcert.github.io.git
-$ cd quantcert.github.io/Magma-contextuality/scr
+$ cd quantcert.github.io/Magma-contextuality/src
 $ touch ~/.bashrc
 $ echo "export \"MAGMA_USER_SPEC=$(pwd)/intrinsics.spec\"" >> ~/.bashrc
 $ source ~/.bashrc
@@ -65,9 +65,9 @@ $ magma Main_AllContextualityChecks-V2.m
 ## Scripts to articles matching
 
 As stated previously, the code follows closely the content of the corresponding 
-papers. 
+papers.
 
-The main results of [[dJG+21]](#dJG21), descibed in Table 2 are given by the 
+The results described in Table 2 of [[dJG+21]](#dJG21) are given by the 
 script [Main_AllContextualityChecks-V2.m](src/mains/Main_AllContextualityChecks-V2.m).
 
 [[SdHG21]](#SdHG21) presenting a variety of results, several scripts were 
@@ -76,7 +76,7 @@ written to generate them. In particular:
 - Sec. 5 is covered by the script [Main_Heptads.m](src/mains/Main_Heptads.m);
 - Sec. 6 is covered by the script [Main_GeometryIntersections_4qubits.m](src/mains/Main_GeometryIntersections_4qubits.m).
 
-[[HdS22]](#HdS22)'s results (numer of embedings and contextuality of their 
+[[HdS22]](#HdS22)'s results (number of embeddings and contextuality of their 
 complement) are obtainable by running the script 
 [Main_Skewed-Cayley-hexagon.m](src/mains/Main_Skewed-Cayley-hexagon.m).
 
