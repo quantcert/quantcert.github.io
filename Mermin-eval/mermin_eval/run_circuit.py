@@ -103,7 +103,7 @@ def output_commant(command_name, command, output=False, output_to_file=False, w_
   if output:
     if "Vector" in str(parent(command)):
       latex_command = vector_to_ket(command)
-    elif "str" in str(parent(a)):
+    elif "str" in str(parent(command)):
       latex_command = command
     else:
       latex_command = latex(command)
@@ -176,6 +176,41 @@ def run(matrix_layers, V_init, output=False, output_file=False, file=None, vecto
     vectors_list.append(V_running)
     output_commant(vector_name + int_name(i+1), V_running, output, output_file, file)
   return vectors_list, matrices_list
+
+def postselected_measure(v, i, n):
+  """ Measure only work on the computational basis and measures only one wire. 
+  args :
+    v (vector): state vector
+    i (int): number of the measured wire, since the first bit is the lsb, you have to
+      think about counting bit from the end
+    n (int): measured value (more precisely than int it is in {0, 1})
+  return :
+    real : the probability of n to be measured
+    vector : the resulting vector after the measure (null if the probability is 0)
+  """
+  if len(v)-1 < 2**i:
+    raise ValueError("Wire out of bounds")
+  resulting_vector = cp.copy(v)
+  for k in range(len(v)):
+  # we only keep the elements of v that have the i th qubit to the correct value (n)
+    if (k & ( 1 << i )) >> i != n:
+      resulting_vector[k] = 0
+  p = resulting_vector.norm()
+  if p != 0:
+    resulting_vector /= p
+  return (p**2, resulting_vector)
+  
+
+def measure(v, i):
+  """ Measure only work on the computational basis and measures only one wire.
+  args:
+    v (vector): state vector 
+    i (int): number of the measured wire, since the first bit is the lsb, you have to
+      think about counting bit from the end
+  returns:
+    real pair : the probability of 0 and 1 to be measured
+  """
+  return(postselected_measure(v, i, 0)[0], postselected_measure(v, i, 1)[0])
 
 
 def int_name(num):

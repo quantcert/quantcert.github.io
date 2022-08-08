@@ -14,7 +14,9 @@ Codes to test the inequalities on hyperbolic quadrics (subgeometries correspondi
  
 
 The codes are written using python and 
-the python library [Qiskit](https://www.qiskit.org/) and are available, as well as examples of results, in the following folder [Sources and Results](https://github.com/quantcert/quantcert.github.io/tree/master/Testing_contextuality/Src).
+the python library [Qiskit](https://www.qiskit.org/) and are available, 
+as well as examples of results, in the following folder 
+[Src](https://github.com/quantcert/quantcert.github.io/tree/master/Testing_contextuality/Src).
 
 More details  can be found in the article 
 [[H21]](https://arxiv.org/abs/2101.03812).
@@ -26,4 +28,4 @@ This program is distributed under the GNU GPL 3. See the enclosed file
 
 ## References
 
-<a id="H21"/>[H21]  Frédéric Holweck **Testing Quantum Contextuality of the Symplectic Polar Space on a Noisy Intermediate Scale Quantum Computer**  [arXiv](https://arxiv.org/abs/2101.03812)
+<a id="H21"/>[H21]  Frédéric Holweck **Testing Quantum Contextuality of the Symplectic Polar Space on a Noisy Intermediate Scale Quantum Computer**  [arXiv:2101.03812](https://arxiv.org/abs/2101.03812)

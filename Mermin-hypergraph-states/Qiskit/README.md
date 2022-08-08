@@ -58,7 +58,7 @@ associated with this project. In order to use it, one must have Docker
 installed, and run the command `docker build --tag sagemath:qiskit .` from the
 folder containing the *Dockerfile*.
 
-Once the image built, one can run if using the command:
+Once the image built, one can run it using the command:
 ```bash
 docker run -it --mount type=bind,source=$(pwd)/app,target=/home/sage/app \
     sagemath:qiskit "sh -c 'cd /home/sage/app; bash'"

@@ -1,13 +1,12 @@
 size := 3; 
 SympSp := QuantumSymplecticSpace(size);
 
-geometries := []
-  cat WLines(SympSp) 
-  cat WBlocks(SympSp) 
-  cat PerpSets(SympSp) 
-  cat ((size gt 2) select Elliptics(SympSp) else []) 
-  cat Hyperbolics(SympSp)
-  ;
+geometries := {}
+  join WLines(SympSp) 
+  join WBlocks(SympSp) 
+  join PerpSets(SympSp) 
+  join ((size gt 2) select Elliptics(SympSp) else {}) 
+  join Hyperbolics(SympSp);
 
 // Time() seems to be broken, so we use Realtime()
 t := Realtime();

@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{physics,amsfonts}
+
+\title{Example document}
+\author{Henri de Boutray}
+\date{November 2018}
+
+\input{sage_output.sage}
+
+\begin{document}
+
+\maketitle
+
+This file is a demo that shows auto generated states and gates steps for
+Deutsch's algorithm. They are generated using the file \verb@deutsch_trace.sage@
+from the same folder.  Bellow are displayed the stated along Deutsch's
+algorithm, with the matrix corresponding to each step, all automatically
+generated as commands. Notice that some simple simplifications are not
+performed, such as $1a \leadsto a$ or $\frac{1}{2}\sqrt{2} \leadsto \frac{1}{
+\sqrt{2}}$. This may be a task for a future version. Meanwhile, this is a simple
+enough thing to do by hand if necessary.
+
+$\varphi_0=\Vzero$
+
+$M_1=\Mone$
+
+$\varphi_1=\Vone$
+
+$M_2=\Mtwo$
+
+$\varphi_2=\Vtwo$
+
+$M_3=\Mthree$
+
+$\varphi_3=\Vthree$
+
+\end{document}

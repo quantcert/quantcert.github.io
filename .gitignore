@@ -1,6 +1,14 @@
-# python compilation products
+# python/sage compilation products
 *.pyc
+*.sage.py
+*.sage.tex
 
 # python temp files
 __logs__/
 __pycache__/
+
+# LaTeX compilation files
+*.aux
+*.log
+*.pdf
+*.synctex.gz
