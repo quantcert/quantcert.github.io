@@ -90,7 +90,7 @@ end intrinsic;
 
 intrinsic WLines(SympSp::ModTupFld) -> SeqEnum
 { Computes W(2*n-1,2) with the geometry being its lines. Returns a list of 
-  tuples (event though this list contains a single element, to be coherent with 
+  tuples (even though this list contains a single element, to be coherent with 
   the other methods of this file), the point has no particular signification, it 
   is arbitrarily chosen to be the null vector.. }
   points := { elt : elt in SympSp | not IsZero(elt) };
