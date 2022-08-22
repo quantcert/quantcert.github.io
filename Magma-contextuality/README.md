@@ -8,7 +8,7 @@ Contact: henri.de_boutray[at]univ-fcomte.fr
 
 The code has been developed to study quantum geometries generated with
 symplectic polar spaces in correspondence with the Pauli group. In particular,
-contextuality for the article [[dJG+21]](#dJG21) presented as a poster
+contextuality for the article [[dHG+21]](#dHG21) presented as a poster
 [[dHG+21']](#dHG21b) for QPL'21, subspaces structures for the article
 [[SdHG21]](#SdHG21) and the Cayley hexagon for the article [[HdS22]](#HdS22). 
 The language chosen was [Magma](http://magma.maths.usyd.edu.au){:target="_blank"} 
@@ -67,7 +67,7 @@ $ magma Main_AllContextualityChecks-V2.m
 As stated previously, the code follows closely the content of the corresponding 
 papers.
 
-The results described in Table 2 of [[dJG+21]](#dJG21) are given by the 
+The results described in Table 2 of [[dHG+21]](#dHG21) are given by the 
 script [Main_AllContextualityChecks-V2.m](src/mains/Main_AllContextualityChecks-V2.m).
 
 [[SdHG21]](#SdHG21) presenting a variety of results, several scripts were 
