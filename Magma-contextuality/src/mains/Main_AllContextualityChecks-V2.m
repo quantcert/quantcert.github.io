@@ -7,6 +7,8 @@ Data is provided in the given format :
 For a given size, INC means the contextuality is inconsistent in the family, 
 CON means all member of the family are contextual and NC means no member of the
 family is contextual.
+Families are shorthanded as follows:
+WLines:WL, WBlocks:WB, PerpSets:PS, Elliptics:El, Hyperbolics:Hy
 ";
 
 for size := 2 to 5 do
