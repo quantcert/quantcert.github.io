@@ -80,6 +80,49 @@ end function;
 
 skewCayleyHexagon := { { epsilon(p) : p in l } : l in cayleyHexagon };
 
+for el in Elliptics(W3) do
+  el[1];
+  newGeom := Lines(W3) diff (el[3] meet skewCayleyHexagon);
+  #newGeom; //306
+  IsContextual(newGeom); //true
+end for;
+
+for hyp in Hyperbolics(W3) do
+  hyp[1];
+  newGeom := Lines(W3) diff (hyp[3] meet skewCayleyHexagon);
+  #newGeom; //294
+  IsContextual(newGeom); //true
+end for;
+
+for p in { p : p in W3 | not IsZero(p) } do
+  p;
+  pts, ls := Quadric(p);
+  newGeom := Lines(W3) diff (ls meet cayleyHexagon);
+  #newGeom;
+  IsContextual(newGeom);
+end for;
+
+"num of lines where sum is zero";
+#{ l : l in skewCayleyHexagon | &+l eq W3!0 };
+"num of lines where points in line commute";
+#{ 
+  l 
+    : l in skewCayleyHexagon 
+    | &and{ IsZero(InnerProduct(pair[1],pair[2])) : pair in Subsequences(l,2) } 
+};
+// TODO: check contextuality degree of the complement of this skew caylex hex
+
+W3Lines := Lines(W3);
+oldCard := #skewCayleyHexagon;
+copy := skewCayleyHexagon;
+for i in [1..5] do
+  while #copy lt oldCard+i do
+    copy join:= { Random(W3Lines) };
+  end while;
+  printf "skew Caley hexagon with %o more random line(s) is contextual ?\n", i;
+  IsContextual(copy);
+end for;
+
 function transvection(p)
   function Tp(q)
     return q+InnerProduct(p,q)*p;
@@ -87,31 +130,83 @@ function transvection(p)
   return Tp;
 end function;
 
-// comment out the unused lines to speed up computation
-transformationClassic := {};
-transformationSkew := {};
 // identityPoints := {};
-for points in CartesianPower(W3,4) do
+transformationClassic := {};
+for points in CartesianPower(W3,2) do
   transvections := [ transvection(p) : p in points ];
   classicCopy := cayleyHexagon;
-  skewCopy := skewCayleyHexagon;
   for T in transvections do
     classicCopy := { { T(x) : x in l } : l in classicCopy };
-    skewCopy := { { T(x) : x in l } : l in skewCopy };
   end for;
   transformationClassic join:= { classicCopy };
+end for;
+
+transformationSkew := {};
+for points in CartesianPower(W3,3) do
+  transvections := [ transvection(p) : p in points ];
+  skewCopy := skewCayleyHexagon;
+  for T in transvections do
+    skewCopy := { { T(x) : x in l } : l in skewCopy };
+  end for;
   transformationSkew join:= { skewCopy };
   // if skewCopy eq skewCayleyHexagon then
   //   identityPoints join:= { points };
   // end if;
 end for;
 
-"Number of classic embedding obtained:";
-#transformationClassic;
-"Are the complement of each one of them contextual ?";
-{ IsContextual(W3Lines diff hexa) : hexa in transformationClassic };
-
 "Number of skew embedding obtained:";
 #transformationSkew;
+"Number of classical embedding obtained:";
+#transformationClassic;
 "Are the complement of each one of them contextual ?";
 { IsContextual(W3Lines diff hexa) : hexa in transformationSkew };
+{ IsContextual(W3Lines diff hexa) : hexa in transformationClassic };
+
+p := Random({ e : e in W3 | not IsZero(e) });
+
+cayleyHyperplane := PerpSet(p) meet cayleyHexagon;
+cayleyHyperplaneComplement1 := W3Lines diff cayleyHyperplane;
+cayleyHyperplaneComplement1 := W3Lines;
+
+skewCayleyHyperplane := PerpSet(p) meet skewCayleyHexagon;
+skewCayleyHyperplaneComplement1 := W3Lines diff skewCayleyHyperplane;
+
+// le choix de epsilon dépend de la quadrique qu'on prend, ici la transfo ne
+// marche pas car on n'a pas la bonne quadrique.
+
+P := PerpSets(W3);
+
+perpsetsPointsIntersections := 
+{ elt[1][2] meet elt[2][2] : elt in CartesianProduct(P,P) |
+  InnerProduct(elt[1][1],elt[2][1]) eq 1 };
+lines := QuantumSubspaces(SympSp,1);
+perpsetsLinesIntersections := 
+{ 
+  { line : line in lines | line subset geometryPoints } : 
+  geometryPoints in perpsetsPointsIntersections 
+};
+
+H, E := Quadrics(SympSp);
+
+quadricsIntersections := { elt[1][3] meet elt[2][3] : elt in CartesianProduct(H,E) };
+
+doilies := perpsetsLinesIntersections join quadricsIntersections;
+
+chexCompl := Lines(W3) diff caleyHexagon;
+"How many doilies in the complement of the classis chex ?";
+#{ doily : doily in doilies | doily subset chexCompl };
+
+SchexCompl := Lines(W3) diff skewCayleyHexagon;
+"How many doilies in the complement of the skew chex ?";
+#{ doily : doily in doilies | doily subset SchexCompl };
+
+// TODO : if no results from the lines above, do the same work for the mermin 
+// squares
+
+// mSquare := ;
+
+// "How many Mermin squares in the complement of the classis chex ?";
+// #{ mSquare : mSquare in mSquares | mSquare subset chexCompl };
+
+// "How many Mermin squares in the complement of the skew chex ?";
+// #{ mSquare : mSquare in mSquares | mSquare subset SchexCompl };

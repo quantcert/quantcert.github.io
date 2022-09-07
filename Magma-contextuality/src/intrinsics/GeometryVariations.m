@@ -23,9 +23,9 @@ end intrinsic;
 intrinsic IncreasedPoint(p::ModTupFldElt,posObsNeutrals::SetEnum[Tup]) 
   -> ModTupFldElt
 { The point *p* with observables given by the second element of each pair of 
- Sort(~posObsPairsSeq,func<a,b|a[1]-b[1]>); *posObsNeutrals* as a list of two integers, added (as a tensor product on the
-  decomposition) as position given by the second element of the corresponding 
-  pair. }
+  Sort(~posObsPairsSeq,func<a,b|a[1]-b[1]>); *posObsNeutrals* as a list of two 
+  integers, added (as a tensor product on the decomposition) as position given 
+  by the second element of the corresponding pair. }
   SympSp := Parent(p);
   n := Integers()!(Degree(SympSp)/2);
   finalSympSp := QuantumSymplecticSpace(n + #posObsNeutrals);
@@ -55,13 +55,11 @@ intrinsic InnerOvoids(geometry::SetEnum[SetEnum[ModTupFldElt]])
   ovoids := {};
   geometryPoints := &join geometry;
   for point in geometryPoints do
-    nonCommutingPoints := { p : p in geometryPoints | InnerProduct(p,point) eq 1 } join { point } ;
-    for ovoid in Subsets(nonCommutingPoints,5) do
-      noneCommute := 
-        &and{ InnerProduct(Setseq(pair)[1],Setseq(pair)[2]) eq 1
-          : pair in Subsets(ovoid,2) };
-      if noneCommute then
-        ovoids join:= { ovoid };
+    nonCommutingPoints := 
+    { p : p in geometryPoints | InnerProduct(p,point) eq 1 } join { point } ;
+    for ovoidCandidate in Subsets(nonCommutingPoints,5) do
+      if IsOvoid({ {p} : p in ovoidCandidate }) then
+        ovoids join:= { ovoidCandidate };
         if #ovoids eq 6 then
           return ovoids;
         end if; 

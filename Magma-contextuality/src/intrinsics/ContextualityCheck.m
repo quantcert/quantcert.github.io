@@ -32,7 +32,7 @@ intrinsic IsContextual(geometry::SetEnum[SetEnum[ModTupFldElt]],interpretation::
   -> BoolElt
 { Checks contextuality using the reformulation of the problem in terms of linear
   algebra, given the interpretation. The interpretation in this case must be 
-  a list of four elements, in [1,-1,i,-i] corresponding to the second argument 
+  a list of four elements, in \{1,-1,i,-i\}, corresponding to the second argument 
   of PauliOperatorInterpretation. }
   function PauliOperator(p)
     return PauliOperatorInterpretation(p,interpretation);
@@ -46,11 +46,16 @@ intrinsic IsContextual(geometry::SetEnum[SetEnum[ModTupFldElt]]) -> BoolElt
   return IsContextual(geometry,PauliOperatorCanonical);
 end intrinsic;
 
-intrinsic NumberOfI(point::ModTupFldElt) -> RngIntElt
+intrinsic NumberOfOp(point::ModTupFldElt,op::SeqEnum[RngIntElt]) -> RngIntElt
 { Return the number of Identities in a point, e.g. 1 for XIX and 2 for IIZ .}
   SympSp := Parent((point));
   n := Degree(SympSp)/2;
-  return #{ i : i in [1..n] | point[2*i-1] eq 0 and point[2*i] eq 0 };
+  return #{ i : i in [1..n] | [point[2*i-1], point[2*i]] eq op };
+end intrinsic;
+
+intrinsic NumberOfI(point::ModTupFldElt) -> RngIntElt
+{ Return the number of Identities in a point, e.g. 1 for XIX and 2 for IIZ .}
+  return NumberOfOp(point,[0,0]);
 end intrinsic;
 
 intrinsic SHSignature(geometry::SetEnum[SetEnum[ModTupFldElt]]) -> Tup
@@ -94,7 +99,7 @@ end intrinsic;
 intrinsic ContextualityDegree(geometry::SetEnum[SetEnum[ModTupFldElt]] : debug:=false) -> RngIntElt
 { Returns the contextuality degree of a geometry where the contextuality degree 
   is the minimum number of constraints non solvable for the system *Ax=v*. In 
-  this system, *A* is the incidence matrix of the geometry, *v* is the value 
+  this system, *A* is the incidence matrix of the geometry, *v* is the debugvalue 
   associated to each context, and *x* is the unknown. }
 
   subspaces := 
@@ -111,7 +116,64 @@ intrinsic ContextualityDegree(geometry::SetEnum[SetEnum[ModTupFldElt]] : debug:=
     [ (SetSign(subspace) eq -1) select 1 else 0 : subspace in subspaces ]
   );
 
+  /* http://magma.maths.usyd.edu.au/magma/handbook/text/1905#21472 
+
+     Distance(u, v) : ModTupRngElt, ModTupRngElt -> RngIntElt
+
+     The Hamming distance between the codewords u and v, where u and v belong to the same code C.
+  */
   return  Min({ Distance(vect,Parent(vect)!elt) : elt in Image(mat) });
+end intrinsic;
+
+intrinsic ContextualityDegreeNotWorking(geometry::SetEnum[SetEnum[ModTupFldElt]] : debug:=false) -> RngIntElt
+{ Returns the contextuality degree of a geometry where the contextuality degree 
+  is the minimum number of constraints non solvable for the system *Ax=v*. In 
+  this system, *A* is the incidence matrix of the geometry, *v* is the value 
+  associated to each context, and *x* is the unknown. }
+
+  subspaces := 
+    Sort(
+      {@ Sort(SetToIndexedSet(subsp)) : subsp in geometry @},
+      func<a,b|SubspaceComparison(a,b)>
+    );
+  points := Sort(SetToIndexedSet(&join subspaces));
+  inc := IncidenceStructure<points|subspaces>;
+  Z2 := GF(2);
+  mat := Matrix(Z2, IncidenceMatrix(inc));
+  vect := Vector(
+    Z2, 
+    [ (SetSign(subspace) eq -1) select 1 else 0 : subspace in subspaces ]
+  );
+  v := Parent(vect)!&+[ DotProduct(vect,ai)*ai : ai in SemiOrthogonalBasis(Image(mat)) ];
+  // this does not work because the space is degenerate (if v has an even number 
+  // of 1s, it is orthogonal to itself, meaning for example that, with this 
+  // method, a vector in the image won't be recognized as such)
+  return Distance(vect,v);
+end intrinsic;
+
+intrinsic ContextualityDegreeNotWorking2(geometry::SetEnum[SetEnum[ModTupFldElt]] : debug:=false) -> RngIntElt
+{ Returns the contextuality degree of a geometry where the contextuality degree 
+  is the minimum number of constraints non solvable for the system *Ax=v*. In 
+  this system, *A* is the incidence matrix of the geometry, *v* is the value 
+  associated to each context, and *x* is the unknown. }
+
+  subspaces := 
+    Sort(
+      {@ Sort(SetToIndexedSet(subsp)) : subsp in geometry @},
+      func<a,b|SubspaceComparison(a,b)>
+    );
+  points := Sort(SetToIndexedSet(&join subspaces));
+  inc := IncidenceStructure<points|subspaces>;
+  Z2 := GF(2);
+  A := Matrix(Z2, IncidenceMatrix(inc));
+  v := Vector(
+    Z2, 
+    [ (SetSign(subspace) eq -1) select 1 else 0 : subspace in subspaces ]
+  );
+  closest_x := Inverse(Transpose(A)*A)*Transpose(A)*v;
+  closest_v := A*closest_x;
+
+  return Distance(closest_v,v);
 end intrinsic;
 
 intrinsic ContextualityDegree(geometry::SetIndx[SetIndx[ModTupFldElt]] : debug:=false) -> RngIntElt

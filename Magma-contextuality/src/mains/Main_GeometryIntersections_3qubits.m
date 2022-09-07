@@ -1,8 +1,10 @@
+/*This file is composed of blocks of code. In order to avoid having to wait too 
+  long for the desired result, one may comment the non interesting blocks.*/
+
 n := 3;
 SympSp := QuantumSymplecticSpace(n);
 
 H, E := Quadrics(SympSp);
-
 quadricsIntersections := { elt[1][3] meet elt[2][3] : elt in CartesianProduct(H,E) };
 signatureTypes := [
 <7, [ 0,  7, 8 ]>, //1
@@ -79,7 +81,7 @@ P := PerpSets(SympSp);
 perpsetsPointsIntersections := 
 { elt[1][2] meet elt[2][2] : elt in CartesianProduct(P,P) |
   InnerProduct(elt[1][1],elt[2][1]) eq 1 };
-lines := IsotropicSubspaces(SympSp,1);
+lines := QuantumSubspaces(SympSp,1);
 perpsetsLinesIntersections := 
 { 
   { line : line in lines | line subset geometryPoints } : 
@@ -110,6 +112,7 @@ perpsetsSignatures :=
  
 // -------------------------------------------------------------------------- //
 
+/* TODO: say it is a long execution */
 doilies := perpsetsLinesIntersections join quadricsIntersections;
 ovoidsMap := &join
 { { <doily,ovoid> : ovoid in InnerOvoids(doily) } : doily in doilies };
@@ -160,8 +163,8 @@ increasedWithHyperplansDoilies :=
   &join
   { 
     {
-      IncreaseGeometry(Doily2,{<pos,operator,ovoid[2]>}) : pos in [1..n]
-    } : ovoid in hyperplans
+      IncreaseGeometry(Doily2,{<pos,operator,hyperplane[2]>}) : pos in [1..n]
+    } : hyperplane in hyperplans
   } : operator in Subsequences({0,1},2) | operator ne [0,0]
 };
 "
@@ -204,50 +207,50 @@ subset increasedWithHyperplansDoilies;
 
 // -------------------------------------------------------------------------- //
 
-"
- --- Deep and zero-points of W(5,2) --- ";
+// "
+//  --- Deep and zero-points of W(5,2) --- ";
 
-type3 := { signature[1] : signature in allSignatures | 
-  signature[2] eq signatureTypes[3] };
+// type3 := { signature[1] : signature in allSignatures | 
+//   signature[2] eq signatureTypes[3] };
 
-"The deep and zero-points of doilies of type 3 of W(5,2) are forming a
-tricentric triad, i.e. are isomorphic to W(1,2)";
-"Number of points in those tricentric triads:";
-{ #(DeepPoints(doily) join ZeroPoints(doily)) : doily in type3 };
+// "The deep and zero-points of doilies of type 3 of W(5,2) are forming a
+// tricentric triad, i.e. are isomorphic to W(1,2)";
+// "Number of points in those tricentric triads:";
+// { #(DeepPoints(doily) join ZeroPoints(doily)) : doily in type3 };
 
 // -------------------------------------------------------------------------- //
 
-"
- --- Finer study of contextuality --- ";
-"Contextuality degree per signature type";
-allSignaturesDegrees :=
-{
-  < signature[1], signature[2], ContextualityDegree(signature[1]) > 
-    : signature in allSignatures 
-};
-sigDegGeometries :=
-[
-  < 
-    sigDeg, 
-    { 
-      geomSigDeg[1] 
-        : geomSigDeg in allSignaturesDegrees
-        | geomSigDeg[2] eq signatureTypes[sigDeg[1]] 
-            and 
-          geomSigDeg[3] eq sigDeg[2]
-    }
-  > : sigDeg in CartesianProduct([1..#signatureTypes],[1..3])
-];
-"[<<Signature type,degree>, Number of such combinations, Example>]:
-(The examples may be disabled)";
-[ 
-  < 
-    sigDegGeometry[1], 
-    #sigDegGeometry[2]
-    // , not #sigDegGeometry[2] eq 0 select Random(sigDegGeometry[2]) else {}
-  > 
-    : sigDegGeometry in sigDegGeometries 
-];
+// "
+//  --- Finer study of contextuality --- ";
+// "Contextuality degree per signature type";
+// allSignaturesDegrees :=
+// {
+//   < signature[1], signature[2], ContextualityDegree(signature[1]) > 
+//     : signature in allSignatures 
+// };
+// sigDegGeometries :=
+// [
+//   < 
+//     sigDeg, 
+//     { 
+//       geomSigDeg[1] 
+//         : geomSigDeg in allSignaturesDegrees
+//         | geomSigDeg[2] eq signatureTypes[sigDeg[1]] 
+//             and 
+//           geomSigDeg[3] eq sigDeg[2]
+//     }
+//   > : sigDeg in CartesianProduct([1..#signatureTypes],[1..3])
+// ];
+// "[<<Signature type,degree>, Number of such combinations, Example>]:
+// (The examples may be disabled)";
+// [ 
+//   < 
+//     sigDegGeometry[1], 
+//     #sigDegGeometry[2]
+//     // , not #sigDegGeometry[2] eq 0 select Random(sigDegGeometry[2]) else {}
+//   > 
+//     : sigDegGeometry in sigDegGeometries 
+// ];
 
 // -------------------------------------------------------------------------- //
 

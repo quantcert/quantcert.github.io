@@ -1,3 +1,33 @@
+signatureTypes := [ <130,[3,9,33,18]>,
+                    <126,[0,24,0,39]>,
+                    <126,[1,13,27,22]>,
+                    <126,[2,10,30,21]>,
+                    <122,[1,15,27,20]>,
+                    <122,[2,10,30,21]>,
+                    <118,[0,16,32,15]>,
+                    <118,[3,9,33,18]>,
+                    <118,[3,11,25,24]>,
+                    <114,[1,15,27,20]>,
+                    <114,[1,17,27,18]>,
+                    <114,[3,13,25,22]>,
+                    <114,[4,12,28,19]>,
+                    <110,[3,15,25,20]>,
+                    <110,[5,11,23,24]>,
+                    <106,[5,13,23,22]>,
+                    <102,[1,21,27,14]>,
+                    <102,[2,18,30,13]>,
+                    <102,[3,15,25,20]>,
+                    <102,[4,12,28,19]>,
+                    <90,[0,36,0,27]>,
+                    <90,[2,22,30,9]>,
+                    <90,[3,9,33,18]>,
+                    <90,[3,21,25,14]>,
+                    <90,[4,16,28,15]>,
+                    <90,[5,15,31,12]>,
+                    <90,[6,18,26,13]>,
+                    <90,[7,17,21,18]>,
+                    <90,[9,27,27,0]> ];
+
 n := 4;
 SympSp := QuantumSymplecticSpace(n);
 
@@ -5,37 +35,6 @@ H, E := Quadrics(SympSp);
 
 quadricsIntersections := { elt[1][3] meet elt[2][3] : elt in CartesianProduct(H,E) };
 
-signatureTypes := [
-<130,[3,9,33,18]>,
-<126,[0,24,0,39]>,
-<126,[1,13,27,22]>,
-<126,[2,10,30,21]>,
-<122,[1,15,27,20]>,
-<122,[2,10,30,21]>,
-<118,[0,16,32,15]>,
-<118,[3,9,33,18]>,
-<118,[3,11,25,24]>,
-<114,[1,15,27,20]>,
-<114,[1,17,27,18]>,
-<114,[3,13,25,22]>,
-<114,[4,12,28,19]>,
-<110,[3,15,25,20]>,
-<110,[5,11,23,24]>,
-<106,[5,13,23,22]>,
-<102,[1,21,27,14]>,
-<102,[2,18,30,13]>,
-<102,[3,15,25,20]>,
-<102,[4,12,28,19]>,
-<90,[0,36,0,27]>,
-<90,[2,22,30,9]>,
-<90,[3,9,33,18]>,
-<90,[3,21,25,14]>,
-<90,[4,16,28,15]>,
-<90,[5,15,31,12]>,
-<90,[6,18,26,13]>,
-<90,[7,17,21,18]>,
-<90,[9,27,27,0]>
-];
 "
 The following signatures will be use across the whole script.";
 "[<Type,Signature>]:"; 
@@ -64,7 +63,7 @@ P := PerpSets(SympSp);
 perpsetsPointsIntersections := 
 { elt[1][2] meet elt[2][2] : elt in CartesianProduct(P,P) |
   InnerProduct(elt[1][1],elt[2][1]) eq 1 };
-lines := IsotropicSubspaces(SympSp,1);
+lines := QuantumSubspaces(SympSp,1);
 perpsetsLinesIntersections := 
 { 
   { line : line in lines | line subset geometryPoints } : 
@@ -141,7 +140,7 @@ P := PerpSets(SympSp3);
 perpsetsPointsIntersections := 
 { elt[1][2] meet elt[2][2] : elt in CartesianProduct(P,P) 
   | InnerProduct(elt[1][1],elt[2][1]) eq 1 };
-lines := IsotropicSubspaces(SympSp3,1);
+lines := QuantumSubspaces(SympSp3,1);
 perpsets3LinesIntersections := 
 { 
   { line : line in lines | line subset geometryPoints } : 
@@ -170,10 +169,11 @@ increased3Doilies :=
 recoverable by the doily of W(3,2):";
 #(increased3Doilies meet increased2Doilies);
 Doilies4 := quadricsIntersections join perpsetsLinesIntersections; // these are not doilies !
+// todo, check that they are doilies
 "Number of genuine W(7,2) doilies:";
 #((Doilies4 diff increased2Doilies) diff increased3Doilies);
 "Total number of doilies in W(7,2):";
-#Doilies4;
+#Doilies4; // this number can be calculated in doubt
 
 // -------------------------------------------------------------------------- //
 "

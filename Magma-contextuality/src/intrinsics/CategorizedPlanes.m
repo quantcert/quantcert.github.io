@@ -25,7 +25,7 @@ intrinsic Quadric(point::ModTupFldElt)
   returned as well as the geometry formed by the lines composed of those 
   points. Short version of *Quadric(point,lines)*, if called multiple times, the 
   lines will be recomputed each time, so avoid it if possible.}
-  lines := IsotropicSubspaces(Parent(point),1);
+  lines := QuantumSubspaces(Parent(point),1);
   return Quadric(point, lines);
 end intrinsic;
 
@@ -37,7 +37,7 @@ a pair degree";
   function Q(x)
     return &+[x[2*i-1]*x[2*i] : i in {1 .. n/2}];
   end function;
-  return  Q;
+  return Q;
 end intrinsic;
 
 intrinsic QuadraticForm(point::ModTupFldElt) -> UserProgram
@@ -47,7 +47,7 @@ intrinsic QuadraticForm(point::ModTupFldElt) -> UserProgram
   function Qp(x)
     return  Q(x) + InnerProduct(x,point);
   end function;
-  return  Qp;
+  return Qp;
 end intrinsic;
 
 intrinsic Hyperbolics(SympSp::ModTupFld) -> SeqEnum[Tup]
@@ -56,7 +56,7 @@ intrinsic Hyperbolics(SympSp::ModTupFld) -> SeqEnum[Tup]
   and the lines of this hyperbolic. }
   BaseQuadricPoints, BaseQuadric := Quadric(SympSp!0);
   GQ := {<SympSp!0, BaseQuadricPoints, BaseQuadric>};
-  lines := IsotropicSubspaces(SympSp,1);
+  lines := QuantumSubspaces(SympSp,1);
   for point in BaseQuadricPoints do
     qPoints, qLines := Quadric(point,lines);
     GQ join:= {<point, qPoints, qLines>};
@@ -71,7 +71,7 @@ intrinsic Elliptics(SympSp::ModTupFld) -> SetEnum[Tup]
   Caution ! On two qubits, there is no line in an elliptic. }
   GQ := {};
   BaseQuadricPoints, BaseQuadric := Quadric(SympSp!0);
-  lines := IsotropicSubspaces(SympSp,1);
+  lines := QuantumSubspaces(SympSp,1);
   for point in { point : point in SympSp } diff (BaseQuadricPoints join {SympSp!0}) do
     qPoints, qLines := Quadric(point,lines);
     GQ join:= {<point, qPoints, qLines>};
@@ -86,7 +86,7 @@ intrinsic Quadrics(SympSp::ModTupFld) -> SetEnum[Tup], SetEnum[Tup]
   second list contains all the }
   Q0 := BaseQuadraticForm(SympSp);  
   BaseQuadricPoints := {a : a in SympSp | IsZero(Q0(a))};
-  lines := IsotropicSubspaces(SympSp,1);
+  lines := QuantumSubspaces(SympSp,1);
   hyperbolics := {};
   elliptics := {};
   for point in SympSp do
@@ -114,7 +114,7 @@ intrinsic PerpSet(point::ModTupFldElt) -> SetEnum[SetEnum[ModTupFldElt]]
   *PerpSet(point,lines)*, if called multiple times, the lines will be recomputed
   each time, so avoid it if possible. }
   SympSp := Parent(point);
-  lines := IsotropicSubspaces(SympSp,1);
+  lines := QuantumSubspaces(SympSp,1);
   return PerpSet(point, lines);
 end intrinsic;
 
@@ -123,7 +123,7 @@ intrinsic PerpSets(SympSp::ModTupFld) -> SeqEnum[Tup]
   tuples is a point generating the PerpSet, the points of this PerpSet
   and the lines of this PerpSet. }
   P := {};
-  lines := IsotropicSubspaces(SympSp,1);
+  lines := QuantumSubspaces(SympSp,1);
   for point in { elt : elt in SympSp | not IsZero(elt) } do
     ps := PerpSet(point, lines);
     psPoints := &join ps;
@@ -136,20 +136,20 @@ intrinsic WLines(SympSp::ModTupFld) -> SeqEnum[Tup]
 { Computes W(2*n-1,2) with the geometry being its lines. Returns a list of 
   tuples (even though this list contains a single element, to be coherent with 
   the other methods of this file), the point has no particular signification, it 
-  is arbitrarily chosen to be the null vector.. }
+  is arbitrarily chosen to be the null vector. }
   points := { elt : elt in SympSp | not IsZero(elt) };
-  lines := IsotropicSubspaces(SympSp,1);
+  lines := QuantumSubspaces(SympSp,1);
   return [<SympSp!0,points,lines>];
 end intrinsic;
 
 intrinsic WBlocks(SympSp::ModTupFld) -> SeqEnum[Tup]
-{ Computes W(2*n-1,2) with the geometry being its lines. Returns a list of 
-  tuples (even though this list contains a single element, to be coherent with 
-  the other methods of this file), the point has no particular signification, it 
-  is arbitrarily chosen to be the null vector.. }
+{ Computes W(2*n-1,2) with the geometry being its blocks (generators). Returns a
+  list of tuples (even though this list contains a single element, to be 
+  coherent with the other methods of this file), the point has no particular 
+  signification, it is arbitrarily chosen to be the null vector. }
   points := { elt : elt in SympSp | not IsZero(elt) };
   n := Integers()!(Degree(SympSp)/2);
-  blocks := IsotropicSubspaces(SympSp, n-1);
+  blocks := QuantumSubspaces(SympSp, n-1);
   return [<SympSp!0,points,blocks>];
 end intrinsic;
 
@@ -171,5 +171,14 @@ intrinsic IsDoily1(geometry::SetEnum[SetEnum[ModTupFldElt]]) -> BoolElt
     } 
       and
     &and{ IsZero(&+ line) : line in geometry }
+  ;
+end intrinsic;
+
+intrinsic IsOvoid(geometry::SetEnum[SetEnum[ModTupFldElt]]) -> BoolElt
+{ Checks if a subgeometry of the doily is an ovoid. }
+  return 
+    # &join geometry eq 5
+      and
+    &and{ &and{ InnerProduct(p1,p2) eq 1 : p2 in geometry } : p1 in geometry }
   ;
 end intrinsic;

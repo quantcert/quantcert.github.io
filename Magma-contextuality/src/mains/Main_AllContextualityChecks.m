@@ -1,22 +1,34 @@
-geometries := [WLines, WBlocks, PerpSets, Elliptics, Hyperbolics];
+geometries := [<WLines,"WL">, <WBlocks,"WB">, <PerpSets,"PS">, <Elliptics,"El">, 
+  <Hyperbolics,"Hy">];
 
-for size := 2 to 4 do 
+"
+Data is provided in the following format: 
+  |family(size):contextuality(number of instances)|time|
+For a given size, INC means the contextuality is inconsistent in the family, 
+CON means all members of the family are contextual and NC means no member of the
+family is contextual. The time given is the time to compute the results for the 
+whole family in seconds.
+Families are shorthanded as follows:
+WLines:WL, WBlocks:WB, PerpSets:PS, Elliptics:El, Hyperbolics:Hy
+
+|contextuality of famillies|time(s)|
+|--------------------------|-------|";
+
+for size := 2 to 5 do
   SympSp := QuantumSymplecticSpace(size);
 
   for geometry in geometries do
-    if not (geometry eq Elliptics and size eq 2) then
-      geometryName := Split(Sprint(geometry,"Minimal"),"'")[2];
-      contextuality := [ IsContextual(instance[3]) : instance in geometry(SympSp) ];
-      notAllIdentical := contextuality[1];
-      for value in contextuality do
-        notAllIdentical xor:= value;
-      end for;
-      if notAllIdentical then
-        Sprintf("%o on %o qubits are inconstant.",geometryName, size);
-      else
-        Sprintf("%o on %o qubits are all %o.",geometryName, size, 
-          contextuality[1] select "contextual" else "non contextual");
-      end if;
+    if not (geometry[1] eq Elliptics and size eq 2) then
+      t := Realtime();
+      contextuality := [ IsContextual(instance[3]) : 
+        instance in geometry[1](SympSp) ];
+      
+      allIdentical := #SequenceToSet(contextuality) eq 1;
+      
+      Sprintf("|%o(%o):%o(x%o)|%o|",geometry[2], size,
+        allIdentical select contextuality[1] select "CON" else "NC " else "INC", 
+        #contextuality, Realtime(t)
+      );
     end if;
   end for;
 
