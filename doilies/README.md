@@ -27,7 +27,4 @@ The following tables for 3, 4 and 5 qubits are results of the doily generation a
 
 ## References
 
-|                          |                                                    |
-|--------------------------|----------------------------------------------------|
-
 |<a id="MSGDH22"/>[MSGDH22]|Axel Muller, Metod Saniga, Alain Giorgetti, Henri De Boutray, and Frédéric Holweck. *Multi-qubit doilies: enumeration for all ranks and classification for ranks four and five*. 2022. [https://arxiv.org/abs/2206.03599](https://arxiv.org/abs/2206.03599){:target="_blank"}|
