@@ -163,3 +163,21 @@ embedded hexagon is not contextual, whereas that of a skewly-embedded one is.
 
 More information related to these papers can be found in the
 [Magma-contextuality](Magma-contextuality) part of this GitHub repository.
+
+## Multi-qubit doilies: enumeration for all ranks and classification for ranks four and five
+
+_Paper abstract:_<br/> 
+For $N \geq 2$, an $N$-qubit doily is a doily living in the $N$-qubit symplectic
+polar space. These doilies are related to operator-based proofs of
+quantum contextuality. Following and extending the strategy of Saniga et al.
+(Mathematics 9 (2021) 2272) that focused exclusively on three-qubit doilies, we
+first bring forth several formulas giving the number of both linear and
+quadratic doilies for any $N > 2$. Then we present an effective algorithm for
+the generation of all $N$-qubit doilies. Using this algorithm for $N=4$ and
+$N=5$, we provide a classification of $N$-qubit doilies in terms of types of
+observables they feature and number of negative lines they are endowed with. We
+also list several distinguished findings about $N$-qubit doilies that are absent
+in the three-qubit case, point out a couple of specific features exhibited by
+linear doilies and outline some prospective extensions of our approach.
+
+The numerical results related to this paper can be found in the [doilies](doilies) part of this GitHub repository.
