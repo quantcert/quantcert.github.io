@@ -9,7 +9,7 @@ Contact: alain.giorgetti[at]femto-st.fr
 
 ## About
 
-This page distributes in CSV format the results of the generation and classification algorithms presented in [[MSGDH22]](#MSGDH22).
+This page distributes in CSV format the results of the generation and classification algorithms presented in [[MSGdH22]](#MSGdH22).
 
 ## Copyright
 
@@ -27,4 +27,5 @@ The following tables for 3, 4 and 5 qubits are results of the doily generation a
 
 ## References
 
-|<a id="MSGDH22"/>[MSGDH22]|Axel Muller, Metod Saniga, Alain Giorgetti, Henri De Boutray, and Frédéric Holweck. *Multi-qubit doilies: enumeration for all ranks and classification for ranks four and five*. 2022. [https://arxiv.org/abs/2206.03599](https://arxiv.org/abs/2206.03599){:target="_blank"}|
+|<a id="MSGdH22"/>[MSGDH22]|Axel Muller, Metod Saniga, Alain Giorgetti, Henri de Boutray, and Frédéric Holweck. *Multi-qubit doilies: enumeration for all ranks and classification for ranks four and five*. Journal of Computational Science,
+Volume 64, 2022, 101853, ISSN 1877-7503. [https://doi.org/10.1016/j.jocs.2022.101853](https://doi.org/10.1016/j.jocs.2022.101853), [https://arxiv.org/abs/2206.03599](https://arxiv.org/abs/2206.03599){:target="_blank"}|
