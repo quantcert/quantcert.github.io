@@ -8,8 +8,8 @@ Contact: henrideboutray[at]hotmail.fr
 
 The code has been developed to study quantum geometries generated with
 symplectic polar spaces in correspondence with the Pauli group. In particular,
-contextuality for the article [[dHG+21]](#dHG21) presented as a poster
-[[dHG+21']](#dHG21b) for QPL'21, subspaces structures for the article
+contextuality for the article [[dHG+22]](#dHG22) presented as a poster
+[[dHG+21]](#dHG21) for QPL'21, subspaces structures for the article
 [[SdHG21]](#SdHG21) and the Cayley hexagon for the article [[HdS22]](#HdS22). 
 The language chosen was [Magma](http://magma.maths.usyd.edu.au){:target="_blank"} 
 since it is a well-established language for mathematics.
@@ -65,7 +65,7 @@ magma Main_AllContextualityChecks.m
 As stated previously, the code follows closely the content of the corresponding 
 papers.
 
-The results described in Table 2 of [[dHG+21]](#dHG21) are given by the 
+The results described in Table 2 of [[dHG+22]](#dHG22) are given by the 
 script [Main_AllContextualityChecks.m](src/mains/Main_AllContextualityChecks.m).
 
 [[SdHG21]](#SdHG21) presenting a variety of results, several scripts were 
@@ -87,7 +87,7 @@ This program is distributed under the GNU GPL 3. See the enclosed file
 
 |                         |                                                    |
 |-------------------------|----------------------------------------------------|
-|<a id="dHG21"/>[dHG+21]  |Henri de Boutray, Frédéric  Holweck, Alain Giorgetti, Pierre-Alain Masson and Metod Saniga. *Contextuality degree of quadrics in multi-qubit symplectic polar spaces*. [arXiv:2105.13798](https://arxiv.org/abs/2105.13798){:target="_blank"}|
-|<a id="dHG21b"/>[dHG+21']|Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and Pierre-Alain Masson. *Automated detection of contextuality proofs with intermediate numbers of observables*. QPL'21, [Poster](poster-landscape.pdf){:target="_blank"}|
+|<a id="dHG22"/>[dHG+22]  |Henri de Boutray, Frédéric  Holweck, Alain Giorgetti, Pierre-Alain Masson and Metod Saniga. *Contextuality degree of quadrics in multi-qubit symplectic polar spaces*. [https://doi.org/10.1088/1751-8121/aca36f](https://doi.org/10.1088/1751-8121/aca36f), [arXiv:2105.13798](https://arxiv.org/abs/2105.13798){:target="_blank"}|
+|<a id="dHG21"/>[dHG+21]|Henri de Boutray, Frédéric  Holweck, Alain Giorgetti and Pierre-Alain Masson. *Automated detection of contextuality proofs with intermediate numbers of observables*. QPL'21, [Poster](poster-landscape.pdf){:target="_blank"}|
 |<a id="SdHG21"/>[SdHG21] |Metod Saniga, Henri de Boutray, Frédéric Holweck and Alain Giorgetti. *Taxonomy of Polar Subspaces of Multi-Qubit Symplectic Polar Spaces of Small Rank*. [doi:10.3390/math9182272](https://doi.org/10.3390/math9182272){:target="_blank"}|
 |<a id="HdS22"/>[HdS22]   |Frédéric Holweck, Henri de Boutray and Metod Saniga. *Three-Qubit-Embedded Split Cayley Hexagon is Contextuality Sensitive*. [doi:10.1038/s41598-022-13079-3](https://doi.org/10.1038/s41598-022-13079-3){:target="_blank"}|
