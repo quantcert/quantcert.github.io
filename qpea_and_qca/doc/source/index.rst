@@ -15,10 +15,10 @@ One may also run all the calculations
    :caption: Contents:
 
    cm
+   flattening
    gme
    mu
    qpea
-   flattening
    run
 
 

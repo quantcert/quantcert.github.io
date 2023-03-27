@@ -10,19 +10,22 @@ project = 'Phase sensitivity of entanglement in QPEA'
 copyright = '2023, Grâce Amouzou'
 authors = 'Grâce Amouzou, Frédéric Holweck, Kossi Atchonouglo'
 package_name = 'QPEA-QCA'
-package_folder = "../src"
+package_folder = "../../src"
+
+import sys, os
+sys.path.append(os.path.abspath(package_folder))
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
-
-templates_path = ['_templates']
-exclude_patterns = [
+extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx.ext.todo',
 ]
+
+templates_path = ['_templates']
+exclude_patterns = []
 
 
 

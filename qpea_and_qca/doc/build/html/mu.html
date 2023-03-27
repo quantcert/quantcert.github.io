@@ -32,8 +32,204 @@
 
           <div class="body" role="main">
             
-  <section id="mu-evaluation">
-<h1>MU Evaluation<a class="headerlink" href="#mu-evaluation" title="Permalink to this heading">¶</a></h1>
+  <section id="module-mu">
+<span id="mu-evaluation"></span><h1>MU Evaluation<a class="headerlink" href="#module-mu" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="mu.a_matrix">
+<span class="sig-prename descclassname"><span class="pre">mu.</span></span><span class="sig-name descname"><span class="pre">a_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mu.html#a_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mu.a_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the matrix “a” of the Mermin polynomial based on three Pauli’s matrices.</p>
+<dl>
+<dt>Example :</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="o">-</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.36</span><span class="p">,</span> <span class="mf">0.54</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">],[</span><span class="mf">0.5</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.51</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.53</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">],[</span><span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="mf">0.48</span><span class="p">]])</span>
+<span class="go">[[ 0.43+0.j    0.9 +0.08j]</span>
+<span class="go"> [ 0.9 -0.08j -0.43+0.j  ]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
+</dd>
+<dt class="field-even">Param<span class="colon">:</span></dt>
+<dd class="field-even"><p>list(int) t : A list of 2 * n lists containing three (03) floats.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array(complex) – The matrix a of dimension 2*2.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mu.a_prime_matrix">
+<span class="sig-prename descclassname"><span class="pre">mu.</span></span><span class="sig-name descname"><span class="pre">a_prime_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mu.html#a_prime_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mu.a_prime_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the matrix “a’” of the Mermin polynomial ased on three Pauli’s matrices.</p>
+<dl>
+<dt>Example :</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_prime_matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="o">-</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.36</span><span class="p">,</span> <span class="mf">0.54</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">],[</span><span class="mf">0.5</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.51</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.53</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">],[</span><span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="mf">0.48</span><span class="p">]])</span>
+<span class="go">[[ 0.48+0.j    0.43-0.76j]</span>
+<span class="go"> [ 0.43+0.76j -0.48+0.j  ]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
+</dd>
+<dt class="field-even">Param<span class="colon">:</span></dt>
+<dd class="field-even"><p>list(int) t : A list of 2 * n lists containing three (03) floats.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array(complex) – The matrix a’ of dimension 2*2.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mu.first_coefficients_generation">
+<span class="sig-prename descclassname"><span class="pre">mu.</span></span><span class="sig-name descname"><span class="pre">first_coefficients_generation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mu.html#first_coefficients_generation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mu.first_coefficients_generation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the very first coefficients for the calculation of MU by random walk algorithm.</p>
+<dl>
+<dt>Example :</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">first_coefficients_generation</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[[-0.71636549  0.16623039 -0.67763407]</span>
+<span class="go"> [-0.36958952  0.54390424  0.75337359]</span>
+<span class="go"> [ 0.48738401 -0.78929548  0.37345613]</span>
+<span class="go"> [-0.51019129 -0.53759251  0.6713413 ]</span>
+<span class="go"> [ 0.89590429 -0.08368889  0.43629311]</span>
+<span class="go"> [ 0.42877383  0.76027758  0.48798669]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array(list(complex)) – A table of 2 * n lists containing three (03) coefficients each.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mu.mermin">
+<span class="sig-prename descclassname"><span class="pre">mu.</span></span><span class="sig-name descname"><span class="pre">mermin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mu.html#mermin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mu.mermin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the Mermin polynomial “mn” by recurrence.</p>
+<dl>
+<dt>Example :</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mermin</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[[</span><span class="mf">0.62</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.035</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.78</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.97</span><span class="p">],[</span><span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.68</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.57</span><span class="p">],[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.97</span><span class="p">]])</span>
+<span class="go">[[ 0.4066 +0.j       -0.37475+0.5798j   -0.5214 -0.05095j   0.1575 -0.206825j]</span>
+<span class="go"> [-0.37475-0.5798j   -0.4066 +0.j        0.1905 +0.199575j   0.5214 +0.05095j]</span>
+<span class="go"> [-0.5214 +0.05095j   0.1905 -0.199575j -0.4066 +0.j   0.37475-0.5798j]</span>
+<span class="go"> [ 0.1575 +0.206825j  0.5214 -0.05095j   0.37475+0.5798j   0.4066 +0.j]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
+</dd>
+<dt class="field-even">Param<span class="colon">:</span></dt>
+<dd class="field-even"><p>list(int) t : A list of 2 * n lists containing three (03) floats.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array(complex) – The polynomial “mn” of dimension 2^n * 2^n.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mu.mermin_prime">
+<span class="sig-prename descclassname"><span class="pre">mu.</span></span><span class="sig-name descname"><span class="pre">mermin_prime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mu.html#mermin_prime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mu.mermin_prime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the Mermin polynomial “mn’” by recurrence from matrices “a” and “a’”</p>
+<dl>
+<dt>Example :</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mermin_prime</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[[</span><span class="mf">0.62</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.035</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.78</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.97</span><span class="p">],[</span><span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.68</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.57</span><span class="p">],[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.97</span><span class="p">]])</span>
+<span class="go">[[ 0.9029+0.j       -0.21775+0.2046j    0.0454+0.0854j  -0.2085+0.210225j]</span>
+<span class="go"> [-0.21775-0.2046j   -0.9029+0.j       -0.0895-0.296975j  -0.0454-0.0854j]</span>
+<span class="go"> [ 0.0454-0.0854j   -0.0895+0.296975j -0.9029+0.j   0.21775-0.2046j]</span>
+<span class="go"> [-0.2085-0.210225j -0.0454+0.0854j    0.21775+0.2046j   0.9029+0.j]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
+</dd>
+<dt class="field-even">Param<span class="colon">:</span></dt>
+<dd class="field-even"><p>list(int) t : A list of 2 * n lists containing three (03) floats.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array(complex) – The polynomial “mn’” of dimension 2^n * 2^n.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mu.mu_calculation">
+<span class="sig-prename descclassname"><span class="pre">mu.</span></span><span class="sig-name descname"><span class="pre">mu_calculation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mu.html#mu_calculation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mu.mu_calculation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates “MU”, the result of the calculation of the vector with the mermin polynomial.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mn</strong> (<em>np.array</em><em>(</em><em>complex</em><em>)</em>) – The Mermin polynomial “mn”.</p></li>
+<li><p><strong>vector</strong> (<em>list</em><em>(</em><em>int</em><em>)</em>) – The state vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float – The value of the calculation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mu.new_coefficients_generation">
+<span class="sig-prename descclassname"><span class="pre">mu.</span></span><span class="sig-name descname"><span class="pre">new_coefficients_generation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mu.html#new_coefficients_generation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mu.new_coefficients_generation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates randomly new parameters for MU maximization by random walk algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – The number of qubits</p></li>
+<li><p><strong>old_array</strong> (<em>np.array</em><em>(</em><em>list</em><em>(</em><em>float</em><em>)</em><em>)</em>) – The table of the coefficients that didn’t maximize Mu</p></li>
+<li><p><strong>step</strong> (<em>float</em>) – The value of the step (used in the random walk algorithm)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array(list(complex)) – Table of new coefficients</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mu.xbest_calculation">
+<span class="sig-prename descclassname"><span class="pre">mu.</span></span><span class="sig-name descname"><span class="pre">xbest_calculation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mu.html#xbest_calculation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mu.xbest_calculation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Maximizes Mu. The algorithm used here is called the Random walk method.</dt><dd><p>The principle is simple. We randomly generate first parameters which are
+used to calculate Mu. The first value of Mu is called Mu0. Then, we
+calculate new parameters based on the previous ones and a variable
+called the descent step. With the new parameters, we calculate a new
+value of Mu. If this value is better than the previous one, we keep it
+and continue the researches until a counter is at its maximum value. The
+goal here is to take a big circle of research scope and to reduce it (by
+decreasing the decent step) more and more until the maximum value of Mu
+is found.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p></li>
+<li><p><strong>step</strong> (<em>int</em>) – The initial value of the descent step.</p></li>
+<li><p><strong>step_min</strong> (<em>float</em>) – The minimum value of the descent step (which is the length of the radius).</p></li>
+<li><p><strong>c_max</strong> (<em>int</em>) – The maximum value of the counter.</p></li>
+<li><p><strong>vector</strong> (<em>list</em><em>(</em><em>int</em><em>)</em>) – The vector for the calculation of Mu.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float – The value that is, expectedly, the optimal maximal value of Mu.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -56,10 +252,20 @@
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="cm.html">CM Evaluation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gme.html">GME Evaluation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">MU Evaluation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qpea.html">QPEA vectors variation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flattening.html">Flattening calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gme.html">GME Evaluation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MU Evaluation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mu.a_matrix"><code class="docutils literal notranslate"><span class="pre">a_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mu.a_prime_matrix"><code class="docutils literal notranslate"><span class="pre">a_prime_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mu.first_coefficients_generation"><code class="docutils literal notranslate"><span class="pre">first_coefficients_generation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mu.mermin"><code class="docutils literal notranslate"><span class="pre">mermin()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mu.mermin_prime"><code class="docutils literal notranslate"><span class="pre">mermin_prime()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mu.mu_calculation"><code class="docutils literal notranslate"><span class="pre">mu_calculation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mu.new_coefficients_generation"><code class="docutils literal notranslate"><span class="pre">new_coefficients_generation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mu.xbest_calculation"><code class="docutils literal notranslate"><span class="pre">xbest_calculation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qpea.html">QPEA vectors variation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run.html">Running all the calculations</a></li>
 </ul>
 
