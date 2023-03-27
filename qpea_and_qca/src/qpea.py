@@ -3,8 +3,8 @@ from math import e, pi
 from datetime import datetime
 import matplotlib.pyplot as plt
 
-from coefficient_matrices import *
-from mermin_polynomials import *
+from cm import *
+from mu import *
 from gme import *
 
 # Variables for the random walk algorithm

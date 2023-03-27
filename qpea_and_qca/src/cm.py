@@ -1,19 +1,19 @@
-from rank import *
+from flattening import *
 from math import sqrt
 
 
-def printing_cms(n, vector):
-    """Calculates the cumulation of the coefficient matrices values which is an invariant. In fact, at first, from the
-    input vector, all the flattenings are made. Then, a calculation is done from each of them. In the end, the
-    invariant is just the sum of all the results.
+def printing_cms(n, vector) -> int:
+    """Calculates the cumulation of the coefficient matrices values which is an invariant.
+        In fact, at first, from the input vector, all the flattenings are made. Then, a calculation is done from each of them. In the end, the
+        invariant is just the sum of all the results.
 
     Example:
         >>> printing_cms(3, [1 / sqrt(2), 0, 0, 0, 0, 0, 0, 1 / sqrt(2)])
         1
 
-    :param int n: The number of qubits.
-    :param list(int) vector : A list filled with the coefficients corresponding to the vector.
-    :returns: int invariant_total : The invariant.
+    :parameter int n: The number of qubits.
+    :parameter list[int] vector: A list filled with the coefficients corresponding to the vector.
+    :return: The invariant.
     """
     all_cms = flattening_and_rank_calculation(n, vector)
     number_of_flattening_types = maximum_of_flattening(n)

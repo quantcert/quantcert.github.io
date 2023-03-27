@@ -1,4 +1,4 @@
-from qpea_and_qca import *
+from qpea import *
 
 # For test running
 test = True

@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flattening &#8212; Phase sensitivity of entanglement in QPEA  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for flattening</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">comb</span><span class="p">,</span> <span class="n">floor</span>
+
+
+<div class="viewcode-block" id="maximum_of_flattening"><a class="viewcode-back" href="../flattening.html#flattening.maximum_of_flattening">[docs]</a><span class="k">def</span> <span class="nf">maximum_of_flattening</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates the maximum of flattening types that can be done. If the reuslt of the calculation is</span>
+<span class="sd">    a float, then, this number turns out to be the largest integer less or equal to our number.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; maximum_of_flattening(4)</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; maximum_of_flattening(7)</span>
+<span class="sd">        3</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :returns: int -- The maximum number of flattening types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">floor</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="maximum_of_matrices"><a class="viewcode-back" href="../flattening.html#flattening.maximum_of_matrices">[docs]</a><span class="k">def</span> <span class="nf">maximum_of_matrices</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">type_of_flattening</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates the maximum of matrices for a type of flattening. If the type of flattening is a divider of the</span>
+<span class="sd">    number of qubits, then, the first result is divided by 2.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; maximum_of_matrices(2, 1)</span>
+<span class="sd">        1.0</span>
+<span class="sd">        &gt;&gt;&gt; maximum_of_matrices(4, 2)</span>
+<span class="sd">        3.0</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :param int type_of_flattening : The type of flattening.</span>
+<span class="sd">    :returns: float -- The maximum number of matrices.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">max_matrices</span> <span class="o">=</span> <span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">type_of_flattening</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">type_of_flattening</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">max_matrices</span> <span class="o">=</span> <span class="n">max_matrices</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">max_matrices</span></div>
+
+
+<div class="viewcode-block" id="convert_in_binary"><a class="viewcode-back" href="../flattening.html#flattening.convert_in_binary">[docs]</a><span class="k">def</span> <span class="nf">convert_in_binary</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts an int into a string containing the number in bits.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; convert_in_binary(5,3)</span>
+<span class="sd">        &#39;101&#39;</span>
+<span class="sd">        &gt;&gt;&gt; convert_in_binary(5,5)</span>
+<span class="sd">        &#39;00101&#39;</span>
+
+<span class="sd">    :param int number: the number that is going to be converted.</span>
+<span class="sd">    :param int bits: the number of bits required.</span>
+<span class="sd">    :returns: String -- The converted number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">format</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="putting_in_list"><a class="viewcode-back" href="../flattening.html#flattening.putting_in_list">[docs]</a><span class="k">def</span> <span class="nf">putting_in_list</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Puts every figure of the number into a list type.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; putting_in_list(&quot;000&quot;)</span>
+<span class="sd">        [0, 0, 0]</span>
+
+<span class="sd">    :param string number: The number to split in a string format.</span>
+<span class="sd">    :returns: list(int) -- The list with every digit of the number in a case.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">number_in_caracters</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">number_in_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">caracter</span> <span class="ow">in</span> <span class="n">number_in_caracters</span><span class="p">:</span>
+        <span class="n">number_in_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">caracter</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">number_in_list</span></div>
+
+
+<div class="viewcode-block" id="list_of_combinaisons"><a class="viewcode-back" href="../flattening.html#flattening.list_of_combinaisons">[docs]</a><span class="k">def</span> <span class="nf">list_of_combinaisons</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">type_of_flattening</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Realizes the possible combinations for a type of flattening.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; list_of_combinaisons(5, 1)</span>
+<span class="sd">        [(1,), (2,), (3,), (4,), (5,)]</span>
+<span class="sd">        &gt;&gt;&gt; list_of_combinaisons(4, 2)</span>
+<span class="sd">        [(1, 2), (1, 3), (2, 3)]</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :param int type_of_flattening : The current type of flattening.</span>
+<span class="sd">    :returns: list[list(int)] -- The list of every possible combination.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">type_of_flattening</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">combinaisons_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">type_of_flattening</span><span class="p">):</span>
+        <span class="n">combinaisons_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">combinaisons_list</span></div>
+
+
+<div class="viewcode-block" id="list_of_combinaisons_for_invariant"><a class="viewcode-back" href="../flattening.html#flattening.list_of_combinaisons_for_invariant">[docs]</a><span class="k">def</span> <span class="nf">list_of_combinaisons_for_invariant</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Realizes the possible combinations for a type of flattening.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; list_of_combinaisons(4)</span>
+<span class="sd">        [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :returns: list[list(int)] -- The list of every possible combination.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">combinaisons_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">combinaisons_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">combinaisons_list</span></div>
+
+
+<div class="viewcode-block" id="flattening_and_rank_calculation"><a class="viewcode-back" href="../flattening.html#flattening.flattening_and_rank_calculation">[docs]</a><span class="k">def</span> <span class="nf">flattening_and_rank_calculation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Construct the matrices of every flattening type and calculates their rank.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; flattening_and_rank_calculation(3, [1, 0, 0, 0, 0, 0, 0, 1])</span>
+<span class="sd">        ([2, 2, 2], [[array([[1, 0, 0, 0], [0, 0, 0, 1]]), array([[1, 0, 0, 0], [0, 0, 0, 1]]), array([[1, 0, 0, 0], [0, 0, 0, 1]])]])</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :param list(int) T : A list filled with the coefficients corresponding to the vector.</span>
+<span class="sd">    :returns: list(list(int)) -- A list of all the matrices after all flatennings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">maximum_of_flattening</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">all_coef_matrices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">q</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">list_combinaisons</span> <span class="o">=</span> <span class="n">list_of_combinaisons</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+        <span class="n">coef_matrices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_combinaisons</span><span class="p">)):</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">list_combinaisons</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">M</span> <span class="o">=</span> <span class="p">[[]]</span>
+            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">M</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">n</span><span class="p">):</span>
+                <span class="n">bin_j</span> <span class="o">=</span> <span class="n">convert_in_binary</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">putting_in_list</span><span class="p">(</span><span class="n">bin_j</span><span class="p">)</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+                    <span class="n">w</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">M</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+            <span class="n">coef_matrices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+        <span class="n">all_coef_matrices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coef_matrices</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">all_coef_matrices</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Phase sensitivity of entanglement in QPEA</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cm.html">CM Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flattening.html">Flattening calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gme.html">GME Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mu.html">MU Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qpea.html">QPEA vectors variation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run.html">Running all the calculations</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Grâce Amouzou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
