@@ -183,7 +183,7 @@ linear doilies and outline some prospective extensions of our approach.
 The numerical results related to this paper can be found in the 
 [doilies](doilies) part of this GitHub repository.
 
-### Phase sensitivity of entanglement in the Quantum Phase Estimation Algorithm
+## Phase sensitivity of entanglement in the Quantum Phase Estimation Algorithm
 
 _Paper abstract:_<br/>
 We study entanglement in the pre-QFT part of the Quantum Phase Estimation and the 
