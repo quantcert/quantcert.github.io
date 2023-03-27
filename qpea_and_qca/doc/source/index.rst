@@ -1,0 +1,30 @@
+.. Phase sensitivity of entanglement in QPEA documentation master file, created by
+   sphinx-quickstart on Mon Mar 27 16:13:29 2023.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+QPEA files
+==========
+To run the calculations, all one needs to do is to lunch the file named "run".
+A simple example is provided with matrix "Z", 3+1 qubits and all the invariants.
+One may also run all the calculations
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   cm
+   gme
+   mu
+   qpea
+   flattening
+   run
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

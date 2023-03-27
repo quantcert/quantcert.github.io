@@ -180,4 +180,17 @@ also list several distinguished findings about $N$-qubit doilies that are absent
 in the three-qubit case, point out a couple of specific features exhibited by
 linear doilies and outline some prospective extensions of our approach.
 
-The numerical results related to this paper can be found in the [doilies](doilies) part of this GitHub repository.
+The numerical results related to this paper can be found in the 
+[doilies](doilies) part of this GitHub repository.
+
+### Phase sensitivity of entanglement in the Quantum Phase Estimation Algorithm
+
+_Paper abstract:_<br/>
+We study entanglement in the pre-QFT part of the Quantum Phase Estimation and the 
+Quantum Counting algorithms. In particular we focus on the sensitivity of 
+entanglement to the input value (the phase and the ratio of marked elements M/N) 
+in some basic cases. One starts from numerical observations and deduce some general 
+results in particular regarding the classes of entanglement.
+
+More information related to this paper can be found in the 
+[qpea_and_qca](qpea_and_qca) part of this GitHub repository.
