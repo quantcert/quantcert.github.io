@@ -1,0 +1,287 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Hypergraphstates used for optimization &#8212; Qiskit Mermin Evaluation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mermin polynomials used for optimization" href="mermin_polynomials-opti.html" />
+    <link rel="prev" title="Hypergraphstates" href="hypergraphstates.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates">
+<span id="hypergraphstates-used-for-optimization"></span><h1>Hypergraphstates used for optimization<a class="headerlink" href="#module-mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.convert_in_binary">
+<code class="descname">convert_in_binary</code><span class="sig-paren">(</span><em>number_to_convert</em>, <em>number_of_bits=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/hypergraphstates_optimization/hypergraphstates.html#convert_in_binary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.convert_in_binary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an int into a string containing its bits.</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convert_in_binary</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">101</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convert_in_binary</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">00101</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>number_to_convert</strong> (<em>int</em>) – the number that is going to be converted.</li>
+<li><strong>number_of_bits</strong> (<em>int</em>) – the number of bits required.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">String number : The converted number.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.corresponding_state_determination">
+<code class="descname">corresponding_state_determination</code><span class="sig-paren">(</span><em>n</em>, <em>state</em>, <em>hyperedges</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/hypergraphstates_optimization/hypergraphstates.html#corresponding_state_determination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.corresponding_state_determination" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Determines the states corresponding to an hyperedge. That is the states </dt>
+<dd>where the vertices linked by the hyperedge are equal to 1.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>int</em>) – The number of qubits.</li>
+<li><strong>state</strong> (<em>list</em><em>(</em><em>int</em><em>)</em>) – The state of the vector.</li>
+<li><strong>hyperedges</strong> (<em>list</em><em>(</em><em>list</em><em>(</em><em>int</em><em>)</em><em>)</em>) – a list containing the lists of the 
+vertices which are linked by an hyperedge.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body"><p class="first last">boolean – True if the state is in an hyperedge.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.hyperedges_computation">
+<code class="descname">hyperedges_computation</code><span class="sig-paren">(</span><em>n</em>, <em>state_vector</em>, <em>hyperedges</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/hypergraphstates_optimization/hypergraphstates.html#hyperedges_computation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.hyperedges_computation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Puts the phases in the right places. Wherever there is an edge or an </dt>
+<dd>hyperedge between some vertices, a minus sign is put where those 
+vertices are all in state 1.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hyperedges_computation</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="go">[0.5, 0.5, 0.5, -0.5]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>int</em>) – The number of qubits.</li>
+<li><strong>state_vector</strong> (<em>list</em><em>(</em><em>int</em><em>)</em>) – The initialized state vector.</li>
+<li><strong>hyperedges</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>int</em><em>]</em>) – a list containing the lists of the 
+vertices which are linked by an hyperedge.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">list(int) – The correct state vector.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.putting_in_list">
+<code class="descname">putting_in_list</code><span class="sig-paren">(</span><em>number</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/hypergraphstates_optimization/hypergraphstates.html#putting_in_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.putting_in_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Puts every figure of the number in a list.</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">putting_in_list</span><span class="p">(</span><span class="mi">000</span><span class="p">)</span>
+<span class="go"> [0, 0, 0]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> (<em>int</em>) – The number to split.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list(int) – The list with every digit of the number in a case.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.state_vector_initialisation">
+<code class="descname">state_vector_initialisation</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/hypergraphstates_optimization/hypergraphstates.html#state_vector_initialisation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.state_vector_initialisation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Initializes the state vector; which is to create an array with the size </dt>
+<dd>of 2 to the power of n. Every number in the array is equal to 1 over the
+square root of 2 to the power of n.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">state_vector_initialisation</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[0.35355339 0.35355339 0.35355339 0.35355339 0.35355339 0.35355339</span>
+<span class="go"> 0.35355339 0.35355339]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>int</em>) – The number of qubits.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list(int) – The initialized state vector.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.states_formation">
+<code class="descname">states_formation</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/hypergraphstates_optimization/hypergraphstates.html#states_formation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.hypergraphstates_optimization.hypergraphstates.states_formation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates every state for n qubits.</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states_formation</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go"> [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>int</em>) – The number of qubits.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list(list(int)) – A list of all the possible states of the qubits 
+which are also contained in a list.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Qiskit Mermin Evaluation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basis_change.html">Basis Change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coefficients_shapes.html">Coefficients shapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QFT.html">QFT main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypergraphstates.html">Hypergraphstates</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hypergraphstates used for optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mermin_polynomials-opti.html">Mermin polynomials used for optimization</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="hypergraphstates.html" title="previous chapter">Hypergraphstates</a></li>
+      <li>Next: <a href="mermin_polynomials-opti.html" title="next chapter">Mermin polynomials used for optimization</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Henri de Boutray and Grâce Amouzou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/hypergraphstates-opti.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

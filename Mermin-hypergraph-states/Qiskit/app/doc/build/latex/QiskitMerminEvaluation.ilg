@@ -1,0 +1,7 @@
+This is makeindex, version 2.15 [TeX Live 2019] (kpathsea + Thai support).
+Scanning style file ./python.ist.......done (7 attributes redefined, 0 ignored).
+Scanning input file QiskitMerminEvaluation.idx....done (44 entries accepted, 0 rejected).
+Sorting entries....done (266 comparisons).
+Generating output file QiskitMerminEvaluation.ind....done (129 lines written, 0 warnings).
+Output written in QiskitMerminEvaluation.ind.
+Transcript written in QiskitMerminEvaluation.ilg.

@@ -1,0 +1,129 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter A
+  \item \spxentry{a\_matrix()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}, 
+		\hyperpage{15}
+  \item \spxentry{a\_prime\_matrix()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}, 
+		\hyperpage{15}
+  \item \spxentry{all\_QFT\_circuits()}\spxextra{in module mermin\_on\_qiskit.QFT}, \hyperpage{9}
+
+  \indexspace
+  \bigletter B
+  \item \spxentry{build\_QFT\_0\_to\_k()}\spxextra{in module mermin\_on\_qiskit.QFT}, \hyperpage{9}
+
+  \indexspace
+  \bigletter C
+  \item \spxentry{circuit\_creation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates}, 
+		\hyperpage{11}
+  \item \spxentry{circuit\_initialisation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates}, 
+		\hyperpage{11}
+  \item \spxentry{coefficients\_format\_mixed\_to\_packed()}\spxextra{in module mermin\_on\_qiskit.coefficients\_shapes}, 
+		\hyperpage{7}
+  \item \spxentry{coefficients\_format\_packed\_to\_mixed()}\spxextra{in module mermin\_on\_qiskit.coefficients\_shapes}, 
+		\hyperpage{7}
+  \item \spxentry{coefficients\_format\_packed\_to\_unpacked()}\spxextra{in module mermin\_on\_qiskit.coefficients\_shapes}, 
+		\hyperpage{7}
+  \item \spxentry{coefficients\_format\_unpacked\_to\_packed()}\spxextra{in module mermin\_on\_qiskit.coefficients\_shapes}, 
+		\hyperpage{8}
+  \item \spxentry{convert\_in\_binary()}\spxextra{in module mermin\_on\_qiskit.basis\_change}, 
+		\hyperpage{3}
+  \item \spxentry{convert\_in\_binary()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}, 
+		\hyperpage{13}
+  \item \spxentry{corresponding\_state\_determination()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}, 
+		\hyperpage{13}
+
+  \indexspace
+  \bigletter E
+  \item \spxentry{edges\_layout()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates}, 
+		\hyperpage{11}
+  \item \spxentry{evaluate\_monomial()}\spxextra{in module mermin\_on\_qiskit.evaluation}, 
+		\hyperpage{1}
+  \item \spxentry{evaluate\_polynomial()}\spxextra{in module mermin\_on\_qiskit.evaluation}, 
+		\hyperpage{1}
+
+  \indexspace
+  \bigletter F
+  \item \spxentry{first\_coefficients\_generation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}, 
+		\hyperpage{15}
+
+  \indexspace
+  \bigletter G
+  \item \spxentry{get\_coef\_from\_optimization\_file()}\spxextra{in module mermin\_on\_qiskit.QFT}, 
+		\hyperpage{9}
+
+  \indexspace
+  \bigletter H
+  \item \spxentry{hyperedges\_computation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}, 
+		\hyperpage{13}
+
+  \indexspace
+  \bigletter L
+  \item \spxentry{load\_IBMQ\_account()}\spxextra{in module mermin\_on\_qiskit.run}, \hyperpage{5}
+
+  \indexspace
+  \bigletter M
+  \item \spxentry{measures\_exploitation()}\spxextra{in module mermin\_on\_qiskit.evaluation}, 
+		\hyperpage{2}
+  \item \spxentry{mermin()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}, 
+		\hyperpage{15}
+  \item \spxentry{mermin\_coeffs\_to\_U3\_coeffs()}\spxextra{in module mermin\_on\_qiskit.basis\_change}, 
+		\hyperpage{3}
+  \item \spxentry{mermin\_IBM()}\spxextra{in module mermin\_on\_qiskit.evaluation}, \hyperpage{2}
+  \item \spxentry{mermin\_on\_qiskit.basis\_change}\spxextra{module}, \hyperpage{3}
+  \item \spxentry{mermin\_on\_qiskit.coefficients\_shapes}\spxextra{module}, \hyperpage{7}
+  \item \spxentry{mermin\_on\_qiskit.evaluation}\spxextra{module}, \hyperpage{1}
+  \item \spxentry{mermin\_on\_qiskit.hypergraphstates}\spxextra{module}, \hyperpage{11}
+  \item \spxentry{mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}\spxextra{module}, 
+		\hyperpage{13}
+  \item \spxentry{mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}\spxextra{module}, 
+		\hyperpage{15}
+  \item \spxentry{mermin\_on\_qiskit.QFT}\spxextra{module}, \hyperpage{9}
+  \item \spxentry{mermin\_on\_qiskit.run}\spxextra{module}, \hyperpage{5}
+  \item \spxentry{mermin\_prime()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}, 
+		\hyperpage{15}
+  \item \spxentry{mu\_calculation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}, 
+		\hyperpage{16}
+  \item \spxentry{mu\_file\_saving()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}, 
+		\hyperpage{16}
+
+  \indexspace
+  \bigletter N
+  \item \spxentry{new\_coefficients\_generation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}, 
+		\hyperpage{16}
+
+  \indexspace
+  \bigletter P
+  \item \spxentry{periodic\_state()}\spxextra{in module mermin\_on\_qiskit.QFT}, \hyperpage{10}
+  \item \spxentry{putting\_in\_list()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}, 
+		\hyperpage{14}
+
+  \indexspace
+  \bigletter Q
+  \item \spxentry{QFT\_lenght()}\spxextra{in module mermin\_on\_qiskit.QFT}, \hyperpage{9}
+
+  \indexspace
+  \bigletter R
+  \item \spxentry{runCircuit()}\spxextra{in module mermin\_on\_qiskit.run}, \hyperpage{5}
+
+  \indexspace
+  \bigletter S
+  \item \spxentry{state\_vector\_initialisation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}, 
+		\hyperpage{14}
+  \item \spxentry{states\_formation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}, 
+		\hyperpage{14}
+
+  \indexspace
+  \bigletter U
+  \item \spxentry{U3\_gates\_placement()}\spxextra{in module mermin\_on\_qiskit.basis\_change}, 
+		\hyperpage{3}
+
+  \indexspace
+  \bigletter X
+  \item \spxentry{xbest\_calculation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}, 
+		\hyperpage{17}
+
+\end{sphinxtheindex}

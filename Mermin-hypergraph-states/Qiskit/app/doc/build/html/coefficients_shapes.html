@@ -1,0 +1,245 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Coefficients shapes &#8212; Qiskit Mermin Evaluation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QFT main" href="QFT.html" />
+    <link rel="prev" title="Run" href="run.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-mermin_on_qiskit.coefficients_shapes">
+<span id="coefficients-shapes"></span><h1>Coefficients shapes<a class="headerlink" href="#module-mermin_on_qiskit.coefficients_shapes" title="Permalink to this headline">¶</a></h1>
+<p>There are three format used for the algorithms:</p>
+<ol class="arabic simple">
+<li>A flat list of coefficients, organized as such: 
+<span class="math notranslate nohighlight">\([x1,y1,z1, x2,y2, ..., xn,yn,zn, x'1,y'1,z'1, x'2,y'2, ..., x'n,y'n,z'n]\)</span>.
+This format is called the <em>unpacked coefficients</em> and is used for the QFT 
+optimization.</li>
+<li>A list of coefficients grouped by families of operators:
+<span class="math notranslate nohighlight">\([[[x1,y1,z1], [x2,y2, ..., [xn,yn,zn]], [[x'1,y'1,z'1], [x'2,y'2, ..., [x'n,y'n,z'n]]]\)</span>
+in other words, you have the whole <span class="math notranslate nohighlight">\(a\)</span> family and the the whole <span class="math notranslate nohighlight">\(a'\)</span> family,
+and in a family, you have <span class="math notranslate nohighlight">\(a1\)</span>, <span class="math notranslate nohighlight">\(a2\)</span>, and so on… Each <span class="math notranslate nohighlight">\(a\)</span> is described by
+it’s three coefficients: <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>.
+This format is called <em>packed coefficients</em> and is used to easily manipulate
+coefficients.</li>
+<li>A list of coefficients grouped by operator:
+<span class="math notranslate nohighlight">\([[x1,y1,z1], [x'1,y'1,z'1], [x2,y2,z2], [x'2,y'2,z'2], ...]\)</span>
+in other words, the list is formed as such: <span class="math notranslate nohighlight">\([a1, a'1, a2, a'2, ...]\)</span>
+This format was previously used for evaluation in Qiskit, allowing for a
+simpler data flow. But it has the inconvenient of being less true to the 
+maths behind all this so it has been dropped. 
+This format is called <em>mixed</em></li>
+</ol>
+<p>With the functions of this module, one may switch between <em>1.</em> and <em>2.</em> and 
+between <em>2.</em> and <em>3.</em>, allowing tho switch freely between the three formats.</p>
+<dl class="function">
+<dt id="mermin_on_qiskit.coefficients_shapes.coefficients_format_mixed_to_packed">
+<code class="descname">coefficients_format_mixed_to_packed</code><span class="sig-paren">(</span><em>_a_a_prime_coeffs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/coefficients_shapes.html#coefficients_format_mixed_to_packed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.coefficients_shapes.coefficients_format_mixed_to_packed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format the coefficients in the shape previously used for evaluation</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coefficients_format_mixed_to_packed</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>                   
+<span class="go">([[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>_a_a_prime_coeffs</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>any</em><em>]</em><em>]</em>) – List of lists of elements as 
+described above (mixed coefficients).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">tuple(list[list[any]]) – Tuple of list of list of elements (packed
+coefficients).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_mixed">
+<code class="descname">coefficients_format_packed_to_mixed</code><span class="sig-paren">(</span><em>_a_coeffs</em>, <em>_a_prime_coeffs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/coefficients_shapes.html#coefficients_format_packed_to_mixed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_mixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format the coefficients in the shape now used for evaluation</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coefficients_format_packed_to_mixed</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]])</span>                           
+<span class="go">[[1, 2, 3], [7, 8, 9], [4, 5, 6], [10, 11, 12]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>_a_coeffs</strong><strong>, </strong><strong>_a_prime_coeffs</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>any</em><em>]</em><em>]</em>) – Lists of lists of 
+elements as described above (packed coefficients).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list[any] – List of list of elements (mixed coefficients).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_unpacked">
+<code class="descname">coefficients_format_packed_to_unpacked</code><span class="sig-paren">(</span><em>_a_coeffs</em>, <em>_a_prime_coeffs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/coefficients_shapes.html#coefficients_format_packed_to_unpacked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.coefficients_shapes.coefficients_format_packed_to_unpacked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unpacks two lists of lists of three elements to one list of elements</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coefficients_format_packed_to_unpacked</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]],[[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]])</span>
+<span class="go">[1,2,3,4,5,6,7,8,9,10,11,12]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>_a_coeffs</strong><strong>, </strong><strong>_a_prime_coeffs</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>any</em><em>]</em><em>]</em>) – Lists of lists of 
+elements as described above (packed coefficients).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list[any] – List of elements (unpacked coefficients).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.coefficients_shapes.coefficients_format_unpacked_to_packed">
+<code class="descname">coefficients_format_unpacked_to_packed</code><span class="sig-paren">(</span><em>_a_a_prime_coeffs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/coefficients_shapes.html#coefficients_format_unpacked_to_packed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.coefficients_shapes.coefficients_format_unpacked_to_packed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Packs a list of elements in two lists of lists of three elements</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coefficients_format_unpacked_to_packed</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
+<span class="go">([[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>_a_a_prime_coeffs</strong> (<em>list</em><em>[</em><em>any</em><em>]</em>) – List of elements (unpacked coefficients).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">tuple[list[list[any]]] – Lists of lists of elements as described 
+above (packed coefficients).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Qiskit Mermin Evaluation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basis_change.html">Basis Change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">Run</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Coefficients shapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QFT.html">QFT main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypergraphstates.html">Hypergraphstates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypergraphstates-opti.html">Hypergraphstates used for optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mermin_polynomials-opti.html">Mermin polynomials used for optimization</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="run.html" title="previous chapter">Run</a></li>
+      <li>Next: <a href="QFT.html" title="next chapter">QFT main</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Henri de Boutray and Grâce Amouzou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/coefficients_shapes.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

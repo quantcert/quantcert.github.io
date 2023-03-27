@@ -1,0 +1,44 @@
+\indexentry{mermin\_on\_qiskit.evaluation (module)@\spxentry{mermin\_on\_qiskit.evaluation}\spxextra{module}|hyperpage}{1}
+\indexentry{evaluate\_monomial() (in module mermin\_on\_qiskit.evaluation)@\spxentry{evaluate\_monomial()}\spxextra{in module mermin\_on\_qiskit.evaluation}|hyperpage}{1}
+\indexentry{evaluate\_polynomial() (in module mermin\_on\_qiskit.evaluation)@\spxentry{evaluate\_polynomial()}\spxextra{in module mermin\_on\_qiskit.evaluation}|hyperpage}{1}
+\indexentry{measures\_exploitation() (in module mermin\_on\_qiskit.evaluation)@\spxentry{measures\_exploitation()}\spxextra{in module mermin\_on\_qiskit.evaluation}|hyperpage}{2}
+\indexentry{mermin\_IBM() (in module mermin\_on\_qiskit.evaluation)@\spxentry{mermin\_IBM()}\spxextra{in module mermin\_on\_qiskit.evaluation}|hyperpage}{2}
+\indexentry{mermin\_on\_qiskit.basis\_change (module)@\spxentry{mermin\_on\_qiskit.basis\_change}\spxextra{module}|hyperpage}{3}
+\indexentry{U3\_gates\_placement() (in module mermin\_on\_qiskit.basis\_change)@\spxentry{U3\_gates\_placement()}\spxextra{in module mermin\_on\_qiskit.basis\_change}|hyperpage}{3}
+\indexentry{convert\_in\_binary() (in module mermin\_on\_qiskit.basis\_change)@\spxentry{convert\_in\_binary()}\spxextra{in module mermin\_on\_qiskit.basis\_change}|hyperpage}{3}
+\indexentry{mermin\_coeffs\_to\_U3\_coeffs() (in module mermin\_on\_qiskit.basis\_change)@\spxentry{mermin\_coeffs\_to\_U3\_coeffs()}\spxextra{in module mermin\_on\_qiskit.basis\_change}|hyperpage}{3}
+\indexentry{mermin\_on\_qiskit.run (module)@\spxentry{mermin\_on\_qiskit.run}\spxextra{module}|hyperpage}{5}
+\indexentry{load\_IBMQ\_account() (in module mermin\_on\_qiskit.run)@\spxentry{load\_IBMQ\_account()}\spxextra{in module mermin\_on\_qiskit.run}|hyperpage}{5}
+\indexentry{runCircuit() (in module mermin\_on\_qiskit.run)@\spxentry{runCircuit()}\spxextra{in module mermin\_on\_qiskit.run}|hyperpage}{5}
+\indexentry{mermin\_on\_qiskit.coefficients\_shapes (module)@\spxentry{mermin\_on\_qiskit.coefficients\_shapes}\spxextra{module}|hyperpage}{7}
+\indexentry{coefficients\_format\_mixed\_to\_packed() (in module mermin\_on\_qiskit.coefficients\_shapes)@\spxentry{coefficients\_format\_mixed\_to\_packed()}\spxextra{in module mermin\_on\_qiskit.coefficients\_shapes}|hyperpage}{7}
+\indexentry{coefficients\_format\_packed\_to\_mixed() (in module mermin\_on\_qiskit.coefficients\_shapes)@\spxentry{coefficients\_format\_packed\_to\_mixed()}\spxextra{in module mermin\_on\_qiskit.coefficients\_shapes}|hyperpage}{7}
+\indexentry{coefficients\_format\_packed\_to\_unpacked() (in module mermin\_on\_qiskit.coefficients\_shapes)@\spxentry{coefficients\_format\_packed\_to\_unpacked()}\spxextra{in module mermin\_on\_qiskit.coefficients\_shapes}|hyperpage}{7}
+\indexentry{coefficients\_format\_unpacked\_to\_packed() (in module mermin\_on\_qiskit.coefficients\_shapes)@\spxentry{coefficients\_format\_unpacked\_to\_packed()}\spxextra{in module mermin\_on\_qiskit.coefficients\_shapes}|hyperpage}{8}
+\indexentry{mermin\_on\_qiskit.QFT (module)@\spxentry{mermin\_on\_qiskit.QFT}\spxextra{module}|hyperpage}{9}
+\indexentry{QFT\_lenght() (in module mermin\_on\_qiskit.QFT)@\spxentry{QFT\_lenght()}\spxextra{in module mermin\_on\_qiskit.QFT}|hyperpage}{9}
+\indexentry{all\_QFT\_circuits() (in module mermin\_on\_qiskit.QFT)@\spxentry{all\_QFT\_circuits()}\spxextra{in module mermin\_on\_qiskit.QFT}|hyperpage}{9}
+\indexentry{build\_QFT\_0\_to\_k() (in module mermin\_on\_qiskit.QFT)@\spxentry{build\_QFT\_0\_to\_k()}\spxextra{in module mermin\_on\_qiskit.QFT}|hyperpage}{9}
+\indexentry{get\_coef\_from\_optimization\_file() (in module mermin\_on\_qiskit.QFT)@\spxentry{get\_coef\_from\_optimization\_file()}\spxextra{in module mermin\_on\_qiskit.QFT}|hyperpage}{9}
+\indexentry{periodic\_state() (in module mermin\_on\_qiskit.QFT)@\spxentry{periodic\_state()}\spxextra{in module mermin\_on\_qiskit.QFT}|hyperpage}{10}
+\indexentry{mermin\_on\_qiskit.hypergraphstates (module)@\spxentry{mermin\_on\_qiskit.hypergraphstates}\spxextra{module}|hyperpage}{11}
+\indexentry{circuit\_creation() (in module mermin\_on\_qiskit.hypergraphstates)@\spxentry{circuit\_creation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates}|hyperpage}{11}
+\indexentry{circuit\_initialisation() (in module mermin\_on\_qiskit.hypergraphstates)@\spxentry{circuit\_initialisation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates}|hyperpage}{11}
+\indexentry{edges\_layout() (in module mermin\_on\_qiskit.hypergraphstates)@\spxentry{edges\_layout()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates}|hyperpage}{11}
+\indexentry{mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates (module)@\spxentry{mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}\spxextra{module}|hyperpage}{13}
+\indexentry{convert\_in\_binary() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates)@\spxentry{convert\_in\_binary()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}|hyperpage}{13}
+\indexentry{corresponding\_state\_determination() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates)@\spxentry{corresponding\_state\_determination()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}|hyperpage}{13}
+\indexentry{hyperedges\_computation() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates)@\spxentry{hyperedges\_computation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}|hyperpage}{13}
+\indexentry{putting\_in\_list() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates)@\spxentry{putting\_in\_list()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}|hyperpage}{14}
+\indexentry{state\_vector\_initialisation() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates)@\spxentry{state\_vector\_initialisation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}|hyperpage}{14}
+\indexentry{states\_formation() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates)@\spxentry{states\_formation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.hypergraphstates}|hyperpage}{14}
+\indexentry{mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials (module)@\spxentry{mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}\spxextra{module}|hyperpage}{15}
+\indexentry{a\_matrix() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials)@\spxentry{a\_matrix()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}|hyperpage}{15}
+\indexentry{a\_prime\_matrix() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials)@\spxentry{a\_prime\_matrix()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}|hyperpage}{15}
+\indexentry{first\_coefficients\_generation() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials)@\spxentry{first\_coefficients\_generation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}|hyperpage}{15}
+\indexentry{mermin() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials)@\spxentry{mermin()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}|hyperpage}{15}
+\indexentry{mermin\_prime() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials)@\spxentry{mermin\_prime()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}|hyperpage}{15}
+\indexentry{mu\_calculation() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials)@\spxentry{mu\_calculation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}|hyperpage}{16}
+\indexentry{mu\_file\_saving() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials)@\spxentry{mu\_file\_saving()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}|hyperpage}{16}
+\indexentry{new\_coefficients\_generation() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials)@\spxentry{new\_coefficients\_generation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}|hyperpage}{16}
+\indexentry{xbest\_calculation() (in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials)@\spxentry{xbest\_calculation()}\spxextra{in module mermin\_on\_qiskit.hypergraphstates\_optimization.mermin\_polynomials}|hyperpage}{17}

@@ -1,0 +1,292 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QFT &#8212; Qiskit Mermin Evaluation  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for QFT</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot; This module builds the QFT in Qiskit and runs it</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qiskit.circuit.library</span> <span class="k">import</span> <span class="n">Permutation</span>
+
+
+<div class="viewcode-block" id="build_QFT_0_to_k"><a class="viewcode-back" href="../QFT.html#QFT.build_QFT_0_to_k">[docs]</a><span class="k">def</span> <span class="nf">build_QFT_0_to_k</span><span class="p">(</span><span class="n">nWires</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; Builds the QFT on nWires wires up to the `k^{th}` state generates.</span>
+<span class="sd">  Note that the whole QFT can be generated in Qiskit using the `QFT` method</span>
+<span class="sd">  </span>
+<span class="sd">  :param int nWires: number of wires</span>
+<span class="sd">  :param int k: number of gates in the output</span>
+<span class="sd">  :returns: QuantumCirctuit -- `k^{th}` first gates of the QFT circuit</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">partial_QFT</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">nWires</span><span class="p">)</span>
+  <span class="n">gate_count</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">if</span> <span class="n">gate_count</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">partial_QFT</span>
+  <span class="k">for</span> <span class="n">wire</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nWires</span><span class="p">):</span>
+    <span class="n">partial_QFT</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">wire</span><span class="p">)</span>
+    <span class="n">gate_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">gate_count</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">partial_QFT</span>
+    <span class="k">for</span> <span class="n">inlayer_nb</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">nWires</span><span class="o">-</span><span class="p">(</span><span class="n">wire</span><span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
+      <span class="n">partial_QFT</span><span class="o">.</span><span class="n">cu1</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">inlayer_nb</span><span class="p">),</span> <span class="n">wire</span><span class="p">,</span> <span class="n">inlayer_nb</span><span class="o">+</span><span class="p">(</span><span class="n">wire</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+      <span class="n">gate_count</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">if</span> <span class="n">gate_count</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">partial_QFT</span>
+    <span class="n">partial_QFT</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+  <span class="n">SWAP</span> <span class="o">=</span> <span class="n">Permutation</span><span class="p">(</span><span class="n">nWires</span><span class="p">,</span> <span class="p">[</span><span class="n">nWires</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">wire</span> <span class="k">for</span> <span class="n">wire</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nWires</span><span class="p">)])</span>
+  <span class="n">meas</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">nWires</span><span class="p">,</span> <span class="n">nWires</span><span class="p">)</span>
+  <span class="n">meas</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nWires</span><span class="p">))</span>
+  <span class="n">meas</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nWires</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="n">nWires</span><span class="p">))</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">partial_QFT</span> <span class="o">+</span> <span class="n">SWAP</span> <span class="o">+</span> <span class="n">meas</span> <span class="k">if</span> <span class="n">measure</span> <span class="k">else</span> <span class="n">partial_QFT</span> <span class="o">+</span> <span class="n">SWAP</span>
+  <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="QFT_lenght"><a class="viewcode-back" href="../QFT.html#QFT.QFT_lenght">[docs]</a><span class="k">def</span> <span class="nf">QFT_lenght</span><span class="p">(</span><span class="n">nWires</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">nWires</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">nWires</span><span class="o">*</span><span class="p">(</span><span class="n">nWires</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="all_QFT_circuits"><a class="viewcode-back" href="../QFT.html#QFT.all_QFT_circuits">[docs]</a><span class="k">def</span> <span class="nf">all_QFT_circuits</span><span class="p">(</span><span class="n">nWires</span><span class="p">):</span>
+  <span class="k">return</span> <span class="p">[</span><span class="n">build_QFT_0_to_k</span><span class="p">(</span><span class="n">nWires</span><span class="p">,</span> <span class="n">partial_QFT_len</span><span class="p">)</span> 
+      <span class="k">for</span> <span class="n">partial_QFT_len</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">QFT_lenght</span><span class="p">(</span><span class="n">nWires</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="periodic_state"><a class="viewcode-back" href="../QFT.html#QFT.periodic_state">[docs]</a><span class="k">def</span> <span class="nf">periodic_state</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">nWires</span><span class="p">):</span>
+  <span class="sa">r</span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  Returns the periodic state `|\varphi^{l,r}&gt;` of size `2^{nWires}`. We have:</span>
+<span class="sd">    </span>
+<span class="sd">    `|\varphi^{l,r}&gt; = \sum_{i=0}^{A-1}|l+ir&gt;/sqrt(A)` with</span>
+<span class="sd">    `A = floor((2^{nWires}-l)/r)+1`</span>
+
+<span class="sd">    In this definition, ``l`` is the shift of the state, and ``r`` is the period </span>
+<span class="sd">    of the state.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    Since</span>
+<span class="sd">    `|\varphi^{1,5}&gt; = (|1&gt;+|6&gt;+|11&gt;)/sqrt(3)=(|0001&gt;+|0110&gt;+|1011&gt;)/sqrt(3)`,</span>
+
+<span class="sd">    &gt;&gt;&gt; periodic_state(1,5,4)</span>
+<span class="sd">    (0, 1/3*sqrt(3), 0, 0, 0, 0, 1/3*sqrt(3), 0, 0, 0, 0, 1/3*sqrt(3), 0, 0, 0, 0)</span>
+
+<span class="sd">  :param int l: The shift of the state.</span>
+<span class="sd">  :param int r: The period of the state.</span>
+<span class="sd">  :param int nWires: The size of the system (number of qubits).</span>
+<span class="sd">  :returns: vector -- The state defined by ``l``, ``r`` and ``nWires`` according</span>
+<span class="sd">    to the definition given above.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">N</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">nWires</span>
+  <span class="n">sqrt_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">N</span><span class="o">-</span><span class="n">l</span><span class="p">)</span><span class="o">/</span><span class="n">r</span><span class="p">))</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">N</span>
+  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">N</span><span class="o">-</span><span class="n">l</span><span class="p">)</span><span class="o">/</span><span class="n">r</span><span class="p">))):</span>
+    <span class="n">result</span><span class="p">[</span><span class="n">l</span><span class="o">+</span><span class="n">k</span><span class="o">*</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">sqrt_A</span>
+  <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="get_coef_from_optimization_file"><a class="viewcode-back" href="../QFT.html#QFT.get_coef_from_optimization_file">[docs]</a><span class="k">def</span> <span class="nf">get_coef_from_optimization_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">iteration</span><span class="p">,</span> <span class="n">evaluation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; The file fed in this function must be a csv file with one of columns being</span>
+<span class="sd">    named &quot;iteration&quot;, an other one being named &quot;coefficients&quot; and if the</span>
+<span class="sd">    `evaluation` parameter is set to `True` a column named &quot;intricationValue&quot;.</span>
+<span class="sd">    The &quot;iteration&quot; column must contain integers, the &quot;coefficients&quot; column</span>
+<span class="sd">    must contain tuples of real numbers (the mermin coefficients) and the</span>
+<span class="sd">    &quot;intricationValue&quot; column must contain real numbers.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    &gt;&gt;&gt; get_coef_from_optimization_file(&quot;../Sage/grover_pac/examples/qft_optimization/1-1-4.csv&quot;,2)</span>
+<span class="sd">    ([(-0.197738971530022, -0.00983193840670331, 0.980205403028067), </span>
+<span class="sd">        (0.892812904656093, -0.035586934469795, 0.449019695976237), </span>
+<span class="sd">        (-0.892282320991669, -0.00788653439204609, -0.451408974457756), </span>
+<span class="sd">        (0.982839628418978, 0.012341254672589, -0.184048793102134)], </span>
+<span class="sd">      [(0.430894968126063, -0.0211632981654613, 0.902153890006799), </span>
+<span class="sd">        (-0.984337747324624, 0.0105235779205133, 0.175978559772592), </span>
+<span class="sd">        (0.984221659519729, -0.0118117927364157, -0.176545196719091), </span>
+<span class="sd">        (0.883187500168151, 0.0083188846423974, 0.468946303647911)])</span>
+
+<span class="sd">  :param str filename: Name of the CSV file containing the information about the</span>
+<span class="sd">    Mermin coefficients.</span>
+<span class="sd">  :param int iteration: Designates the line from which the data must be</span>
+<span class="sd">    retrieved.</span>
+<span class="sd">  :param bool intricationValue: If `True`, the evaluation will be returned as </span>
+<span class="sd">    well as the coefficients.</span>
+<span class="sd">  :returns: tuple[list[tuple[real]]], real(optional) -- The mermin coefficients </span>
+<span class="sd">    previously optimized in packed shape, eventually with the optimum computed</span>
+<span class="sd">    with these coefficients.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">coef_file</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">coef_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">iteration</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">evaluation</span><span class="p">:</span>
+          <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">]),</span> <span class="nb">eval</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;intricationValue&#39;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+          <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">])</span>
+  <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s2">&quot;Iteration </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">iteration</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> not found in file </span><span class="se">\&quot;</span><span class="s2">&quot;</span>\
+   <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; Performs the Mermin evaluation on each state generated by the QFT ran on </span>
+<span class="sd">    IBM&#39;s quantum processor.</span>
+
+<span class="sd">  This script must be called with 4 arguments, the number of wires, the shift of </span>
+<span class="sd">    the periodic state given as input to the QFT, the period of this same state</span>
+<span class="sd">    and the path of the csv file storing the optimization results (operated</span>
+<span class="sd">    separately).</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">    $ python QFT.py 4 1 1 &quot;../Sage/grover_pac/examples/qft_optimization/1-1-4.csv&quot;</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="kn">import</span> <span class="nn">sys</span>
+  <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="k">import</span> <span class="n">plot_histogram</span>
+  <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">interactive</span>
+
+  <span class="kn">from</span> <span class="nn">coefficients_shapes</span> <span class="k">import</span> <span class="o">*</span>
+  <span class="kn">import</span> <span class="nn">evaluation</span>
+  <span class="kn">import</span> <span class="nn">run</span>
+  
+  <span class="c1">####                 Example of circuit run in terminal                   ####</span>
+  <span class="n">run</span><span class="o">.</span><span class="n">load_IBMQ_account</span><span class="p">()</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Account loaded&quot;</span><span class="p">)</span>
+  <span class="c1"># interactive(True) # needed to view the plot from terminal</span>
+  <span class="c1"># circ = build_QFT_0_to_k(4, 11, measure=True)</span>
+  <span class="c1"># count = run.runCircuit(circ, monitor=True)</span>
+  <span class="c1"># plot_histogram(count).show()</span>
+  <span class="c1"># input(&#39;Press return to end program&#39;)</span>
+
+  <span class="c1">####                QFT execution and mermin evaluation                   ####</span>
+
+  <span class="c1">##                       Variables initialization                           ##</span>
+  <span class="n">simulation</span> <span class="o">=</span> <span class="kc">True</span>
+  <span class="n">local</span> <span class="o">=</span> <span class="kc">True</span>
+  <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.1</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="n">l</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+  <span class="n">nWires</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># usually 4</span>
+  <span class="n">optimization_filepath</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+
+  <span class="c1">##                      Periodic state preparation                          ##</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="n">periodic_state</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">nWires</span><span class="p">)</span>
+  <span class="n">preparation_circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">nWires</span><span class="p">)</span>
+  <span class="n">preparation_circuit</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="n">nWires</span><span class="p">))</span>
+
+  <span class="c1">##           QFT Mermin evaluation for each step of the algorithm           ##</span>
+  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="c1"># range(QFT_lenght(nWires)+1):</span>
+    <span class="n">coeffs</span><span class="p">,</span> <span class="n">theoreticalValue</span> <span class="o">=</span> <span class="n">get_coef_from_optimization_file</span><span class="p">(</span>
+      <span class="n">optimization_filepath</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">evaluation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">QFT_partial</span> <span class="o">=</span> <span class="n">build_QFT_0_to_k</span><span class="p">(</span><span class="n">nWires</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">evaluation</span><span class="o">.</span><span class="n">evaluate_polynomial</span><span class="p">(</span><span class="n">nWires</span><span class="p">,</span> 
+      <span class="n">preparation_circuit</span> <span class="o">+</span> <span class="n">QFT_partial</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">,</span> <span class="n">is_simulation</span><span class="o">=</span><span class="n">simulation</span><span class="p">,</span> 
+      <span class="n">local</span><span class="o">=</span><span class="n">local</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="ow">not</span> <span class="n">simulation</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">simulation</span><span class="p">:</span>
+      <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">theoreticalValue</span><span class="o">-</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+  <span class="c1"># In case of problem, retrieve results using backend.retrieve_job(job_id)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Qiskit Mermin Evaluation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basis_change.html">Basis Change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run.html">Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coefficients_shapes.html">Coefficients shapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QFT.html">QFT main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hypergraphstates.html">Hypergraphstates</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Henri de Boutray and Grâce Amouzou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

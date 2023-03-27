@@ -1,0 +1,95 @@
+## Results provided by IBMQ Experience on January 4 2021 on the backend ibmq-casablanca (accessible via the research-q program)
+## The first vector [(a,b,c),n] provides the line/context in decimal notation with its sign \pm 1
+## The second vecteor [[p,q,r],[s,t,u],[v,w,x]] corresponds to the evaluated context in base 4 notation. The context is made of three measurements
+## {'1':nbr1, '0':nbr0} corresponds to the results obtained by the IBM quantum machine for 8192 shots
+## Then follows 2  figures: the sum of the expectation of the contexts, the global standard deviation
+
+[(0, 3, 4), 1]
+[[0, 1], [1, 0], [1, 1]]
+{'1': 855, '0': 7337}
+0.791259765625
+0.0033779825476181248
+[(0, 7, 8), 1]
+[[0, 1], [2, 0], [2, 1]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:00:00,626: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 909, '0': 7283}
+1.5693359375
+0.00484282203202522
+[(0, 11, 12), 1]
+[[0, 1], [3, 0], [3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:02:05,145: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 979, '0': 7213}
+2.330322265625
+0.006024762901535781
+[(1, 3, 5), 1]
+[[0, 2], [1, 0], [1, 2]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:02:49,515: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 681, '0': 7511}
+3.1640625
+0.00675291658825683
+[(1, 7, 9), 1]
+[[0, 2], [2, 0], [2, 2]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:03:35,477: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 727, '0': 7465}
+3.986572265625
+0.007448062700153297
+[(1, 11, 13), 1]
+[[0, 2], [3, 0], [3, 2]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:04:20,435: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 917, '0': 7275}
+4.7626953125
+0.008222434835230672
+[(2, 3, 6), 1]
+[[0, 3], [1, 0], [1, 3]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:05:05,523: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 548, '0': 7644}
+5.62890625
+0.008673408854654606
+[(2, 7, 10), 1]
+[[0, 3], [2, 0], [2, 3]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:05:49,564: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 479, '0': 7713}
+6.511962890625
+0.009052531503624553
+[(2, 11, 14), 1]
+[[0, 3], [3, 0], [3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:06:34,242: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 370, '0': 7822}
+7.421630859375
+0.009338775969927387
+[(4, 9, 14), -1]
+[[1, 1], [2, 2], [3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:07:19,558: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7457, '0': 735}
+8.2421875
+0.009858114756049488
+[(4, 10, 13), 1]
+[[1, 1], [2, 3], [3, 2]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:08:04,315: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 625, '0': 7567}
+9.089599609375
+0.010285188843858695
+[(5, 8, 14), 1]
+[[1, 2], [2, 1], [3, 3]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:08:47,842: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 640, '0': 7552}
+9.933349609375
+0.010704055056762623
+[(5, 10, 12), -1]
+[[1, 2], [2, 3], [3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:09:32,587: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7224, '0': 968}
+10.697021484375
+0.011282583124753916
+[(6, 8, 13), -1]
+[[1, 3], [2, 1], [3, 2]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:10:17,179: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 7138, '0': 1054}
+11.439697265625
+0.011873574079992415
+[(6, 9, 12), 1]
+[[1, 3], [2, 2], [3, 1]]
+ibmqfactory.load_account:WARNING:2021-01-04 14:11:02,084: Credentials are already in use. The existing account in the session will be replaced.
+{'1': 693, '0': 7499}
+12.2705078125
+0.012265182358951727
