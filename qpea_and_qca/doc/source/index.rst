@@ -3,21 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Quantum Phase Estimation Algorithm files
-========================================
+QPEA files
+==========
 To run the calculations, all one needs to do is to lunch the file named "run".
 A simple example is provided with matrix "Z", 3+1 qubits and all the invariants.
+One may also run all the calculations
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Contents:
 
    cm
    gme
-   mu 
+   mu
    qpea
-   rank
+   flattening
    run
 
 

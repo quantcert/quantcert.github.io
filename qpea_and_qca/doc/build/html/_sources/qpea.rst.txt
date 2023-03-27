@@ -1,7 +1,7 @@
 .. nodoctest
 
-QPEA algorithm vectors variation
-================================
+QPEA vectors variation
+======================
 
 .. automodule:: qpea
    :members:

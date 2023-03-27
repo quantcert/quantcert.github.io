@@ -1,7 +1,7 @@
 .. nodoctest
 
-Coefficient Matrices Evaluation
-===============================
+CM Evaluation
+=============
 
 .. automodule:: cm
    :members:

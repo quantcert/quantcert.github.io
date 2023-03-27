@@ -19,17 +19,10 @@ available on arxiv <!---->. This code allows to draw the corresponding figures.
 
 <!--The code documentation can be found
 [in pdf format](doc/build/latex/Mermin-evaluation.pdf) or
-[as a website](doc/build/html).--> It is generated from the code using
-[Sphinx](http://www.sphinx-doc.org).
+[as a website](doc/build/html).--> It is generated from the code using [Sphinx](http://www.sphinx-doc.org).
 
 ## Copyright
 
-This program is distributed under the GNU LGPL 3. See the enclosed file
-[LICENSE](LICENSE).
+This program is distributed under the GNU LGPL 3. See the enclosed file [LICENSE](LICENSE).
 
 ## References
-
-<!-- <a id="BJH19"/>[BJH+19] Henri de Boutray, Hamza Jaffali, Frédéric
-  Holweck, Alain Giorgetti and Pierre-Alain Masson. **Mermin Polynomials for
-  Entanglement Evaluation in Grover’s algorithm and Quantum Fourier Transform**
-  [arXiv:2001.05192](https://arxiv.org/abs/2001.05192)-->

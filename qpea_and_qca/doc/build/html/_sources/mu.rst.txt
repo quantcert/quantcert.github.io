@@ -1,7 +1,7 @@
 .. nodoctest
 
-Mermin Polynomials Evaluation
-=============================
+MU Evaluation
+=============
 
 .. automodule:: mu
    :members:

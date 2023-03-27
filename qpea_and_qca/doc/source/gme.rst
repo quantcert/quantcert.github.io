@@ -1,7 +1,7 @@
 .. nodoctest
 
-Geometric Measure of Entanglement Evaluation
-===============================
+GME Evaluation
+==============
 
 .. automodule:: gme
    :members:

@@ -21,6 +21,7 @@ templates_path = ['_templates']
 exclude_patterns = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
+    'sphinx.ext.todo',
 ]
 
 
