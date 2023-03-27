@@ -1,0 +1,208 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>mermin_on_qiskit.hypergraphstates &#8212; Qiskit Mermin Evaluation  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../_static/icon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for mermin_on_qiskit.hypergraphstates</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="circuit_creation"><a class="viewcode-back" href="../../hypergraphstates.html#mermin_on_qiskit.hypergraphstates.circuit_creation">[docs]</a><span class="k">def</span> <span class="nf">circuit_creation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">hyperedges</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Creates an empty circuit with the number of qubits required.</span>
+
+<span class="sd">    :param int n: The number of qubits of which depends the number of wires to </span>
+<span class="sd">        create.</span>
+<span class="sd">    :param list[list[int]] hyperedges: A list containing the lists of the </span>
+<span class="sd">        vertices which are linked by an hyperedge.</span>
+<span class="sd">    :returns: QuantumCircuit -- A circuit with the required number of quantum </span>
+<span class="sd">        wires and classical wires.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">created</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">qubits</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">created</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">hyperedges</span><span class="p">):</span>
+        <span class="n">hyperedge</span> <span class="o">=</span> <span class="n">hyperedges</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hyperedge</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">qubits</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span>
+            <span class="n">created</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">created</span><span class="p">:</span>
+        <span class="n">qubits</span> <span class="o">=</span> <span class="n">n</span>
+    <span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">circuit</span></div>
+
+
+<div class="viewcode-block" id="circuit_initialisation"><a class="viewcode-back" href="../../hypergraphstates.html#mermin_on_qiskit.hypergraphstates.circuit_initialisation">[docs]</a><span class="k">def</span> <span class="nf">circuit_initialisation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">hyperedges</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot; Creates an empty circuit with the number of qubits required and places </span>
+<span class="sd">        the circuit in the initial state before adding gates for calculations.</span>
+<span class="sd">        Places and Hadamard gate on every main (non additional) qubits wire.</span>
+<span class="sd">        This is needed in order to place the qubits in a `|+&gt;` state which is</span>
+<span class="sd">        `(|0&gt; + |1&gt;) / sqrt(2)`.</span>
+
+<span class="sd">    :param int n: The number of qubits of which depends the number of wires to </span>
+<span class="sd">        create.</span>
+<span class="sd">    :param list[list[int]] hyperedges: A list containing the lists of the </span>
+<span class="sd">        vertices which are linked by an hyperedge.</span>
+<span class="sd">    :returns: QuantumCircuit -- The created and initialized circuit.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">circuit</span> <span class="o">=</span> <span class="n">circuit_creation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">hyperedges</span><span class="p">)</span>
+    <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">circuit</span></div>
+
+
+<div class="viewcode-block" id="edges_layout"><a class="viewcode-back" href="../../hypergraphstates.html#mermin_on_qiskit.hypergraphstates.edges_layout">[docs]</a><span class="k">def</span> <span class="nf">edges_layout</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">hyperedges</span><span class="p">,</span> <span class="n">circuit</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Disposes all the gates corresponding to the edges.</span>
+<span class="sd">        In fact, for a two-vertices edge, there not much to do, as for a </span>
+<span class="sd">        three-vertices edge, too.</span>
+<span class="sd">        For more an edge of than three vertices, things are a little different. </span>
+<span class="sd">        First, Toffoli gates are used to link qubits</span>
+<span class="sd">        two by two. The target qubit here is an auxiliary qubit.</span>
+<span class="sd">        Then, the last link is a simple CZ.</span>
+<span class="sd">        But all the Toffoli gates that we put create an entanglement which is </span>
+<span class="sd">        removed by replacing exactly the same gates again after the CZ.</span>
+
+<span class="sd">    :param int n: The number of qubits.</span>
+<span class="sd">    :param list[list[int] hyperedges: The list of the vertices which are linked</span>
+<span class="sd">        by an hyperedge.</span>
+<span class="sd">    :param QuantumCircuit circuit: The circuit that will be modified.</span>
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">hyperedge</span> <span class="ow">in</span> <span class="n">hyperedges</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hyperedge</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">hyperedge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">hyperedge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hyperedge</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="c1"># The target qubit is the third one</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">hyperedge</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  
+            <span class="n">circuit</span><span class="o">.</span><span class="n">toffoli</span><span class="p">(</span><span class="o">*</span><span class="n">hyperedge</span><span class="p">)</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">hyperedge</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hyperedge</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="c1"># Here, the process is different. We&#39;ll place many Toffoli gates to </span>
+            <span class="c1"># form the hypergraph-state which creates an entanglement. So, we </span>
+            <span class="c1"># place new Toffoli gates again for cancel the entanglement</span>
+            <span class="n">vertex_index</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">maximum</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hyperedge</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">qubit_aux</span> <span class="o">=</span> <span class="n">n</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">toffoli</span><span class="p">(</span><span class="n">hyperedge</span><span class="p">[</span><span class="n">vertex_index</span><span class="p">],</span> <span class="n">hyperedge</span><span class="p">[</span><span class="n">vertex_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">qubit_aux</span><span class="p">)</span>
+            <span class="n">vertex_index</span> <span class="o">+=</span> <span class="mi">2</span>
+            <span class="k">while</span> <span class="n">vertex_index</span> <span class="o">&lt;</span> <span class="n">maximum</span><span class="p">:</span>
+                <span class="n">circuit</span><span class="o">.</span><span class="n">toffoli</span><span class="p">(</span><span class="n">hyperedge</span><span class="p">[</span><span class="n">vertex_index</span><span class="p">],</span> <span class="n">qubit_aux</span><span class="p">,</span> <span class="n">qubit_aux</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">qubit_aux</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">vertex_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="n">qubit_aux</span><span class="p">,</span> <span class="n">hyperedge</span><span class="p">[</span><span class="n">vertex_index</span><span class="p">])</span>
+            <span class="n">qubit_aux</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">vertex_index</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">maximum</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">circuit</span><span class="o">.</span><span class="n">toffoli</span><span class="p">(</span><span class="n">qubit_aux</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hyperedge</span><span class="p">[</span><span class="n">vertex_index</span><span class="p">],</span> <span class="n">qubit_aux</span><span class="p">)</span>
+                <span class="n">qubit_aux</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">vertex_index</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">maximum</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">toffoli</span><span class="p">(</span><span class="n">hyperedge</span><span class="p">[</span><span class="n">vertex_index</span><span class="p">],</span> <span class="n">hyperedge</span><span class="p">[</span><span class="n">vertex_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">qubit_aux</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Qiskit Mermin Evaluation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basis_change.html">Basis Change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../run.html">Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../coefficients_shapes.html">Coefficients shapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../QFT.html">QFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hypergraphstates.html">Hypergraphstates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hypergraphstates-opti.html">Hypergraphstates used for optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mermin_polynomials-opti.html">Mermin polynomials used for optimization</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Henri de Boutray and Grâce Amouzou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

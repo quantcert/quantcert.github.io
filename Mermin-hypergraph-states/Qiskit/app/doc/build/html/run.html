@@ -1,0 +1,181 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Run &#8212; Qiskit Mermin Evaluation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Coefficients shapes" href="coefficients_shapes.html" />
+    <link rel="prev" title="Basis Change" href="basis_change.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-mermin_on_qiskit.run">
+<span id="run"></span><h1>Run<a class="headerlink" href="#module-mermin_on_qiskit.run" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="mermin_on_qiskit.run.load_IBMQ_account">
+<code class="descname">load_IBMQ_account</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/run.html#load_IBMQ_account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.run.load_IBMQ_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the IMBQ account. If it fails a first time, the IBMQ token will be
+prompted and the account loading will be attempted a second time. If it fails
+a second time. Exits by letting the <span class="math notranslate nohighlight">\(Error\)</span> be raised.</p>
+<dl class="docutils">
+<dt>Raises:</dt>
+<dd><dl class="first last docutils">
+<dt>IBMQAccountCredentialsInvalidFormat: If the default provider stored on</dt>
+<dd>disk could not be parsed.</dd>
+<dt>IBMQAccountCredentialsNotFound: If no IBM Quantum Experience credentials</dt>
+<dd>can be found.</dd>
+<dt>IBMQAccountMultipleCredentialsFound: If multiple IBM Quantum Experience</dt>
+<dd>credentials are found.</dd>
+<dt>IBMQAccountCredentialsInvalidUrl: If invalid IBM Quantum Experience</dt>
+<dd>credentials are found.</dd>
+<dt>IBMQProviderError: If the default provider stored on disk could not</dt>
+<dd>be found.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="mermin_on_qiskit.run.runCircuit">
+<code class="descname">runCircuit</code><span class="sig-paren">(</span><em>qc</em>, <em>simulation=True</em>, <em>return_count=True</em>, <em>monitor=False</em>, <em>local=True</em>, <em>shots=1024</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mermin_on_qiskit/run.html#runCircuit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mermin_on_qiskit.run.runCircuit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the QuantumCircuit <span class="math notranslate nohighlight">\(qc\)</span> in IBM Quantum Experience.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>qc</strong> (<em>QuantumCircuit</em>) – Quantum circuit to be executed</li>
+<li><strong>simulation</strong> (<em>bool</em>) – If <span class="math notranslate nohighlight">\(True\)</span>, the experience runs on a simulator, which 
+substantially faster than on a quantum processor (due to the demand on
+those). Otherwise, runs on one of the quantum processors.</li>
+<li><strong>return_count</strong> (<em>bool</em>) – If the circuit contains measures, and return_count
+is set to <span class="math notranslate nohighlight">\(True\)</span>, then the count of the result will be returned, otherwise,
+the result will be directly returned.</li>
+<li><strong>monitor</strong> (<em>bool</em>) – If <span class="math notranslate nohighlight">\(True\)</span>, a <span class="math notranslate nohighlight">\(job_monitor\)</span> will be displayed after the
+job is submitted.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>TODO : add local and shots docs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dict[str:int] or Result – Depending on return_count, <span class="math notranslate nohighlight">\(runCircuit\)</span>
+either returns the result (of type Result) of the run or the count of this
+result, which would be the equivalent of calling <span class="math notranslate nohighlight">\(result.get_counts()\)</span>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Qiskit Mermin Evaluation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basis_change.html">Basis Change</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coefficients_shapes.html">Coefficients shapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QFT.html">QFT main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypergraphstates.html">Hypergraphstates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypergraphstates-opti.html">Hypergraphstates used for optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mermin_polynomials-opti.html">Mermin polynomials used for optimization</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="basis_change.html" title="previous chapter">Basis Change</a></li>
+      <li>Next: <a href="coefficients_shapes.html" title="next chapter">Coefficients shapes</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Henri de Boutray and Grâce Amouzou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/run.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
