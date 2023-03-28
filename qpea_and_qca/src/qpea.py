@@ -17,10 +17,10 @@ c_max = 200
 def cas_matrice_z(n, angles, basis):
     """ Generates the vectors depending on the basis and also the angles for the quantum phase estimation algorithm.
 
-    :param int n: The number of qubits.
-    :param np.array(float) angles : The table of the angle values.
-    :param int basis: The value of the number of qubits on the second register.
-    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithm will be.
+    :parameter int n: The number of qubits.
+    :parameter np.array[float] angles: The table of the angle values.
+    :parameter int basis: The value of the number of qubits on the second register.
+    :return: np.array[complex] -- A table of vectors corresponding to each angle value on which the algorithm will be.
 
     """
     if basis == 1:
@@ -33,10 +33,10 @@ def cas_matrice_z(n, angles, basis):
 def cas_matrice_g(n, angles, basis):
     """ Generates the vectors depending on the basis and also the angles for the quantum counting algorithm.
 
-    :param int n: The number of qubits.
-    :param np.array(float) angles : The table of the angle values.
-    :param int basis: The value of the number of qubits on the second register.
-    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithm will be.
+    :parameter int n: The number of qubits.
+    :parameter np.array[float] angles: The table of the angle values.
+    :parameter int basis: The value of the number of qubits on the second register.
+    :return: np.array[complex] -- A table of vectors corresponding to each angle value on which the algorithm will be.
 
     """
     if basis == 1:
@@ -50,10 +50,10 @@ def angles_determination(min, max, step):
     """ Generates a table of different values that corresponds to an angle which will be involved in the algorithms
     calculations and variations.
 
-    :param int min: The minimal value of the angle.
-    :param int max: The maximal value of the angle.
-    :param float step: The step of variation of the angle.
-    :returns: np.array(float) -- The table of float values of the angle.
+    :parameter int min: The minimal value of the angle.
+    :parameter int max: The maximal value of the angle.
+    :parameter float step: The step of variation of the angle.
+    :return: np.array[float] -- The table of float values of the angle.
 
     """
     angles = np.arange(min, max, step)
@@ -61,14 +61,14 @@ def angles_determination(min, max, step):
 
 
 def psi_calculation_qca_base_0(n, thetas):
-    """ Computes the vector for each angle for the quantum counting algorithm when there are only one qubit on the
-    second register. This means that the total number of qubits of all the system is n + 1.
+    """ Computes the vector for each angle for the quantum counting algorithm 
+    when there are only one qubit on the second register. This means that the 
+    total number of qubits of all the system is n + 1.
 
-    :param int n: The number of qubits.
-    :param np.array(float) thetas : The table of float values of the angle.
-    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithm will be.
-    performed.
-
+    :parameter int n: The number of qubits.
+    :parameter np.array[float] thetas: The table of float values of the angle.
+    :return: np.array[complex] -- A table of vectors corresponding to each angle 
+        value on which the algorithm will be performed.
     """
     norm = 1 / sqrt(2 ** n)
     max = 2 ** (n - 1)
@@ -86,14 +86,14 @@ def psi_calculation_qca_base_0(n, thetas):
 
 
 def psi_calculation_qca_base_00(n, thetas):
-    """ Computes the vector for each angle for the quantum counting algorithm when there are two qubits on the
-    second register. This means that the total number of qubits of all the system is n + 2.
+    """ Computes the vector for each angle for the quantum counting algorithm 
+    when there are two qubits on the second register. This means that the total 
+    number of qubits of all the system is n + 2.
 
-    :param int n: The number of qubits.
-    :param np.array(float) thetas : The table of float values of the angle.
-    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithm will be
-    performed.
-
+    :parameter int n: The number of qubits.
+    :parameter np.array[float] thetas: The table of float values of the angle.
+    :return: np.array[complex] -- A table of vectors corresponding to each angle 
+        value on which the algorithm will be performed.
     """
     norm = 1 / sqrt(2 ** (n + 2))
     max = 2 ** (n - 2)
@@ -113,14 +113,14 @@ def psi_calculation_qca_base_00(n, thetas):
 
 
 def psi_calculation_qpea_base_0(n, phis):
-    """ Computes the vector for each angle for the quantum phase estimation algorithm when there are only one qubit on
-    the second register. This means that the total number of qubits of all the system is n + 1.
+    """ Computes the vector for each angle for the quantum phase estimation
+    algorithm when there are only one qubit on the second register. This
+    means that the total number of qubits of all the system is n + 1.
 
-    :param int n: The number of qubits.
-    :param np.array(float) phis : The table of float values of the angle.
-    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithm will be
-    performed.
-
+    :parameter int n: The number of qubits.
+    :parameter np.array[float] phis: The table of float values of the angle.
+    :return: np.array[complex] -- A table of vectors corresponding to each angle 
+        value on which the algorithm will be performed.
     """
     norm = 1 / sqrt(2 ** n)
     max = 2 ** (n - 1)
@@ -136,14 +136,14 @@ def psi_calculation_qpea_base_0(n, phis):
 
 
 def psi_calculation_qpea_base_00(n, phis):
-    """ Computes the vector for each angle for the quantum phase estimation algorithm when there are two qubits on
-    the second register. This means that the total number of qubits of all the system is n + 2.
+    """ Computes the vector for each angle for the quantum phase estimation 
+    algorithm when there are two qubits on the second register. This means that
+    the total number of qubits of all the system is n + 2.
 
-    :param int n: The number of qubits.
-    :param np.array(float) phis : The table of float values of the angle.
-    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithms will be
-    performed.
-
+    :parameter int n: The number of qubits.
+    :parameter np.array[float] phis: The table of float values of the angle.
+    :return: np.array[complex] -- A table of vectors corresponding to each angle 
+        value on which the algorithms will be performed.
     """
     norm = 1 / sqrt(2 ** n)
     max = 2 ** (n - 2)
@@ -163,9 +163,9 @@ def psi_calculation_qpea_base_00(n, phis):
 def calcul_invariant_cm(n, psi):
     """ Calculates the value of the invariant based on the coefficient matrices.
 
-    :param int n: The number of qubits.
-    :param np.array(float) psi : The table of vectors for the algorithm.
-    :returns: np.array(complex) -- The list of the coefficients calculated.
+    :parameter int n: The number of qubits.
+    :parameter np.array[float] psi: The table of vectors for the algorithm.
+    :return: np.array[complex] -- The list of the coefficients calculated.
 
     """
     liste_cms = []
@@ -178,10 +178,10 @@ def calcul_invariant_cm(n, psi):
 def calcul_invariant_mu(n, angles, psi):
     """ Calculates the value of the invariant based on Mermin polynomials.
 
-    :param int n: The number of qubits.
-    :param np.array(float) angles : The table of the angle values.
-    :param np.array(float) psi : The table of vectors for the algorithm.
-    :returns: np.array(complex) -- The list of the coefficients calculated.
+    :parameter int n: The number of qubits.
+    :parameter np.array[float] angles: The table of the angle values.
+    :parameter np.array[float] psi: The table of vectors for the algorithm.
+    :return: np.array[complex] -- The list of the coefficients calculated.
 
     """
     liste_mus = []
@@ -194,10 +194,10 @@ def calcul_invariant_mu(n, angles, psi):
 def calcul_invariant_gme(n, angles, psi):
     """ Calculates the value of the invariant based on Mermin polynomials.
 
-    :param int n: The number of qubits.
-    :param np.array(float) angles : The table of the angle values.
-    :param np.array(float) psi : The table of vectors for the algorithm.
-    :returns: np.array(complex) -- The list of the coefficients calculated.
+    :parameter int n: The number of qubits.
+    :parameter np.array[float] angles: The table of the angle values.
+    :parameter np.array[float] psi: The table of vectors for the algorithm.
+    :return: np.array[complex] -- The list of the coefficients calculated.
 
     """
     liste_gmes = []
@@ -211,13 +211,13 @@ def run(n_first_register, n_second_register, case, cm=True, mu=True, gm=True):
     """ Generates a table of different values that corresponds to an angle which will be involved in the algorithms
     calculations and variations.
 
-    :param int n_first_register: The number of qubits on the first register of the system.
-    :param int n_second_register: The value of the number of qubits on the second register.
-    :param str case: The value that determines the type of algorithm : "G" for qca or "Z" for qpea.
-    :param boolean cm : This determines if the invariant based on the coefficient matrices should be calculated or not
-    :param boolean mu : This determines if the invariant based on the Mermin polynials should be calculated or not
-    :param boolean gm : This determines if the geometric measure invariant should be calculated or not
-    :returns: np.array(float) -- The table of float values of the angle.
+    :parameter int n_first_register: The number of qubits on the first register of the system.
+    :parameter int n_second_register: The value of the number of qubits on the second register.
+    :parameter str case: The value that determines the type of algorithm : "G" for qca or "Z" for qpea.
+    :parameter boolean cm: This determines if the invariant based on the coefficient matrices should be calculated or not
+    :parameter boolean mu: This determines if the invariant based on the Mermin polynials should be calculated or not
+    :parameter boolean gm: This determines if the geometric measure invariant should be calculated or not
+    :return: np.array[float] -- The table of float values of the angle.
 
     """
     # Initialisations
