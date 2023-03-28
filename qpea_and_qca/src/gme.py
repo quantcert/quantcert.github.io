@@ -15,8 +15,8 @@ def first_coefficients_generation(n):
          [-0.366532  -0.25643112j  0.67716151-0.58425138j]
          [ 0.74835654-0.53252389j -0.3953533 -0.00874982j]]
 
-    :param int n: The number of qubits.
-    :returns: np.array(list(complex)) -- A table of n lists containing three (03) coefficients.
+    :parameter int n: The number of qubits.
+    :return: np.array[list[complex]] -- A table of n lists containing three (03) coefficients.
 
     """
     first_coefficient_list = []
@@ -34,11 +34,10 @@ def first_coefficients_generation(n):
 def new_coefficients_generation(n, old_coefficients, step):
     """ Generates randomly new parameters for GME maximization by quantum walk algorithm.
 
-
-    :param int n: The number of qubits
-    :param np.array(list(complex)) old_coefficients: The table of the coefficients that didn't maximize the gme
-    :param float step: The value of the step (used in the random walk algorithm)
-    :returns: np.array(list(complex)) -- Table of new coefficients
+    :parameter int n: The number of qubits
+    :parameter np.array[list[complex]] old_coefficients: The table of the coefficients that didn't maximize the gme
+    :parameter float step: The value of the step (used in the random walk algorithm)
+    :return: np.array[list[complex]] -- Table of new coefficients
 
     """
     new_coefficients_list = []
@@ -55,12 +54,11 @@ def vector_calculation(n, coeffs, first_base=ket_0, second_base=ket_1):
     """ Calculation of the vector on which the GME will be calculated.
     This vector depends on the basis which can be |0> or |00>. The default value is the first mentioned.
 
-
-    :param int n: The number of qubits
-    :param np.array(list(complex)) coeffs: The table of the coefficients
-    :param list(int) first_base: The vector corresponding to |0> or |00>
-    :param list(int) second_base: The vector corresponding to |1> or |11>
-    :returns: np.array(list(complex)) -- Vector of length 2^n
+    :parameter int n: The number of qubits
+    :parameter np.array[list[complex]] coeffs: The table of the coefficients
+    :parameter np.array[int] first_base: The vector corresponding to |0> or |00>
+    :parameter np.array[int] second_base: The vector corresponding to |1> or |11>
+    :returns: np.array[list[complex]] -- Vector of length 2^n
 
     """
     vector = 1
@@ -73,8 +71,8 @@ def vector_calculation(n, coeffs, first_base=ket_0, second_base=ket_1):
 def gme_calculation(vector, psi):
     """ Calculates "GME", the result of the calculation of the vector with the generated one, formed to be "separable".
 
-    :param np.array(complex) vector: The separable, ie non entangled vector.
-    :param np.array(complex) psi: The state vector from which the gme is computed.
+    :parameter np.array[complex] vector: The separable, ie non entangled vector.
+    :parameter np.array[complex] psi: The state vector from which the gme is computed.
     :returns: float -- The value of the calculation.
 
     """
@@ -95,12 +93,12 @@ def gme_best_calculation(n, psi, step, alpha_min, c_max):
         decreasing the decent step) more and more until the maximum value of GME
         is found.
 
-    :param int n: The number of qubits.
-    :param list(complex) psi: The vector for the calculation of GME.
-    :param int step: The initial value of the descent step.
-    :param float alpha_min: The minimum value of the descent step (which is the length of the radius).
-    :param int c_max: The maximum value of the counter.
-    :returns: float -- The value that is, expectedly, Mu, the optimal maximal value of the gme.
+    :parameter int n: The number of qubits.
+    :parameter list[complex] psi: The vector for the calculation of GME.
+    :parameter int step: The initial value of the descent step.
+    :parameter float alpha_min: The minimum value of the descent step (which is the length of the radius).
+    :parameter int c_max: The maximum value of the counter.
+    :return: float -- The value that is, expectedly, Mu, the optimal maximal value of the gme.
 
     """
     c = 0

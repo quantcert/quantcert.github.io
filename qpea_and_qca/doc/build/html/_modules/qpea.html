@@ -47,13 +47,19 @@
 
 
 <div class="viewcode-block" id="cas_matrice_z"><a class="viewcode-back" href="../qpea.html#qpea.cas_matrice_z">[docs]</a><span class="k">def</span> <span class="nf">cas_matrice_z</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">basis</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generates the vectors depending on the basis and also the angles for the quantum phase estimation algorithm.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generates the vectors for the algorithm computation.</span>
+<span class="sd">        This depends on the basis and also on the angles for QPEA.</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param np.array(float) angles : The table of the angle values.</span>
-<span class="sd">    :param int basis: The value of the number of qubits on the second register.</span>
-<span class="sd">    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithm will be.</span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; cas_matrice_z(2, [0, 1, 2], 1)</span>
+<span class="sd">        [[0.5 (0.5+0j) 0.5 (0.5+0j)]</span>
+<span class="sd">         [0.5 (0.5+0j) 0.5 (0.5-1.2246467991473532e-16j)]</span>
+<span class="sd">         [0.5 (0.5+0j) 0.5 (0.5-2.4492935982947064e-16j)]]</span>
 
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter np.array[float] angles : The table of the angle values.</span>
+<span class="sd">    :parameter int basis: The value of the number of qubits on the second register.</span>
+<span class="sd">    :return: np.array[complex] -- A table of vectors corresponding to each angle value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">basis</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">psi</span> <span class="o">=</span> <span class="n">psi_calculation_qpea_base_0</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
@@ -63,13 +69,18 @@
 
 
 <div class="viewcode-block" id="cas_matrice_g"><a class="viewcode-back" href="../qpea.html#qpea.cas_matrice_g">[docs]</a><span class="k">def</span> <span class="nf">cas_matrice_g</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">basis</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generates the vectors depending on the basis and also the angles for the quantum counting algorithm.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generates the vectors depending on the basis and also the angles for QCA.</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param np.array(float) angles : The table of the angle values.</span>
-<span class="sd">    :param int basis: The value of the number of qubits on the second register.</span>
-<span class="sd">    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithm will be.</span>
+<span class="sd">    Example:</span>
+<span class="sd">    &gt;&gt;&gt; cas_matrice_g(2, [0, 1, 2], 1)</span>
+<span class="sd">    [[0.5 (0.5+0j) 0.5 (0.5+0j)]</span>
+<span class="sd">     [0.5 (0.5+0j) 0.5 (0.5+0j)]</span>
+<span class="sd">     [0.5 (0.5+0j) 0.5 0.5]]</span>
 
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter np.array[float] angles : The table of the angle values.</span>
+<span class="sd">    :parameter int basis: The value of the number of qubits on the second register.</span>
+<span class="sd">    :return: np.array[complex] -- A table of vectors corresponding to each angle value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">basis</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">psi</span> <span class="o">=</span> <span class="n">psi_calculation_qca_base_0</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
@@ -79,28 +90,42 @@
 
 
 <div class="viewcode-block" id="angles_determination"><a class="viewcode-back" href="../qpea.html#qpea.angles_determination">[docs]</a><span class="k">def</span> <span class="nf">angles_determination</span><span class="p">(</span><span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generates a table of different values that corresponds to an angle which will be involved in the algorithms</span>
-<span class="sd">    calculations and variations.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generates a table of different values.</span>
+<span class="sd">        Each table value corresponds to an angle which will be involved in the</span>
+<span class="sd">        algorithms calculations and variations.</span>
 
-<span class="sd">    :param int min: The minimal value of the angle.</span>
-<span class="sd">    :param int max: The maximal value of the angle.</span>
-<span class="sd">    :param float step: The step of variation of the angle.</span>
-<span class="sd">    :returns: np.array(float) -- The table of float values of the angle.</span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; angles_determination(0, 10, 1)</span>
+<span class="sd">        [0 1 2 3 4 5 6 7 8 9]</span>
 
+<span class="sd">    :parameter int min: The minimal value of the angle.</span>
+<span class="sd">    :parameter int max: The maximal value of the angle.</span>
+<span class="sd">    :parameter float step: The step of variation of the angle.</span>
+<span class="sd">    :return: np.array[float] -- The table of float values of the angle.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">angles</span></div>
 
 
 <div class="viewcode-block" id="psi_calculation_qca_base_0"><a class="viewcode-back" href="../qpea.html#qpea.psi_calculation_qca_base_0">[docs]</a><span class="k">def</span> <span class="nf">psi_calculation_qca_base_0</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">thetas</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the vector for each angle for the quantum counting algorithm when there are only one qubit on the</span>
-<span class="sd">    second register. This means that the total number of qubits of all the system is n + 1.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the vector for each angle for QCA.</span>
+<span class="sd">        This is for the case where there are only one qubit on the second register.</span>
+<span class="sd">        This means that the total number of qubits of all the system is n + 1.</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param np.array(float) thetas : The table of float values of the angle.</span>
-<span class="sd">    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithm will be.</span>
-<span class="sd">    performed.</span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; psi_calculation_qca_base_0(3, [0, 1])</span>
+<span class="sd">        [[(0.35355339059327373+0j) (0.35355339059327373+0j)</span>
+<span class="sd">          (0.35355339059327373+0j) (0.35355339059327373+0j)</span>
+<span class="sd">          (0.35355339059327373+0j) (0.35355339059327373+0j)</span>
+<span class="sd">          (0.35355339059327373+0j) (0.35355339059327373+0j)]</span>
+<span class="sd">         [(-0.35355339059327373-4.329780281177466e-17j) (-0.35355339059327373-4.329780281177466e-17j)</span>
+<span class="sd">          (-0.35355339059327373-1.2989340843532398e-16j) (-0.35355339059327373+4.329780281177466e-17j)</span>
+<span class="sd">          (-0.35355339059327373-2.164890140588733e-16j) (-0.35355339059327373+1.2989340843532398e-16j)</span>
+<span class="sd">          (-0.35355339059327373-3.0308461968242264e-16j) (-0.35355339059327373+2.164890140588733e-16j)]]</span>
 
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter np.array(float) thetas : The table of float values of the angle.</span>
+<span class="sd">    :return: np.array[complex] -- A table of vectors corresponding to each angle value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">norm</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">n</span><span class="p">)</span>
     <span class="nb">max</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
@@ -118,14 +143,25 @@
 
 
 <div class="viewcode-block" id="psi_calculation_qca_base_00"><a class="viewcode-back" href="../qpea.html#qpea.psi_calculation_qca_base_00">[docs]</a><span class="k">def</span> <span class="nf">psi_calculation_qca_base_00</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">thetas</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the vector for each angle for the quantum counting algorithm when there are two qubits on the</span>
-<span class="sd">    second register. This means that the total number of qubits of all the system is n + 2.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the vector for each angle for QCA.</span>
+<span class="sd">        This is the case where there are two qubits on the second register.</span>
+<span class="sd">        This means that the total number of qubits of all the system is n + 2.</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param np.array(float) thetas : The table of float values of the angle.</span>
-<span class="sd">    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithm will be</span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; psi_calculation_qca_base_00(3, [0, 1])</span>
+<span class="sd">        [[(0.17677669529663687+0j) (0.17677669529663687+0j)</span>
+<span class="sd">          (0.17677669529663687+0j) (0.17677669529663687+0j)</span>
+<span class="sd">          (0.17677669529663687+0j) (0.17677669529663687+0j)</span>
+<span class="sd">          (0.17677669529663687+0j) (0.17677669529663687+0j)]</span>
+<span class="sd">        [(-0.17677669529663687-2.164890140588733e-17j) (-0.17677669529663687-2.164890140588733e-17j)</span>
+<span class="sd">        (-0.17677669529663687-2.164890140588733e-17j) (-0.17677669529663687-2.164890140588733e-17j)</span>
+<span class="sd">        (-0.17677669529663687-6.494670421766199e-17j) (-0.17677669529663687-6.494670421766199e-17j)</span>
+<span class="sd">        (-0.17677669529663687+2.164890140588733e-17j) (-0.17677669529663687+2.164890140588733e-17j)]]</span>
+
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter np.array[float] thetas : The table of float values of the angle.</span>
+<span class="sd">    :return: np.array[complex] -- A table of vectors corresponding to each angle value on which the algorithm will be</span>
 <span class="sd">    performed.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">norm</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span>
     <span class="nb">max</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
@@ -145,14 +181,23 @@
 
 
 <div class="viewcode-block" id="psi_calculation_qpea_base_0"><a class="viewcode-back" href="../qpea.html#qpea.psi_calculation_qpea_base_0">[docs]</a><span class="k">def</span> <span class="nf">psi_calculation_qpea_base_0</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">phis</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the vector for each angle for the quantum phase estimation algorithm when there are only one qubit on</span>
-<span class="sd">    the second register. This means that the total number of qubits of all the system is n + 1.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the vector for each angle for the QPEA.</span>
+<span class="sd">    This is the case where there are only one qubit on the second register.</span>
+<span class="sd">    This means that the total number of qubits of all the system is n + 1.</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param np.array(float) phis : The table of float values of the angle.</span>
-<span class="sd">    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithm will be</span>
-<span class="sd">    performed.</span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; psi_calculation_qca_base_0(3, [0, 1])</span>
+<span class="sd">        [[0.35355339059327373 (0.35355339059327373+0j) 0.35355339059327373</span>
+<span class="sd">         (0.35355339059327373+0j) 0.35355339059327373 (0.35355339059327373+0j)</span>
+<span class="sd">          0.35355339059327373 (0.35355339059327373+0j)]</span>
+<span class="sd">         [0.35355339059327373 (0.35355339059327373+0j) 0.35355339059327373</span>
+<span class="sd">         (0.35355339059327373-8.659560562354932e-17j) 0.35355339059327373</span>
+<span class="sd">         (0.35355339059327373-1.7319121124709863e-16j) 0.35355339059327373</span>
+<span class="sd">         (0.35355339059327373-2.5978681687064796e-16j)]]</span>
 
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter np.array[float] phis : The table of float values of the angle.</span>
+<span class="sd">    :return: np.array[complex] -- A table of vectors corresponding to each angle value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">norm</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">n</span><span class="p">)</span>
     <span class="nb">max</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
@@ -168,14 +213,23 @@
 
 
 <div class="viewcode-block" id="psi_calculation_qpea_base_00"><a class="viewcode-back" href="../qpea.html#qpea.psi_calculation_qpea_base_00">[docs]</a><span class="k">def</span> <span class="nf">psi_calculation_qpea_base_00</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">phis</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the vector for each angle for the quantum phase estimation algorithm when there are two qubits on</span>
-<span class="sd">    the second register. This means that the total number of qubits of all the system is n + 2.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the vector for each angle for the QPEA.</span>
+<span class="sd">        This is the case where there are two qubits on the second register.</span>
+<span class="sd">        This means that the total number of qubits of all the system is n + 2.</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param np.array(float) phis : The table of float values of the angle.</span>
-<span class="sd">    :returns: np.array(complex) -- A table of vectors corresponding to each angle value on which the algorithms will be</span>
-<span class="sd">    performed.</span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; psi_calculation_qca_base_0(3, [0, 1])</span>
+<span class="sd">        [[0.35355339059327373 0.35355339059327373 (0.35355339059327373+0j)</span>
+<span class="sd">         (0.35355339059327373+0j) 0.35355339059327373 -0.35355339059327373</span>
+<span class="sd">         (0.35355339059327373+0j) (0.35355339059327373+0j)]</span>
+<span class="sd">         [0.35355339059327373 0.35355339059327373 (0.35355339059327373+0j)</span>
+<span class="sd">         (0.35355339059327373+0j) 0.35355339059327373 -0.35355339059327373</span>
+<span class="sd">         (0.35355339059327373+8.659560562354932e-17j)</span>
+<span class="sd">         (0.35355339059327373-8.659560562354932e-17j)]]</span>
 
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter np.array[float] phis : The table of float values of the angle.</span>
+<span class="sd">    :return: np.array[complex] -- A table of vectors corresponding to each angle value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">norm</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">n</span><span class="p">)</span>
     <span class="nb">max</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
@@ -195,10 +249,9 @@
 <div class="viewcode-block" id="calcul_invariant_cm"><a class="viewcode-back" href="../qpea.html#qpea.calcul_invariant_cm">[docs]</a><span class="k">def</span> <span class="nf">calcul_invariant_cm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">psi</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates the value of the invariant based on the coefficient matrices.</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param np.array(float) psi : The table of vectors for the algorithm.</span>
-<span class="sd">    :returns: np.array(complex) -- The list of the coefficients calculated.</span>
-
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter np.array[complex] psi : The table of vectors for the algorithm.</span>
+<span class="sd">    :return: np.array[complex] -- The list of the coefficients calculated.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">liste_cms</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">psi</span><span class="p">)):</span>
@@ -210,11 +263,10 @@
 <div class="viewcode-block" id="calcul_invariant_mu"><a class="viewcode-back" href="../qpea.html#qpea.calcul_invariant_mu">[docs]</a><span class="k">def</span> <span class="nf">calcul_invariant_mu</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">psi</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates the value of the invariant based on Mermin polynomials.</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param np.array(float) angles : The table of the angle values.</span>
-<span class="sd">    :param np.array(float) psi : The table of vectors for the algorithm.</span>
-<span class="sd">    :returns: np.array(complex) -- The list of the coefficients calculated.</span>
-
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter np.array[float] angles : The table of the angle values.</span>
+<span class="sd">    :parameter np.array[float] psi : The table of vectors for the algorithm.</span>
+<span class="sd">    :return: np.array[complex] -- The list of the coefficients calculated.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">liste_mus</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -226,11 +278,10 @@
 <div class="viewcode-block" id="calcul_invariant_gme"><a class="viewcode-back" href="../qpea.html#qpea.calcul_invariant_gme">[docs]</a><span class="k">def</span> <span class="nf">calcul_invariant_gme</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">psi</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates the value of the invariant based on Mermin polynomials.</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param np.array(float) angles : The table of the angle values.</span>
-<span class="sd">    :param np.array(float) psi : The table of vectors for the algorithm.</span>
-<span class="sd">    :returns: np.array(complex) -- The list of the coefficients calculated.</span>
-
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter np.array[float] angles : The table of the angle values.</span>
+<span class="sd">    :parameter np.array[float] psi : The table of vectors for the algorithm.</span>
+<span class="sd">    :return: np.array[complex] -- The list of the coefficients calculated.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">liste_gmes</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -239,17 +290,18 @@
     <span class="k">return</span> <span class="n">liste_gmes</span></div>
 
 
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../qpea.html#qpea.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">n_first_register</span><span class="p">,</span> <span class="n">n_second_register</span><span class="p">,</span> <span class="n">case</span><span class="p">,</span> <span class="n">cm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">gm</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generates a table of different values that corresponds to an angle which will be involved in the algorithms</span>
-<span class="sd">    calculations and variations.</span>
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../qpea.html#qpea.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">n_first_register</span><span class="p">,</span> <span class="n">n_second_register</span><span class="p">,</span> <span class="n">case</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">cm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">gm</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generates a table of different values that corresponds to an angle.</span>
+<span class="sd">        The angles will be involved in the algorithms calculations and variations.</span>
 
-<span class="sd">    :param int n_first_register: The number of qubits on the first register of the system.</span>
-<span class="sd">    :param int n_second_register: The value of the number of qubits on the second register.</span>
-<span class="sd">    :param str case: The value that determines the type of algorithm : &quot;G&quot; for qca or &quot;Z&quot; for qpea.</span>
-<span class="sd">    :param boolean cm : This determines if the invariant based on the coefficient matrices should be calculated or not</span>
-<span class="sd">    :param boolean mu : This determines if the invariant based on the Mermin polynials should be calculated or not</span>
-<span class="sd">    :param boolean gm : This determines if the geometric measure invariant should be calculated or not</span>
-<span class="sd">    :returns: np.array(float) -- The table of float values of the angle.</span>
+<span class="sd">    :parameter int n_first_register: The number of qubits on the first register of the system.</span>
+<span class="sd">    :parameter int n_second_register: The value of the number of qubits on the second register.</span>
+<span class="sd">    :parameter str case: The value that determines the type of algorithm : &quot;G&quot; for qca or &quot;Z&quot; for qpea.</span>
+<span class="sd">    :parameter boolean test: This determines if all the cases will be run or not.</span>
+<span class="sd">    :parameter boolean cm : This determines if the invariant based on coefficient matrices should be calculated or not</span>
+<span class="sd">    :parameter boolean mu : This determines if the invariant based on Mermin polynials should be calculated or not</span>
+<span class="sd">    :parameter boolean gm : This determines if the geometric measure invariant should be calculated or not</span>
+<span class="sd">    :return: np.array[float] -- The table of float values of the angle.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Initialisations</span>
@@ -285,18 +337,60 @@
     <span class="n">figure_title</span> <span class="o">+=</span> <span class="s2">&quot;for &quot;</span> <span class="o">+</span> <span class="n">partial_name</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">figure_title</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">test</span><span class="p">:</span>
+        <span class="n">mus</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.9999999999067279</span><span class="p">,</span> <span class="mf">1.0103062222152035</span><span class="p">,</span> <span class="mf">1.0405665920265939</span><span class="p">,</span> <span class="mf">1.0889422751646143</span><span class="p">,</span> <span class="mf">1.1527524278805945</span><span class="p">,</span>
+               <span class="mf">1.2288389766268188</span><span class="p">,</span> <span class="mf">1.3138405208539408</span><span class="p">,</span> <span class="mf">1.4043483587175283</span><span class="p">,</span> <span class="mf">1.496980728967107</span><span class="p">,</span> <span class="mf">1.5884231296220788</span><span class="p">,</span>
+               <span class="mf">1.6754690852864125</span><span class="p">,</span> <span class="mf">1.755078083330678</span><span class="p">,</span> <span class="mf">1.8244644421456928</span><span class="p">,</span> <span class="mf">1.8811919708574691</span><span class="p">,</span> <span class="mf">1.9233067103801844</span><span class="p">,</span>
+               <span class="mf">1.9494805496877794</span><span class="p">,</span> <span class="mf">1.9591481218698696</span><span class="p">,</span> <span class="mf">1.9526719570212117</span><span class="p">,</span> <span class="mf">1.9314873490675082</span><span class="p">,</span> <span class="mf">1.8982328255914078</span><span class="p">,</span>
+               <span class="mf">1.856830989996974</span><span class="p">,</span> <span class="mf">1.812463816884072</span><span class="p">,</span> <span class="mf">1.7713548382279636</span><span class="p">,</span> <span class="mf">1.7402410919708633</span><span class="p">,</span> <span class="mf">1.7255335895156148</span><span class="p">,</span>
+               <span class="mf">1.7320508073458023</span><span class="p">,</span> <span class="mf">1.7620354373100198</span><span class="p">,</span> <span class="mf">1.8145278515514063</span><span class="p">,</span> <span class="mf">1.885676776176094</span><span class="p">,</span> <span class="mf">1.9694898609990459</span><span class="p">,</span>
+               <span class="mf">2.0590476587362216</span><span class="p">,</span> <span class="mf">2.1473898028424565</span><span class="p">,</span> <span class="mf">2.2281717566662085</span><span class="p">,</span> <span class="mf">2.2960387077701476</span><span class="p">,</span> <span class="mf">2.346805761501569</span><span class="p">,</span>
+               <span class="mf">2.3775198481459032</span><span class="p">,</span> <span class="mf">2.386450618004572</span><span class="p">,</span> <span class="mf">2.3730514404152783</span><span class="p">,</span> <span class="mf">2.337857957727014</span><span class="p">,</span> <span class="mf">2.282412727350107</span><span class="p">,</span>
+               <span class="mf">2.209140544981537</span><span class="p">,</span> <span class="mf">2.1212166619215393</span><span class="p">,</span> <span class="mf">2.0224569280724434</span><span class="p">,</span> <span class="mf">1.9171923595909324</span><span class="p">,</span> <span class="mf">1.8101627493296928</span><span class="p">,</span>
+               <span class="mf">1.7064220309937372</span><span class="p">,</span> <span class="mf">1.6112106582550543</span><span class="p">,</span> <span class="mf">1.5298234744484558</span><span class="p">,</span> <span class="mf">1.4672424510969109</span><span class="p">,</span> <span class="mf">1.4277324369209297</span><span class="p">,</span>
+               <span class="mf">1.4142135620999805</span><span class="p">,</span> <span class="mf">1.4277324347673055</span><span class="p">,</span> <span class="mf">1.4672425897845138</span><span class="p">,</span> <span class="mf">1.529823120689342</span><span class="p">,</span> <span class="mf">1.6112107722854376</span><span class="p">,</span>
+               <span class="mf">1.706397114563703</span><span class="p">,</span> <span class="mf">1.810163018834823</span><span class="p">,</span> <span class="mf">1.917192903264069</span><span class="p">,</span> <span class="mf">2.0224570878922603</span><span class="p">,</span> <span class="mf">2.121216645317109</span><span class="p">,</span>
+               <span class="mf">2.2091406434618444</span><span class="p">,</span> <span class="mf">2.2824129499826364</span><span class="p">,</span> <span class="mf">2.337857920775528</span><span class="p">,</span> <span class="mf">2.3730517264330504</span><span class="p">,</span> <span class="mf">2.386451442652399</span><span class="p">,</span>
+               <span class="mf">2.3775198912375686</span><span class="p">,</span> <span class="mf">2.346805770061271</span><span class="p">,</span> <span class="mf">2.2960387074996693</span><span class="p">,</span> <span class="mf">2.2281717723242105</span><span class="p">,</span> <span class="mf">2.147389829660271</span><span class="p">,</span>
+               <span class="mf">2.059047723972027</span><span class="p">,</span> <span class="mf">1.9694897162155698</span><span class="p">,</span> <span class="mf">1.8856766120231359</span><span class="p">,</span> <span class="mf">1.8145398129064096</span><span class="p">,</span> <span class="mf">1.7620349975820364</span><span class="p">,</span>
+               <span class="mf">1.732050807057174</span><span class="p">,</span> <span class="mf">1.7255337868883218</span><span class="p">,</span> <span class="mf">1.7402460220754987</span><span class="p">,</span> <span class="mf">1.7713547492766084</span><span class="p">,</span> <span class="mf">1.8124639943559362</span><span class="p">,</span>
+               <span class="mf">1.856831077120687</span><span class="p">,</span> <span class="mf">1.898232855205713</span><span class="p">,</span> <span class="mf">1.9314873101625183</span><span class="p">,</span> <span class="mf">1.952671957350256</span><span class="p">,</span> <span class="mf">1.9591481147363243</span><span class="p">,</span>
+               <span class="mf">1.9494805983340204</span><span class="p">,</span> <span class="mf">1.9233059764470963</span><span class="p">,</span> <span class="mf">1.881191270166835</span><span class="p">,</span> <span class="mf">1.824464380198904</span><span class="p">,</span> <span class="mf">1.7550778407042589</span><span class="p">,</span>
+               <span class="mf">1.6754690439110307</span><span class="p">,</span> <span class="mf">1.5884231310548558</span><span class="p">,</span> <span class="mf">1.4969807310340382</span><span class="p">,</span> <span class="mf">1.404348356864725</span><span class="p">,</span> <span class="mf">1.313840520917688</span><span class="p">,</span>
+               <span class="mf">1.2288389760180813</span><span class="p">,</span> <span class="mf">1.1527524298488945</span><span class="p">,</span> <span class="mf">1.0889422804377134</span><span class="p">,</span> <span class="mf">1.0405665867274447</span><span class="p">,</span> <span class="mf">1.0103062903380824</span><span class="p">]</span>
+
+        <span class="n">gmes</span> <span class="o">=</span> <span class="p">[</span><span class="mf">9.988188054421698e-11</span><span class="p">,</span> <span class="mf">0.005170899886881686</span><span class="p">,</span> <span class="mf">0.020556444565457466</span><span class="p">,</span> <span class="mf">0.045779310777429694</span><span class="p">,</span>
+                <span class="mf">0.080224273599112</span><span class="p">,</span> <span class="mf">0.12305814295608786</span><span class="p">,</span> <span class="mf">0.17325662410511855</span><span class="p">,</span> <span class="mf">0.22963710323288644</span><span class="p">,</span> <span class="mf">0.2908961490792845</span><span class="p">,</span>
+                <span class="mf">0.35565034746109636</span><span class="p">,</span> <span class="mf">0.42247898202151435</span><span class="p">,</span> <span class="mf">0.47934455650004193</span><span class="p">,</span> <span class="mf">0.49831527703978074</span><span class="p">,</span> <span class="mf">0.49870809915894976</span><span class="p">,</span>
+                <span class="mf">0.49088593550877246</span><span class="p">,</span> <span class="mf">0.48000292329213623</span><span class="p">,</span> <span class="mf">0.4691605712365421</span><span class="p">,</span> <span class="mf">0.4604855812965428</span><span class="p">,</span> <span class="mf">0.4555075951999775</span><span class="p">,</span>
+                <span class="mf">0.4552237160102125</span><span class="p">,</span> <span class="mf">0.4599552617985945</span><span class="p">,</span> <span class="mf">0.4690252430098939</span><span class="p">,</span> <span class="mf">0.48040828118946455</span><span class="p">,</span> <span class="mf">0.49095458362373856</span><span class="p">,</span>
+                <span class="mf">0.49782072437542035</span><span class="p">,</span> <span class="mf">0.5000000001063967</span><span class="p">,</span> <span class="mf">0.4983002159372162</span><span class="p">,</span> <span class="mf">0.494401447354348</span><span class="p">,</span> <span class="mf">0.4900606178792827</span><span class="p">,</span>
+                <span class="mf">0.48663489763556866</span><span class="p">,</span> <span class="mf">0.4848846956219197</span><span class="p">,</span> <span class="mf">0.48500431552267653</span><span class="p">,</span> <span class="mf">0.48676182332598195</span><span class="p">,</span> <span class="mf">0.48964925076788546</span><span class="p">,</span>
+                <span class="mf">0.4930139555600691</span><span class="p">,</span> <span class="mf">0.49618187595248864</span><span class="p">,</span> <span class="mf">0.4985806392388925</span><span class="p">,</span> <span class="mf">0.4998423471713588</span><span class="p">,</span> <span class="mf">0.4998466790699849</span><span class="p">,</span>
+                <span class="mf">0.4986876518187885</span><span class="p">,</span> <span class="mf">0.4965932524111609</span><span class="p">,</span> <span class="mf">0.49384423816450496</span><span class="p">,</span> <span class="mf">0.4907185856135208</span><span class="p">,</span> <span class="mf">0.4874634278661204</span><span class="p">,</span>
+                <span class="mf">0.4842855895710807</span><span class="p">,</span> <span class="mf">0.48135176643242483</span><span class="p">,</span> <span class="mf">0.4787925688308179</span><span class="p">,</span> <span class="mf">0.47682868046764715</span><span class="p">,</span> <span class="mf">0.4790143143573391</span><span class="p">,</span>
+                <span class="mf">0.4868346734349447</span><span class="p">,</span> <span class="mf">0.50000000003228</span><span class="p">,</span> <span class="mf">0.48683467347205034</span><span class="p">,</span> <span class="mf">0.4790143144678166</span><span class="p">,</span> <span class="mf">0.4768286811591098</span><span class="p">,</span>
+                <span class="mf">0.4787925688776139</span><span class="p">,</span> <span class="mf">0.4813517664087923</span><span class="p">,</span> <span class="mf">0.48428558957908063</span><span class="p">,</span> <span class="mf">0.4874634278304283</span><span class="p">,</span> <span class="mf">0.4907185856598357</span><span class="p">,</span>
+                <span class="mf">0.49384423815238965</span><span class="p">,</span> <span class="mf">0.4965932523141716</span><span class="p">,</span> <span class="mf">0.49868765183897823</span><span class="p">,</span> <span class="mf">0.4998466791367343</span><span class="p">,</span> <span class="mf">0.4998423472561506</span><span class="p">,</span>
+                <span class="mf">0.49858063922618834</span><span class="p">,</span> <span class="mf">0.49618187593169905</span><span class="p">,</span> <span class="mf">0.49301395553496363</span><span class="p">,</span> <span class="mf">0.48964925079317767</span><span class="p">,</span> <span class="mf">0.4867618233612544</span><span class="p">,</span>
+                <span class="mf">0.4850043155206073</span><span class="p">,</span> <span class="mf">0.4848846955959414</span><span class="p">,</span> <span class="mf">0.4866348975706738</span><span class="p">,</span> <span class="mf">0.49006061784854515</span><span class="p">,</span> <span class="mf">0.49440144733215374</span><span class="p">,</span>
+                <span class="mf">0.49830021591848384</span><span class="p">,</span> <span class="mf">0.5000000000229394</span><span class="p">,</span> <span class="mf">0.49782072430287116</span><span class="p">,</span> <span class="mf">0.4909545835843562</span><span class="p">,</span> <span class="mf">0.4804082811491477</span><span class="p">,</span>
+                <span class="mf">0.46902524303397386</span><span class="p">,</span> <span class="mf">0.4599552618131959</span><span class="p">,</span> <span class="mf">0.45522371591874444</span><span class="p">,</span> <span class="mf">0.4555075951963953</span><span class="p">,</span> <span class="mf">0.4604855812303088</span><span class="p">,</span>
+                <span class="mf">0.46916057126002564</span><span class="p">,</span> <span class="mf">0.4800029233215385</span><span class="p">,</span> <span class="mf">0.49088593547903514</span><span class="p">,</span> <span class="mf">0.49870809910605485</span><span class="p">,</span> <span class="mf">0.49831527707243817</span><span class="p">,</span>
+                <span class="mf">0.47934455649636887</span><span class="p">,</span> <span class="mf">0.42247898198326606</span><span class="p">,</span> <span class="mf">0.3556503474739049</span><span class="p">,</span> <span class="mf">0.2908961490297365</span><span class="p">,</span> <span class="mf">0.2296371032404957</span><span class="p">,</span>
+                <span class="mf">0.17325662406164344</span><span class="p">,</span> <span class="mf">0.12305814306230756</span><span class="p">,</span> <span class="mf">0.08022427346340089</span><span class="p">,</span> <span class="mf">0.045779310579230015</span><span class="p">,</span>
+                <span class="mf">0.020556444624852954</span><span class="p">,</span> <span class="mf">0.005170900003777734</span><span class="p">]</span>
+
     <span class="k">if</span> <span class="n">cm</span><span class="p">:</span>
         <span class="n">figure_name</span> <span class="o">+=</span> <span class="s2">&quot;_CM&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">cms</span><span class="p">:</span>
             <span class="n">cms</span> <span class="o">=</span> <span class="n">calcul_invariant_cm</span><span class="p">(</span><span class="n">n_total</span><span class="p">,</span> <span class="n">psis</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">mu</span><span class="p">:</span>
         <span class="n">figure_name</span> <span class="o">+=</span> <span class="s2">&quot;_MU&quot;</span>
-        <span class="n">mus</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.9999999999067279</span><span class="p">,</span> <span class="mf">1.0103062222152035</span><span class="p">,</span> <span class="mf">1.0405665920265939</span><span class="p">,</span> <span class="mf">1.0889422751646143</span><span class="p">,</span> <span class="mf">1.1527524278805945</span><span class="p">,</span> <span class="mf">1.2288389766268188</span><span class="p">,</span> <span class="mf">1.3138405208539408</span><span class="p">,</span> <span class="mf">1.4043483587175283</span><span class="p">,</span> <span class="mf">1.496980728967107</span><span class="p">,</span> <span class="mf">1.5884231296220788</span><span class="p">,</span> <span class="mf">1.6754690852864125</span><span class="p">,</span> <span class="mf">1.755078083330678</span><span class="p">,</span> <span class="mf">1.8244644421456928</span><span class="p">,</span> <span class="mf">1.8811919708574691</span><span class="p">,</span> <span class="mf">1.9233067103801844</span><span class="p">,</span> <span class="mf">1.9494805496877794</span><span class="p">,</span> <span class="mf">1.9591481218698696</span><span class="p">,</span> <span class="mf">1.9526719570212117</span><span class="p">,</span> <span class="mf">1.9314873490675082</span><span class="p">,</span> <span class="mf">1.8982328255914078</span><span class="p">,</span> <span class="mf">1.856830989996974</span><span class="p">,</span> <span class="mf">1.812463816884072</span><span class="p">,</span> <span class="mf">1.7713548382279636</span><span class="p">,</span> <span class="mf">1.7402410919708633</span><span class="p">,</span> <span class="mf">1.7255335895156148</span><span class="p">,</span> <span class="mf">1.7320508073458023</span><span class="p">,</span> <span class="mf">1.7620354373100198</span><span class="p">,</span> <span class="mf">1.8145278515514063</span><span class="p">,</span> <span class="mf">1.885676776176094</span><span class="p">,</span> <span class="mf">1.9694898609990459</span><span class="p">,</span> <span class="mf">2.0590476587362216</span><span class="p">,</span> <span class="mf">2.1473898028424565</span><span class="p">,</span> <span class="mf">2.2281717566662085</span><span class="p">,</span> <span class="mf">2.2960387077701476</span><span class="p">,</span> <span class="mf">2.346805761501569</span><span class="p">,</span> <span class="mf">2.3775198481459032</span><span class="p">,</span> <span class="mf">2.386450618004572</span><span class="p">,</span> <span class="mf">2.3730514404152783</span><span class="p">,</span> <span class="mf">2.337857957727014</span><span class="p">,</span> <span class="mf">2.282412727350107</span><span class="p">,</span> <span class="mf">2.209140544981537</span><span class="p">,</span> <span class="mf">2.1212166619215393</span><span class="p">,</span> <span class="mf">2.0224569280724434</span><span class="p">,</span> <span class="mf">1.9171923595909324</span><span class="p">,</span> <span class="mf">1.8101627493296928</span><span class="p">,</span> <span class="mf">1.7064220309937372</span><span class="p">,</span> <span class="mf">1.6112106582550543</span><span class="p">,</span> <span class="mf">1.5298234744484558</span><span class="p">,</span> <span class="mf">1.4672424510969109</span><span class="p">,</span> <span class="mf">1.4277324369209297</span><span class="p">,</span> <span class="mf">1.4142135620999805</span><span class="p">,</span> <span class="mf">1.4277324347673055</span><span class="p">,</span> <span class="mf">1.4672425897845138</span><span class="p">,</span> <span class="mf">1.529823120689342</span><span class="p">,</span> <span class="mf">1.6112107722854376</span><span class="p">,</span> <span class="mf">1.706397114563703</span><span class="p">,</span> <span class="mf">1.810163018834823</span><span class="p">,</span> <span class="mf">1.917192903264069</span><span class="p">,</span> <span class="mf">2.0224570878922603</span><span class="p">,</span> <span class="mf">2.121216645317109</span><span class="p">,</span> <span class="mf">2.2091406434618444</span><span class="p">,</span> <span class="mf">2.2824129499826364</span><span class="p">,</span> <span class="mf">2.337857920775528</span><span class="p">,</span> <span class="mf">2.3730517264330504</span><span class="p">,</span> <span class="mf">2.386451442652399</span><span class="p">,</span> <span class="mf">2.3775198912375686</span><span class="p">,</span> <span class="mf">2.346805770061271</span><span class="p">,</span> <span class="mf">2.2960387074996693</span><span class="p">,</span> <span class="mf">2.2281717723242105</span><span class="p">,</span> <span class="mf">2.147389829660271</span><span class="p">,</span> <span class="mf">2.059047723972027</span><span class="p">,</span> <span class="mf">1.9694897162155698</span><span class="p">,</span> <span class="mf">1.8856766120231359</span><span class="p">,</span> <span class="mf">1.8145398129064096</span><span class="p">,</span> <span class="mf">1.7620349975820364</span><span class="p">,</span> <span class="mf">1.732050807057174</span><span class="p">,</span> <span class="mf">1.7255337868883218</span><span class="p">,</span> <span class="mf">1.7402460220754987</span><span class="p">,</span> <span class="mf">1.7713547492766084</span><span class="p">,</span> <span class="mf">1.8124639943559362</span><span class="p">,</span> <span class="mf">1.856831077120687</span><span class="p">,</span> <span class="mf">1.898232855205713</span><span class="p">,</span> <span class="mf">1.9314873101625183</span><span class="p">,</span> <span class="mf">1.952671957350256</span><span class="p">,</span> <span class="mf">1.9591481147363243</span><span class="p">,</span> <span class="mf">1.9494805983340204</span><span class="p">,</span> <span class="mf">1.9233059764470963</span><span class="p">,</span> <span class="mf">1.881191270166835</span><span class="p">,</span> <span class="mf">1.824464380198904</span><span class="p">,</span> <span class="mf">1.7550778407042589</span><span class="p">,</span> <span class="mf">1.6754690439110307</span><span class="p">,</span> <span class="mf">1.5884231310548558</span><span class="p">,</span> <span class="mf">1.4969807310340382</span><span class="p">,</span> <span class="mf">1.404348356864725</span><span class="p">,</span> <span class="mf">1.313840520917688</span><span class="p">,</span> <span class="mf">1.2288389760180813</span><span class="p">,</span> <span class="mf">1.1527524298488945</span><span class="p">,</span> <span class="mf">1.0889422804377134</span><span class="p">,</span> <span class="mf">1.0405665867274447</span><span class="p">,</span> <span class="mf">1.0103062903380824</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">mus</span><span class="p">:</span>
             <span class="n">mus</span> <span class="o">=</span> <span class="n">calcul_invariant_mu</span><span class="p">(</span><span class="n">n_total</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">psis</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">gm</span><span class="p">:</span>
         <span class="n">figure_name</span> <span class="o">+=</span> <span class="s2">&quot;_GME&quot;</span>
-        <span class="n">gmes</span> <span class="o">=</span> <span class="p">[</span><span class="mf">9.988188054421698e-11</span><span class="p">,</span> <span class="mf">0.005170899886881686</span><span class="p">,</span> <span class="mf">0.020556444565457466</span><span class="p">,</span> <span class="mf">0.045779310777429694</span><span class="p">,</span> <span class="mf">0.080224273599112</span><span class="p">,</span> <span class="mf">0.12305814295608786</span><span class="p">,</span> <span class="mf">0.17325662410511855</span><span class="p">,</span> <span class="mf">0.22963710323288644</span><span class="p">,</span> <span class="mf">0.2908961490792845</span><span class="p">,</span> <span class="mf">0.35565034746109636</span><span class="p">,</span> <span class="mf">0.42247898202151435</span><span class="p">,</span> <span class="mf">0.47934455650004193</span><span class="p">,</span> <span class="mf">0.49831527703978074</span><span class="p">,</span> <span class="mf">0.49870809915894976</span><span class="p">,</span> <span class="mf">0.49088593550877246</span><span class="p">,</span> <span class="mf">0.48000292329213623</span><span class="p">,</span> <span class="mf">0.4691605712365421</span><span class="p">,</span> <span class="mf">0.4604855812965428</span><span class="p">,</span> <span class="mf">0.4555075951999775</span><span class="p">,</span> <span class="mf">0.4552237160102125</span><span class="p">,</span> <span class="mf">0.4599552617985945</span><span class="p">,</span> <span class="mf">0.4690252430098939</span><span class="p">,</span> <span class="mf">0.48040828118946455</span><span class="p">,</span> <span class="mf">0.49095458362373856</span><span class="p">,</span> <span class="mf">0.49782072437542035</span><span class="p">,</span> <span class="mf">0.5000000001063967</span><span class="p">,</span> <span class="mf">0.4983002159372162</span><span class="p">,</span> <span class="mf">0.494401447354348</span><span class="p">,</span> <span class="mf">0.4900606178792827</span><span class="p">,</span> <span class="mf">0.48663489763556866</span><span class="p">,</span> <span class="mf">0.4848846956219197</span><span class="p">,</span> <span class="mf">0.48500431552267653</span><span class="p">,</span> <span class="mf">0.48676182332598195</span><span class="p">,</span> <span class="mf">0.48964925076788546</span><span class="p">,</span> <span class="mf">0.4930139555600691</span><span class="p">,</span> <span class="mf">0.49618187595248864</span><span class="p">,</span> <span class="mf">0.4985806392388925</span><span class="p">,</span> <span class="mf">0.4998423471713588</span><span class="p">,</span> <span class="mf">0.4998466790699849</span><span class="p">,</span> <span class="mf">0.4986876518187885</span><span class="p">,</span> <span class="mf">0.4965932524111609</span><span class="p">,</span> <span class="mf">0.49384423816450496</span><span class="p">,</span> <span class="mf">0.4907185856135208</span><span class="p">,</span> <span class="mf">0.4874634278661204</span><span class="p">,</span> <span class="mf">0.4842855895710807</span><span class="p">,</span> <span class="mf">0.48135176643242483</span><span class="p">,</span> <span class="mf">0.4787925688308179</span><span class="p">,</span> <span class="mf">0.47682868046764715</span><span class="p">,</span> <span class="mf">0.4790143143573391</span><span class="p">,</span> <span class="mf">0.4868346734349447</span><span class="p">,</span> <span class="mf">0.50000000003228</span><span class="p">,</span> <span class="mf">0.48683467347205034</span><span class="p">,</span> <span class="mf">0.4790143144678166</span><span class="p">,</span> <span class="mf">0.4768286811591098</span><span class="p">,</span> <span class="mf">0.4787925688776139</span><span class="p">,</span> <span class="mf">0.4813517664087923</span><span class="p">,</span> <span class="mf">0.48428558957908063</span><span class="p">,</span> <span class="mf">0.4874634278304283</span><span class="p">,</span> <span class="mf">0.4907185856598357</span><span class="p">,</span> <span class="mf">0.49384423815238965</span><span class="p">,</span> <span class="mf">0.4965932523141716</span><span class="p">,</span> <span class="mf">0.49868765183897823</span><span class="p">,</span> <span class="mf">0.4998466791367343</span><span class="p">,</span> <span class="mf">0.4998423472561506</span><span class="p">,</span> <span class="mf">0.49858063922618834</span><span class="p">,</span> <span class="mf">0.49618187593169905</span><span class="p">,</span> <span class="mf">0.49301395553496363</span><span class="p">,</span> <span class="mf">0.48964925079317767</span><span class="p">,</span> <span class="mf">0.4867618233612544</span><span class="p">,</span> <span class="mf">0.4850043155206073</span><span class="p">,</span> <span class="mf">0.4848846955959414</span><span class="p">,</span> <span class="mf">0.4866348975706738</span><span class="p">,</span> <span class="mf">0.49006061784854515</span><span class="p">,</span> <span class="mf">0.49440144733215374</span><span class="p">,</span> <span class="mf">0.49830021591848384</span><span class="p">,</span> <span class="mf">0.5000000000229394</span><span class="p">,</span> <span class="mf">0.49782072430287116</span><span class="p">,</span> <span class="mf">0.4909545835843562</span><span class="p">,</span> <span class="mf">0.4804082811491477</span><span class="p">,</span> <span class="mf">0.46902524303397386</span><span class="p">,</span> <span class="mf">0.4599552618131959</span><span class="p">,</span> <span class="mf">0.45522371591874444</span><span class="p">,</span> <span class="mf">0.4555075951963953</span><span class="p">,</span> <span class="mf">0.4604855812303088</span><span class="p">,</span> <span class="mf">0.46916057126002564</span><span class="p">,</span> <span class="mf">0.4800029233215385</span><span class="p">,</span> <span class="mf">0.49088593547903514</span><span class="p">,</span> <span class="mf">0.49870809910605485</span><span class="p">,</span> <span class="mf">0.49831527707243817</span><span class="p">,</span> <span class="mf">0.47934455649636887</span><span class="p">,</span> <span class="mf">0.42247898198326606</span><span class="p">,</span> <span class="mf">0.3556503474739049</span><span class="p">,</span> <span class="mf">0.2908961490297365</span><span class="p">,</span> <span class="mf">0.2296371032404957</span><span class="p">,</span> <span class="mf">0.17325662406164344</span><span class="p">,</span> <span class="mf">0.12305814306230756</span><span class="p">,</span> <span class="mf">0.08022427346340089</span><span class="p">,</span> <span class="mf">0.045779310579230015</span><span class="p">,</span> <span class="mf">0.020556444624852954</span><span class="p">,</span> <span class="mf">0.005170900003777734</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">gmes</span><span class="p">:</span>
             <span class="n">gmes</span> <span class="o">=</span> <span class="n">calcul_invariant_gme</span><span class="p">(</span><span class="n">n_total</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">psis</span><span class="p">)</span>
 

@@ -4,8 +4,9 @@ from math import comb, floor
 
 
 def maximum_of_flattening(n):
-    """ Calculates the maximum of flattening types that can be done. If the reuslt of the calculation is
-    a float, then, this number turns out to be the largest integer less or equal to our number.
+    """ Calculates the maximum of flattening types that can be done.
+        If the reuslt of the calculation is a float, then, this number turns out
+        to be the largest integer less or equal to our number.
 
     Examples:
         >>> maximum_of_flattening(4)
@@ -13,15 +14,16 @@ def maximum_of_flattening(n):
         >>> maximum_of_flattening(7)
         3
 
-    :param int n: The number of qubits.
-    :returns: int -- The maximum number of flattening types.
+    :parameter int n: The number of qubits.
+    :return: int -- The maximum number of flattening types.
     """
     return floor(n / 2)
 
 
 def maximum_of_matrices(n, type_of_flattening):
-    """ Calculates the maximum of matrices for a type of flattening. If the type of flattening is a divider of the
-    number of qubits, then, the first result is divided by 2.
+    """ Calculates the maximum of matrices for a type of flattening.
+        If the type of flattening is a divider of the number of qubits, then,
+        the first result is divided by 2.
 
     Examples:
         >>> maximum_of_matrices(2, 1)
@@ -29,9 +31,9 @@ def maximum_of_matrices(n, type_of_flattening):
         >>> maximum_of_matrices(4, 2)
         3.0
 
-    :param int n: The number of qubits.
-    :param int type_of_flattening : The type of flattening.
-    :returns: float -- The maximum number of matrices.
+    :parameter int n: The number of qubits.
+    :parameter int type_of_flattening : The type of flattening.
+    :return: float -- The maximum number of matrices.
     """
     max_matrices = comb(n, type_of_flattening)
     if n % type_of_flattening == 0:
@@ -44,13 +46,13 @@ def convert_in_binary(number, bits=0):
 
     Examples:
         >>> convert_in_binary(5,3)
-        '101'
+        "101"
         >>> convert_in_binary(5,5)
-        '00101'
+        "00101"
 
-    :param int number: the number that is going to be converted.
-    :param int bits: the number of bits required.
-    :returns: String -- The converted number.
+    :parameter int number: the number that is going to be converted.
+    :parameter int bits: the number of bits required.
+    :return: str -- The converted number.
     """
     return format(number, "b").zfill(bits)
 
@@ -62,8 +64,8 @@ def putting_in_list(number):
         >>> putting_in_list("000")
         [0, 0, 0]
 
-    :param string number: The number to split in a string format.
-    :returns: list(int) -- The list with every digit of the number in a case.
+    :parameter str number: The number to split in a string format.
+    :return: list[int] -- The list with every digit of the number in a case.
     """
     number_in_caracters = str(number)
     number_in_list = []
@@ -81,9 +83,9 @@ def list_of_combinaisons(n, type_of_flattening):
         >>> list_of_combinaisons(4, 2)
         [(1, 2), (1, 3), (2, 3)]
 
-    :param int n: The number of qubits.
-    :param int type_of_flattening : The current type of flattening.
-    :returns: list[list(int)] -- The list of every possible combination.
+    :parameter int n: The number of qubits.
+    :parameter int type_of_flattening : The current type of flattening.
+    :return: list[list[int]] -- The list of every possible combination.
     """
     if type_of_flattening == 1:
         n = n + 1
@@ -101,8 +103,8 @@ def list_of_combinaisons_for_invariant(n):
         >>> list_of_combinaisons(4)
         [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]
 
-    :param int n: The number of qubits.
-    :returns: list[list(int)] -- The list of every possible combination.
+    :parameter int n: The number of qubits.
+    :return: list[list[int]] -- The list of every possible combination.
     """
     L = list(range(n))
     combinaisons_list = []
@@ -112,15 +114,15 @@ def list_of_combinaisons_for_invariant(n):
 
 
 def flattening_and_rank_calculation(n, T):
-    """ Construct the matrices of every flattening type and calculates their rank.
+    """ Constructs the matrices of every flattening type.
 
     Example:
         >>> flattening_and_rank_calculation(3, [1, 0, 0, 0, 0, 0, 0, 1])
         ([2, 2, 2], [[array([[1, 0, 0, 0], [0, 0, 0, 1]]), array([[1, 0, 0, 0], [0, 0, 0, 1]]), array([[1, 0, 0, 0], [0, 0, 0, 1]])]])
 
-    :param int n: The number of qubits.
-    :param list(int) T : A list filled with the coefficients corresponding to the vector.
-    :returns: list(list(int)) -- A list of all the matrices after all flatennings.
+    :parameter int n: The number of qubits.
+    :parameter list[int] T : A list filled with the coefficients corresponding to the vector.
+    :return: list[np.array[int]] -- A list of all the matrices after all flatennings.
     """
     q = maximum_of_flattening(n)
     all_coef_matrices = []

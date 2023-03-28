@@ -37,8 +37,16 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="qpea.angles_determination">
 <span class="sig-prename descclassname"><span class="pre">qpea.</span></span><span class="sig-name descname"><span class="pre">angles_determination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qpea.html#angles_determination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qpea.angles_determination" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a table of different values that corresponds to an angle which will be involved in the algorithms
-calculations and variations.</p>
+<dd><dl>
+<dt>Generates a table of different values.</dt><dd><p>Each table value corresponds to an angle which will be involved in the
+algorithms calculations and variations.</p>
+</dd>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">angles_determination</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">[0 1 2 3 4 5 6 7 8 9]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -48,7 +56,7 @@ calculations and variations.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>np.array(float) – The table of float values of the angle.</p>
+<dd class="field-even"><p>np.array[float] – The table of float values of the angle.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -62,8 +70,8 @@ calculations and variations.</p>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
 </dl>
-<p>:param np.array(float) psi : The table of vectors for the algorithm.
-:returns: np.array(complex) – The list of the coefficients calculated.</p>
+<p>:parameter np.array[complex] psi : The table of vectors for the algorithm.
+:return: np.array[complex] – The list of the coefficients calculated.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -75,9 +83,9 @@ calculations and variations.</p>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
 </dl>
-<p>:param np.array(float) angles : The table of the angle values.
-:param np.array(float) psi : The table of vectors for the algorithm.
-:returns: np.array(complex) – The list of the coefficients calculated.</p>
+<p>:parameter np.array[float] angles : The table of the angle values.
+:parameter np.array[float] psi : The table of vectors for the algorithm.
+:return: np.array[complex] – The list of the coefficients calculated.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -89,117 +97,192 @@ calculations and variations.</p>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
 </dl>
-<p>:param np.array(float) angles : The table of the angle values.
-:param np.array(float) psi : The table of vectors for the algorithm.
-:returns: np.array(complex) – The list of the coefficients calculated.</p>
+<p>:parameter np.array[float] angles : The table of the angle values.
+:parameter np.array[float] psi : The table of vectors for the algorithm.
+:return: np.array[complex] – The list of the coefficients calculated.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qpea.cas_matrice_g">
 <span class="sig-prename descclassname"><span class="pre">qpea.</span></span><span class="sig-name descname"><span class="pre">cas_matrice_g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qpea.html#cas_matrice_g"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qpea.cas_matrice_g" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates the vectors depending on the basis and also the angles for the quantum counting algorithm.</p>
+<dd><p>Generates the vectors depending on the basis and also the angles for QCA.</p>
+<p>Example:
+&gt;&gt;&gt; cas_matrice_g(2, [0, 1, 2], 1)
+[[0.5 (0.5+0j) 0.5 (0.5+0j)]</p>
+<blockquote>
+<div><p>[0.5 (0.5+0j) 0.5 (0.5+0j)]
+[0.5 (0.5+0j) 0.5 0.5]]</p>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
 </dl>
-<p>:param np.array(float) angles : The table of the angle values.
-:param int basis: The value of the number of qubits on the second register.
-:returns: np.array(complex) – A table of vectors corresponding to each angle value on which the algorithm will be.</p>
+<p>:parameter np.array[float] angles : The table of the angle values.
+:parameter int basis: The value of the number of qubits on the second register.
+:return: np.array[complex] – A table of vectors corresponding to each angle value.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qpea.cas_matrice_z">
 <span class="sig-prename descclassname"><span class="pre">qpea.</span></span><span class="sig-name descname"><span class="pre">cas_matrice_z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qpea.html#cas_matrice_z"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qpea.cas_matrice_z" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates the vectors depending on the basis and also the angles for the quantum phase estimation algorithm.</p>
+<dd><dl>
+<dt>Generates the vectors for the algorithm computation.</dt><dd><p>This depends on the basis and also on the angles for QPEA.</p>
+</dd>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cas_matrice_z</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">[[0.5 (0.5+0j) 0.5 (0.5+0j)]</span>
+<span class="go"> [0.5 (0.5+0j) 0.5 (0.5-1.2246467991473532e-16j)]</span>
+<span class="go"> [0.5 (0.5+0j) 0.5 (0.5-2.4492935982947064e-16j)]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
 </dl>
-<p>:param np.array(float) angles : The table of the angle values.
-:param int basis: The value of the number of qubits on the second register.
-:returns: np.array(complex) – A table of vectors corresponding to each angle value on which the algorithm will be.</p>
+<p>:parameter np.array[float] angles : The table of the angle values.
+:parameter int basis: The value of the number of qubits on the second register.
+:return: np.array[complex] – A table of vectors corresponding to each angle value.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qpea.psi_calculation_qca_base_0">
 <span class="sig-prename descclassname"><span class="pre">qpea.</span></span><span class="sig-name descname"><span class="pre">psi_calculation_qca_base_0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thetas</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qpea.html#psi_calculation_qca_base_0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qpea.psi_calculation_qca_base_0" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the vector for each angle for the quantum counting algorithm when there are only one qubit on the
-second register. This means that the total number of qubits of all the system is n + 1.</p>
+<dd><dl>
+<dt>Computes the vector for each angle for QCA.</dt><dd><p>This is for the case where there are only one qubit on the second register.
+This means that the total number of qubits of all the system is n + 1.</p>
+</dd>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psi_calculation_qca_base_0</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">[[(0.35355339059327373+0j) (0.35355339059327373+0j)</span>
+<span class="go">  (0.35355339059327373+0j) (0.35355339059327373+0j)</span>
+<span class="go">  (0.35355339059327373+0j) (0.35355339059327373+0j)</span>
+<span class="go">  (0.35355339059327373+0j) (0.35355339059327373+0j)]</span>
+<span class="go"> [(-0.35355339059327373-4.329780281177466e-17j) (-0.35355339059327373-4.329780281177466e-17j)</span>
+<span class="go">  (-0.35355339059327373-1.2989340843532398e-16j) (-0.35355339059327373+4.329780281177466e-17j)</span>
+<span class="go">  (-0.35355339059327373-2.164890140588733e-16j) (-0.35355339059327373+1.2989340843532398e-16j)</span>
+<span class="go">  (-0.35355339059327373-3.0308461968242264e-16j) (-0.35355339059327373+2.164890140588733e-16j)]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
 </dl>
-<p>:param np.array(float) thetas : The table of float values of the angle.
-:returns: np.array(complex) – A table of vectors corresponding to each angle value on which the algorithm will be.
-performed.</p>
+<p>:parameter np.array(float) thetas : The table of float values of the angle.
+:return: np.array[complex] – A table of vectors corresponding to each angle value.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qpea.psi_calculation_qca_base_00">
 <span class="sig-prename descclassname"><span class="pre">qpea.</span></span><span class="sig-name descname"><span class="pre">psi_calculation_qca_base_00</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thetas</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qpea.html#psi_calculation_qca_base_00"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qpea.psi_calculation_qca_base_00" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the vector for each angle for the quantum counting algorithm when there are two qubits on the
-second register. This means that the total number of qubits of all the system is n + 2.</p>
+<dd><dl>
+<dt>Computes the vector for each angle for QCA.</dt><dd><p>This is the case where there are two qubits on the second register.
+This means that the total number of qubits of all the system is n + 2.</p>
+</dd>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psi_calculation_qca_base_00</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">[[(0.17677669529663687+0j) (0.17677669529663687+0j)</span>
+<span class="go">  (0.17677669529663687+0j) (0.17677669529663687+0j)</span>
+<span class="go">  (0.17677669529663687+0j) (0.17677669529663687+0j)</span>
+<span class="go">  (0.17677669529663687+0j) (0.17677669529663687+0j)]</span>
+<span class="go">[(-0.17677669529663687-2.164890140588733e-17j) (-0.17677669529663687-2.164890140588733e-17j)</span>
+<span class="go">(-0.17677669529663687-2.164890140588733e-17j) (-0.17677669529663687-2.164890140588733e-17j)</span>
+<span class="go">(-0.17677669529663687-6.494670421766199e-17j) (-0.17677669529663687-6.494670421766199e-17j)</span>
+<span class="go">(-0.17677669529663687+2.164890140588733e-17j) (-0.17677669529663687+2.164890140588733e-17j)]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
 </dl>
-<p>:param np.array(float) thetas : The table of float values of the angle.
-:returns: np.array(complex) – A table of vectors corresponding to each angle value on which the algorithm will be
+<p>:parameter np.array[float] thetas : The table of float values of the angle.
+:return: np.array[complex] – A table of vectors corresponding to each angle value on which the algorithm will be
 performed.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qpea.psi_calculation_qpea_base_0">
 <span class="sig-prename descclassname"><span class="pre">qpea.</span></span><span class="sig-name descname"><span class="pre">psi_calculation_qpea_base_0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qpea.html#psi_calculation_qpea_base_0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qpea.psi_calculation_qpea_base_0" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the vector for each angle for the quantum phase estimation algorithm when there are only one qubit on
-the second register. This means that the total number of qubits of all the system is n + 1.</p>
+<dd><p>Computes the vector for each angle for the QPEA.
+This is the case where there are only one qubit on the second register.
+This means that the total number of qubits of all the system is n + 1.</p>
+<dl>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psi_calculation_qca_base_0</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">[[0.35355339059327373 (0.35355339059327373+0j) 0.35355339059327373</span>
+<span class="go"> (0.35355339059327373+0j) 0.35355339059327373 (0.35355339059327373+0j)</span>
+<span class="go">  0.35355339059327373 (0.35355339059327373+0j)]</span>
+<span class="go"> [0.35355339059327373 (0.35355339059327373+0j) 0.35355339059327373</span>
+<span class="go"> (0.35355339059327373-8.659560562354932e-17j) 0.35355339059327373</span>
+<span class="go"> (0.35355339059327373-1.7319121124709863e-16j) 0.35355339059327373</span>
+<span class="go"> (0.35355339059327373-2.5978681687064796e-16j)]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
 </dl>
-<p>:param np.array(float) phis : The table of float values of the angle.
-:returns: np.array(complex) – A table of vectors corresponding to each angle value on which the algorithm will be
-performed.</p>
+<p>:parameter np.array[float] phis : The table of float values of the angle.
+:return: np.array[complex] – A table of vectors corresponding to each angle value.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qpea.psi_calculation_qpea_base_00">
 <span class="sig-prename descclassname"><span class="pre">qpea.</span></span><span class="sig-name descname"><span class="pre">psi_calculation_qpea_base_00</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qpea.html#psi_calculation_qpea_base_00"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qpea.psi_calculation_qpea_base_00" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the vector for each angle for the quantum phase estimation algorithm when there are two qubits on
-the second register. This means that the total number of qubits of all the system is n + 2.</p>
+<dd><dl>
+<dt>Computes the vector for each angle for the QPEA.</dt><dd><p>This is the case where there are two qubits on the second register.
+This means that the total number of qubits of all the system is n + 2.</p>
+</dd>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psi_calculation_qca_base_0</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">[[0.35355339059327373 0.35355339059327373 (0.35355339059327373+0j)</span>
+<span class="go"> (0.35355339059327373+0j) 0.35355339059327373 -0.35355339059327373</span>
+<span class="go"> (0.35355339059327373+0j) (0.35355339059327373+0j)]</span>
+<span class="go"> [0.35355339059327373 0.35355339059327373 (0.35355339059327373+0j)</span>
+<span class="go"> (0.35355339059327373+0j) 0.35355339059327373 -0.35355339059327373</span>
+<span class="go"> (0.35355339059327373+8.659560562354932e-17j)</span>
+<span class="go"> (0.35355339059327373-8.659560562354932e-17j)]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
 </dl>
-<p>:param np.array(float) phis : The table of float values of the angle.
-:returns: np.array(complex) – A table of vectors corresponding to each angle value on which the algorithms will be
-performed.</p>
+<p>:parameter np.array[float] phis : The table of float values of the angle.
+:return: np.array[complex] – A table of vectors corresponding to each angle value.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qpea.run">
-<span class="sig-prename descclassname"><span class="pre">qpea.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_first_register</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_second_register</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qpea.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qpea.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a table of different values that corresponds to an angle which will be involved in the algorithms
-calculations and variations.</p>
+<span class="sig-prename descclassname"><span class="pre">qpea.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_first_register</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_second_register</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qpea.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qpea.run" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Generates a table of different values that corresponds to an angle.</dt><dd><p>The angles will be involved in the algorithms calculations and variations.</p>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>n_first_register</strong> (<em>int</em>) – The number of qubits on the first register of the system.</p></li>
 <li><p><strong>n_second_register</strong> (<em>int</em>) – The value of the number of qubits on the second register.</p></li>
 <li><p><strong>case</strong> (<em>str</em>) – The value that determines the type of algorithm : “G” for qca or “Z” for qpea.</p></li>
+<li><p><strong>test</strong> (<em>boolean</em>) – This determines if all the cases will be run or not.</p></li>
 </ul>
 </dd>
 </dl>
-<p>:param boolean cm : This determines if the invariant based on the coefficient matrices should be calculated or not
-:param boolean mu : This determines if the invariant based on the Mermin polynials should be calculated or not
-:param boolean gm : This determines if the geometric measure invariant should be calculated or not
-:returns: np.array(float) – The table of float values of the angle.</p>
+<p>:parameter boolean cm : This determines if the invariant based on coefficient matrices should be calculated or not
+:parameter boolean mu : This determines if the invariant based on Mermin polynials should be calculated or not
+:parameter boolean gm : This determines if the geometric measure invariant should be calculated or not
+:return: np.array[float] – The table of float values of the angle.</p>
 </dd></dl>
 
 </section>
@@ -227,20 +310,7 @@ calculations and variations.</p>
 <li class="toctree-l1"><a class="reference internal" href="flattening.html">Flattening calculation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gme.html">GME Evaluation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mu.html">MU Evaluation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">QPEA vectors variation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#qpea.angles_determination"><code class="docutils literal notranslate"><span class="pre">angles_determination()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qpea.calcul_invariant_cm"><code class="docutils literal notranslate"><span class="pre">calcul_invariant_cm()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qpea.calcul_invariant_gme"><code class="docutils literal notranslate"><span class="pre">calcul_invariant_gme()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qpea.calcul_invariant_mu"><code class="docutils literal notranslate"><span class="pre">calcul_invariant_mu()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qpea.cas_matrice_g"><code class="docutils literal notranslate"><span class="pre">cas_matrice_g()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qpea.cas_matrice_z"><code class="docutils literal notranslate"><span class="pre">cas_matrice_z()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qpea.psi_calculation_qca_base_0"><code class="docutils literal notranslate"><span class="pre">psi_calculation_qca_base_0()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qpea.psi_calculation_qca_base_00"><code class="docutils literal notranslate"><span class="pre">psi_calculation_qca_base_00()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qpea.psi_calculation_qpea_base_0"><code class="docutils literal notranslate"><span class="pre">psi_calculation_qpea_base_0()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qpea.psi_calculation_qpea_base_00"><code class="docutils literal notranslate"><span class="pre">psi_calculation_qpea_base_00()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qpea.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QPEA vectors variation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run.html">Running all the calculations</a></li>
 </ul>
 

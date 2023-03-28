@@ -47,8 +47,8 @@
 <span class="sd">         [-0.366532  -0.25643112j  0.67716151-0.58425138j]</span>
 <span class="sd">         [ 0.74835654-0.53252389j -0.3953533 -0.00874982j]]</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :returns: np.array(list(complex)) -- A table of n lists containing three (03) coefficients.</span>
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :return: np.array[list[complex]] -- A table of n lists containing three (03) coefficients.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">first_coefficient_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -66,11 +66,10 @@
 <div class="viewcode-block" id="new_coefficients_generation"><a class="viewcode-back" href="../gme.html#gme.new_coefficients_generation">[docs]</a><span class="k">def</span> <span class="nf">new_coefficients_generation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">old_coefficients</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Generates randomly new parameters for GME maximization by quantum walk algorithm.</span>
 
-
-<span class="sd">    :param int n: The number of qubits</span>
-<span class="sd">    :param np.array(list(complex)) old_coefficients: The table of the coefficients that didn&#39;t maximize the gme</span>
-<span class="sd">    :param float step: The value of the step (used in the random walk algorithm)</span>
-<span class="sd">    :returns: np.array(list(complex)) -- Table of new coefficients</span>
+<span class="sd">    :parameter int n: The number of qubits</span>
+<span class="sd">    :parameter np.array[list[complex]] old_coefficients: The table of the coefficients that didn&#39;t maximize the gme</span>
+<span class="sd">    :parameter float step: The value of the step (used in the random walk algorithm)</span>
+<span class="sd">    :return: np.array[list[complex]] -- Table of new coefficients</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">new_coefficients_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -87,12 +86,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculation of the vector on which the GME will be calculated.</span>
 <span class="sd">    This vector depends on the basis which can be |0&gt; or |00&gt;. The default value is the first mentioned.</span>
 
-
-<span class="sd">    :param int n: The number of qubits</span>
-<span class="sd">    :param np.array(list(complex)) coeffs: The table of the coefficients</span>
-<span class="sd">    :param list(int) first_base: The vector corresponding to |0&gt; or |00&gt;</span>
-<span class="sd">    :param list(int) second_base: The vector corresponding to |1&gt; or |11&gt;</span>
-<span class="sd">    :returns: np.array(list(complex)) -- Vector of length 2^n</span>
+<span class="sd">    :parameter int n: The number of qubits</span>
+<span class="sd">    :parameter np.array[list[complex]] coeffs: The table of the coefficients</span>
+<span class="sd">    :parameter np.array[int] first_base: The vector corresponding to |0&gt; or |00&gt;</span>
+<span class="sd">    :parameter np.array[int] second_base: The vector corresponding to |1&gt; or |11&gt;</span>
+<span class="sd">    :returns: np.array[list[complex]] -- Vector of length 2^n</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">vector</span> <span class="o">=</span> <span class="mi">1</span>
@@ -105,8 +103,8 @@
 <div class="viewcode-block" id="gme_calculation"><a class="viewcode-back" href="../gme.html#gme.gme_calculation">[docs]</a><span class="k">def</span> <span class="nf">gme_calculation</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">psi</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates &quot;GME&quot;, the result of the calculation of the vector with the generated one, formed to be &quot;separable&quot;.</span>
 
-<span class="sd">    :param np.array(complex) vector: The separable, ie non entangled vector.</span>
-<span class="sd">    :param np.array(complex) psi: The state vector from which the gme is computed.</span>
+<span class="sd">    :parameter np.array[complex] vector: The separable, ie non entangled vector.</span>
+<span class="sd">    :parameter np.array[complex] psi: The state vector from which the gme is computed.</span>
 <span class="sd">    :returns: float -- The value of the calculation.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -127,12 +125,12 @@
 <span class="sd">        decreasing the decent step) more and more until the maximum value of GME</span>
 <span class="sd">        is found.</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param list(complex) psi: The vector for the calculation of GME.</span>
-<span class="sd">    :param int step: The initial value of the descent step.</span>
-<span class="sd">    :param float alpha_min: The minimum value of the descent step (which is the length of the radius).</span>
-<span class="sd">    :param int c_max: The maximum value of the counter.</span>
-<span class="sd">    :returns: float -- The value that is, expectedly, Mu, the optimal maximal value of the gme.</span>
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter list[complex] psi: The vector for the calculation of GME.</span>
+<span class="sd">    :parameter int step: The initial value of the descent step.</span>
+<span class="sd">    :parameter float alpha_min: The minimum value of the descent step (which is the length of the radius).</span>
+<span class="sd">    :parameter int c_max: The maximum value of the counter.</span>
+<span class="sd">    :return: float -- The value that is, expectedly, Mu, the optimal maximal value of the gme.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>

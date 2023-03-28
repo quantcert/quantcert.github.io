@@ -52,8 +52,8 @@
 <span class="sd">         [ 0.89590429 -0.08368889  0.43629311]</span>
 <span class="sd">         [ 0.42877383  0.76027758  0.48798669]]</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :returns: np.array(list(complex)) -- A table of 2 * n lists containing three (03) coefficients each.</span>
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :return: np.array(list(complex)) -- A table of 2 * n lists containing three (03) coefficients each.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">first_coefficients_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -72,10 +72,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Generates randomly new parameters for MU maximization by random walk algorithm.</span>
 
 
-<span class="sd">    :param int n: The number of qubits</span>
-<span class="sd">    :param np.array(list(float)) old_array: The table of the coefficients that didn&#39;t maximize Mu</span>
-<span class="sd">    :param float step: The value of the step (used in the random walk algorithm)</span>
-<span class="sd">    :returns: np.array(list(complex)) -- Table of new coefficients</span>
+<span class="sd">    :parameter int n: The number of qubits</span>
+<span class="sd">    :parameter np.array(list(float)) old_array: The table of the coefficients that didn&#39;t maximize Mu</span>
+<span class="sd">    :parameter float step: The value of the step (used in the random walk algorithm)</span>
+<span class="sd">    :return: np.array(list(complex)) -- Table of new coefficients</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">maximum</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span>
@@ -94,13 +94,13 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the matrix &quot;a&quot; of the Mermin polynomial based on three Pauli&#39;s matrices.</span>
 
 <span class="sd">    Example :</span>
-<span class="sd">        &gt;&gt;&gt; a_matrix(3, [[-0.7, 0.16, -0.7],[-0.36, 0.54, 0.75],[0.5 -0.8, 0.37],[-0.51, -0.53, 0.7], [0.9, -0.08, 0.43],[0.43, 0.76, 0.48]])</span>
+<span class="sd">        &gt;&gt;&gt; a_matrix(3, [[-0.7,0.2,-0.7],[-0.36,0.5,0.7],[0.5,-0.8,0.4],[-0.5,-0.5,0.7], [0.9,-0.1,0.4],[0.4,0.7,0.5]])</span>
 <span class="sd">        [[ 0.43+0.j    0.9 +0.08j]</span>
 <span class="sd">         [ 0.9 -0.08j -0.43+0.j  ]]</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param: list(int) t : A list of 2 * n lists containing three (03) floats.</span>
-<span class="sd">    :returns: np.array(complex) -- The matrix a of dimension 2*2.</span>
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter: list(int) t : A list of 2 * n lists containing three (03) floats.</span>
+<span class="sd">    :return: np.array(complex) -- The matrix a of dimension 2*2.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_x</span> <span class="o">+</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_y</span> <span class="o">+</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_z</span>
@@ -111,13 +111,13 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the matrix &quot;a&#39;&quot; of the Mermin polynomial ased on three Pauli&#39;s matrices.</span>
 
 <span class="sd">    Example :</span>
-<span class="sd">        &gt;&gt;&gt; a_prime_matrix(3, [[-0.7, 0.16, -0.7],[-0.36, 0.54, 0.75],[0.5 -0.8, 0.37],[-0.51, -0.53, 0.7], [0.9, -0.08, 0.43],[0.43, 0.76, 0.48]])</span>
+<span class="sd">    &gt;&gt;&gt; a_prime_matrix(3, [[-0.7,0.2,-0.7],[-0.4,0.5,0.7],[0.5,-0.8,0.4],[-0.5,-0.5,0.7],[0.9,-0.1,0.4],[0.4,0.7,0.5]])</span>
 <span class="sd">        [[ 0.48+0.j    0.43-0.76j]</span>
 <span class="sd">         [ 0.43+0.76j -0.48+0.j  ]]</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param: list(int) t : A list of 2 * n lists containing three (03) floats.</span>
-<span class="sd">    :returns: np.array(complex) -- The matrix a&#39; of dimension 2*2.</span>
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter: list(int) t : A list of 2 * n lists containing three (03) floats.</span>
+<span class="sd">    :return: np.array(complex) -- The matrix a&#39; of dimension 2*2.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a_prime</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_x</span> <span class="o">+</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_y</span> <span class="o">+</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_z</span>
@@ -134,9 +134,9 @@
 <span class="sd">         [-0.5214 +0.05095j   0.1905 -0.199575j -0.4066 +0.j   0.37475-0.5798j]</span>
 <span class="sd">         [ 0.1575 +0.206825j  0.5214 -0.05095j   0.37475+0.5798j   0.4066 +0.j]]</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param: list(int) t : A list of 2 * n lists containing three (03) floats.</span>
-<span class="sd">    :returns: np.array(complex) -- The polynomial &quot;mn&quot; of dimension 2^n * 2^n.</span>
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter: list(int) t : A list of 2 * n lists containing three (03) floats.</span>
+<span class="sd">    :return: np.array(complex) -- The polynomial &quot;mn&quot; of dimension 2^n * 2^n.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -160,9 +160,9 @@
 <span class="sd">         [ 0.0454-0.0854j   -0.0895+0.296975j -0.9029+0.j   0.21775-0.2046j]</span>
 <span class="sd">         [-0.2085-0.210225j -0.0454+0.0854j    0.21775+0.2046j   0.9029+0.j]]</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param: list(int) t : A list of 2 * n lists containing three (03) floats.</span>
-<span class="sd">    :returns: np.array(complex) -- The polynomial &quot;mn&#39;&quot; of dimension 2^n * 2^n.</span>
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter: list(int) t : A list of 2 * n lists containing three (03) floats.</span>
+<span class="sd">    :return: np.array(complex) -- The polynomial &quot;mn&#39;&quot; of dimension 2^n * 2^n.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -179,9 +179,9 @@
 <div class="viewcode-block" id="mu_calculation"><a class="viewcode-back" href="../mu.html#mu.mu_calculation">[docs]</a><span class="k">def</span> <span class="nf">mu_calculation</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span> <span class="n">vector</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates &quot;MU&quot;, the result of the calculation of the vector with the mermin polynomial.</span>
 
-<span class="sd">    :param np.array(complex) mn: The Mermin polynomial &quot;mn&quot;.</span>
-<span class="sd">    :param list(int) vector: The state vector.</span>
-<span class="sd">    :returns: float -- The value of the calculation.</span>
+<span class="sd">    :parameter np.array(complex) mn: The Mermin polynomial &quot;mn&quot;.</span>
+<span class="sd">    :parameter list(int) vector: The state vector.</span>
+<span class="sd">    :return: float -- The value of the calculation.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">v_dagger</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># The transpose conjugate of the vector</span>
@@ -201,12 +201,12 @@
 <span class="sd">        decreasing the decent step) more and more until the maximum value of Mu</span>
 <span class="sd">        is found.</span>
 
-<span class="sd">    :param int n: The number of qubits.</span>
-<span class="sd">    :param int step: The initial value of the descent step.</span>
-<span class="sd">    :param float step_min: The minimum value of the descent step (which is the length of the radius).</span>
-<span class="sd">    :param int c_max: The maximum value of the counter.</span>
-<span class="sd">    :param list(int) vector: The vector for the calculation of Mu.</span>
-<span class="sd">    :returns: float -- The value that is, expectedly, the optimal maximal value of Mu.</span>
+<span class="sd">    :parameter int n: The number of qubits.</span>
+<span class="sd">    :parameter int step: The initial value of the descent step.</span>
+<span class="sd">    :parameter float step_min: The minimum value of the descent step (which is the length of the radius).</span>
+<span class="sd">    :parameter int c_max: The maximum value of the counter.</span>
+<span class="sd">    :parameter list(int) vector: The vector for the calculation of Mu.</span>
+<span class="sd">    :return: float -- The value that is, expectedly, the optimal maximal value of Mu.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>

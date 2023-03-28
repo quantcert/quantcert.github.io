@@ -34,10 +34,10 @@
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
 
 
-<div class="viewcode-block" id="printing_cms"><a class="viewcode-back" href="../cm.html#cm.printing_cms">[docs]</a><span class="k">def</span> <span class="nf">printing_cms</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="printing_cms"><a class="viewcode-back" href="../cm.html#cm.printing_cms">[docs]</a><span class="k">def</span> <span class="nf">printing_cms</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the cumulation of the coefficient matrices values which is an invariant.</span>
-<span class="sd">        In fact, at first, from the input vector, all the flattenings are made. Then, a calculation is done from each of them. In the end, the</span>
-<span class="sd">        invariant is just the sum of all the results.</span>
+<span class="sd">        In fact, at first, from the input vector, all the flattenings are made. Then, a calculation is done from each</span>
+<span class="sd">        of them. In the end, the invariant is just the sum of all the results.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; printing_cms(3, [1 / sqrt(2), 0, 0, 0, 0, 0, 0, 1 / sqrt(2)])</span>
@@ -45,7 +45,7 @@
 
 <span class="sd">    :parameter int n: The number of qubits.</span>
 <span class="sd">    :parameter list[int] vector: A list filled with the coefficients corresponding to the vector.</span>
-<span class="sd">    :return: The invariant.</span>
+<span class="sd">    :return: int -- The invariant.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">all_cms</span> <span class="o">=</span> <span class="n">flattening_and_rank_calculation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="p">)</span>
     <span class="n">number_of_flattening_types</span> <span class="o">=</span> <span class="n">maximum_of_flattening</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>

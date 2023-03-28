@@ -39,7 +39,7 @@
 <span class="sig-prename descclassname"><span class="pre">mu.</span></span><span class="sig-name descname"><span class="pre">a_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mu.html#a_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mu.a_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the matrix “a” of the Mermin polynomial based on three Pauli’s matrices.</p>
 <dl>
-<dt>Example :</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="o">-</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.36</span><span class="p">,</span> <span class="mf">0.54</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">],[</span><span class="mf">0.5</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.51</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.53</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">],[</span><span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="mf">0.48</span><span class="p">]])</span>
+<dt>Example :</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="o">-</span><span class="mf">0.7</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="o">-</span><span class="mf">0.7</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.36</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.7</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.4</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.7</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.4</span><span class="p">],[</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.7</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]])</span>
 <span class="go">[[ 0.43+0.j    0.9 +0.08j]</span>
 <span class="go"> [ 0.9 -0.08j -0.43+0.j  ]]</span>
 </pre></div>
@@ -50,7 +50,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
-<dt class="field-even">Param<span class="colon">:</span></dt>
+<dt class="field-even">Parameter<span class="colon">:</span></dt>
 <dd class="field-even"><p>list(int) t : A list of 2 * n lists containing three (03) floats.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -63,19 +63,19 @@
 <dt class="sig sig-object py" id="mu.a_prime_matrix">
 <span class="sig-prename descclassname"><span class="pre">mu.</span></span><span class="sig-name descname"><span class="pre">a_prime_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mu.html#a_prime_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mu.a_prime_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the matrix “a’” of the Mermin polynomial ased on three Pauli’s matrices.</p>
-<dl>
-<dt>Example :</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_prime_matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="o">-</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.36</span><span class="p">,</span> <span class="mf">0.54</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">],[</span><span class="mf">0.5</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.51</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.53</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">],[</span><span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="mf">0.48</span><span class="p">]])</span>
-<span class="go">[[ 0.48+0.j    0.43-0.76j]</span>
-<span class="go"> [ 0.43+0.76j -0.48+0.j  ]]</span>
-</pre></div>
-</div>
+<p>Example :
+&gt;&gt;&gt; a_prime_matrix(3, [[-0.7,0.2,-0.7],[-0.4,0.5,0.7],[0.5,-0.8,0.4],[-0.5,-0.5,0.7],[0.9,-0.1,0.4],[0.4,0.7,0.5]])</p>
+<blockquote>
+<div><dl class="simple">
+<dt>[[ 0.48+0.j    0.43-0.76j]</dt><dd><p>[ 0.43+0.76j -0.48+0.j  ]]</p>
 </dd>
 </dl>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
-<dt class="field-even">Param<span class="colon">:</span></dt>
+<dt class="field-even">Parameter<span class="colon">:</span></dt>
 <dd class="field-even"><p>list(int) t : A list of 2 * n lists containing three (03) floats.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -128,7 +128,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
-<dt class="field-even">Param<span class="colon">:</span></dt>
+<dt class="field-even">Parameter<span class="colon">:</span></dt>
 <dd class="field-even"><p>list(int) t : A list of 2 * n lists containing three (03) floats.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -155,7 +155,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of qubits.</p>
 </dd>
-<dt class="field-even">Param<span class="colon">:</span></dt>
+<dt class="field-even">Parameter<span class="colon">:</span></dt>
 <dd class="field-even"><p>list(int) t : A list of 2 * n lists containing three (03) floats.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -254,17 +254,7 @@ is found.</p>
 <li class="toctree-l1"><a class="reference internal" href="cm.html">CM Evaluation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flattening.html">Flattening calculation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gme.html">GME Evaluation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">MU Evaluation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#mu.a_matrix"><code class="docutils literal notranslate"><span class="pre">a_matrix()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mu.a_prime_matrix"><code class="docutils literal notranslate"><span class="pre">a_prime_matrix()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mu.first_coefficients_generation"><code class="docutils literal notranslate"><span class="pre">first_coefficients_generation()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mu.mermin"><code class="docutils literal notranslate"><span class="pre">mermin()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mu.mermin_prime"><code class="docutils literal notranslate"><span class="pre">mermin_prime()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mu.mu_calculation"><code class="docutils literal notranslate"><span class="pre">mu_calculation()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mu.new_coefficients_generation"><code class="docutils literal notranslate"><span class="pre">new_coefficients_generation()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mu.xbest_calculation"><code class="docutils literal notranslate"><span class="pre">xbest_calculation()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MU Evaluation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qpea.html">QPEA vectors variation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run.html">Running all the calculations</a></li>
 </ul>
