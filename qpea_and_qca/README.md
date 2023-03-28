@@ -15,11 +15,11 @@ three invariants (one based on Mermin polynomials, one based on Coefficient
 Matrices and the geometric measure of entanglement), we are able to obtain
 numerical evaluations of the invariants for the quantum states coming
 from the algorithms. More information about this is provided in our article
-available on arxiv <!---->. This code allows to draw the corresponding figures.
+available on arxiv. This code allows to draw the corresponding figures.
 
-<!--The code documentation can be found
-[in pdf format](doc/build/latex/Mermin-evaluation.pdf) or
-[as a website](doc/build/html).--> It is generated from the code using [Sphinx](http://www.sphinx-doc.org).
+The code documentation can be found [here](doc/build/html). 
+<!--[in pdf format](doc/build/latex/Mermin-evaluation.pdf) or-->
+It is generated from the code using [Sphinx](http://www.sphinx-doc.org).
 
 ## Copyright
 
