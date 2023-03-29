@@ -23,6 +23,6 @@ It is generated from the code using [Sphinx](http://www.sphinx-doc.org).
 
 ## Copyright
 
-This program is distributed under the GNU LGPL 3. See the enclosed file [LICENSE](LICENSE).
+This program is distributed under the GNU LGPL 3.
 
 ## References
