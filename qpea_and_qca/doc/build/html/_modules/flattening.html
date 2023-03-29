@@ -1,18 +1,16 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>flattening &#8212; Phase sensitivity of entanglement in QPEA  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
    
@@ -38,8 +36,9 @@
 
 
 <div class="viewcode-block" id="maximum_of_flattening"><a class="viewcode-back" href="../flattening.html#flattening.maximum_of_flattening">[docs]</a><span class="k">def</span> <span class="nf">maximum_of_flattening</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Calculates the maximum of flattening types that can be done. If the reuslt of the calculation is</span>
-<span class="sd">    a float, then, this number turns out to be the largest integer less or equal to our number.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates the maximum of flattening types that can be done.</span>
+<span class="sd">        If the reuslt of the calculation is a float, then, this number turns out</span>
+<span class="sd">        to be the largest integer less or equal to our number.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; maximum_of_flattening(4)</span>
@@ -54,8 +53,9 @@
 
 
 <div class="viewcode-block" id="maximum_of_matrices"><a class="viewcode-back" href="../flattening.html#flattening.maximum_of_matrices">[docs]</a><span class="k">def</span> <span class="nf">maximum_of_matrices</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">type_of_flattening</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Calculates the maximum of matrices for a type of flattening. If the type of flattening is a divider of the</span>
-<span class="sd">    number of qubits, then, the first result is divided by 2.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates the maximum of matrices for a type of flattening.</span>
+<span class="sd">        If the type of flattening is a divider of the number of qubits, then,</span>
+<span class="sd">        the first result is divided by 2.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; maximum_of_matrices(2, 1)</span>
@@ -64,7 +64,7 @@
 <span class="sd">        3.0</span>
 
 <span class="sd">    :parameter int n: The number of qubits.</span>
-<span class="sd">    :parameter int type_of_flattening: The type of flattening.</span>
+<span class="sd">    :parameter int type_of_flattening : The type of flattening.</span>
 <span class="sd">    :return: float -- The maximum number of matrices.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">max_matrices</span> <span class="o">=</span> <span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">type_of_flattening</span><span class="p">)</span>
@@ -74,13 +74,13 @@
 
 
 <div class="viewcode-block" id="convert_in_binary"><a class="viewcode-back" href="../flattening.html#flattening.convert_in_binary">[docs]</a><span class="k">def</span> <span class="nf">convert_in_binary</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Converts an int into a string containing the number in bits.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts an int into a string containing the number in bits.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; convert_in_binary(5,3)</span>
-<span class="sd">        &#39;101&#39;</span>
+<span class="sd">        &quot;101&quot;</span>
 <span class="sd">        &gt;&gt;&gt; convert_in_binary(5,5)</span>
-<span class="sd">        &#39;00101&#39;</span>
+<span class="sd">        &quot;00101&quot;</span>
 
 <span class="sd">    :parameter int number: the number that is going to be converted.</span>
 <span class="sd">    :parameter int bits: the number of bits required.</span>
@@ -90,13 +90,13 @@
 
 
 <div class="viewcode-block" id="putting_in_list"><a class="viewcode-back" href="../flattening.html#flattening.putting_in_list">[docs]</a><span class="k">def</span> <span class="nf">putting_in_list</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Puts every figure of the number into a list type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Puts every figure of the number into a list type.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; putting_in_list(&quot;000&quot;)</span>
 <span class="sd">        [0, 0, 0]</span>
 
-<span class="sd">    :parameter string number: The number to split in a string format.</span>
+<span class="sd">    :parameter str number: The number to split in a string format.</span>
 <span class="sd">    :return: list[int] -- The list with every digit of the number in a case.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">number_in_caracters</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
@@ -107,7 +107,7 @@
 
 
 <div class="viewcode-block" id="list_of_combinaisons"><a class="viewcode-back" href="../flattening.html#flattening.list_of_combinaisons">[docs]</a><span class="k">def</span> <span class="nf">list_of_combinaisons</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">type_of_flattening</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Realizes the possible combinations for a type of flattening.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Realizes the possible combinations for a type of flattening.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; list_of_combinaisons(5, 1)</span>
@@ -116,7 +116,7 @@
 <span class="sd">        [(1, 2), (1, 3), (2, 3)]</span>
 
 <span class="sd">    :parameter int n: The number of qubits.</span>
-<span class="sd">    :parameter int type_of_flattening: The current type of flattening.</span>
+<span class="sd">    :parameter int type_of_flattening : The current type of flattening.</span>
 <span class="sd">    :return: list[list[int]] -- The list of every possible combination.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">type_of_flattening</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -129,7 +129,7 @@
 
 
 <div class="viewcode-block" id="list_of_combinaisons_for_invariant"><a class="viewcode-back" href="../flattening.html#flattening.list_of_combinaisons_for_invariant">[docs]</a><span class="k">def</span> <span class="nf">list_of_combinaisons_for_invariant</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Realizes the possible combinations for a type of flattening.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Realizes the possible combinations for a type of flattening.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; list_of_combinaisons(4)</span>
@@ -146,15 +146,15 @@
 
 
 <div class="viewcode-block" id="flattening_and_rank_calculation"><a class="viewcode-back" href="../flattening.html#flattening.flattening_and_rank_calculation">[docs]</a><span class="k">def</span> <span class="nf">flattening_and_rank_calculation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Construct the matrices of every flattening type and calculates their rank.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Constructs the matrices of every flattening type.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; flattening_and_rank_calculation(3, [1, 0, 0, 0, 0, 0, 0, 1])</span>
 <span class="sd">        ([2, 2, 2], [[array([[1, 0, 0, 0], [0, 0, 0, 1]]), array([[1, 0, 0, 0], [0, 0, 0, 1]]), array([[1, 0, 0, 0], [0, 0, 0, 1]])]])</span>
 
 <span class="sd">    :parameter int n: The number of qubits.</span>
-<span class="sd">    :parameter list[int] T: A list filled with the coefficients corresponding to the vector.</span>
-<span class="sd">    :return: list[list[int]] -- A list of all the matrices after all flatennings.</span>
+<span class="sd">    :parameter list[int] T : A list filled with the coefficients corresponding to the vector.</span>
+<span class="sd">    :return: list[np.array[int]] -- A list of all the matrices after all flatennings.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">maximum_of_flattening</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="n">all_coef_matrices</span> <span class="o">=</span> <span class="p">[]</span>
@@ -223,7 +223,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -240,8 +240,8 @@
       &copy;2023, Grâce Amouzou.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

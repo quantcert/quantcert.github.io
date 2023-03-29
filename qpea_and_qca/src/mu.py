@@ -20,8 +20,8 @@ def first_coefficients_generation(n):
          [ 0.89590429 -0.08368889  0.43629311]
          [ 0.42877383  0.76027758  0.48798669]]
 
-    :param int n: The number of qubits.
-    :returns: np.array(list(complex)) -- A table of 2 * n lists containing three (03) coefficients each.
+    :parameter int n: The number of qubits.
+    :return: np.array(list(complex)) -- A table of 2 * n lists containing three (03) coefficients each.
 
     """
     first_coefficients_list = []
@@ -40,10 +40,10 @@ def new_coefficients_generation(n, old_array, step):
     """ Generates randomly new parameters for MU maximization by random walk algorithm.
 
 
-    :param int n: The number of qubits
-    :param np.array(list(float)) old_array: The table of the coefficients that didn't maximize Mu
-    :param float step: The value of the step (used in the random walk algorithm)
-    :returns: np.array(list(complex)) -- Table of new coefficients
+    :parameter int n: The number of qubits
+    :parameter np.array(list(float)) old_array: The table of the coefficients that didn't maximize Mu
+    :parameter float step: The value of the step (used in the random walk algorithm)
+    :return: np.array(list(complex)) -- Table of new coefficients
 
     """
     maximum = 2 * n
@@ -62,13 +62,13 @@ def a_matrix(n, t):
     """ Computes the matrix "a" of the Mermin polynomial based on three Pauli's matrices.
 
     Example :
-        >>> a_matrix(3, [[-0.7, 0.16, -0.7],[-0.36, 0.54, 0.75],[0.5 -0.8, 0.37],[-0.51, -0.53, 0.7], [0.9, -0.08, 0.43],[0.43, 0.76, 0.48]])
+        >>> a_matrix(3, [[-0.7,0.2,-0.7],[-0.36,0.5,0.7],[0.5,-0.8,0.4],[-0.5,-0.5,0.7], [0.9,-0.1,0.4],[0.4,0.7,0.5]])
         [[ 0.43+0.j    0.9 +0.08j]
          [ 0.9 -0.08j -0.43+0.j  ]]
 
-    :param int n: The number of qubits.
-    :param: list(int) t : A list of 2 * n lists containing three (03) floats.
-    :returns: np.array(complex) -- The matrix a of dimension 2*2.
+    :parameter int n: The number of qubits.
+    :parameter: list(int) t : A list of 2 * n lists containing three (03) floats.
+    :return: np.array(complex) -- The matrix a of dimension 2*2.
 
     """
     a = t[2 * n - 2][0] * matrix_x + t[2 * n - 2][1] * matrix_y + t[2 * n - 2][2] * matrix_z
@@ -79,13 +79,13 @@ def a_prime_matrix(n, t):
     """ Computes the matrix "a'" of the Mermin polynomial ased on three Pauli's matrices.
 
     Example :
-        >>> a_prime_matrix(3, [[-0.7, 0.16, -0.7],[-0.36, 0.54, 0.75],[0.5 -0.8, 0.37],[-0.51, -0.53, 0.7], [0.9, -0.08, 0.43],[0.43, 0.76, 0.48]])
+    >>> a_prime_matrix(3, [[-0.7,0.2,-0.7],[-0.4,0.5,0.7],[0.5,-0.8,0.4],[-0.5,-0.5,0.7],[0.9,-0.1,0.4],[0.4,0.7,0.5]])
         [[ 0.48+0.j    0.43-0.76j]
          [ 0.43+0.76j -0.48+0.j  ]]
 
-    :param int n: The number of qubits.
-    :param: list(int) t : A list of 2 * n lists containing three (03) floats.
-    :returns: np.array(complex) -- The matrix a' of dimension 2*2.
+    :parameter int n: The number of qubits.
+    :parameter: list(int) t : A list of 2 * n lists containing three (03) floats.
+    :return: np.array(complex) -- The matrix a' of dimension 2*2.
 
     """
     a_prime = t[2 * n - 1][0] * matrix_x + t[2 * n - 1][1] * matrix_y + t[2 * n - 1][2] * matrix_z
@@ -102,9 +102,9 @@ def mermin(n, t):
          [-0.5214 +0.05095j   0.1905 -0.199575j -0.4066 +0.j   0.37475-0.5798j]
          [ 0.1575 +0.206825j  0.5214 -0.05095j   0.37475+0.5798j   0.4066 +0.j]]
 
-    :param int n: The number of qubits.
-    :param: list(int) t : A list of 2 * n lists containing three (03) floats.
-    :returns: np.array(complex) -- The polynomial "mn" of dimension 2^n * 2^n.
+    :parameter int n: The number of qubits.
+    :parameter: list(int) t : A list of 2 * n lists containing three (03) floats.
+    :return: np.array(complex) -- The polynomial "mn" of dimension 2^n * 2^n.
 
     """
     if n == 1:
@@ -128,9 +128,9 @@ def mermin_prime(n, t):
          [ 0.0454-0.0854j   -0.0895+0.296975j -0.9029+0.j   0.21775-0.2046j]
          [-0.2085-0.210225j -0.0454+0.0854j    0.21775+0.2046j   0.9029+0.j]]
 
-    :param int n: The number of qubits.
-    :param: list(int) t : A list of 2 * n lists containing three (03) floats.
-    :returns: np.array(complex) -- The polynomial "mn'" of dimension 2^n * 2^n.
+    :parameter int n: The number of qubits.
+    :parameter: list(int) t : A list of 2 * n lists containing three (03) floats.
+    :return: np.array(complex) -- The polynomial "mn'" of dimension 2^n * 2^n.
 
     """
     if n == 1:
@@ -147,9 +147,9 @@ def mermin_prime(n, t):
 def mu_calculation(mn, vector):
     """ Calculates "MU", the result of the calculation of the vector with the mermin polynomial.
 
-    :param np.array(complex) mn: The Mermin polynomial "mn".
-    :param list(int) vector: The state vector.
-    :returns: float -- The value of the calculation.
+    :parameter np.array(complex) mn: The Mermin polynomial "mn".
+    :parameter list(int) vector: The state vector.
+    :return: float -- The value of the calculation.
 
     """
     v_dagger = np.conj(vector).T  # The transpose conjugate of the vector
@@ -169,12 +169,12 @@ def xbest_calculation(n, step, step_min, c_max, vector):
         decreasing the decent step) more and more until the maximum value of Mu
         is found.
 
-    :param int n: The number of qubits.
-    :param int step: The initial value of the descent step.
-    :param float step_min: The minimum value of the descent step (which is the length of the radius).
-    :param int c_max: The maximum value of the counter.
-    :param list(int) vector: The vector for the calculation of Mu.
-    :returns: float -- The value that is, expectedly, the optimal maximal value of Mu.
+    :parameter int n: The number of qubits.
+    :parameter int step: The initial value of the descent step.
+    :parameter float step_min: The minimum value of the descent step (which is the length of the radius).
+    :parameter int c_max: The maximum value of the counter.
+    :parameter list(int) vector: The vector for the calculation of Mu.
+    :return: float -- The value that is, expectedly, the optimal maximal value of Mu.
 
     """
     c = 0

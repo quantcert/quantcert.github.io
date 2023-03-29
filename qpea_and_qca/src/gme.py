@@ -18,7 +18,6 @@ def first_coefficients_generation(n):
 
     :parameter int n: The number of qubits.
     :returns: np.array[list[complex]] -- A table of n lists containing 3 coefficients.
-
     """
     first_coefficient_list = []
 
@@ -40,7 +39,6 @@ def new_coefficients_generation(n, old_coefficients, step):
     :parameter np.array[list[complex]] old_coefficients: The table of the coefficients that didn't maximize the gme
     :parameter float step: The value of the step (used in the random walk algorithm)
     :returns: np.array[list[complex]] -- Table of new coefficients
-
     """
     new_coefficients_list = []
     for counter in range(n):
@@ -56,13 +54,11 @@ def vector_calculation(n, coeffs, first_base=ket_0, second_base=ket_1):
     """ Calculation of the vector on which the GME will be calculated.
     This vector depends on the basis which can be |0> or |00>. The default value is the first mentioned.
 
-
     :parameter int n: The number of qubits
     :parameter np.array[list[complex]] coeffs: The table of the coefficients
     :parameter list[int] first_base: The vector corresponding to |0> or |00>
     :parameter list[int] second_base: The vector corresponding to |1> or |11>
     :returns: np.array[list[complex]] -- Vector of length 2^n
-
     """
     vector = 1
     for i in range(n):
@@ -101,7 +97,6 @@ def gme_best_calculation(n, psi, step, alpha_min, c_max):
     :parameter float alpha_min: The minimum value of the descent step (which is the length of the radius).
     :parameter int c_max: The maximum value of the counter.
     :returns: float -- The value that is, expectedly, Mu, the optimal maximal value of the gme.
-
     """
     c = 0
     step_it = step
