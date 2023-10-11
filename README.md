@@ -194,3 +194,19 @@ results in particular regarding the classes of entanglement.
 
 More information related to this paper can be found in the 
 [qpea_and_qca](qpea_and_qca) part of this GitHub repository.
+
+## Implementing 2-qubit pseudo-telepathy games on noisy intermediate scale quantum computers
+
+_Paper abstract:_<br/>
+It is known that Mermin-Peres like proofs of quantum contextuality can furnish non-
+local games with a guaranteed quantum strategy, when classically no such guarantee 
+can exist. This phenomenon, also called quantum pseudo-telepathy, has been studied 
+in the case of the so-called Mermin Magic square game. In this paper we review in 
+detail two different ways of implementing on a quantum computer such a game and 
+propose a new Doily game based on the geometry of 2-qubit Pauli group. We show that
+the quantumness of these games are almost revealed when we play them on the IBM 
+Quantum Experience, however the inherent noise in the available quantum machines 
+prevents a full demonstration of the non-classical aspects.   
+
+More information related to this paper can be found in the 
+[quantum_game](quantum_game) part of this GitHub repository.
