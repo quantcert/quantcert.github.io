@@ -210,3 +210,8 @@ prevents a full demonstration of the non-classical aspects.
 
 More information related to this paper can be found in the 
 [quantum_game](quantum_game) part of this GitHub repository.
+
+## Contextuality degree of multi-qubit configurations
+
+All information related to this subject can be found in the
+[ContextualityDegree](ContextualityDegree) part of this GitHub repository.
