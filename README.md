@@ -214,4 +214,4 @@ More information related to this paper can be found in the
 ## Contextuality degree of multi-qubit configurations
 
 All information related to this subject can be found in the
-[ContextualityDegree](ContextualityDegree) part of this GitHub repository.
+[contextualityDegree](contextualityDegree) part of this GitHub repository.
