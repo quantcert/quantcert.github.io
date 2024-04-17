@@ -12,9 +12,10 @@ import csv
 
 from qiskit import *
 from qiskit_aer.noise import NoiseModel
-from qiskit_aer import AerSimulator
+from qiskit_aer import Aer 
+from qiskit_ibm_provider import IBMProvider
 
-# Creating the Eloily as a set of string-valued operators and lines
+
 
 # Function to give tensor product of 3 qubit operators
 def tensor3(mat_1, mat_2, mat_3):
@@ -269,8 +270,8 @@ for indices in doily_indices:
 
 # Adding the sign parity of each context
 doily_contexts_with_signs = [[context, id_check(context_str_prod(context))] for context in doily_contexts_str]
-print("Doily contexts with signs (ignoring anticommutation in gamma multiplications):")
-print(doily_contexts_with_signs)
+# print("Doily contexts with signs:")
+# print(doily_contexts_with_signs)
                             
 
 # Creating the canonical double-six contexts also from the gamma generators
@@ -289,8 +290,8 @@ for i in range(6):
             
 # Adding context sign parities
 double_six_contexts_str_with_signs = [[context, id_check(context_str_prod(context))] for context in double_six_contexts_str]
-print("Double six contexts not ignoring anticommutation of gamma products:")
-print((double_six_contexts_str_with_signs))
+# print("Double six contexts:")
+# print((double_six_contexts_str_with_signs))
 
 
 # Combining doily and double six to get eloily
@@ -318,9 +319,16 @@ eloily_points = [item for item in Counter(points_on_all_lines).keys()]
 
 # Implementing the game in a circuit 
 
+# ------------------------------------------------------------------------------------#
+# ------------------------------------------------------------------------------------#
 
-# Your credentials go here:
+
+# YOUR IBM QUANTUM EXPERIENCE API TOKEN HERE:
 IBMProvider.save_account('<API_TOKEN>', overwrite=True)
+
+
+# ------------------------------------------------------------------------------------#
+# ------------------------------------------------------------------------------------#
 
 
 # Load previously saved account credentials.
@@ -341,11 +349,16 @@ is_simulation = True
 is_noisy = False
 number_of_shots = 8192 # number of shots per game
 
+
 # Allocating the qubits based on the CNOT connection topology
+
 del_A, del_B = 28, 32 # Alice and Bob's delegation qubits
 A1, B1 = 29,31 # Alice & Bobs first qubits A1, B1
 A2, B2 = 35,36 
 A3, B3 = 48,50
+# If simulator doesn't accept such large qubit assignments change to any lower ones for simulation
+
+
 
 # listing ways of choosing 2 lines from 5 (each point lies on 5 lines)
 intersection_options = list(it.combinations(range(5),2))
@@ -386,14 +399,14 @@ for point in eloily_points:
         circuit.z (B2);
         circuit.z (B3);
 
-        # Delegating and measuring Alice's qubits
+        # Delegating and measuring Alice's qubits for first operator
         Op_delegate(Alice_line[0][0], circuit, A1, del_A)
         Op_delegate(Alice_line[0][1], circuit, A2, del_A)
         Op_delegate(Alice_line[0][2], circuit, A3, del_A)
         
         circuit.measure(del_A,c[0])
 
-        # Delegating and measuring Bob's qubits
+        # Delegating and measuring Bob's qubits for first operator
         Op_delegate(Bob_line[0][0], circuit, B1, del_B)
         Op_delegate(Bob_line[0][1], circuit, B2, del_B)
         Op_delegate(Bob_line[0][2], circuit, B3, del_B)
@@ -409,10 +422,10 @@ for point in eloily_points:
         Op_measurement(Bob_line[1][1], circuit, B2, c[6])
         Op_measurement(Bob_line[1][2], circuit, B3, c[7])
 
-        # Setting up run on simulator or real QC
+        # Setting up run on simulator or real QC 
         if is_simulation:
-            # local_simulator = Aer.get_backend('qasm_simulator')
-            local_simulator = AerSimulator()
+            local_simulator = Aer.get_backend('statevector_simulator')
+#             local_simulator = AerSimulator()
             if is_noisy:
                 result = execute(circuit, backend=local_simulator, noise_model = noise_model, shots=number_of_shots).result()
             else:
@@ -421,14 +434,14 @@ for point in eloily_points:
             result = execute(circuit, backend=quantum_comp, shots=number_of_shots).result()
         measures_dictionary = result.get_counts()
 
-        # Getting results
-        qubit_results = [key for key in result.get_counts(circuit)]
+        # Getting results, noting IBM returns bitstrings backwards
+        qubit_results = [key[::-1] for key in result.get_counts(circuit)]
         qubit_counts = list(result.get_counts(circuit).values())
         total_counts = sum(qubit_counts)
 
-        # Configuring player results, noting IBM returns bitstrings backwards
-        Alice_results = ["".join(reversed(qubits[4:8])) for qubits in qubit_results]
-        Bob_results = ["".join(reversed(qubits[0:4])) for qubits in qubit_results]
+        # Configuring player results
+        Alice_results = [qubits[0:4] for qubits in qubit_results]
+        Bob_results = [qubits[4:8] for qubits in qubit_results]
 
         # Converts players's 4 bits to a 3-bit answer, one per qubit measurement
         Alice_ans = [str(int(qubits[0]))
@@ -455,9 +468,9 @@ for point in eloily_points:
                     writer = csv.writer(outcsv)
                     writer.writerow([Alice_line, Bob_line, measures_dictionary, Alice_ans+Bob_ans, success_rate])
         Success_arr.append(success_rate)
+        
 
 print("Success rate for each intersection point: ")
-print(Success_arr)
 print("-"*30)
 print("Global victory for Brisbane: ", np.mean(Success_arr))
 
