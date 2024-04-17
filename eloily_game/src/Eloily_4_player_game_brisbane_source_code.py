@@ -3,6 +3,7 @@
 
 # Copyright (C) 2024 Colm Kelleher.
 
+
 # NOTE: Code is written for Qiskit 0.46.0. 
 
 import numpy as np
@@ -141,42 +142,6 @@ def string_to_col(point):
     return str_to_array(binary_col)
 
 
-# function to return stabiliser state for 3 qubits
-def stabiliser_state(test_chi):
-    
-    # Forming tensor products of all Gamma generators
-    O1 = np.kron(Ops[gamma_str[0]],Ops[gamma_str[0]])
-    O2 = np.kron(Ops[gamma_str[1]],Ops[gamma_str[1]])
-    O3 = np.kron(Ops[gamma_str[2]],Ops[gamma_str[2]])
-    O4 = np.kron(Ops[gamma_str[3]],Ops[gamma_str[3]])
-    O5 = np.kron(Ops[gamma_str[4]],Ops[gamma_str[4]])
-    O6 = np.kron(Ops[gamma_str[5]],Ops[gamma_str[5]])
-    O7 = np.kron(Ops[gamma_str[6]],Ops[gamma_str[6]])
-
-    # New 6-qubit generators
-    Ops_gen = [O1, O2, O3 ,O4, O5, O6]
-
-    Chi_bin = format(test_chi, '064b') # test_chi input determines initial state Chi in binary form
-
-    Chi = str_to_array(Chi_bin)
-    Id = np.eye(64)
-    Psi = Chi # start stabiliser state as initial state Chi
-    Op_product = Id
-    for op in Ops_gen: # iterate over product of identity+generators
-        Op_product = np.matmul(0.5*(Id+op), Op_product)
-        Psi = np.matmul(0.5*(Id+op), Psi).real
-    
-    # returning stabiliser state in array form with binary-encoded vectors (works for balanced state)
-    psi_arr = []
-    for term in Psi:
-        if term != 0: 
-            psi_arr.append(str(np.sign(term))+str(format(Psi.index(term), '06b')))
-    
-    return psi_arr
-
-# The State: 
-# -000111+001110+010101-011100+100011-101010-110001+111000
-
 
 ## Some functions for creating the game conditions
 
@@ -193,7 +158,80 @@ def negative_line(point):
     for line in neg_lines:
         if point in line:
             return line
+            
 
+# ----------------------------------------------------------------- #
+
+# Below are some functions to check the success of a given game result
+
+# ----------------------------------------------------------------- #
+
+
+# Functions for converting results into bitstrings and check if game is won or not
+def direct_measure_to_bit(bits):
+	# converts triple of direct measured bits to one operator result
+    return str((int(bits[0])+int(bits[1])+int(bits[2]))%2)
+
+def bits_to_triplet(line, bits):
+	# converts two bits to triplet answer using line parity
+    s_factor = S_factor(line)
+    return str(bits[0])+str(bits[1])+str((int(bits[0])+int(bits[1])+s_factor)%2)
+
+def player_line_bits(line, bits):
+	# returns triplet answer for bits
+    reorg_bits = str(bits[0]) + str(bits[1])
+    return bits_to_triplet(line, reorg_bits)
+
+def coord(line, point):
+	# gives coordinate of point in question on player line
+    return line.index(point)
+
+def coords(alice_line, bob_line, dylan_line, evan_line, point):
+	# gives array of coordinates of point to check winning condition
+    coords_arr = []
+    for line in (alice_line, bob_line, dylan_line, evan_line):
+        coords_arr.append(coord(line, point))
+    return coords_arr
+
+def intersection_check(alice_trip, bob_trip, dylan_trip, evan_trip, coords):
+	# checks whether A*B*D*E = +1 condition, with A given by Alice measurement result on given point, etc.
+    return not (int(alice_trip[coords[0]]) + int(bob_trip[coords[1]]) + int(dylan_trip[coords[2]]) + int(evan_trip[coords[3]]))%2
+
+
+
+def results_check_single_del(point, alice_line, bob_line, daisy_line, evan_line, bit_result):
+	# returns true if players have won the game or not
+    coords_data = coords(alice_line, bob_line, daisy_line, evan_line, point)
+    
+    alice_bits = bit_result[0:3]
+    bob_bits = bit_result[4:7]
+    daisy_bits = bit_result[8:11]
+    evan_bits = bit_result[12:15]
+    
+    alice_second_bit = direct_measure_to_bit(alice_bits)
+    bob_second_bit = direct_measure_to_bit(bob_bits)
+    daisy_second_bit = direct_measure_to_bit(daisy_bits)
+    evan_second_bit = direct_measure_to_bit(evan_bits)
+    
+    alice_del_bit = bit_result[3]
+    bob_del_bit = bit_result[7]
+    daisy_del_bit = bit_result[11]
+    evan_del_bit = bit_result[15]
+    
+    alice_trip = bits_to_triplet(alice_line, str(alice_del_bit)+str(alice_second_bit)) 
+    bob_trip = bits_to_triplet(bob_line, str(bob_del_bit)+str(bob_second_bit))  
+    daisy_trip = bits_to_triplet(daisy_line, str(daisy_del_bit)+str(daisy_second_bit))  
+    evan_trip = bits_to_triplet(evan_line, str(evan_del_bit)+str(evan_second_bit))  
+    
+    return intersection_check(alice_trip, bob_trip, daisy_trip, evan_trip, coords_data)
+    
+
+
+# ----------------------------------------------------------------- #
+
+# Below section implements Eloily as in 2-player game source code
+
+# ----------------------------------------------------------------- #
 
 
 # Defining the Pauli operators
@@ -313,24 +351,25 @@ points_on_all_lines = np.array(all_lines).flatten()
 eloily_points = [item for item in Counter(points_on_all_lines).keys()]
 
 
+# ----------------------------------------------------------------- #
+
+# End of Eloily construction section
+
+# ----------------------------------------------------------------- #
 
 
-# Creating the Eloily Game
+
+# Creating the 4-Player Eloily Game
 
 
-# Implementing the game in a circuit 
-
-# ------------------------------------------------------------------------------------#
-# ------------------------------------------------------------------------------------#
-
+# ----------------------------------------------------------------- #
+# ----------------------------------------------------------------- #
 
 # YOUR IBM QUANTUM EXPERIENCE API TOKEN HERE:
 IBMProvider.save_account('<API_TOKEN>', overwrite=True)
 
-
-# ------------------------------------------------------------------------------------#
-# ------------------------------------------------------------------------------------#
-
+# ----------------------------------------------------------------- #
+# ----------------------------------------------------------------- #
 
 # Load previously saved account credentials.
 provider = IBMProvider()
@@ -340,139 +379,143 @@ quantum_comp=provider.get_backend('ibm_brisbane')
 noise_model = NoiseModel.from_backend(quantum_comp)
 
 # Write column headers for the output date CSV
-with open('results_file.csv', 'w', newline='') as outcsv:
+with open('4_player_results_file.csv', 'w', newline='') as outcsv:
     writer = csv.writer(outcsv)
-    writer.writerow(["Alice", "Bob", "Measures_Dict", "Bitstring_Answers", "Result"])
+    writer.writerow(["Alice", "Bob", "Daisy", "Evan", "Measures_Dict", "Victory_checks", "Result"])
     
-
-# Set whether doing simulation and if so whether using noise model
+# Select whether to use a simulator and if so whether to include a noise model
 is_simulation = True
 is_noisy = False
-number_of_shots = 8192 # number of shots per game
+number_of_shots = 8192# number of shots per game
 
 
-# Allocating the qubits based on the CNOT connection topology
-
-del_A, del_B = 28, 32 # Alice and Bob's delegation qubits
-A1, B1 = 29,31 # Alice & Bobs first qubits A1, B1
-A2, B2 = 35,36 
-A3, B3 = 48,50
-# If simulator doesn't accept such large qubit assignments change to any lower ones for simulation
+choices = list(it.combinations(range(5),4)) # all possible 4-line choices at an intersection
 
 
+# Select qubit assignments for players and their delegation qubits
+alice = [0,1,2]
+bob = [3,4,5]
+daisy = [6,7,8]
+evan = [9,10,11]
 
-# listing ways of choosing 2 lines from 5 (each point lies on 5 lines)
-intersection_options = list(it.combinations(range(5),2))
+alice_del = [12]
+bob_del = [13]
+daisy_del = [14]
+evan_del = [15]
 
-Success_arr = []
-# Iterating over all points in Eloily
+Success_array = [] # store success rates
+
+# loop over all points
 for point in eloily_points:
-    point_intersecting_lines = intersecting_lines(point) # all lines intersecting at that point
-    
-    # Iterating over all pairs of intersecting lines
-    for a_ind, b_ind in intersection_options:
-        Alice_line = point_intersecting_lines[a_ind]
-        Bob_line = point_intersecting_lines[b_ind]
-        
-        # Line parities
-        s_factor_a = S_factor(Alice_line)
-        s_factor_b = S_factor(Bob_line)
+    intersections = intersecting_lines(point)
+    # loop over all 4-line choices per point
+    for line_choices in choices:
+        alice_line = intersections[line_choices[0]]
+        bob_line = intersections[line_choices[1]]
+        daisy_line = intersections[line_choices[2]]
+        evan_line = intersections[line_choices[3]]
 
-        col = Alice_line.index(point) # defines "column" equivalent in Eloily for Alice's point
-        row = Bob_line.index(point) # defines "row" equivalent for Bob's point      
-        
         # Making the circuit
-        q = QuantumRegister(max([del_A, del_B, A1, B1, A2, B2, A3, B3])+1) # ensuring we have enough qubits based on allocation choice
-        c = ClassicalRegister(8)
+        q = QuantumRegister(len(alice)+len(bob)+len(daisy)+len(evan)+len(alice_del)+len(bob_del)+len(daisy_del)+len(evan_del))
+        c = ClassicalRegister(len(alice)+len(bob)+len(daisy)+len(evan)+len(alice_del)+len(bob_del)+len(daisy_del)+len(evan_del))
         circuit = QuantumCircuit(q,c)
 
-        # Applying gates to implement the stabiliser state:
-        circuit.h (A1);
-        circuit.h (A2);
-        circuit.h (A3);
-        circuit.cx (A1,B1);
-        circuit.cx (A2,B2);
-        circuit.cx (A3,B3);
-        circuit.x (B1);
-        circuit.x (B2);
-        circuit.x (B3);
-        circuit.z (A1);
-        circuit.z (B2);
-        circuit.z (B3);
+        # Entangled state, based on stabiliser state:
+        circuit.h (alice[0]);
+        circuit.cx (alice[0],bob[0]);
+        circuit.cx (alice[0],daisy[0]);
+        circuit.cx (alice[0],evan[0]);
 
-        # Delegating and measuring Alice's qubits for first operator
-        Op_delegate(Alice_line[0][0], circuit, A1, del_A)
-        Op_delegate(Alice_line[0][1], circuit, A2, del_A)
-        Op_delegate(Alice_line[0][2], circuit, A3, del_A)
+        circuit.h (alice[1]);
+        circuit.cx (alice[1],bob[1]);
+        circuit.cx (alice[1],daisy[1]);
+        circuit.cx (alice[1],evan[1]);
+
+        circuit.h (alice[2]);
+        circuit.cx (alice[2],bob[2]);
+        circuit.cx (alice[2],daisy[2]);
+        circuit.cx (alice[2],evan[2]);
+
+
+        # Delegating players first operator
+        Op_delegate(alice_line[0][0], circuit, alice[0], alice_del[0])
+        Op_delegate(alice_line[0][1], circuit, alice[1], alice_del[0])
+        Op_delegate(alice_line[0][2], circuit, alice[2], alice_del[0])
+
+
+        Op_delegate(bob_line[0][0], circuit, bob[0], bob_del[0])
+        Op_delegate(bob_line[0][1], circuit, bob[1], bob_del[0])
+        Op_delegate(bob_line[0][2], circuit, bob[2], bob_del[0])
+
+
+        Op_delegate(daisy_line[0][0], circuit, daisy[0], daisy_del[0])
+        Op_delegate(daisy_line[0][1], circuit, daisy[1], daisy_del[0])
+        Op_delegate(daisy_line[0][2], circuit, daisy[2], daisy_del[0])
+
+
+        Op_delegate(evan_line[0][0], circuit, evan[0], evan_del[0])
+        Op_delegate(evan_line[0][1], circuit, evan[1], evan_del[0])
+        Op_delegate(evan_line[0][2], circuit, evan[2], evan_del[0])
+
         
-        circuit.measure(del_A,c[0])
-
-        # Delegating and measuring Bob's qubits for first operator
-        Op_delegate(Bob_line[0][0], circuit, B1, del_B)
-        Op_delegate(Bob_line[0][1], circuit, B2, del_B)
-        Op_delegate(Bob_line[0][2], circuit, B3, del_B)
+        # Measuring players's register qubits
+        Op_measurement(alice_line[1][0], circuit, alice[0], 0)
+        Op_measurement(alice_line[1][1], circuit, alice[1], 1)
+        Op_measurement(alice_line[1][2], circuit, alice[2], 2)
         
-        circuit.measure(del_B,c[4])
-
-        # Performing direct measurements on the original qubits
-        Op_measurement(Alice_line[1][0], circuit, A1, c[1])
-        Op_measurement(Alice_line[1][1], circuit, A2, c[2])
-        Op_measurement(Alice_line[1][2], circuit, A3, c[3])
+        Op_measurement(bob_line[1][0], circuit, bob[0], 4)
+        Op_measurement(bob_line[1][1], circuit, bob[1], 5)
+        Op_measurement(bob_line[1][2], circuit, bob[2], 6)
         
-        Op_measurement(Bob_line[1][0], circuit, B1, c[5])
-        Op_measurement(Bob_line[1][1], circuit, B2, c[6])
-        Op_measurement(Bob_line[1][2], circuit, B3, c[7])
+        Op_measurement(daisy_line[1][0], circuit, daisy[0], 8)
+        Op_measurement(daisy_line[1][1], circuit, daisy[1], 9)
+        Op_measurement(daisy_line[1][2], circuit, daisy[2], 10)
+        
+        Op_measurement(evan_line[1][0], circuit, evan[0], 12)
+        Op_measurement(evan_line[1][1], circuit, evan[1], 13)
+        Op_measurement(evan_line[1][2], circuit, evan[2], 14)
 
-        # Setting up run on simulator or real QC 
+        # Measuring players's delegation qubits
+        circuit.measure(alice_del[0], 3)
+        circuit.measure(bob_del[0], 7)
+        circuit.measure(daisy_del[0], 11)
+        circuit.measure(evan_del[0], 15)
+
         if is_simulation:
-            local_simulator = Aer.get_backend('statevector_simulator')
-#             local_simulator = AerSimulator()
-            if is_noisy:
-                result = execute(circuit, backend=local_simulator, noise_model = noise_model, shots=number_of_shots).result()
-            else:
-                result = execute(circuit, backend=local_simulator, shots=number_of_shots).result()
+        	local_simulator = Aer.get_backend('qasm_simulator')
+        	if is_noisy:
+        		result = execute(circuit, backend=local_simulator, noise_model = noise_model, shots=number_of_shots).result()
+        	else:
+        		result = execute(circuit, backend=local_simulator, shots=number_of_shots).result()
         else:
             result = execute(circuit, backend=quantum_comp, shots=number_of_shots).result()
-        measures_dictionary = result.get_counts()
-
-        # Getting results, noting IBM returns bitstrings backwards
+        
+        # Getting results
         qubit_results = [key[::-1] for key in result.get_counts(circuit)]
         qubit_counts = list(result.get_counts(circuit).values())
         total_counts = sum(qubit_counts)
 
-        # Configuring player results
-        Alice_results = [qubits[0:4] for qubits in qubit_results]
-        Bob_results = [qubits[4:8] for qubits in qubit_results]
+		# Checking to see if each game was victorious or not
+        game_checks = [results_check_single_del(point, alice_line, bob_line, daisy_line, evan_line, bit_result) for bit_result in qubit_results]
+        game_coords = []
+        for i in range(len(game_checks)):
+            if game_checks[i]:
+                game_coords.append(i)
 
-        # Converts players's 4 bits to a 3-bit answer, one per qubit measurement
-        Alice_ans = [str(int(qubits[0]))
-                     +str((int(qubits[1])+int(qubits[2])+int(qubits[3]))%2)
-                     +str((int(qubits[0])+int(qubits[1])+int(qubits[2])
-                           +int(qubits[3])+s_factor_a)%2) 
-                     for qubits in Alice_results]
-        Bob_ans = [str(int(qubits[0]))
-                     +str((int(qubits[1])+int(qubits[2])+int(qubits[3]))%2)
-                     +str((int(qubits[0])+int(qubits[1])+int(qubits[2])
-                           +int(qubits[3])+s_factor_b)%2) 
-                   for qubits in Bob_results]
-
-        # Checks to see for each shot whether they win the game
-        checklist = [int(Alice_ans[i][col]) == int(Bob_ans[i][row]) for i in range(len(Alice_ans))]
-
-        # Computes success rate for game
-        true_counts = [checklist[i]*qubit_counts[i] for i in range(len(qubit_results))]
-        success_rate = sum(true_counts)/float(total_counts)
-        
-        # Writes result to output file
+		# Compute success rate
+        winning_count = sum([game_checks[i]*qubit_counts[i] for i in range(len(qubit_counts))])/number_of_shots
+        Success_array.append(winning_count)
+    
         if not is_simulation:
-            with open("results_file.csv",'a') as file:
-                    writer = csv.writer(outcsv)
-                    writer.writerow([Alice_line, Bob_line, measures_dictionary, Alice_ans+Bob_ans, success_rate])
-        Success_arr.append(success_rate)
+            with open('4_player_results_file.csv', 'w') as outfile:
+                writer = csv.writer(outfile)
+                for row in zip(point, alice_line, bob_line, daisy_line, evan_line, result.get_counts(), game_checks, winning_count):
+                    writer.writerow(row)
         
 
-print("Success rate for each intersection point: ")
-print("-"*30)
-print("Global victory for Brisbane: ", np.mean(Success_arr))
+victory = np.mean(Success_array)
+print("Victory rate: ",victory)
+
+
 
 
