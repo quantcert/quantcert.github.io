@@ -14,6 +14,13 @@ the python library [Qiskit](https://www.qiskit.org/) and are available,
 as well as examples of results, in the following folder 
 [Src](https://github.com/quantcert/quantcert.github.io/tree/master/eloily_game/src).
 
+File "Eloily_2_player_game_brisbane_source_code.py" provides code for running 2-player Eloily game for simulator, noisy simulator, and quantum backend.
+File "Eloily_4_player_game_brisbane_source_code.py" provides code for running 4-player Eloily game for simulator, noisy simulator, and quantum backend.
+Both of the above run on the "ibm_brisbane" backend, but that can be changed in-code.
+
+File "eloily_full_2_player_game_results.csv" gives all results for running the 2-player game.
+File "2_player_grid_doily_results_from_eloily_data.py" gives the results for all Mermin and Doily games, which are subgeometries contained in the eloily.  It gathers these results from the results of the eloily game. It provides the specific grid and doily that give the best respective results.
+
 More details  can be found in the article 
 [[K24]](https://arxiv.org/abs/2403.09512).
 
