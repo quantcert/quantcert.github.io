@@ -1,0 +1,38 @@
+#!/bin/bash
+####################################################################################
+# Copyright (C) 2024 Axel Muller and Alain Giorgetti                               #
+# Université de Franche-Comté, CNRS, institut FEMTO-ST, F-25000 Besançon, France   #
+####################################################################################
+# This software is distributed under the terms of the GNU Lesser                   #
+# General Public License version 2.1                                               #
+####################################################################################
+
+D1=$1;D2=$2
+
+N_QUBITS=${D1:-4}
+#path=${D2:-"/dev/null"}
+if [[ "${path}" = "0" ]]; then path="/dev/null"; fi
+header=${@:2}
+
+my_invocation="$(printf %q "$BASH_SOURCE")$((($#)) && printf ' %q' "$@")"
+
+if [[ -z $1 ]] || ! [[ $1 =~ $re ]] || [[ $1 -lt 2 ]] || [[ $1 -gt 31 ]] #if the arguments are incorrect
+then
+    echo;echo "usage : $0 qubits_number(2..15) [txt_file_output] [--import file_name | --elliptics [--complement] | --hyperbolics [--complement] | --perpsets [--complement] | --subspaces k | --affine] [--solver sat | retrieve]";echo
+    exit
+fi
+
+if ! command -v flex &> /dev/null;then echo "flex lexer needed !";fi
+if ! command -v bison &> /dev/null;then echo "bison parser needed !";fi
+
+make compile
+
+gcc -std=c99 -Wall -g -Wextra -Ofast -fopenmp lib/qontextium.c -lm -o main.out -D N_QUBITS=$N_QUBITS \
+&& \
+time ./main.out $header #> $path
+
+#remove all the temporary files if the program was terminated before the end
+rm -f .tmp[0-9]*.txt .tmp[0-9]*.log .bak[0-9]*.txt .bak[0-9]*.log
+
+#echo "%% Do not modify this file. It is automatically generated from $my_invocation in src/c"
+#$(cat $path)" > $path

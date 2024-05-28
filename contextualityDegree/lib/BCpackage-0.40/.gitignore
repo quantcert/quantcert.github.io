@@ -1,0 +1,5 @@
+bc2cnf
+lexer.c
+lexer11.c
+parser.tab.*
+parser11.tab.*
