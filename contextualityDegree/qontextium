@@ -16,16 +16,47 @@ header=${@:2}
 
 my_invocation="$(printf %q "$BASH_SOURCE")$((($#)) && printf ' %q' "$@")"
 
+
 if [[ -z $1 ]] || ! [[ $1 =~ $re ]] || [[ $1 -lt 2 ]] || [[ $1 -gt 31 ]] #if the arguments are incorrect
 then
-    echo;echo "usage : $0 qubits_number(2..15) [txt_file_output] [--import file_name | --elliptics [--complement] | --hyperbolics [--complement] | --perpsets [--complement] | --subspaces k | --affine] [--solver sat | retrieve]";echo
+    echo;echo "Usage : $0 QUBITS_NUMBER CONFIGURATION [OPTIONS] [--solver SOLVER]";   
+    if [[ $1 == "--help" ]]
+    then
+        echo -n "
+Qontextium is a program which estimates the contextuality degree of quantum configurations.
+
+Parameters:
+
+QUBITS_NUMBER                   : the number of qubits in the configuration
+
+CONFIGURATION                   : the configuration to be generated. It can be one of the following:
+
+    --import file_name          : import a configuration from a file
+    --elliptics [--complement]  : generate elliptic configurations
+    --hyperbolics [--complement]: generate hyperbolic configurations
+    --perpsets [--complement]   : generate perpsets configurations
+    --subspaces k               : generates a configuration with subspaces of dimension k as contexts
+    --affine                    : generate affine configurations
+
+SOLVER
+
+    --solver sat                : use a SAT solver to estimate the contextuality degree
+    --solver retrieve           : checks a solution from a solution code
+";
+    echo
+    else
+        echo "type $0 --help for more information";echo
+    fi
     exit
 fi
+#if someone types --help
+
+
 
 if ! command -v flex &> /dev/null;then echo "flex lexer needed !";fi
 if ! command -v bison &> /dev/null;then echo "bison parser needed !";fi
 
-make compile
+make -s compile
 
 gcc -std=c99 -Wall -g -Wextra -Ofast -fopenmp lib/qontextium.c -lm -o main.out -D N_QUBITS=$N_QUBITS \
 && \

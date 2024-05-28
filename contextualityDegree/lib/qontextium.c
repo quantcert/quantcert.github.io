@@ -205,9 +205,9 @@ int main(int argc, char **argv)
     }
     if (SET_IMPORT)
     {
-        print("imported qa:\n");
+        print("imported configuration:\n");
         print_quantum_assignment(import_qa);
-        print("cdeg:%d\n", geometry_contextuality_degree(import_qa, false, true, false, NULL));
+        print("contextuality degree :%d\n", geometry_contextuality_degree(import_qa, false, true, false, NULL));
     }
 
     free_quantum_assignment(&lines_qa);

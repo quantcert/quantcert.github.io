@@ -21,15 +21,31 @@ This program is distributed under the GNU LGPL 2.1 See the enclosed file [LICENS
 Installation
 ============
 
-The program is located in this [folder](https://github.com/quantcert/quantcert.github.io/tree/master/contextualityDegree)
+The program is located in this [folder](https://github.com/quantcert/quantcert.github.io/tree/master/contextualityDegree).
+The programs flex and bison need to be installed in your machine for the program to run.
 The installation is automatic when running Qontextium for the first time.
 
 Execution
 =========
 
-Here are the possible options to execute the program :
 
-    ./qontextium qubits_number(2..15) [txt_file_output] [--import file_name | --elliptics [--complement] | --hyperbolics [--complement] | --perpsets [--complement] | --subspaces k | --affine] [--solver sat | retrieve]
+    ./qontextium QUBITS_NUMBER CONFIGURATION [OPTIONS] [--solver SOLVER]
+
+QUBITS_NUMBER                   : the number of qubits in the configuration
+
+CONFIGURATION                   : the configuration to be generated. It can be one of the following:
+
+    --import file_name          : import a configuration from a file
+    --elliptics [--complement]  : generate elliptic configurations
+    --hyperbolics [--complement]: generate hyperbolic configurations
+    --perpsets [--complement]   : generate perpsets configurations
+    --subspaces k               : generates a configuration with subspaces of dimension k as contexts
+    --affine                    : generate affine configurations
+
+SOLVER
+
+    --solver sat                : use a SAT solver to estimate the contextuality degree
+    --solver retrieve           : checks a solution from a solution code
 
 For example to compute the contextuality degree of totally isotrpic subspaces of dimension 1 
 (lines) for 2 qubits, you need to run this command :
