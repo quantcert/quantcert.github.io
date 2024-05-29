@@ -4,7 +4,7 @@ Qontextium
 ==========
 
 Qontextium is a program which estimates the contextuality degree 
-of quantum configurations. It is developped in the C language and is 
+of quantum configurations. It is developed in the C language and is 
 using the OpenMP parallelization library.
 
 Copyright (C) 2024 Axel Muller and Alain Giorgetti.
@@ -31,15 +31,15 @@ Execution
 
     ./qontextium QUBITS_NUMBER CONFIGURATION [OPTIONS] [--solver SOLVER]
 
-QUBITS_NUMBER                   : the number of qubits in the configuration
+QUBITS_NUMBER is the number of qubits in the configuration.
 
-CONFIGURATION                   : the configuration to be generated. It can be one of the following:
+CONFIGURATION is the configuration to be generated. It can be one of the following:
 
     --import file_name          : import a configuration from a file
-    --elliptics [--complement]  : generate elliptic configurations
-    --hyperbolics [--complement]: generate hyperbolic configurations
-    --perpsets [--complement]   : generate perpsets configurations
-    --subspaces k               : generates a configuration with subspaces of dimension k as contexts
+    --elliptics [--complement]  : generate elliptic configurations (or their complement)
+    --hyperbolics [--complement]: generate hyperbolic configurations (or their complement)
+    --perpsets [--complement]   : generate perpsets configurations (or their complement)
+    --subspaces k               : generates a configuration with all subspaces of dimension k as contexts
     --affine                    : generate affine configurations
 
 SOLVER
@@ -47,8 +47,8 @@ SOLVER
     --solver sat                : use a SAT solver to estimate the contextuality degree
     --solver retrieve           : checks a solution from a solution code
 
-For example to compute the contextuality degree of totally isotrpic subspaces of dimension 1 
-(lines) for 2 qubits, you need to run this command :
+For example, to compute the contextuality degree of totally isotropic subspaces of dimension 1 
+(lines) for 2 qubits, run this command:
 
     ./qontextium 2 --subspaces 1
 
