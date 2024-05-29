@@ -3,7 +3,7 @@
 /* Université de Franche-Comté, CNRS, institut FEMTO-ST, F-25000 Besançon, France */
 /**********************************************************************************/
 /* This software is distributed under the terms of the GNU Lesser                 */
-/* General Public License version 2.1                                             */
+/* General Public License version 2                                             */
 /**********************************************************************************/
 
 /**
@@ -81,7 +81,7 @@ void init_complex(){
  * @param o one-qubit observable representing a pauli gate
 */
 pauli_matrix get_matrix(bv o){
-    if(o > Y)print("get mat error");
+    if(o > Y)print("This matrix does not exist!");
     return PAULI_MATS[o];
 }
 

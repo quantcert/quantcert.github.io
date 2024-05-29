@@ -3,7 +3,7 @@
 /* Université de Franche-Comté, CNRS, institut FEMTO-ST, F-25000 Besançon, France */
 /**********************************************************************************/
 /* This software is distributed under the terms of the GNU Lesser                 */
-/* General Public License version 2.1                                             */
+/* General Public License version 2                                             */
 /**********************************************************************************/
 /**
  *
@@ -366,11 +366,11 @@ int check_structure(quantum_assignment qa,bool* bool_sol,bool to_print,bool *lin
     compute_negativity(&qa);
     
     
-    if(to_print)print("\nfil:%ld\n",(size_t)line_filter);
+    
     int ccpt = 0;
     if(to_print && line_filter != NULL)for (size_t i = 0; i < (size_t)NB_LINES_CUSTOM(qa.n_qubits); i++)ccpt++;
     
-    if(to_print)print("\nccpt : %d\n",ccpt);
+    
 
     bool* invalid_lines = NULL;
     int* number_of_invalid_lines = NULL;
@@ -419,10 +419,10 @@ int check_structure(quantum_assignment qa,bool* bool_sol,bool to_print,bool *lin
 
     if(to_print && SEE_GRAPH){
         int nul = 0;
-        print("\n\nType search mode (0->stop,1->all,2->point degree,3->observable value,4->line degree,5->symmetric) : ");
+        print("\n\nType search mode (0->stop,1->all,2->point degree,3->observable value,4->line degree,5->symmetric): ");
         nul += scanf("%d",&mode);
         if(mode == 2 || mode == 3){
-            print((mode==2)?"point degree : ":"observable value : ");
+            print((mode==2)?"point degree : ":"observable value: ");
             nul += scanf("%d",&param[0]);
         }else if(mode == 4){
             print("point 1 : ");
@@ -520,16 +520,18 @@ int check_structure(quantum_assignment qa,bool* bool_sol,bool to_print,bool *lin
     }
     
 
-    int complexity_degree = compute_category_list(to_print,category_list,category_count,MAX_DEG,qa);
-    
     int vertices_count = 0;
-    for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa.n_qubits); i++)if (number_of_invalid_lines[i] > 0)vertices_count++;
+    for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa.n_qubits); i++)
+        if (number_of_invalid_lines[i] > 0)
+            vertices_count++;
 
-    if(to_print)
-        print("\n\nnumber of vertices in the invalid config. : %d ; \n", vertices_count);
+    if (to_print)
+        print("\n\nNumber of vertices in the invalid configuration: %d ; \n", vertices_count);
+
+    int complexity_degree = compute_category_list(to_print,category_list,category_count,MAX_DEG,qa);
 
     if(to_print
-    )print("(%d)",complexity_degree);
+    )print("\nNumber of different line types: %d\n",complexity_degree);
 
     free_matrix(category_list);
     free(category_count);
@@ -556,15 +558,17 @@ int check_contextuality_solution(quantum_assignment qa,bool* bool_sol,FILE* outp
 
     bool to_print = (output != NULL);
 
-    if(to_print)fprintf(output,"\n___________________________\n");
-
+    if(to_print){
+        fprintf(output,"\n___________________________\n");
+        fprintf(output,"context => quantum / classical\n");
+    }
     for (size_t i = 0; i < qa.cpt_geometries; i++)
     {
         if(to_print)for (size_t j = 0; j < qa.points_per_geometry; j++){
             bv bv1 = qa.geometries[qa.geometry_indices[i]][j];
             if(bv1 == I)break;
             print_BV_to_file(bv1,qa.n_qubits,output);
-            fprintf(output,"(%d)",bool_sol[bv1]);
+            fprintf(output,"(%s)",bool_sol[bv1]?"-1":"+1");
         }
         if(to_print)fprintf(output,"  =>  ");
         
@@ -583,7 +587,7 @@ int check_contextuality_solution(quantum_assignment qa,bool* bool_sol,FILE* outp
         c_deg += (test != is_neg);
 
         if(to_print){
-            fprintf(output," : %d / %d : %s",is_neg,test,(test == is_neg)?"valid    ":"invalid");
+            fprintf(output," %s / %s : %s", is_neg ?"-1":"+1", test?"-1":"+1",(test == is_neg)?"valid    ":"invalid");
             if(test != is_neg)fprintf(output," %d",c_deg);
             
             fprintf(output,"\n");
@@ -591,8 +595,8 @@ int check_contextuality_solution(quantum_assignment qa,bool* bool_sol,FILE* outp
 
     }
     if(to_print){
-        fprintf(output,"\nhamming distance : %d\nnegative lines : %d\n",c_deg,neg);
-        print("\nc_degree : %d,neg.lines : %d\n",c_deg,neg);
+        fprintf(output, "\nnegative lines : %d\nHamming distance : %d\n", neg, c_deg);
+        
     }
 
     
@@ -822,6 +826,8 @@ int geometry_SAT_contextuality_degree(quantum_assignment qa,bool contextuality_o
     /*heuristics*/
     
 
+    bool no_ret_sol = (ret_sol == NULL);
+
     int th_num = omp_get_thread_num();
 
     char bc2cnf_file[128] = {0},sat_log[128] = {0},bc2cnf_cp[128] = {0},sat_cp[128] = {0},sat_command[4096],cp_command[4096];
@@ -846,12 +852,17 @@ int geometry_SAT_contextuality_degree(quantum_assignment qa,bool contextuality_o
         if(print_solution)printf("positive config. ");
         return 0;
     }
+    if (no_ret_sol)ret_sol = calloc(BV_LIMIT_CUSTOM(qa.n_qubits), sizeof(bool));
+
     int start_degree = contextuality_only?0:/* cpt_geometries - 1 ;*/neg_lines;
     
     int c_degree_test = start_degree;
+    int hamming_distance = c_degree_test;
+
+    print("\nStarting SAT computation...\n");
 
     /*While we haven't tested all possible degrees*/
-    while(c_degree_test >= 0){
+    while(c_degree_test >= 0 && !is_done){
         /*pipeline process : we use bc2cnf to transform the problem into a DIMACS CNF form*/
         //
         FILE* sat_fp = popen(sat_command,"w");
@@ -875,36 +886,43 @@ int geometry_SAT_contextuality_degree(quantum_assignment qa,bool contextuality_o
         /*the exit status tells us if the problem is SAT or not*/
         int status = WEXITSTATUS(pclose(sat_fp));
         bool is_sat_test = status == 10;//else 20//is_sat(f);
-        
-        //if(print_solution)print("%d,",c_degree_test);
+        bool expected_output = status == 10 || status == 20;
+        // if(print_solution)print("%d,",c_degree_test);
         /*if the exit status is something else than what is expected, we print it*/
-        if(status != 10 && status != 20)print("{%d}",status);
-        if(!is_sat_test  /* || c_degree_test < 4  */)break;
+        if (!expected_output) print("status error: {%d}", status);
+        if (expected_output  && !is_sat_test){
+            if(print_solution)print("\nContextuality degree found : %d\n",hamming_distance);
+            break;
+        }
         if(system(cp_command) != EXIT_SUCCESS)print("copy error!");
 
-        if(!contextuality_only){
-            int hamming_distance = compute_contextuality_solution(qa,bc2cnf_cp,sat_cp,NULL,NULL);
+        if(!contextuality_only && expected_output){
+            hamming_distance = compute_contextuality_solution(qa,bc2cnf_cp,sat_cp,NULL,ret_sol);
             if(hamming_distance == -1)print("\nunexpected hamming distance error\n");
-            if(print_solution)print("%d,",hamming_distance);
+            if(print_solution)print("current Hamming distance: %d\n",hamming_distance);
             c_degree_test/* --;// */ = hamming_distance-1;
         }else{
             c_degree_test--;
         }
-        if(is_done)break;
     };
+    print("Computation done\n");
     /*if the tested degree fails, then we go back to the one above*/
-    c_degree_test++;
 
     /*if a solution is found*/
     #pragma omp critical
-    {compute_contextuality_solution(qa,bc2cnf_cp,sat_cp,print_solution?stdout:NULL,ret_sol);}
+    {
+        //compute_contextuality_solution(qa,bc2cnf_cp,sat_cp,print_solution?stdout:NULL,ret_sol);
+        check_contextuality_solution(qa,ret_sol,print_solution?stdout:NULL);
+    }
+
 
     remove(bc2cnf_file);
     remove(sat_log);
     remove(bc2cnf_cp);
     remove(sat_cp);
+    if(no_ret_sol)free(ret_sol);
 
-    return c_degree_test;
+    return hamming_distance;
 }
 
 /**
@@ -1005,15 +1023,15 @@ int geometry_contextuality_degree_custom(quantum_assignment qa,bool contextualit
     while (true)
     {
         if(SEE_GRAPH){
-            print("\nDo you want to see the contextual configuration ? (0:no,1:yes) : ");
-            //continued = (qa.cpt_geometries == 5355);
+            print("\nDo you want to see the contextual configuration ? (0:no, 1:yes): ");
+            
             if(scanf("%d",&continued) == 0)print("oops wrong text");
         }else{
             continued = false;
         }
         if(!continued)break;
         check_structure(qa, bool_sol, stdout, NULL); 
-        // break;
+        
     }
 
     if(print_solution){

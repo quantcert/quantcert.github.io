@@ -3,7 +3,7 @@
 /* Université de Franche-Comté, CNRS, institut FEMTO-ST, F-25000 Besançon, France */
 /**********************************************************************************/
 /* This software is distributed under the terms of the GNU Lesser                 */
-/* General Public License version 2.1                                             */
+/* General Public License version 2                                             */
 /**********************************************************************************/
 /**
  * @file qontextium.c
@@ -24,6 +24,9 @@ bool
     SET_HYPERBOLICS = false,
     SET_ELLIPTICS = false,
     SET_PERPSETS = false,
+
+    SET_ALL_QUADRICS = false,
+
     SET_SUBSPACES = false,
     SET_AFFINE = false,
     SET_IMPORT = false;
@@ -32,9 +35,21 @@ bool
 int main(int argc, char **argv)
 {
 
+    print("   ____              __            __  _               \n"
+          "  / __ \\____  ____  / /____  _  __/ /_(_)_  ______ ___ \n"
+          " / / / / __ \\/ __ \\/ __/ _ \\| |/_/ __/ / / / / __ `__ \\\n"
+          "/ /_/ / /_/ / / / / /_/  __/>  </ /_/ / /_/ / / / / / /\n"
+          "\\___\\_\\____/_/ /_/\\__/\\___/_/|_|\\__/_/\\__,_/_/ /_/ /_/ \n"
+
+          "Welcome to Qontextium!\n\n"
+          "Qontextium is a program for estimating the contextuality degree \n"
+          "of quantum configurations. Developed by Axel Muller and Alain Giorgetti\n"
+          "at Université de Franche-Comté, CNRS, institut FEMTO-ST\n"
+          "Happy analyzing quantum configurations with Qontextium!\n\n\n");
+
     main_header();
 
-    print("You can stop the program at any moment by pressing Ctrl+C\n");
+    print("You can stop the program at any moment by pressing Ctrl+C\n\n");
 
     init_complex();
 
@@ -55,27 +70,32 @@ int main(int argc, char **argv)
     for (int i = 1; i < argc; i++)
     {
         bool is_zerolocus = false;
-        if (strcmp(argv[i], "--hyperbolics") == 0)
+        if (strcmp(argv[i], "--hyperbolic") == 0)
         {
+            print("configuration :hyperbolic quadric\n");
             SET_HYPERBOLICS = true;
             is_zerolocus = true;
         }
-        else if (strcmp(argv[i], "--elliptics") == 0)
+        else if (strcmp(argv[i], "--elliptic") == 0)
         {
+            print("configuration :elliptic quadric\n");
             SET_ELLIPTICS = true;
             is_zerolocus = true;
         }
-        else if (strcmp(argv[i], "--perpsets") == 0)
+        else if (strcmp(argv[i], "--perpset") == 0)
         {
+            print("configuration :perpset\n");
             SET_PERPSETS = true;
             is_zerolocus = true;
         }
         else if (strcmp(argv[i], "--affine") == 0)
         {
+            print("configuration :affine planes\n");
             SET_AFFINE = true;
         }
         else if (strcmp(argv[i], "--subspaces") == 0)
         {
+            print("configuration :subspaces\n");
             SET_SUBSPACES = true;
             if (i < argc - 1)
                 k_subspaces = strtod(argv[i + 1], NULL);
@@ -87,6 +107,7 @@ int main(int argc, char **argv)
         {
             if (i < argc - 1 && strcmp(argv[i + 1], "--complement") == 0)
             {
+                print("\tcomplement\n");
                 complement = true;
                 i++;
             }
@@ -94,7 +115,7 @@ int main(int argc, char **argv)
 
         if (strcmp(argv[i], "--solver") == 0)
         {
-            print("solver choosed : ");
+            print("selected solver :");
             i++;
             if (i < argc && strcmp(argv[i], "sat") == 0)
             {
@@ -112,7 +133,7 @@ int main(int argc, char **argv)
             }
         }
 
-        if (strcmp(argv[i], "--import") == 0)
+        else if (strcmp(argv[i], "--import") == 0)
         {
             i++;
             if (i < argc)
@@ -128,8 +149,12 @@ int main(int argc, char **argv)
                 SET_IMPORT = true;
             }
         }
+        else if (strcmp(argv[i], "--all") == 0)
+        {
+            SET_ALL_QUADRICS = true;
+        }
     }
-    print("h:%d e:%d p:%d s:%d k:%d a:%d i:%d\n", SET_HYPERBOLICS, SET_ELLIPTICS, SET_PERPSETS, SET_SUBSPACES, k_subspaces, SET_AFFINE, SET_IMPORT);
+    
 
     
     
@@ -154,7 +179,8 @@ int main(int argc, char **argv)
         if (SET_PERPSETS && i != I)
         {
             qa = perpset(i, lines_indices, VARQ, lines_qa.geometries, complement);
-            print("per:%d;", geometry_contextuality_degree(qa, false, true, false, NULL));
+            print("best Hamming distance found:%d;", geometry_contextuality_degree(qa, false, true, false, NULL));
+            if (!SET_ALL_QUADRICS)break;
         }
         if (SET_HYPERBOLICS || SET_ELLIPTICS)
         {
@@ -165,7 +191,7 @@ int main(int argc, char **argv)
                 // print_quantum_assignment(qa);
 
                 // printf("n_neg:%d\n",negative_lines_count(qa));
-                print("test_sol:%d\n", geometry_contextuality_degree(qa, false, true, false, my_bool_sol));
+                print("best Hamming distance found: %d\n", geometry_contextuality_degree(qa, false, true, false, my_bool_sol));
                 
 
                 
@@ -173,7 +199,7 @@ int main(int argc, char **argv)
                 
                 
 
-                
+                if(!SET_ALL_QUADRICS)break;
                 
                 
             }
@@ -191,8 +217,8 @@ int main(int argc, char **argv)
 
         bool *bool_sol = calloc(BV_LIMIT_CUSTOM(VARQ), sizeof(bool));
 
-        int c_deg_generators = (k_subspaces == 1) ? geometry_contextuality_degree(lines_qa, false, true, false, bool_sol) : subspaces_contextuality_degree(VARQ, k_subspaces);
-        print("\nsubspace(n=%d,k=%d): contextuality degree : %d\n", VARQ, k_subspaces, c_deg_generators);
+        int c_deg_generators = (k_subspaces == 1) ? geometry_contextuality_degree(lines_qa, false, true, false, bool_sol) :subspaces_contextuality_degree(VARQ, k_subspaces);
+        print("\nsubspace(n=%d,k=%d):contextuality degree :%d\n", VARQ, k_subspaces, c_deg_generators);
 
         free(bool_sol);
     }

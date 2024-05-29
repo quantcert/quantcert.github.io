@@ -19,7 +19,7 @@ my_invocation="$(printf %q "$BASH_SOURCE")$((($#)) && printf ' %q' "$@")"
 
 if [[ -z $1 ]] || ! [[ $1 =~ $re ]] || [[ $1 -lt 2 ]] || [[ $1 -gt 31 ]] #if the arguments are incorrect
 then
-    echo;echo "Usage : $0 QUBITS_NUMBER CONFIGURATION [OPTIONS] [--solver SOLVER]";   
+    echo;echo "Usage: $0 QUBITS_NUMBER CONFIGURATION [OPTIONS] [--solver SOLVER]";   
     if [[ $1 == "--help" ]]
     then
         echo -n "
@@ -27,21 +27,21 @@ Qontextium is a program which estimates the contextuality degree of quantum conf
 
 Parameters:
 
-QUBITS_NUMBER                   : the number of qubits in the configuration
+QUBITS_NUMBER:                         the number of qubits in the configuration
 
-CONFIGURATION                   : the configuration to be generated. It can be one of the following:
+CONFIGURATION:                         the configuration to be generated. It can be one of the following:
 
-    --import file_name          : import a configuration from a file
-    --elliptics [--complement]  : generate elliptic configurations
-    --hyperbolics [--complement]: generate hyperbolic configurations
-    --perpsets [--complement]   : generate perpsets configurations
-    --subspaces k               : generates a configuration with subspaces of dimension k as contexts
-    --affine                    : generate affine configurations
+    --import file_name:                import a configuration from a file
+    --elliptic [--complement|--all]:  generate a elliptic configuration (or their complement or all of them)
+    --hyperbolic [--complement|--all]:generate a hyperbolic configuration (or their complement or all of them)
+    --perpset [--complement]:         generate a perpset configuration (or their complement or all of them)
+    --subspaces k:                     generates a configuration with subspaces of dimension k as contexts
+    --affine:                          generate affine configurations
 
 SOLVER
 
-    --solver sat                : use a SAT solver to estimate the contextuality degree
-    --solver retrieve           : checks a solution from a solution code
+    --solver sat:                      use a SAT solver to estimate the contextuality degree
+    --solver retrieve:                 checks a solution from a solution code
 ";
     echo
     else

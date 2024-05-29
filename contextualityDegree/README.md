@@ -16,14 +16,21 @@ Contact: axel.muller AT femto-st.fr
 Copyright
 =========
 
-This program is distributed under the GNU LGPL 2.1 See the enclosed file [LICENSE](./LICENSE).
+This program is distributed under the GNU GPL 2. See the enclosed file [LICENSE](./LICENSE).
 
 Installation
 ============
 
+Linux is required to run this program.
 The program is located in this [folder](https://github.com/quantcert/quantcert.github.io/tree/master/contextualityDegree).
-The programs flex and bison need to be installed in your machine for the program to run.
-The installation is automatic when running Qontextium for the first time.
+`flex` and `bison` need to be installed in your machine for the program to run.
+These tools are commonly available and easy to install on most Linux distributions. 
+If you don't have them already, you can typically install them using your distribution's package manager. 
+For example, on Debian-based systems: 
+
+    sudo apt-get install flex bison
+
+The compilation is automatic when running Qontextium for the first time.
 
 Execution
 =========
@@ -33,19 +40,25 @@ Execution
 
 QUBITS_NUMBER is the number of qubits in the configuration.
 
-CONFIGURATION is the configuration to be generated. It can be one of the following:
+CONFIGURATION [OPTIONS] is the configuration to be generated. It can be one of the following:
 
-    --import file_name          : import a configuration from a file
-    --elliptics [--complement]  : generate elliptic configurations (or their complement)
-    --hyperbolics [--complement]: generate hyperbolic configurations (or their complement)
-    --perpsets [--complement]   : generate perpsets configurations (or their complement)
-    --subspaces k               : generates a configuration with all subspaces of dimension k as contexts
-    --affine                    : generate affine configurations
+--import file_name: import a configuration from a file
+
+--elliptics [--complement]: generate elliptic configurations (or their complement or all of them)
+
+--hyperbolics [--complement]: generate hyperbolic configurations (or their complement or all of them)
+
+--perpsets [--complement]: generate perpsets configurations (or their complement or all of them)
+
+--subspaces k: generates a configuration with all subspaces of dimension k as contexts
+
+--affine: generate affine configurations
 
 SOLVER
 
-    --solver sat                : use a SAT solver to estimate the contextuality degree
-    --solver retrieve           : checks a solution from a solution code
+--solver sat: use a SAT solver to estimate the contextuality degree
+
+--solver retrieve: checks a solution from a solution code
 
 For example, to compute the contextuality degree of totally isotropic subspaces of dimension 1 
 (lines) for 2 qubits, run this command:
@@ -57,4 +70,5 @@ For example, to compute the contextuality degree of totally isotropic subspaces 
 
 |                         |                                                    |
 |-------------------------|----------------------------------------------------|
-|<a id="dHG21"/>[dHG+21]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *Revealing contextuality of quantum configurations with a SAT solver*. Journées nationales du GDR GPL (Génie de la Programmation et du Logiciel), CNRS, groupe de travail LVP (Langages et Vérification de Programmes), 5-8 juin 2023, Rennes, France. Session posters et démos, 6 juin 2023. [Poster](23poster.pdf){:target="_blank"}|
+|<a id="MSGDH23"/>[MSGDH23]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *Revealing contextuality of quantum configurations with a SAT solver*. Journées nationales du GDR GPL (Génie de la Programmation et du Logiciel), CNRS, groupe de travail LVP (Langages et Vérification de Programmes), 5-8 juin 2023, Rennes, France. Session posters et démos, 6 juin 2023. [Poster](23poster.pdf){:target="_blank"}|
+|<a id="MSGDH24"/>[MSGDH24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *New and improved bounds on the contextuality degree of multi-qubit configurations*. Mathematical Structures in Computer Science, 2024. [Article](https://doi.org/10.1017/S0960129524000057){:target="_blank"}|

@@ -3,7 +3,7 @@
 /* Université de Franche-Comté, CNRS, institut FEMTO-ST, F-25000 Besançon, France */
 /**********************************************************************************/
 /* This software is distributed under the terms of the GNU Lesser                 */
-/* General Public License version 2.1                                             */
+/* General Public License version 2                                             */
 /**********************************************************************************/
 
 /**
