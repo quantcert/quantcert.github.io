@@ -256,7 +256,6 @@ bool generate_subspace(bv bv1[],int size){
         
         _subspaces_current_index++;
         if(is_neg)_subspaces_n_negative ++;
-        
     }
 
     if(_subspaces_current_index % 2000000 == 1)print("%ld,",_subspaces_current_index);

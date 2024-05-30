@@ -9,10 +9,9 @@
 
 D1=$1;D2=$2
 
-N_QUBITS=${D1:-4}
 #path=${D2:-"/dev/null"}
 if [[ "${path}" = "0" ]]; then path="/dev/null"; fi
-header=${@:2}
+header=${@:1}
 
 my_invocation="$(printf %q "$BASH_SOURCE")$((($#)) && printf ' %q' "$@")"
 
@@ -56,10 +55,9 @@ fi
 if ! command -v flex &> /dev/null;then echo "flex lexer needed !";fi
 if ! command -v bison &> /dev/null;then echo "bison parser needed !";fi
 
-make -s compile
+make -s all
 
-gcc -std=c99 -Wall -g -Wextra -Ofast -fopenmp lib/qontextium.c -lm -o main.out -D N_QUBITS=$N_QUBITS \
-&& \
+#&& \
 time ./main.out $header #> $path
 
 #remove all the temporary files if the program was terminated before the end

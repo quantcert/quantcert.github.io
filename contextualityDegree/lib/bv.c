@@ -303,7 +303,6 @@ void print_BV_custom(bv bv1,int n_qubits){
   }
   print("]");
 }
-void print_BV(bv bv1){print_BV_custom(bv1,N_QUBITS);}
 void print_BV_W2(bv bv1){print_BV_custom(bv1,INDEX_DOILY_SIZE);}
 
 /**

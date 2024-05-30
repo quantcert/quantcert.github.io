@@ -53,7 +53,8 @@ int main(int argc, char **argv)
 
     init_complex();
 
-    int VARQ = N_QUBITS;
+    int VARQ = atoi(argv[1]);
+
 
     // print("%d %d %d\n",NB_HYPERBOLICS(VARQ),NB_OBS_PER_HYPERBOLIC(VARQ),NB_LINES_PER_HYPERBOLIC(VARQ));
     // print("%d %d %d\n",NB_ELLIPTICS(VARQ),NB_OBS_PER_ELLIPTIC(VARQ),NB_LINES_PER_ELLIPTIC(VARQ));
@@ -67,7 +68,7 @@ int main(int argc, char **argv)
     int k_subspaces = -1;
     bool complement = false;
 
-    for (int i = 1; i < argc; i++)
+    for (int i = 2; i < argc; i++)
     {
         bool is_zerolocus = false;
         if (strcmp(argv[i], "--hyperbolic") == 0)
