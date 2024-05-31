@@ -416,6 +416,16 @@ void subspaces_rec(int n_qubits,int k,int l,bv bv1[]){
     }
 }
 
+/**
+ * @brief Generates all subspaces of a given dimension
+ * 
+ * /!\ The geometries need to be freed after use
+ * 
+ * @param n_qubits number of qubits
+ * @param k dimension of the subspace
+ * 
+ * @return quantum_assignment 
+ */
 quantum_assignment subspaces(int n_qubits,int k){
 
     int size = NB_OBS_PER_GENERATOR(k+1);
@@ -492,33 +502,6 @@ quantum_assignment affine_planes(quantum_assignment planes){
         if (j != 7)print("INCORRECT NUMBER OF POINTS PER AFFINE PLANES! :%d\n",j);
     }
     return ap;
-}
-
-/**
- * @brief Computes the contextuality degree of generators 
- * 
- * @param n_qubits number of qubits
- *  
- * @return int contextuality degree of the geometry
- */
-int subspaces_contextuality_degree(int n_qubits,int k){
-
-
-    print("\nGenerating subspaces...(expected: at most %ld * %d)\n\n",NB_SUBSPACES(n_qubits,k),NB_OBS_PER_GENERATOR(k+1));
-
-    quantum_assignment qa = subspaces(n_qubits,k);
-
-    print("\nfirst : %ld\n",_subspaces_current_index);
-
-    print("\n\nGeometries generated((%ld,%d,%d,n_neg=%ld))\n\nnow checking contextuality...\n\n",_subspaces_current_index,NB_OBS_PER_GENERATOR(k+1),n_qubits,_subspaces_n_negative);
-    
-    bool contextuality_only = (k != 1) && !(n_qubits == 2 && k == 1);
-    
-    int c_degree = geometry_contextuality_degree(qa,contextuality_only,false,true,NULL);
-
-    free_matrix(_subspaces_tab);
-
-    return c_degree;
 }
 
 /**
@@ -650,6 +633,8 @@ void doily_spreads_rec(bv w2_doily_lines[][NB_POINTS_PER_LINE],uint16_t incidenc
 /**
  * @brief generates the 6 spreads of the W2 doily in order to build the corresponding 2-spreads
  * 
+ * 
+ * 
  */
 void doily_spreads(bv W2_doily_lines[][NB_POINTS_PER_LINE]){
     uint32_t incidence_list = 0;
@@ -657,48 +642,5 @@ void doily_spreads(bv W2_doily_lines[][NB_POINTS_PER_LINE]){
     doily_spreads_rec(W2_doily_lines,incidence_list,lines_indices,5);
 }
 
-/**
- * @brief generates a 2-spread from a doily and then computes its contextuality degree
- * 
- */
-void two_spread_contextuality_degree(bv doily[],bv W2_doily_lines[][NB_POINTS_PER_LINE],int n_qubits){
-
-    bv** cdegree_two_spread_lines = (bv**)init_matrix(NB_LINES_DOILY,NB_POINTS_PER_LINE,sizeof(bv));
-
-    quantum_assignment qa;
-    qa.cpt_geometries = NB_LINES_TWO_SPREAD;
-    qa.points_per_geometry = NB_POINTS_PER_LINE;
-    qa.n_qubits = n_qubits;
-
-    for (size_t i = 0; i < NB_LINES_DOILY; i++){
-        for (size_t j = 0; j < NB_POINTS_PER_LINE; j++)cdegree_two_spread_lines[i][j] = doily[W2_doily_lines[i][j]];
-    }
-    for (size_t i = 0; i < NB_TWO_SPREADS_PER_DOILY; i++){
-        qa.geometry_indices = index_two_spreads[i];
-        qa.geometries = cdegree_two_spread_lines;
-        int deg = geometry_contextuality_degree(qa,false,false,false,NULL);
-        if(deg != 1)print("UNEXPECTED DEGREE:%d, ",deg);
-        print("-");
-    }
-
-    free_matrix(cdegree_two_spread_lines);
-}
-
-/**
- * @brief Contextualit degree of the two spread Metod described in a mail at 27/01/2023
- * 
- * WARNING : 
- */
-void contextuality_degree_of_particular_two_spread_27_01_2023(bv W2_doily_lines[][NB_POINTS_PER_LINE]){
-    static const int n_qubits = 5;
-    bv particular_2_spread[] = {
-        [XI]=str_to_bv_custom("ZXYYI",n_qubits),[IX]=str_to_bv_custom("YZXZX",n_qubits),[IZ]=str_to_bv_custom("XYZXY",n_qubits),
-        [XX]=str_to_bv_custom("XYZXX",n_qubits),[YI]=str_to_bv_custom("ZXXIX",n_qubits),[ZI]=str_to_bv_custom("XYXYY",n_qubits),
-        [XZ]=str_to_bv_custom("YZXZY",n_qubits),[YY]=str_to_bv_custom("XYXYX",n_qubits),[ZX]=str_to_bv_custom("ZXIXZ",n_qubits),
-        [YZ]=str_to_bv_custom("YZYXZ",n_qubits),[ZY]=str_to_bv_custom("ZXXIY",n_qubits),[IY]=str_to_bv_custom("YZIYI",n_qubits),
-        [ZZ]=str_to_bv_custom("IIYZI",n_qubits),[XY]=str_to_bv_custom("XYYII",n_qubits),[YX]=str_to_bv_custom("XYIZI",n_qubits)
-    };
-    two_spread_contextuality_degree(particular_2_spread,W2_doily_lines,5);
-}
 
 #endif //QUADRICS

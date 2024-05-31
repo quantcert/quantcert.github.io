@@ -6,7 +6,7 @@ dependencies:
 	fi
 	make -C ./lib/kissat_gb > /dev/null
 
-main.out: dependencies lib/*.c
+main.out: ./lib/*.c
 	gcc -std=c99 -Wall -g -Wextra -Ofast -fopenmp lib/qontextium.c -lm -o main.out
 
 all: dependencies main.out

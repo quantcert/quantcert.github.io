@@ -1,3 +1,30 @@
+/**********************************************************************************/
+/* Copyright (C) 2024 Axel Muller and Alain Giorgetti                             */
+/* Université de Franche-Comté, CNRS, institut FEMTO-ST, F-25000 Besançon, France */
+/**********************************************************************************/
+/* This software is distributed under the terms of the GNU Lesser                 */
+/* General Public License version 2                                             */
+/**********************************************************************************/
+/**
+ * @file config_checker.c
+ * @author Axel Muller
+ * @brief Contains functions to check the structure of the invalid lines of a quantum assignment
+ * There are multiple filters you can use to visualize the contextual graphs :
+
+NOTHING
+- This filter always returns false, meaning no lines will pass through this filter. It effectively filters out all lines.
+ALL
+- This filter always returns true, meaning all lines will pass through this filter.
+POINT DEGREE
+- This filter checks if any of the points in the geometry (for the given line i) match a specific point degree specified by the user.
+OBSERVABLE VALUE
+- This filter checks if any of the points in the geometry for the line i match a specific observable value given by the user
+LINE DEGREE
+- This filter checks if the sorted degrees of the points in the geometry for each line exactly match the degrees specified by the user
+SYMMETRIC
+- This filter checks if all points in the geometry for line i are symmetric. An observable is symmetric if the number of Y's is even.
+ *
+ */
 #ifndef CONFIG_CHECKER
 #define CONFIG_CHECKER
 

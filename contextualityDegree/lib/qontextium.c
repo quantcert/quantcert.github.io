@@ -100,8 +100,10 @@ int main(int argc, char **argv)
             SET_SUBSPACES = true;
             if (i < argc - 1)
                 k_subspaces = strtod(argv[i + 1], NULL);
-            if (k_subspaces == -1)
-                k_subspaces = VARQ - 1;
+            if (k_subspaces <= 0 || k_subspaces >= VARQ){
+                print("\nInvalid number of dimensions: %d\n", k_subspaces);
+                return 0;
+            }
             i++;
         }
         if (is_zerolocus)
@@ -218,9 +220,21 @@ int main(int argc, char **argv)
 
         bool *bool_sol = calloc(BV_LIMIT_CUSTOM(VARQ), sizeof(bool));
 
-        int c_deg_generators = (k_subspaces == 1) ? geometry_contextuality_degree(lines_qa, false, true, false, bool_sol) :subspaces_contextuality_degree(VARQ, k_subspaces);
-        print("\nsubspace(n=%d,k=%d):contextuality degree :%d\n", VARQ, k_subspaces, c_deg_generators);
+        int c_deg;
 
+        if (k_subspaces == 1){
+            c_deg = geometry_contextuality_degree(lines_qa, false, true, false, bool_sol);
+        }else{
+            print("\nGenerating subspaces...(expected: at most %ld * %d)\n\n", NB_SUBSPACES(VARQ, k_subspaces), NB_OBS_PER_GENERATOR(k_subspaces + 1));
+
+            quantum_assignment qa = subspaces(VARQ, k_subspaces);
+            print("\n\nGeometries generated((%ld contexts,%d obs. per cont.,%d qubits,%ld neg.lines))\n\nnow checking contextuality...\n\n", _subspaces_current_index, NB_OBS_PER_GENERATOR(k_subspaces + 1), VARQ, _subspaces_n_negative);
+            
+            bool sol[_subspaces_current_index];
+            c_deg = geometry_contextuality_degree(qa, false, true, true, sol);
+            free_matrix(qa.geometries);
+        }
+        print("\nsubspace(%d qubits,%d dimensions):contextuality degree: %d\n", VARQ, k_subspaces, c_deg);
         free(bool_sol);
     }
     if (SET_AFFINE)

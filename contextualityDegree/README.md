@@ -35,6 +35,7 @@ The compilation is automatic when running Qontextium for the first time.
 Execution
 =========
 
+Here are the possible options to execute the program:
 
     ./qontextium QUBITS_NUMBER CONFIGURATION [OPTIONS] [--solver SOLVER]
 
@@ -65,6 +66,32 @@ For example, to compute the contextuality degree of totally isotropic subspaces 
 
     ./qontextium 2 --subspaces 1
 
+#### Graph Visualization
+
+There are multiple filters you can use to visualize the contextual graphs :
+
+NOTHING
+- This filter always returns false, meaning no lines will pass through this filter. It effectively filters out all lines.
+
+
+ALL
+- This filter always returns true, meaning all lines will pass through this filter.
+
+
+POINT DEGREE
+- This filter checks if any of the points in the geometry (for the given line i) match a specific point degree specified by the user.
+
+
+OBSERVABLE VALUE
+- This filter checks if any of the points in the geometry for the line i match a specific observable value given by the user
+
+
+LINE DEGREE
+- This filter checks if the sorted degrees of the points in the geometry for each line exactly match the degrees specified by the user
+
+
+SYMMETRIC
+- This filter checks if all points in the geometry for line i are symmetric. An observable is symmetric if the number of Y's is even.
 
 ## References
 

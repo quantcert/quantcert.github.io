@@ -401,7 +401,7 @@ int geometry_SAT_contextuality_degree(quantum_assignment qa,bool contextuality_o
 
     /*We check the contextuality degree */
     /*First we test the maximal contextuality degree possible,check its satisfiabiliy, then 
-    decremeent it until it is no longer satisfiable*/
+    decrement it until it is no longer satisfiable*/
     int neg_lines = negative_lines_count(qa);
     if(neg_lines == 0 && false){
         if(print_solution)printf("positive config. ");
@@ -467,7 +467,7 @@ int geometry_SAT_contextuality_degree(quantum_assignment qa,bool contextuality_o
     #pragma omp critical
     {
         //compute_contextuality_solution(qa,bc2cnf_cp,sat_cp,print_solution?stdout:NULL,ret_sol);
-        check_contextuality_solution(qa,ret_sol,print_solution?stdout:NULL);
+        check_contextuality_solution(qa,ret_sol,NULL);
     }
 
 
@@ -547,57 +547,35 @@ int geometry_contextuality_degree_custom(quantum_assignment qa,bool contextualit
         case SAT_SOLVER:c_degree = geometry_SAT_contextuality_degree(qa,contextuality_only,print_solution,optimistic,bool_sol);break;
         case RETRIEVE_SOLUTION:
             parse_bool(bool_sol,BV_LIMIT_CUSTOM(qa.n_qubits));
-            c_degree = check_contextuality_solution(qa,bool_sol,print_solution?stdout:NULL);break;
+            c_degree = check_contextuality_solution(qa,bool_sol,NULL);break;
         default:break;
         }
 
-    
 
-    
-    
-    
+        check_contextuality_solution(qa, bool_sol, print_solution ? stdout : NULL);
 
-    
+        int continued = false;
 
-    
-
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    int continued = true;
-
-    while (true)
-    {
-        if(SEE_GRAPH){
-            print("\nDo you want to see the contextual configuration ? (0:no, 1:yes): ");
-            
-            if(scanf("%d",&continued) == 0){
-                print("oops wrong text");
-                continued = false;
+        while (true){
+            if (SEE_GRAPH){
+                print("\nDo you want to see the contextual configuration ? (0:no, 1:yes): ");
+                
+                if (scanf("%d", &continued) == 0){
+                    print("oops wrong text");
+                    continued = false;
+                }
             }
-        }else{
-            continued = false;
-        }
-        if(!continued)break;
-        check_structure(qa, bool_sol, stdout, NULL); 
-        
+            if (!continued)break;
+
+            check_structure(qa, bool_sol, stdout, NULL); 
+            
     }
 
     if(print_solution){
-        print("\nsolution code : ");
+        print("\nsolution code: ");
         print_bool(bool_sol, BV_LIMIT_CUSTOM(qa.n_qubits));
         print("\n");
     }
-    //check_contextuality_solution(qa,bool_sol,stderr);
 
     if(!has_indices)free(qa.geometry_indices);
     if(!has_negative)free(qa.lines_negativity);
