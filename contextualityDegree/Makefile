@@ -12,6 +12,7 @@ main.out: ./lib/*.c
 all: dependencies main.out
 
 clean: 
-	make -C ./lib/kissat_gb/ clean
-	make -C ./lib/BCpackage-0.40/ clean 
-	rm -f main.out
+	-make -C ./lib/kissat_gb/ clean
+	-make -C ./lib/BCpackage-0.40/ clean 
+	-rm -rf ./lib/kissat_gb/build
+	-rm -f main.out

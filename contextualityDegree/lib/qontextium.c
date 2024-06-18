@@ -213,7 +213,7 @@ int main(int argc, char **argv)
         free(bool_sol);
     }
 
-    // test_CK_noIs(lines_qa, my_bool_sol, 0);free(my_bool_sol);return 0;/*takes a YYYY quadric*/
+    
 
     if (SET_SUBSPACES)
     {
@@ -234,7 +234,7 @@ int main(int argc, char **argv)
             c_deg = geometry_contextuality_degree(qa, false, true, true, sol);
             free_matrix(qa.geometries);
         }
-        print("\nsubspace(%d qubits,%d dimensions):contextuality degree: %d\n", VARQ, k_subspaces, c_deg);
+        print("\nsubspace(%d qubits,%d dimensions):Hamming distance found: %d\n", VARQ, k_subspaces, c_deg);
         free(bool_sol);
     }
     if (SET_AFFINE)
@@ -248,7 +248,7 @@ int main(int argc, char **argv)
     {
         print("imported configuration:\n");
         print_quantum_assignment(import_qa);
-        print("contextuality degree :%d\n", geometry_contextuality_degree(import_qa, false, true, false, NULL));
+        print("Hamming distance found :%d\n", geometry_contextuality_degree(import_qa, false, true, false, NULL));
     }
 
     free_quantum_assignment(&lines_qa);

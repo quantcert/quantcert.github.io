@@ -274,12 +274,17 @@ void filter_lines(bool to_print,quantum_assignment qa, bool *invalid_lines, int 
         is_line_in_specific_type[i] = true;
         for (size_t j = 0; j < qa.points_per_geometry; j++)
         {
-            (*obs_specific_type_degree)[qa.geometries[qa.geometry_indices[i]][j]]++;
+            bv bv1 = qa.geometries[qa.geometry_indices[i]][j];
+            //if(m == MODE_POINT_DEGREE && number_of_invalid_lines[bv1] != param[0])continue;
+            (*obs_specific_type_degree)[bv1]++;
         }
     }
 
-    if (to_print)print("\n\nspecific / obs / general");
-
+    if (to_print){
+        print("\nOn the left: degree of the points relative to the selected filter");
+        print("\nOn the right: degree of the points relative to the whole invalid configuration\n");
+        print("\n\nspecific / obs / general");
+    }
     /*number of lines with that category*/
     *category_count = calloc(CONFIG_MAX_DEG, sizeof(int));
     /*for each type of invalid line, determined by the degrees of its vertices, we count the

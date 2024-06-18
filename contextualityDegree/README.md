@@ -66,6 +66,10 @@ For example, to compute the contextuality degree of totally isotropic subspaces 
 
     ./qontextium 2 --subspaces 1
 
+Example files are provided in the `misc` folder, you can run them like this
+
+    ./qontextium 2 --import ./misc/qa_grid.txt
+
 #### Graph Visualization
 
 There are multiple filters you can use to visualize the contextual graphs :

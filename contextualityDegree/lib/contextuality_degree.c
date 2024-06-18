@@ -150,7 +150,7 @@ int check_contextuality_solution(quantum_assignment qa,bool* bool_sol,FILE* outp
 
     }
     if(to_print){
-        fprintf(output, "\nnegative lines : %d\nHamming distance : %d\n", neg, c_deg);
+        fprintf(output, "\nnegative lines :%d\nHamming distance :%d\n", neg, c_deg);
         
     }
 

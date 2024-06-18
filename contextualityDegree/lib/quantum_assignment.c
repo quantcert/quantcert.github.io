@@ -118,6 +118,27 @@ void print_quantum_assignment(quantum_assignment qa){
 }
 
 /**
+ * @brief Prints a quantum assignment as a readable configuration to a file
+ * 
+ * @param qa 
+ * @param output 
+ */
+void quantum_assignment_print_to_file(quantum_assignment qa, FILE *output)
+{
+    bool no_indices = quantum_assignment_autofill_indices(&qa);
+    
+    for (size_t i = 0; i < qa.cpt_geometries; i++){
+        for (size_t j = 0; j < qa.points_per_geometry; j++){
+            print_BV_to_file(qa.geometries[qa.geometry_indices[i]][j],qa.n_qubits,output);
+            if(j != qa.points_per_geometry-1)fprintf(output,",");
+        }
+        fprintf(output,"\n");
+    }
+
+    if(no_indices)free(qa.geometry_indices);
+}
+
+/**
  * @brief Computes the negativite contexts of a quantum assignment
  * 
  * @param qa 
