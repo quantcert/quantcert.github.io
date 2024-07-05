@@ -7,3 +7,8 @@ Release 1.0.0
   code accompanying [MSGDH24], also described in [MSGDH23], see details in
   contextualityDegree/README.md.
 
+Release 1.1.0
+=============
+
+* Second release of Qontextium, in [contextualityDegree](./contextualityDegree),
+  code accompanying [MSGHK24], see details in contextualityDegree/README.md.
