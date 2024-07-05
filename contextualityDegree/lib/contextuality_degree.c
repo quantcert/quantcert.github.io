@@ -2,17 +2,12 @@
 /* Copyright (C) 2024 Axel Muller and Alain Giorgetti                             */
 /* Université de Franche-Comté, CNRS, institut FEMTO-ST, F-25000 Besançon, France */
 /**********************************************************************************/
-/* This software is distributed under the terms of the GNU Lesser                 */
-/* General Public License version 2                                             */
+/* This software is distributed under the terms of the GNU General Public License */
+/* version 2                                                                      */
 /**********************************************************************************/
 /**
- *
  * @file contextuality_degree.c
- * @author Axel Muller
- * @brief
- * @version 0.1
- * @date 2023-11-17
- *
+ * @brief contains methods to compute the contextuality degree of a quantum assignment
  */
 #ifndef CDEGREE
 #define CDEGREE 1

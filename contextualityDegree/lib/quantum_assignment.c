@@ -1,3 +1,17 @@
+/**********************************************************************************/
+/* Copyright (C) 2024 Axel Muller and Alain Giorgetti                             */
+/* Université de Franche-Comté, CNRS, institut FEMTO-ST, F-25000 Besançon, France */
+/**********************************************************************************/
+/* This software is distributed under the terms of the GNU General Public License */
+/* version 2                                                                      */
+/**********************************************************************************/
+/**
+ * @file quantum_assignment.c
+ * @brief Data structure and functions to handle quantum assignments
+ * 
+ */
+
+
 #ifndef QUANTUM_ASSIGNMENT
 #define QUANTUM_ASSIGNMENT
 
