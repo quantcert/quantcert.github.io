@@ -2,12 +2,11 @@
 /* Copyright (C) 2024 Axel Muller and Alain Giorgetti                             */
 /* Université de Franche-Comté, CNRS, institut FEMTO-ST, F-25000 Besançon, France */
 /**********************************************************************************/
-/* This software is distributed under the terms of the GNU Lesser                 */
-/* General Public License version 2                                             */
+/* This software is distributed under the terms of the GNU General Public License */
+/* version 2                                                                      */
 /**********************************************************************************/
 /**
  * @file config_checker.c
- * @author Axel Muller
  * @brief Contains functions to check the structure of the invalid lines of a quantum assignment
  * There are multiple filters you can use to visualize the contextual graphs :
 

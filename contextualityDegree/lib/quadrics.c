@@ -2,16 +2,12 @@
 /* Copyright (C) 2024 Axel Muller and Alain Giorgetti                             */
 /* Université de Franche-Comté, CNRS, institut FEMTO-ST, F-25000 Besançon, France */
 /**********************************************************************************/
-/* This software is distributed under the terms of the GNU Lesser                 */
-/* General Public License version 2                                             */
+/* This software is distributed under the terms of the GNU General Public License */
+/* version 2                                                                      */
 /**********************************************************************************/
-
 /**
  * @file quadrics.c
- * @author Axel Muller
- *
- * [dHG+21] Henri de Boutray, Frédéric Holweck, Alain Giorgetti, Pierre-Alain Masson and Metod Saniga. Contextuality
- * degree of quadrics in multi-qubit symplectic polar spaces. arXiv:2105.13798
+ * @brief C functions to generate various geometries, among which quadrics.
  */
 
 #ifndef QUADRICS

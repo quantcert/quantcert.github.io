@@ -2,9 +2,13 @@
 /* Copyright (C) 2024 Axel Muller and Alain Giorgetti                             */
 /* Université de Franche-Comté, CNRS, institut FEMTO-ST, F-25000 Besançon, France */
 /**********************************************************************************/
-/* This software is distributed under the terms of the GNU Lesser                 */
-/* General Public License version 2                                             */
+/* This software is distributed under the terms of the GNU General Public License */
+/* version 2                                                                      */
 /**********************************************************************************/
+/**
+ * @file constants.c
+ * @brief contains all the constants used in the program
+ */
 
 #ifndef MY_CONSTS
 #define MY_CONSTS 1/*safe guard*/
