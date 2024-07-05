@@ -130,6 +130,11 @@ int main(int argc, char **argv)
                 global_solver_mode = RETRIEVE_SOLUTION;
                 print("retrieve\n");
             }
+            else if (i < argc && strcmp(argv[i], "heuristic") == 0)
+            {
+                global_solver_mode = INVALID_LINES_HEURISTIC_SOLVER;
+                print("heuristic\n");
+            }
             else
             {
                 print("none\n");
@@ -182,7 +187,7 @@ int main(int argc, char **argv)
         if (SET_PERPSETS && i != I)
         {
             qa = perpset(i, lines_indices, VARQ, lines_qa.geometries, complement);
-            print("best Hamming distance found:%d;", geometry_contextuality_degree(qa, false, true, false, NULL));
+            print("best Hamming distance found:%d;", geometry_contextuality_degree(&qa, false, true, false, NULL));
             if (!SET_ALL_QUADRICS)break;
         }
         if (SET_HYPERBOLICS || SET_ELLIPTICS)
@@ -194,7 +199,7 @@ int main(int argc, char **argv)
                 // print_quantum_assignment(qa);
 
                 // printf("n_neg:%d\n",negative_lines_count(qa));
-                print("best Hamming distance found: %d\n", geometry_contextuality_degree(qa, false, true, false, my_bool_sol));
+                print("best Hamming distance found: %d\n", geometry_contextuality_degree(&qa, false, true, false, my_bool_sol));
                 
 
                 
@@ -223,7 +228,7 @@ int main(int argc, char **argv)
         int c_deg;
 
         if (k_subspaces == 1){
-            c_deg = geometry_contextuality_degree(lines_qa, false, true, false, bool_sol);
+            c_deg = geometry_contextuality_degree(&lines_qa, false, true, false, bool_sol);
         }else{
             print("\nGenerating subspaces...(expected: at most %ld * %d)\n\n", NB_SUBSPACES(VARQ, k_subspaces), NB_OBS_PER_GENERATOR(k_subspaces + 1));
 
@@ -231,29 +236,33 @@ int main(int argc, char **argv)
             print("\n\nGeometries generated((%ld contexts,%d obs. per cont.,%d qubits,%ld neg.lines))\n\nnow checking contextuality...\n\n", _subspaces_current_index, NB_OBS_PER_GENERATOR(k_subspaces + 1), VARQ, _subspaces_n_negative);
             
             bool sol[_subspaces_current_index];
-            c_deg = geometry_contextuality_degree(qa, false, true, true, sol);
+            c_deg = geometry_contextuality_degree(&qa, false, true, true, sol);
             free_matrix(qa.geometries);
         }
         print("\nsubspace(%d qubits,%d dimensions):Hamming distance found: %d\n", VARQ, k_subspaces, c_deg);
         free(bool_sol);
     }
-    if (SET_AFFINE)
-    {
+    if (SET_AFFINE){
         quantum_assignment planes = subspaces(VARQ, 2);
         quantum_assignment affine = affine_planes(planes);
-        print("n_neg:%d/%ld\n", negative_lines_count(affine), affine.cpt_geometries);
-        print("affine:%d\n", geometry_contextuality_degree(affine, false, true, false, NULL));
+        print("n_neg:%d/%ld\n", negative_lines_count(&affine), affine.cpt_geometries);
+        print("affine:%d\n", geometry_contextuality_degree(&affine, false, true, false, NULL));
+
+        
+        
     }
-    if (SET_IMPORT)
-    {
+    if (SET_IMPORT){
         print("imported configuration:\n");
-        print_quantum_assignment(import_qa);
-        print("Hamming distance found :%d\n", geometry_contextuality_degree(import_qa, false, true, false, NULL));
+        print_quantum_assignment(&import_qa);
+        print("Hamming distance found :%d\n", geometry_contextuality_degree(&import_qa, false, true, false, NULL));
+        free_quantum_assignment(&import_qa);
+        free_matrix(import_qa.geometries);
     }
 
     free_quantum_assignment(&lines_qa);
     free_matrix(lines_indices);
-    free(lines_qa.geometry_indices);
+    free_matrix(lines_qa.geometries);
+    free(my_bool_sol);
 
     return 0;
 }

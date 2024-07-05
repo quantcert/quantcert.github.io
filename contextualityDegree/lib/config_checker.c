@@ -347,48 +347,48 @@ void filter_lines(bool to_print,quantum_assignment qa, bool *invalid_lines, int 
  * @param line_filter if not NULL, only checks the lines that are true in the filter
  * @return int the number of different types of invalid lines
  */
-int check_structure(quantum_assignment qa, bool *bool_sol, bool to_print, bool *line_filter)
+int check_structure(quantum_assignment* qa, bool *bool_sol, bool to_print, bool *line_filter)
 {
 
-    compute_negativity(&qa);
+    compute_negativity(qa);
 
     
     
     int ccpt = 0;
     if (to_print && line_filter != NULL)
-        for (size_t i = 0; i < (size_t)NB_LINES_CUSTOM(qa.n_qubits); i++)
+        for (size_t i = 0; i < (size_t)NB_LINES_CUSTOM(qa->n_qubits); i++)
             ccpt++;
 
     
 
     bool *invalid_lines = NULL;
     int *number_of_invalid_lines = NULL;
-    compute_invalid_lines(qa, bool_sol, &invalid_lines, &number_of_invalid_lines);
+    compute_invalid_lines(*qa, bool_sol, &invalid_lines, &number_of_invalid_lines);
 
     mode m = 1;
-    int param[qa.points_per_geometry];
-    if (to_print && SEE_GRAPH)m = ask_mode(qa, param);
+    int param[qa->points_per_geometry];
+    if (to_print && SEE_GRAPH)m = ask_mode(*qa, param);
 
     int *obs_specific_type_degree = NULL;
 
     int *category_count = NULL;
     int **category_list = NULL;
 
-    filter_lines(to_print,qa, invalid_lines, number_of_invalid_lines, m, param, line_filter, &obs_specific_type_degree, &category_count, &category_list);
+    filter_lines(to_print,*qa, invalid_lines, number_of_invalid_lines, m, param, line_filter, &obs_specific_type_degree, &category_count, &category_list);
     //second_filter(to_print, obs_specific_type_degree, is_line_in_specific_type, number_of_invalid_lines, qa, );
 
     /*for each number of invalid lines, we count the number of points with that number of invalid lines*/
-    int number_of_obs_with_degree[BV_LIMIT_CUSTOM(qa.n_qubits)];
-    for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa.n_qubits); i++)
+    int number_of_obs_with_degree[BV_LIMIT_CUSTOM(qa->n_qubits)];
+    for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa->n_qubits); i++)
         number_of_obs_with_degree[i] = 0;
 
-    for (bv i = 1; i < BV_LIMIT_CUSTOM(qa.n_qubits); i++)
+    for (bv i = 1; i < BV_LIMIT_CUSTOM(qa->n_qubits); i++)
         number_of_obs_with_degree[number_of_invalid_lines[i]]++;
 
     if (to_print)
         print("\nPoint degree types:\n");
 
-    for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa.n_qubits); i++)
+    for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa->n_qubits); i++)
     {
         if (number_of_obs_with_degree[i] != 0)
         {
@@ -401,27 +401,27 @@ int check_structure(quantum_assignment qa, bool *bool_sol, bool to_print, bool *
         print("\n\nspecific degrees : ");
 
     /*for each present point degree, we count the number of points with that degree*/
-    int cpt_specific_degrees[BV_LIMIT_CUSTOM(qa.n_qubits)];
-    for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa.n_qubits); i++)
+    int cpt_specific_degrees[BV_LIMIT_CUSTOM(qa->n_qubits)];
+    for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa->n_qubits); i++)
         cpt_specific_degrees[i] = 0;
 
-    for (bv j = 0; j < BV_LIMIT_CUSTOM(qa.n_qubits); j++)
+    for (bv j = 0; j < BV_LIMIT_CUSTOM(qa->n_qubits); j++)
         cpt_specific_degrees[obs_specific_type_degree[j]]++;
 
     if (to_print)
-        for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa.n_qubits); i++)
+        for (size_t i = 1; i < BV_LIMIT_CUSTOM(qa->n_qubits); i++)
             if (cpt_specific_degrees[i] != 0)
                 print("%ld(x%d)", i, cpt_specific_degrees[i]);
 
     int vertices_count = 0;
-    for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa.n_qubits); i++)
+    for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa->n_qubits); i++)
         if (number_of_invalid_lines[i] > 0)
             vertices_count++;
 
     if (to_print)
         print("\n\nNumber of vertices in the invalid configuration: %d ; \n", vertices_count);
 
-    int complexity_degree = compute_category_list(to_print, category_list, category_count, qa);
+    int complexity_degree = compute_category_list(to_print, category_list, category_count, *qa);
 
     if (to_print
     )print("\nNumber of different line types: %d\n", complexity_degree);

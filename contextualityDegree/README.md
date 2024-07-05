@@ -57,7 +57,9 @@ CONFIGURATION [OPTIONS] is the configuration to be generated. It can be one of t
 
 SOLVER
 
---solver sat: use a SAT solver to estimate the contextuality degree
+--solver sat: uses a SAT solver to estimate the contextuality degree (eventually gives the optimum)
+
+--solver heuristic: uses the heuristic method presented in [MSGHK24](#MSGHK24) to estimate the contextuality degree (faster, but no guarantee of finding the optimum)
 
 --solver retrieve: checks a solution from a solution code
 
@@ -103,3 +105,4 @@ SYMMETRIC
 |-------------------------|----------------------------------------------------|
 |<a id="MSGDH23"/>[MSGDH23]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *Revealing contextuality of quantum configurations with a SAT solver*. Journées nationales du GDR GPL (Génie de la Programmation et du Logiciel), CNRS, groupe de travail LVP (Langages et Vérification de Programmes), 5-8 juin 2023, Rennes, France. Session posters et démos, 6 juin 2023. [Poster](23poster.pdf){:target="_blank"}|
 |<a id="MSGDH24"/>[MSGDH24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *New and improved bounds on the contextuality degree of multi-qubit configurations*. Mathematical Structures in Computer Science, 2024. [Article](https://doi.org/10.1017/S0960129524000057){:target="_blank"}|
+|<a id="MSGHK24"/>[MSGHK24]|Muller, Axel and Saniga, Metod and Giorgetti, Holweck, Frédéric and Kelleher, Colm.*A new heuristic approach for contextuality degree estimates and its four- to six-qubit portrayals*.[Article](https://doi.org/10.48550/arXiv.2407.02928){:target="_blank"}|

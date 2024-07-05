@@ -48,7 +48,9 @@
 #define MULTI_THREAD true //enables multi-thread(if you don't want debug prints issues)
 #define SUB_NEGATIVE_TYPES DOILY_PROCESSING//if true differenciates types 7A/7B and 8A/8B
 #define AUTOMATIC_PROCEDURE false//if true uses an automatic function to trace the path of the procedure
-#define HEURISTIC_NUM_THREADS (MULTI_THREAD?15:1)//number of threads to use for the heuristic method
+
+#define HEURISTIC_NUM_THREADS (MULTI_THREAD?200:1)//number of threads to use for the heuristic method
+#define HEURISTIC_MAX_ITERATIONS 100000//maximum number of iterations for the heuristic method
 
 #define DOUBLE_CHECK false//if true, checks the validity of every doily generated (has always been valid anyway)
 #define DANGEROUS_OPTIMIZATIONS false//unproved optimizations

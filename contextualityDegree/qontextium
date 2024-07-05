@@ -39,7 +39,8 @@ CONFIGURATION:                         the configuration to be generated. It can
 
 SOLVER
 
-    --solver sat:                      use a SAT solver to estimate the contextuality degree
+    --solver sat:                      use a SAT solver to estimate the contextuality degree (eventually gives the optimum)
+    --solver heuristic:                use a heuristic to estimate the contextuality degree (faster, but no guarantee of finding the optimum)
     --solver retrieve:                 checks a solution from a solution code
 
 GRAPH VISUALIZATION MODES
