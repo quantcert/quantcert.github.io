@@ -82,11 +82,11 @@ ALL
 
 
 POINT DEGREE
-- This filter checks if any of the points in the geometry (for the given line i) match a specific point degree specified by the user.
+- This filter checks if any of the points in the geometry (for a given line) match a specific point degree specified by the user.
 
 
 OBSERVABLE VALUE
-- This filter checks if any of the points in the geometry for the line i match a specific observable value given by the user
+- This filter checks if any of the points in the geometry for a line match a specific observable value given by the user
 
 
 LINE DEGREE
@@ -94,7 +94,7 @@ LINE DEGREE
 
 
 SYMMETRIC
-- This filter checks if all points in the geometry for line i are symmetric. An observable is symmetric if the number of Y's is even.
+- This filter checks if all points in the geometry for a line are symmetric. An observable is symmetric if the number of Y's is even.
 
 ## References
 
