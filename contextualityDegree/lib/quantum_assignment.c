@@ -63,6 +63,10 @@ bool quantum_assignment_autofill_indices(quantum_assignment* qa){
  */
 bool is_negative_custom(bv geometry[], int size, int n_qubits, bool verbose, FILE *output)
 {
+    for (int i = 0; i < size; i++)if(geometry[i] == I){
+        size = i;
+        break;
+    }
     pauli_matrix mat = get_matrix(I);
 
     /*for each qubit*/
@@ -106,6 +110,7 @@ bool is_negative_custom(bv geometry[], int size, int n_qubits, bool verbose, FIL
     if (phase.imag != 0 || phase.real == 0)
     {
         print("geometry phase error");
+        is_done = true;
     }
     return phase.real == -1;
 }
@@ -121,12 +126,15 @@ void print_quantum_assignment(quantum_assignment* qa){
     
     print("geometries : \n");
     for (size_t i = 0; i < qa->cpt_geometries; i++){
+        //print("[");
         for (size_t j = 0; j < qa->points_per_geometry; j++){
+            if(qa->geometries[qa->geometry_indices[i]][j] == I)break;
             print_BV_custom(qa->geometries[qa->geometry_indices[i]][j],qa->n_qubits);
-            //print("%ld ",qa.geometries[qa.geometry_indices[i]][j]);
+            //print("%d", qa->geometries[qa->geometry_indices[i]][j]);
+            //if (j != qa->points_per_geometry-1)print(",");
         }
-        print("%c",is_negative_custom(qa->geometries[qa->geometry_indices[i]],qa->points_per_geometry,qa->n_qubits,false,NULL)?'-':'+');
-        print("\n");
+        print("%c\n",is_negative_custom(qa->geometries[qa->geometry_indices[i]],qa->points_per_geometry,qa->n_qubits,false,NULL)?'-':'+');
+        //print("],\n");
     }
     print("\n");
 

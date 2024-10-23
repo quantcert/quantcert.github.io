@@ -4,4 +4,3 @@ XX,YY,ZZ
 YZ,ZY,XX
 ZX,XZ,YY
 XY,YX,ZZ
- 

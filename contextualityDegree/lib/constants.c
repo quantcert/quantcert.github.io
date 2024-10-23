@@ -22,6 +22,7 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <omp.h>
+#include <time.h>
 
 #ifndef N_QUBITS
     #define N_QUBITS 4//number of qubits in an observable
@@ -54,7 +55,7 @@
 #define AUTOMATIC_PROCEDURE false//if true uses an automatic function to trace the path of the procedure
 
 #define HEURISTIC_NUM_THREADS (MULTI_THREAD?200:1)//number of threads to use for the heuristic method
-#define HEURISTIC_MAX_ITERATIONS 100000//maximum number of iterations for the heuristic method
+#define HEURISTIC_MAX_ITERATIONS 10000000//0//maximum number of iterations for the heuristic method
 
 #define DOUBLE_CHECK false//if true, checks the validity of every doily generated (has always been valid anyway)
 #define DANGEROUS_OPTIMIZATIONS false//unproved optimizations
@@ -177,7 +178,8 @@ void implement_sigint(){
 }
 
 void** init_matrix(size_t dim1,size_t dim2,size_t size){
-    void** res = calloc(dim1,sizeof(void*));
+    if(dim1 == 0 || dim2 == 0 || size == 0)return NULL;
+    void** res = dim1>0?calloc(dim1,sizeof(void*)):NULL;
     void* sub_array = calloc(dim1*dim2,size);
     for (size_t i = 0; i < dim1; i++){
         res[i] = (sub_array+(i*dim2*size));/**size since it cannot know the type*/
@@ -198,6 +200,15 @@ void main_header(){
     if(IMPLEMENT_SIGINT)implement_sigint();
 }
 
-
+static unsigned long x = 0;
+#pragma omp threadprivate(x)
+/*uses xorshift*/
+int fast_random(){
+    if(x == 0)x = time(NULL) + omp_get_thread_num();
+    x ^= x << 13;
+    x ^= x >> 17;
+    x ^= x << 5;
+    return x;
+}
 
 #endif //MY_CONSTS

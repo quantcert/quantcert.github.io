@@ -423,7 +423,7 @@ int check_structure(quantum_assignment* qa, bool *bool_sol, bool to_print, bool 
     int complexity_degree = compute_category_list(to_print, category_list, category_count, *qa);
 
     if (to_print
-    )print("\nNumber of different line types: %d\n", complexity_degree);
+    )print("Number of different line types: %d\n", complexity_degree);
 
     free_matrix(category_list);
     free(category_count);

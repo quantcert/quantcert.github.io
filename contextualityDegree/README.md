@@ -40,17 +40,19 @@ QUBITS_NUMBER is the number of qubits in the configuration.
 
 CONFIGURATION [OPTIONS] is the configuration to be generated. It can be one of the following:
 
---import file_name: import a configuration from a file
+--import assignment [FILE]: imports a configuration from a file (see ./misc/qa_grid.txt for an example) and estimates its contextuality degree
 
---elliptics [--complement]: generate elliptic configurations (or their complement or all of them)
+--import hypergram [FILE1] [FILE2]: imports a hypergram from two files, checks assignability. When assignable, estimates the contextuality degree. The first file describes the hypergraph. The second file describes a Gram matrix on the same vertices (see ./misc/grid_hypergraph.txt and ./misc/grid_gram.txt for an example)
 
---hyperbolics [--complement]: generate hyperbolic configurations (or their complement or all of them)
+--elliptics [--complement]: generates elliptic configurations (or their complement or all of them)
 
---perpsets [--complement]: generate perpsets configurations (or their complement or all of them)
+--hyperbolics [--complement]: generates hyperbolic configurations (or their complement or all of them)
+
+--perpsets [--complement]: generates perpsets configurations (or their complement or all of them)
 
 --subspaces k: generates a configuration with all subspaces of dimension k as contexts
 
---affine: generate affine configurations
+--affine: generates affine configurations
 
 SOLVER
 
@@ -60,14 +62,13 @@ SOLVER
 
 --solver retrieve: checks a solution from a solution code
 
-For example, to compute the contextuality degree of totally isotropic subspaces of dimension 1 
-(lines) for 2 qubits, run this command:
+For example, to compute the contextuality degree of totally isotropic subspaces of dimension 1 (lines) for 2 qubits, run this command:
 
     ./qontextium 2 --subspaces 1
 
-Example files are provided in the `misc` folder, you can run them like this
+Example files are provided in the `misc` folder, for example you can import a Peres-Mermin magic square with this command:
 
-    ./qontextium 2 --import ./misc/qa_grid.txt
+    ./qontextium 2 --import assignment ./misc/qa_grid.txt
 
 #### Graph Visualization
 
@@ -102,4 +103,5 @@ SYMMETRIC
 |-------------------------|----------------------------------------------------|
 |<a id="MSGDH23"/>[MSGDH23]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *Revealing contextuality of quantum configurations with a SAT solver*. Journées nationales du GDR GPL (Génie de la Programmation et du Logiciel), CNRS, groupe de travail LVP (Langages et Vérification de Programmes), 5-8 juin 2023, Rennes, France. Session posters et démos, 6 juin 2023. [Poster](23poster.pdf){:target="_blank"}|
 |<a id="MSGDH24"/>[MSGDH24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *New and improved bounds on the contextuality degree of multi-qubit configurations*. Mathematical Structures in Computer Science, 2024. [Article](https://doi.org/10.1017/S0960129524000057){:target="_blank"}|
-|<a id="MSGHK24"/>[MSGHK24]|Muller, Axel and Saniga, Metod and Giorgetti, Holweck, Frédéric and Kelleher, Colm. *A new heuristic approach for contextuality degree estimates and its four- to six-qubit portrayals*. [Article](https://doi.org/10.48550/arXiv.2407.02928){:target="_blank"}|
+|<a id="MSGHK24"/>[MSGHK24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and Holweck, Frédéric and Kelleher, Colm. *A new heuristic approach for contextuality degree estimates and its four- to six-qubit portrayals*. [Article](https://doi.org/10.48550/arXiv.2407.02928){:target="_blank"}|
+|<a id="MG24"/>[MG24]|Muller, Axel and Giorgetti, Alain. *An abstract structure determines the contextuality degree of observable-based Kochen-Specker proofs*. [Article](https://arxiv.org/html/2410.14463v1){:target="_blank"}|

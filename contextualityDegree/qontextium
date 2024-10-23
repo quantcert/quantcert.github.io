@@ -30,7 +30,8 @@ QUBITS_NUMBER:                         the number of qubits in the configuration
 
 CONFIGURATION:                         the configuration to be generated. It can be one of the following:
 
-    --import file_name:                import a configuration from a file
+    --import assignment [FILE]:        import a configuration assignment from a file
+    --import hypergram [FILE1] [FILE2]:import a hypergraph from two files (hypergraph + gram matrix)
     --elliptic [--complement|--all]:   generate a elliptic configuration (or their complement or all of them)
     --hyperbolic [--complement|--all]: generate a hyperbolic configuration (or their complement or all of them)
     --perpset [--complement]:          generate a perpset configuration (or their complement or all of them)

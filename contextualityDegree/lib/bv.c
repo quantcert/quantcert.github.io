@@ -8,6 +8,10 @@
 /**
  * @file bv.c
  * @brief Contains functions about the bitvector used to represent observables
+ *
+ * Some functions are based on [DHGMS22] (https://doi.org/10.1088/1751-8121/aca36f)
+ * and [HDS22] (https://doi.org/10.1038/s41598-022-13079-3)
+ *
  */
 
 #ifndef MY_BV
@@ -154,26 +158,40 @@ unsigned int innerProduct_custom(bv i1,bv i2,int n_qubits){
 unsigned int innerProduct(bv i1,bv i2){return innerProduct_custom(i1,i2,N_QUBITS);}
 
 /**
- * @brief base quadratic form of an observable
-*/
-unsigned int baseQuadraticFormVector(bv i,int n_qubits){
-  /*We perform the multiplications*/
-  return get_Z(i,n_qubits) Qtimes get_X(i,n_qubits);
-}
-
-/**
- * @brief quadatric of bv1 given a base
+ * @brief Base quadratic form of an observable
+ *
+ * Q_0(bv1) = x1x2 + x3x4 + ... + x_{N-1}x_N
+ *
+ * See [DHGMS22] Section 5.1
+ *
  */
-unsigned int quadraticForm_custom(bv base,bv bv1,int n_qubits){
-  /*the Xor from Qplus preserves the parity of the two vectors*/
-  word n = baseQuadraticFormVector(bv1,n_qubits) Qplus innerProductVector(base,bv1,n_qubits);
-  
-  return bit_parity(n,n_qubits);
+unsigned int baseQuadraticFormVector(bv i, int n_qubits) {
+  /*We perform the multiplications*/
+  return get_Z(i, n_qubits) Qtimes get_X(i, n_qubits);
 }
-unsigned int quadraticForm(bv base,bv bv1){return quadraticForm_custom(base,bv1,N_QUBITS);}
 
 /**
- * @brief same as inner product but with 2 qubits
+ * @brief Quadratic of bv1 given a base
+ * 
+ * Q_base(bv1) = Q_0(bv1) + <bv1,base>
+ * 
+ * See [DHGMS22] Section 5.1
+ * 
+ */
+unsigned int quadraticForm_custom(bv base, bv bv1, int n_qubits) {
+  /* The Xor from Qplus preserves the parity of the two vectors */
+  word n = baseQuadraticFormVector(bv1, n_qubits)
+      Qplus innerProductVector(base, bv1, n_qubits);
+
+  return bit_parity(n, n_qubits);
+}
+
+unsigned int quadraticForm(bv base, bv bv1) {
+  return quadraticForm_custom(base, bv1, N_QUBITS);
+}
+
+/**
+ * @brief same as inner product but with 2 qubits (faster)
  * 
  * @param i1 
  * @param i2 
@@ -189,6 +207,10 @@ unsigned int innerProduct_W2(bv i1,bv i2){
 
 /**
  * @brief Performs the transvection of the point q from the base p
+ * 
+ * T_p(q) = q + <p,q>p
+ * 
+ * See [HDS22] Section 1
  */
 bv transvection_custom(bv p,bv q,int n_qubits){
   return q Qplus (innerProduct_custom(p,q,n_qubits) * p);
@@ -210,11 +232,8 @@ bool is_symmetric(bv bv1,int n_qubits){
  * 
  * @param b 
  */
-void print_bits(bv b)
-{
-    for (size_t i = 0; i < 2*N_QUBITS; i++)print("%d",(b>>(2*N_QUBITS-i-1))&1);
-    
-    print("\n");
+void print_bits_custom(bv b,int n_bits){
+  for (int i = 0; i < n_bits; i++)print("%d", (b >> (n_bits - i - 1)) & 1);
 }
 
 /**
