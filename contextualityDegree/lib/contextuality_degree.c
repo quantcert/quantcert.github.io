@@ -38,7 +38,7 @@ int global_solver_mode = SAT_SOLVER;
  * @return false 
  */
 bool rand_float(float p) {
-    return ((float)rand() / RAND_MAX) <= p;
+    return ((float)fast_random() / RAND_MAX) <= p;
 }
 
 /**
@@ -116,8 +116,7 @@ int check_contextuality_solution(quantum_assignment* qa,bool* bool_sol,FILE* out
         if(to_print)
             for (size_t j = 0; j < qa->points_per_geometry; j++){
                 bv bv1 = qa->geometries[qa->geometry_indices[i]][j];
-                if (bv1 == I)
-                    break;
+                if (bv1 == I)break;
                 print_BV_to_file(bv1, qa->n_qubits, output);
                 fprintf(output, "(%s)", bool_sol[bv1] ? "-1" : "+1");
             }
@@ -266,14 +265,18 @@ int compute_contextuality_solution(quantum_assignment* qa,char* bc2cnf_file,char
  * @param l index of the geometry we want to print
 */
 void write_line(FILE *f,bv* geometry,bool negative,int points_per_geometry){
-
+    /*edge case where the context is empty*/
+    if(geometry[0] == I){
+        fprintf(f,"T\n");
+        return;
+    }
     /*We compute the "negativeness" of a geometry before printing it as -1^x to
     solve it as a linear problem, which is why the expected sum is 1(odd) for negative geometries
     and 0(even) for the positive ones*/
     if(negative)
          fprintf(f,"ODD(");
     else fprintf(f,"EVEN(");
-    
+
     /*We print all the observables of the geometry*/
     bool begin = true;
     for (int i = 0; i < points_per_geometry; i++){
@@ -397,7 +400,6 @@ int geometry_contextuality_degree_max_invalid_heuristics(quantum_assignment* qa,
             n_invalid[j] = 0;
             bool_sol[j] = false;
         }
-        if(!DETERMINISTIC)srand(time(NULL));
 
         int hamming_test = check_contextuality_solution(qa,bool_sol,NULL);
 
@@ -413,6 +415,8 @@ int geometry_contextuality_degree_max_invalid_heuristics(quantum_assignment* qa,
         }
         int current_max = 0;
 
+        int n_neg = 0;
+
         for (size_t cpt = 0; cpt < HEURISTIC_MAX_ITERATIONS && !is_done; cpt++){
             
             
@@ -421,15 +425,18 @@ int geometry_contextuality_degree_max_invalid_heuristics(quantum_assignment* qa,
             current_max = 0;/*maximum number of invalid contexts found for a single observable*/
 
             float th_ratio = (float)omp_get_thread_num()/omp_get_num_threads();
-            float threshold_select = 0.20f+0.79f*(1-th_ratio);
-            float rand_select = 0.90f;//+0.02f*(th_ratio);
+            float threshold_select = 0.6+0.4f*(1-th_ratio);
+            float rand_select = 0.99f;//+0.02f*(th_ratio);
+            
 
             for (size_t i = I+1; i < BV_LIMIT_CUSTOM(qa->n_qubits); i++){/*for each observable*/
                 /*selects the assignments that won't be flipped*/
-                if(!(n_invalid[i] >= old_current_max * threshold_select && rand_float(rand_select)))continue;
+                if (!(n_invalid[i] >= old_current_max * threshold_select && rand_float(rand_select) /* && n_I_custom(i, qa->n_qubits) %2 == 0 */))
+                    continue; 
                 
                 
                 bool_sol[i] ^= true;
+                n_neg += (bool_sol[i]?+1:-1);
 
                 for (size_t j = 0; j < max_line_per_obs && line_per_obs[i][j] != -1; j++)/*for each context in an obs*/
                 {
@@ -457,19 +464,32 @@ int geometry_contextuality_degree_max_invalid_heuristics(quantum_assignment* qa,
                 }  
             }
             
-            
             #pragma omp critical
             {
                 if(hamming_test < global_min){/*if a thread found a lower bound that the current best one*/
                     
+                    if (hamming_test < global_min)print("current Hamming distance : %d\n", hamming_test);
                     
-                    print("current Hamming distance : %d\n",hamming_test);
                     global_min = hamming_test;
+
+                    
+                    
+                    
+
                     for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa->n_qubits); i++){
                         
                         min_sol[i] = bool_sol[i];
                         
                     }
+
+                    
+
+                    
+                    
+                    
+                    
+                    
+
                     nth_sol_global++;
                     
                 }
@@ -480,6 +500,13 @@ int geometry_contextuality_degree_max_invalid_heuristics(quantum_assignment* qa,
         if (print_solution)print(".");
     }
     if(is_done)is_done = false;
+
+    
+    
+    
+    
+    
+    
 
     free_matrix(line_per_obs);
     /*if wanted, the solution is copied to the given array*/
@@ -549,7 +576,6 @@ int geometry_SAT_contextuality_degree(quantum_assignment* qa,bool contextuality_
 
 
     print("\nStarting SAT computation...\n");
-
     /*While we haven't tested all possible degrees*/
     while(c_degree_test >= 0 && !is_done){
         /*pipeline process : we use bc2cnf to transform the problem into a DIMACS CNF form*/
@@ -578,7 +604,12 @@ int geometry_SAT_contextuality_degree(quantum_assignment* qa,bool contextuality_
         bool expected_output = status == 10 || status == 20;
         // if(print_solution)print("%d,",c_degree_test);
         /*if the exit status is something else than what is expected, we print it*/
-        if (!expected_output) print("status error: {%d}", status);
+        if (!expected_output){
+            print("status error: {%d}", status);
+            print_quantum_assignment(qa);
+            print("number of contexts : %ld\n",qa->cpt_geometries);
+            exit(0);
+        }
         if (expected_output  && !is_sat_test){
             if(print_solution)print("\nContextuality degree found : %d\n",hamming_distance);
             break;
@@ -594,7 +625,7 @@ int geometry_SAT_contextuality_degree(quantum_assignment* qa,bool contextuality_
             c_degree_test--;
         }
     };
-    print("Computation done\n");
+
     /*if the tested degree fails, then we go back to the one above*/
 
     /*if a solution is found*/
@@ -636,8 +667,6 @@ int geometry_contextuality_degree_custom(quantum_assignment* qa,bool contextuali
 
     int c_degree = -1;
 
-    if(!DETERMINISTIC)srand(time(NULL));
-
 
     if(!has_bool_sol)bool_sol = calloc(BV_LIMIT_CUSTOM(qa->n_qubits),sizeof(bool));
 
@@ -656,7 +685,7 @@ int geometry_contextuality_degree_custom(quantum_assignment* qa,bool contextuali
         }
 
 
-        check_contextuality_solution(qa, bool_sol, print_solution ? stderr : NULL);
+        //check_contextuality_solution(qa, bool_sol, print_solution ? stderr : NULL);
 
         int continued = false;
 

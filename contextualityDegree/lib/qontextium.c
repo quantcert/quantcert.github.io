@@ -14,6 +14,7 @@
 #define QONTEXTIUM
 
 #include "quadrics.c"
+#include "hypergram.c"
 
 #include <sys/wait.h>
 #include <stdio.h>
@@ -29,7 +30,8 @@ bool
 
     SET_SUBSPACES = false,
     SET_AFFINE = false,
-    SET_IMPORT = false;
+    SET_IMPORT_ASSIGNMENT = false,
+    SET_IMPORT_HYPERGRAM = false;
 
 
 int main(int argc, char **argv)
@@ -146,15 +148,55 @@ int main(int argc, char **argv)
             i++;
             if (i < argc)
             {
-                FILE *f = fopen(argv[i], "r");
-                if (f == NULL)
-                {
-                    print("file not found\n");
-                    return 0;
+                if(strcmp(argv[i],"assignment") == 0){
+                    i++;
+                    if (i < argc)
+                    {
+                        FILE *f = fopen(argv[i], "r");
+                        if (f == NULL)
+                        {
+                            print("file not found\n");
+                            return 0;
+                        }
+                        import_qa = quantum_assignment_parse(f);
+                        fclose(f);
+                        SET_IMPORT_ASSIGNMENT = true;
+                    }else{
+                        print("no file specified\n");
+                    }
+                }else if(strcmp(argv[i],"hypergram") == 0){
+                    //two files needed
+                    if (i + 2 < argc)
+                    {
+                        FILE *f_hypergrpaph = fopen(argv[i + 1], "r");
+                        FILE *f_gram = fopen(argv[i + 2], "r");
+                        if (f_hypergrpaph == NULL){
+                            print("hypergrpaph file not found\n");
+                            return 0;
+                        }
+                        if (f_gram == NULL){
+                            print("gram file not found\n");
+                            return 0;
+                        }
+                        hypergram import_hg = hypergram_create_from_file(f_hypergrpaph, f_gram);
+                        if (import_hg.geometries == NULL)
+                        {
+                            print("error while importing hypergram\n");
+                            return 0;
+                        }
+                        hypergram_compute_assignment(&import_hg);
+                        import_qa = hypergram_to_quantum_assignment(import_hg);
+                        hypergram_free(import_hg);
+                        fclose(f_hypergrpaph);
+                        fclose(f_gram);
+                        SET_IMPORT_HYPERGRAM = true;
+                    }
+                    else
+                    {
+                        print("two files needed\n");
+                    }
                 }
-                import_qa = quantum_assignment_parse(f);
-                fclose(f);
-                SET_IMPORT = true;
+                    
             }
         }
         else if (strcmp(argv[i], "--all") == 0)
@@ -171,14 +213,22 @@ int main(int argc, char **argv)
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     bool *my_bool_sol = calloc(BV_LIMIT_CUSTOM(VARQ), sizeof(bool));
 
     // #pragma omp parallel for shared(is_done)
-    for (bv i = I; i < (bv)BV_LIMIT_CUSTOM(VARQ); i++)
+    for (bv i = str_to_bv_custom("YYY",3); i < (bv)BV_LIMIT_CUSTOM(VARQ); i++)
     {
-        if (is_done)
-            continue;
+        if (is_done)continue;
 
         bool *bool_sol = calloc(BV_LIMIT_CUSTOM(VARQ), sizeof(bool));
 
@@ -188,6 +238,7 @@ int main(int argc, char **argv)
         {
             qa = perpset(i, lines_indices, VARQ, lines_qa.geometries, complement);
             print("best Hamming distance found:%d;", geometry_contextuality_degree(&qa, false, true, false, NULL));
+            print_quantum_assignment(&qa);
             if (!SET_ALL_QUADRICS)break;
         }
         if (SET_HYPERBOLICS || SET_ELLIPTICS)
@@ -196,7 +247,7 @@ int main(int argc, char **argv)
             if ((qa.cpt_geometries == (size_t)NB_LINES_PER_HYPERBOLIC(qa.n_qubits) && SET_HYPERBOLICS) ||
                 (qa.cpt_geometries == (size_t)NB_LINES_PER_ELLIPTIC(qa.n_qubits) && SET_ELLIPTICS))
             {
-                // print_quantum_assignment(qa);
+                //print_quantum_assignment(&qa);
 
                 // printf("n_neg:%d\n",negative_lines_count(qa));
                 print("best Hamming distance found: %d\n", geometry_contextuality_degree(&qa, false, true, false, my_bool_sol));
@@ -241,6 +292,7 @@ int main(int argc, char **argv)
         }
         print("\nsubspace(%d qubits,%d dimensions):Hamming distance found: %d\n", VARQ, k_subspaces, c_deg);
         free(bool_sol);
+        print_quantum_assignment(&lines_qa);
     }
     if (SET_AFFINE){
         quantum_assignment planes = subspaces(VARQ, 2);
@@ -251,10 +303,10 @@ int main(int argc, char **argv)
         
         
     }
-    if (SET_IMPORT){
+    if (SET_IMPORT_ASSIGNMENT || SET_IMPORT_HYPERGRAM){
         print("imported configuration:\n");
         print_quantum_assignment(&import_qa);
-        print("Hamming distance found :%d\n", geometry_contextuality_degree(&import_qa, false, true, false, NULL));
+        print("Hamming distance found: %d\n", geometry_contextuality_degree(&import_qa, false, true, false, NULL));
         free_quantum_assignment(&import_qa);
         free_matrix(import_qa.geometries);
     }

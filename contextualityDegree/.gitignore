@@ -6,8 +6,3 @@ callgrind.out.*
 .*.txt
 .*.log
 .*
-!.gitignore
-lib/kissat_gb/build/kissat
-tests.out
-main.out
-lib/kissat_gb/build/build.h

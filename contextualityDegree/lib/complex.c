@@ -172,7 +172,10 @@ void print_mat(pauli_matrix m){
  * 
 */
 W2_complex get_id_matrix_phase(pauli_matrix mat){
-    if(!eq(mat.a,mat.d) ||  !is_zero(mat.b) || !is_zero(mat.c) || is_zero(mat.a))print("incorrect value!");
+    if(!eq(mat.a,mat.d) ||  !is_zero(mat.b) || !is_zero(mat.c) || is_zero(mat.a)){
+        print("incorrect value!");
+        is_done = true;
+    }
     /*
     * One property of any matrix which is x times I is that
     * there is only one eigenvalue which is x

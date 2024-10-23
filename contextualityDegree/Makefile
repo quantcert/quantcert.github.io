@@ -13,7 +13,7 @@ main.out: ./lib/*.c
 
 all: dependencies main.out
 
-tests: ./lib/*.c
+tests: ./lib/*.c dependencies
 	gcc -std=c99 -Wall -g -Wextra -Ofast -fopenmp tests/test.c -lm -o tests.out
 	./tests.out 2> /dev/null
 

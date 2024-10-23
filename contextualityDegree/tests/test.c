@@ -21,6 +21,7 @@
 #define HEURISTIC_MAX_ITERATIONS 1000
 
 #include "../lib/quadrics.c"
+#include "../lib/hypergram.c"
 
 bool assert_true(bool condition, const char *message){
     if(condition){
@@ -116,6 +117,36 @@ int main(){
     "Troily has contextuality degree 63 with heuristic");
 
     free_quantum_assignment(&troily);
+
+    /////////////////////////////
+
+    FILE *mer_hypergraph = fopen("./misc/grid_hypergraph.txt", "r");
+    FILE *mer_gram = fopen("./misc/grid_gram.txt", "r");
+
+    if(mer_hypergraph == NULL || mer_gram == NULL){
+        printf("Error: could not open files\n");
+        return 1;
+    }
+    hypergram mermin_hg = hypergram_create_from_file(mer_hypergraph, mer_gram);
+
+    assert_equal(mermin_hg.cpt_geometries, 6, "The imported grid has 6 geometries");
+    hypergram_print(mermin_hg);
+
+    /////////////////////////////
+
+    quantum_assignment mermin_qa = hypergram_to_quantum_assignment(mermin_hg);
+
+    assert_equal(mermin_qa.n_qubits, 2, "The imported grid has 2 qubits");
+
+    /////////////////////////////
+
+    int mermin_deg = geometry_contextuality_degree_custom(&mermin_qa, false, false, false, INVALID_LINES_HEURISTIC_SOLVER, NULL);
+
+    assert_equal(mermin_deg,1,"Mermin square has contextuality degree 1");
+
+    fclose(mer_hypergraph);
+    fclose(mer_gram);
+    hypergram_free(mermin_hg);
 
     /////////////////////////////
 
