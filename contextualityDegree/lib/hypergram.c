@@ -61,7 +61,7 @@ bool is_gram_matrix_valid(bit_matrix bm)
             }
         }
     }
-    print("matrix is valid !\n");
+    
     return true;
 }
 

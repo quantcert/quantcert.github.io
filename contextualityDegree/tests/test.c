@@ -13,15 +13,9 @@
 #define TEST_C
 
 #include "../lib/constants.c"
-
-#undef SEE_GRAPH
-#define SEE_GRAPH false
-
-#undef HEURISTIC_MAX_ITERATIONS
-#define HEURISTIC_MAX_ITERATIONS 1000
-
 #include "../lib/quadrics.c"
 #include "../lib/hypergram.c"
+#include "../lib/cayley_hexagon.c"
 
 bool assert_true(bool condition, const char *message){
     if(condition){
@@ -45,17 +39,20 @@ bool assert_equal(int a, int b, const char *message){
 
 int main(){
 
+    global_interact_with_user = false;
+    global_heuristic_iterations = 1000;
+
     main_header();
     init_complex();
 
     int VARQ = 3;
 
     size_t **lines_indices = NULL;
-    quantum_assignment lines_qa = generate_total_lines(&lines_indices, VARQ);
+    quantum_assignment lines_qa_three = generate_total_lines(&lines_indices, VARQ);
 
     /////////////////////////////
 
-    assert_equal(lines_qa.cpt_geometries,315, 
+    assert_equal(lines_qa_three.cpt_geometries,315, 
     "315 lines for 3 qubits");
 
     /////////////////////////////
@@ -89,7 +86,7 @@ int main(){
 
     /////////////////////////////
 
-    bool* bool_sol = calloc(import_qa.cpt_geometries, sizeof(bool));
+    bool* bool_sol = calloc(BV_LIMIT_CUSTOM(import_qa.n_qubits), sizeof(bool));
     int import_deg = geometry_contextuality_degree_custom(&import_qa, false, false, false, SAT_SOLVER, bool_sol);
     assert_equal(import_deg,1, 
     "imported grid has contextuality degree 1");
@@ -120,8 +117,8 @@ int main(){
 
     /////////////////////////////
 
-    FILE *mer_hypergraph = fopen("./misc/grid_hypergraph.txt", "r");
-    FILE *mer_gram = fopen("./misc/grid_gram.txt", "r");
+    FILE *mer_hypergraph = fopen("./misc/grid.hypergraph.txt", "r");
+    FILE *mer_gram = fopen("./misc/grid.gram.txt", "r");
 
     if(mer_hypergraph == NULL || mer_gram == NULL){
         printf("Error: could not open files\n");
@@ -150,15 +147,49 @@ int main(){
 
     /////////////////////////////
 
+    quantum_assignment hexagon = {0},complement_hexagon = {0};
+    
+    int cpt = 0;
+
+    while (cpt < 1 && next_classical_cayley_hexagon(lines_qa_three, lines_indices, &hexagon, &complement_hexagon))
+    {
+        int c_degree = geometry_contextuality_degree_custom(&hexagon, true, false, true, INVALID_LINES_HEURISTIC_SOLVER, NULL);
+        int c_degree_comp = geometry_contextuality_degree_custom(&complement_hexagon, true, false, true, INVALID_LINES_HEURISTIC_SOLVER, NULL);
+
+        assert_equal(c_degree,0,"Hexagon has contextuality degree 0");
+        assert_equal(c_degree_comp,0,"Complement hexagon has contextuality degree 0");
+        cpt++;
+    }
+
+    cpt = 0;
+
+    while (cpt < 2 && next_skew_cayley_hexagon(lines_qa_three, lines_indices, &hexagon, &complement_hexagon))
+    {
+        int c_degree = geometry_contextuality_degree_custom(&hexagon, true, false, true, INVALID_LINES_HEURISTIC_SOLVER, NULL);
+        int c_degree_comp = geometry_contextuality_degree_custom(&complement_hexagon, true, false, true, INVALID_LINES_HEURISTIC_SOLVER, NULL);
+
+        assert_equal(c_degree,0,"Skew Hexagon has contextuality degree 0");
+        assert_equal(c_degree_comp,24,"Skew Complement hexagon has contextuality degree 24");
+
+        cpt++;
+    }
+
+    free_quantum_assignment(&hexagon);
+    free_quantum_assignment(&complement_hexagon);
+
+    free_cayley_hexagons();
+
+    /////////////////////////////
+
     free_quantum_assignment(&import_qa);
     free_matrix(import_qa.geometries);
     free(bool_sol);
 
     /////////////////////////////
 
-    free_quantum_assignment(&lines_qa);
+    free_quantum_assignment(&lines_qa_three);
     free_matrix(lines_indices);
-    free_matrix(lines_qa.geometries);
+    free_matrix(lines_qa_three.geometries);
 
     return 0;
 }

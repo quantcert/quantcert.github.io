@@ -1,5 +1,7 @@
 .PHONY: tests
 
+CC := gcc
+
 dependencies:
 	make -C lib/BCpackage-0.40 bc2cnf > /dev/null 
 	cd ./lib/kissat_gb && \
@@ -9,12 +11,12 @@ dependencies:
 	make -C ./lib/kissat_gb > /dev/null
 
 main.out: ./lib/*.c
-	gcc -std=c99 -Wall -g -Wextra -Ofast -fopenmp lib/qontextium.c -lm -o main.out
+	$(CC) -Wall -g -Wextra -Ofast -fopenmp lib/qontextium.c -lm -o main.out
 
 all: dependencies main.out
 
 tests: ./lib/*.c dependencies
-	gcc -std=c99 -Wall -g -Wextra -Ofast -fopenmp tests/test.c -lm -o tests.out
+	$(CC) -Wall -g -Wextra -Ofast -fopenmp tests/test.c -lm -o tests.out
 	./tests.out 2> /dev/null
 
 clean: 

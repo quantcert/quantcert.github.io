@@ -141,6 +141,28 @@ void print_quantum_assignment(quantum_assignment* qa){
 }
 
 /**
+ * @brief Prints a quantum assignment to a file in CSV format
+ * 
+ * @param qa 
+ * @param output 
+ */
+void quantum_assignment_to_CSV(quantum_assignment qa, FILE *output)
+{
+    for (size_t i = 0; i < qa.cpt_geometries; i++)
+    {
+        for (size_t j = 0; j < qa.points_per_geometry; j++)
+        {
+            if(j != 0)fprintf(output,",");
+            bv bv1 = qa.geometries[qa.geometry_indices[i]][j];
+            if (bv1 == I)
+                break;
+            print_BV_to_file(bv1, qa.n_qubits, output);
+        }
+        fprintf(output, "\n");
+    }
+}
+
+/**
  * @brief Prints a quantum assignment as a readable configuration to a file
  * 
  * @param qa 

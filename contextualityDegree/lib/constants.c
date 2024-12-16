@@ -21,8 +21,11 @@
 #include <signal.h>
 #include <string.h>
 #include <sys/wait.h>
-#include <omp.h>
 #include <time.h>
+
+#ifdef _OPENMP
+    #include <omp.h>
+#endif
 
 #ifndef N_QUBITS
     #define N_QUBITS 4//number of qubits in an observable
@@ -55,11 +58,9 @@
 #define AUTOMATIC_PROCEDURE false//if true uses an automatic function to trace the path of the procedure
 
 #define HEURISTIC_NUM_THREADS (MULTI_THREAD?200:1)//number of threads to use for the heuristic method
-#define HEURISTIC_MAX_ITERATIONS 10000000//0//maximum number of iterations for the heuristic method
 
 #define DOUBLE_CHECK false//if true, checks the validity of every doily generated (has always been valid anyway)
 #define DANGEROUS_OPTIMIZATIONS false//unproved optimizations
-#define SEE_GRAPH true//if true, allows the user to go through the graph of the contextuality degree of a geometry
 #define DETERMINISTIC false//if true, randomness will always use the same seed (must be used with MULTI_THREAD turned off)
 
 //the 3 following options work properly when SKIP_OVOID_SYMMETRIES is DISABLED (since it is used to find the correct numbers)
@@ -151,11 +152,12 @@ enum program_code{
 /*outer function headers to avoid warnings*/
 void program_end();
 
-__ssize_t getline(char ** restrict,  size_t * restrict,  FILE * restrict);
+long int getline(char ** restrict,  size_t * restrict,  FILE * restrict);
 
 struct sigaction;
 
 volatile sig_atomic_t is_done = false;//to be set to true when SIGINT is triggered
+bool global_interact_with_user = true;// if true, the program will interact with the user
 
 /**
  * @brief triggered when the sigint signal is activated

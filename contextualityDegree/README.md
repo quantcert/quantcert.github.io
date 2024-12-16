@@ -34,25 +34,31 @@ Execution
 
 Here are the possible options to execute the program:
 
-    ./qontextium QUBITS_NUMBER CONFIGURATION [OPTIONS] [--solver SOLVER]
+    ./qontextium CONFIGURATION [OPTIONS] [--solver SOLVER] [--export VAL] [--no-interaction]
 
 QUBITS_NUMBER is the number of qubits in the configuration.
+
+    --export [all|valid|invalid]:      exports the requested contexts to the standard output in the CSV format
+
+--no-interaction: disables the interactions with the user after the computations (useful for scripts)
 
 CONFIGURATION [OPTIONS] is the configuration to be generated. It can be one of the following:
 
 --import assignment [FILE]: imports a configuration from a file (see ./misc/qa_grid.txt for an example) and estimates its contextuality degree
 
---import hypergram [FILE1] [FILE2]: imports a hypergram from two files, checks assignability. When assignable, estimates the contextuality degree. The first file describes the hypergraph. The second file describes a Gram matrix on the same vertices (see ./misc/grid_hypergraph.txt and ./misc/grid_gram.txt for an example)
+--import hypergram [FILE1] [FILE2]: imports a hypergram from two files, checks assignability. When assignable, estimates the contextuality degree. The first file describes the hypergraph. The second file describes a Gram matrix on the same vertices (see ./misc/grid.hypergraph.txt and ./misc/grid.gram.txt for an example)
 
---elliptics [--complement]: generates elliptic configurations (or their complement or all of them)
+--elliptic n [--complement]: generates n qubit elliptic configurations (or their complement or all of them)
 
---hyperbolics [--complement]: generates hyperbolic configurations (or their complement or all of them)
+--hyperbolic n [--complement]: generates n qubit hyperbolic configurations (or their complement or all of them)
 
---perpsets [--complement]: generates perpsets configurations (or their complement or all of them)
+--perpset n [--complement]: generates n qubit perpsets configurations (or their complement or all of them)
 
---subspaces k: generates a configuration with all subspaces of dimension k as contexts
+--subspaces k n: generates a n qubit configuration with all subspaces of dimension k as contexts
 
---affine: generates affine configurations
+--affine n: generates n qubit affine configurations
+
+--hexagon [skew] [--complement|--all]: generates classical or skew embeddings of split cayley hexagons
 
 SOLVER
 
@@ -62,17 +68,29 @@ SOLVER
 
 --solver retrieve: checks a solution from a solution code
 
+OTHER OPTIONS
+
+    --heuristic-iter: the number of iterations for the heuristic solver (default: 10000)
+
 For example, to compute the contextuality degree of totally isotropic subspaces of dimension 1 (lines) for 2 qubits, run this command:
 
-    ./qontextium 2 --subspaces 1
+    ./qontextium --subspaces 1 2
 
 Example files are provided in the `misc` folder, for example you can import a Peres-Mermin magic square with this command:
 
-    ./qontextium 2 --import assignment ./misc/qa_grid.txt
+    ./qontextium --import assignment ./misc/qa_grid.txt
+
+The following command applies the heuristic approach presented in [MG24](#MG24) and outputs in the file filename.txt a list of invalid lines forming a classical-embedded Cayley hexagon, as detailed in [MG24](#MG24). May be long, use CTRL+C to interrupt after ..
+
+    ./qontextium --subspaces 1 3 --solver heuristic --export > misc/filename.txt
+
+The following command computes one of the results presented in [SHKMGD23](#SHKMGD23), namely the contextuality degree 24 of a complement of a skew embedding of a split Cayley hexagon. The last option removes interaction with the user after computation.
+
+    ./qontextium --hexagon skew --complement --solver sat --no-interaction
 
 #### Graph Visualization
 
-There are multiple filters you can use to visualize the contextual graphs :
+There are multiple filters you can use to visualize the contextual graphs:
 
 NOTHING
 - This filter always returns false, meaning no lines will pass through this filter. It effectively filters out all lines.
@@ -87,11 +105,11 @@ POINT DEGREE
 
 
 OBSERVABLE VALUE
-- This filter checks if any of the points in the geometry for a line match a specific observable value given by the user
+- This filter checks if any of the points in the geometry for a line match a specific observable value given by the user.
 
 
 LINE DEGREE
-- This filter checks if the sorted degrees of the points in the geometry for each line exactly match the degrees specified by the user
+- This filter checks if the sorted degrees of the points in the geometry for each line exactly match the degrees specified by the user.
 
 
 SYMMETRIC
@@ -105,3 +123,4 @@ SYMMETRIC
 |<a id="MSGDH24"/>[MSGDH24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *New and improved bounds on the contextuality degree of multi-qubit configurations*. Mathematical Structures in Computer Science, 2024. [Article](https://doi.org/10.1017/S0960129524000057){:target="_blank"}|
 |<a id="MSGHK24"/>[MSGHK24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and Holweck, Frédéric and Kelleher, Colm. *A new heuristic approach for contextuality degree estimates and its four- to six-qubit portrayals*. [Article](https://doi.org/10.48550/arXiv.2407.02928){:target="_blank"}|
 |<a id="MG24"/>[MG24]|Muller, Axel and Giorgetti, Alain. *An abstract structure determines the contextuality degree of observable-based Kochen-Specker proofs*. [Article](https://arxiv.org/html/2410.14463v1){:target="_blank"}|
+|<a id="SHKMGD23"/>[SHKMGD23]|Saniga, Metod and Holweck, Frédéric and Kelleher, Colm and Muller, Axel and Giorgetti, Alain and de Boutray, Henri. *Classically-embedded split Cayley hexagons rule three-qubit contextuality with three-element contexts*. [Article](https://arxiv.org/abs/2312.07738){:target="_blank"}|

@@ -15,34 +15,40 @@ header=${@:1}
 
 my_invocation="$(printf %q "$BASH_SOURCE")$((($#)) && printf ' %q' "$@")"
 
-
-if [[ -z $1 ]] || [[ $1 -lt 2 ]] || [[ $1 -gt 31 ]] #if the arguments are incorrect
+#if there is no first argument 
+if [[ -z $1 ]] 
 then
-    echo;echo "Usage: $0 QUBITS_NUMBER CONFIGURATION [OPTIONS] [--solver SOLVER]";   
-    if [[ $1 == "--help" ]]
-    then
-        echo -n "
+    echo;echo "Usage: $0 CONFIGURATION [OPTIONS] [--solver SOLVER] [--export VAL] [--no-interaction]";   
+fi
+if [[ $1 == "--help" ]]
+then
+    echo -n "
 Qontextium is a program which estimates the contextuality degree of quantum configurations.
 
 Parameters:
+    --export [all|valid|invalid]:         exports the requested contexts to the standard output in the CSV format
+    --no-interaction:                     disables the interaction with the user (useful for scripts)
 
-QUBITS_NUMBER:                         the number of qubits in the configuration
+CONFIGURATION:                            the configuration to be generated. It can be one of the following:
 
-CONFIGURATION:                         the configuration to be generated. It can be one of the following:
-
-    --import assignment [FILE]:        import a configuration assignment from a file
-    --import hypergram [FILE1] [FILE2]:import a hypergraph from two files (hypergraph + gram matrix)
-    --elliptic [--complement|--all]:   generate a elliptic configuration (or their complement or all of them)
-    --hyperbolic [--complement|--all]: generate a hyperbolic configuration (or their complement or all of them)
-    --perpset [--complement]:          generate a perpset configuration (or their complement or all of them)
-    --subspaces k:                     generates a configuration with subspaces of dimension k as contexts
-    --affine:                          generate affine configurations
+    --import assignment [FILE]:           import a configuration assignment from a file
+    --import hypergram [FILE1] [FILE2]:   import a hypergraph from two files (hypergraph + gram matrix)
+    --elliptic n [--complement|--all]:    generates a n qubit elliptic configuration (or their complement or all of them)
+    --hyperbolic n [--complement|--all]:  generates a n qubit hyperbolic configuration (or their complement or all of them)
+    --perpset n [--complement]:           generates a n qubit perpset configuration (or their complement or all of them)
+    --subspaces k n:                      generates a n qubit configuration with subspaces of dimension k as contexts
+    --affine n:                           generates n qubit affine configurations
+    --hexagon [skew] [--complement|--all]:generates classical or skew embeddings of split cayley hexagons
 
 SOLVER
 
-    --solver sat:                      use a SAT solver to estimate the contextuality degree (eventually gives the optimum)
-    --solver heuristic:                use a heuristic to estimate the contextuality degree (faster, but no guarantee of finding the optimum)
-    --solver retrieve:                 checks a solution from a solution code
+    --solver sat:                         use a SAT solver to estimate the contextuality degree (eventually gives the optimum)
+    --solver heuristic:                   use a heuristic to estimate the contextuality degree (faster, but no guarantee of finding the optimum)
+    --solver retrieve:                    checks a solution from a solution code
+
+OTHER OPTIONS
+
+    --heuristic-iter:                     the number of iterations for the heuristic solver (default: 10000)
 
 GRAPH VISUALIZATION MODES
 
@@ -67,10 +73,6 @@ SYMMETRIC
 - This filter checks if all points in the geometry for line i are symmetric. An observable is symmetric if the number of Y's is even.
 
 ";
-    echo
-    else
-        echo;echo "type $0 --help for more information";echo
-    fi
     exit
 fi
 

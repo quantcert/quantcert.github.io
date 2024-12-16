@@ -212,10 +212,9 @@ unsigned int innerProduct_W2(bv i1,bv i2){
  * 
  * See [HDS22] Section 1
  */
-bv transvection_custom(bv p,bv q,int n_qubits){
+bv transvection(bv p,bv q,int n_qubits){
   return q Qplus (innerProduct_custom(p,q,n_qubits) * p);
 }
-bv transvection(bv p,bv q){return transvection_custom(p,q,N_QUBITS);}
 
 /**
  * @brief Returns true if the observable is symmetric i.e. if its number of Y's is even

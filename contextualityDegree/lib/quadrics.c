@@ -93,6 +93,8 @@ void insert_line_index(bv obs, size_t index,size_t** lines_indices,int n_qubits)
 */
 quantum_assignment generate_total_lines(size_t*** lines_indices,int n_qubits) {
 
+    print("generating lines...");
+
     bv ** lines = (bv **)init_matrix(NB_LINES_CUSTOM(n_qubits) + 1, NB_POINTS_PER_LINE, sizeof(bv));
     *lines_indices = (size_t**)init_matrix(BV_LIMIT_CUSTOM(n_qubits),NB_LINES_PER_POINT_CUSTOM(n_qubits),sizeof(size_t));//calloc(BV_LIMIT_CUSTOM(VARQ),sizeof(size_t[NB_LINES_PER_POINT_CUSTOM(VARQ)]));
     if(lines == NULL || *lines_indices == NULL){

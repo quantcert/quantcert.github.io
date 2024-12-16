@@ -27,7 +27,8 @@ typedef enum
     INVALID_LINES_HEURISTIC_SOLVER,
 } solver_mode;
 
-int global_solver_mode = SAT_SOLVER;
+solver_mode global_solver_mode = SAT_SOLVER;
+size_t global_heuristic_iterations = 10000; //maximum number of iterations for the heuristic method
 
 
 /**
@@ -87,7 +88,6 @@ void parse_bool(bool* arr,size_t size){
         }
     }
 }
-
 
 
 /**
@@ -417,7 +417,7 @@ int geometry_contextuality_degree_max_invalid_heuristics(quantum_assignment* qa,
 
         int n_neg = 0;
 
-        for (size_t cpt = 0; cpt < HEURISTIC_MAX_ITERATIONS && !is_done; cpt++){
+        for (size_t cpt = 0; cpt < global_heuristic_iterations && !is_done; cpt++){
             
             
             
@@ -427,6 +427,8 @@ int geometry_contextuality_degree_max_invalid_heuristics(quantum_assignment* qa,
             float th_ratio = (float)omp_get_thread_num()/omp_get_num_threads();
             float threshold_select = 0.6+0.4f*(1-th_ratio);
             float rand_select = 0.99f;//+0.02f*(th_ratio);
+
+            if(omp_get_num_threads() == 1)threshold_select = 0.8;
             
 
             for (size_t i = I+1; i < BV_LIMIT_CUSTOM(qa->n_qubits); i++){/*for each observable*/
@@ -435,6 +437,9 @@ int geometry_contextuality_degree_max_invalid_heuristics(quantum_assignment* qa,
                     continue; 
                 
                 
+                if(bool_sol[i] == 0 && rand_float(0.3f))continue;/*if the assignment is false, we have a 50% chance of flipping it*/
+                if(n_I_custom(i, qa->n_qubits) > 2)continue;
+
                 bool_sol[i] ^= true;
                 n_neg += (bool_sol[i]?+1:-1);
 
@@ -466,7 +471,8 @@ int geometry_contextuality_degree_max_invalid_heuristics(quantum_assignment* qa,
             
             #pragma omp critical
             {
-                if(hamming_test < global_min){/*if a thread found a lower bound that the current best one*/
+                //print("%d,",hamming_test);
+                if(hamming_test <= global_min){/*if a thread found a lower bound that the current best one*/
                     
                     if (hamming_test < global_min)print("current Hamming distance : %d\n", hamming_test);
                     
@@ -481,6 +487,7 @@ int geometry_contextuality_degree_max_invalid_heuristics(quantum_assignment* qa,
                         min_sol[i] = bool_sol[i];
                         
                     }
+
 
                     
 
@@ -575,7 +582,7 @@ int geometry_SAT_contextuality_degree(quantum_assignment* qa,bool contextuality_
     int hamming_distance = c_degree_test;
 
 
-    print("\nStarting SAT computation...\n");
+    if(print_solution)print("\nStarting SAT computation...\n");
     /*While we haven't tested all possible degrees*/
     while(c_degree_test >= 0 && !is_done){
         /*pipeline process : we use bc2cnf to transform the problem into a DIMACS CNF form*/
@@ -599,7 +606,8 @@ int geometry_SAT_contextuality_degree(quantum_assignment* qa,bool contextuality_
         fprintf(sat_fp,";");
 
         /*the exit status tells us if the problem is SAT or not*/
-        int status = WEXITSTATUS(pclose(sat_fp));
+        int close_status = pclose(sat_fp);
+        int status = WEXITSTATUS(close_status);
         bool is_sat_test = status == 10;//else 20//is_sat(f);
         bool expected_output = status == 10 || status == 20;
         // if(print_solution)print("%d,",c_degree_test);
@@ -690,7 +698,8 @@ int geometry_contextuality_degree_custom(quantum_assignment* qa,bool contextuali
         int continued = false;
 
         while (true){
-            if (SEE_GRAPH){
+            if (global_interact_with_user)
+            {
                 print("\nDo you want to see the contextual configuration ? (0:no, 1:yes): ");
                 
                 if (scanf("%d", &continued) == 0){

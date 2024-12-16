@@ -366,7 +366,7 @@ int check_structure(quantum_assignment* qa, bool *bool_sol, bool to_print, bool 
 
     mode m = 1;
     int param[qa->points_per_geometry];
-    if (to_print && SEE_GRAPH)m = ask_mode(*qa, param);
+    if (to_print && global_interact_with_user)m = ask_mode(*qa, param);
 
     int *obs_specific_type_degree = NULL;
 
@@ -387,7 +387,7 @@ int check_structure(quantum_assignment* qa, bool *bool_sol, bool to_print, bool 
     if (to_print)
         print("\nPoint degree types:\n");
 
-    for (size_t i = 0; i < BV_LIMIT_CUSTOM(qa->n_qubits); i++)
+    for (size_t i = 1; i < BV_LIMIT_CUSTOM(qa->n_qubits); i++)
     {
         if (number_of_obs_with_degree[i] != 0)
         {

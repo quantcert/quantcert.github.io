@@ -14,3 +14,8 @@ Release 1.2.0
 =============
 
 * Third release of Qontextium, in [contextualityDegree](./contextualityDegree), code accompanying [MG24], see details in contextualityDegree/README.md.
+
+Release 1.3.0
+=============
+
+* Third release of Qontextium, in [contextualityDegree](./contextualityDegree), code accompanying [SHKMG23], see details in contextualityDegree/README.md.
