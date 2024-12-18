@@ -101,7 +101,7 @@ int main(int argc, char **argv)
 
     init_complex();
 
-    int VARQ = atoi(argv[1]);
+    int VARQ = -1;
 
     // print("%d %d %d\n",NB_HYPERBOLICS(VARQ),NB_OBS_PER_HYPERBOLIC(VARQ),NB_LINES_PER_HYPERBOLIC(VARQ));
     // print("%d %d %d\n",NB_ELLIPTICS(VARQ),NB_OBS_PER_ELLIPTIC(VARQ),NB_LINES_PER_ELLIPTIC(VARQ));
@@ -274,7 +274,6 @@ int main(int argc, char **argv)
                         fclose(f_hypergrpaph);
                         fclose(f_gram);
                         SET_IMPORT_HYPERGRAM = true;
-                        exit(0);
                     }
                     else
                     {
@@ -317,25 +316,7 @@ int main(int argc, char **argv)
             }
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 
     bool *my_bool_sol = calloc(BV_LIMIT_CUSTOM(VARQ), sizeof(bool));
 

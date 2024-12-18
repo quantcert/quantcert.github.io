@@ -70,7 +70,7 @@ SOLVER
 
 OTHER OPTIONS
 
-    --heuristic-iter: the number of iterations for the heuristic solver (default: 10000)
+--heuristic-iter: the number of iterations for the heuristic solver (default: 10000)
 
 For example, to compute the contextuality degree of totally isotropic subspaces of dimension 1 (lines) for 2 qubits, run this command:
 
@@ -80,9 +80,13 @@ Example files are provided in the `misc` folder, for example you can import a Pe
 
     ./qontextium --import assignment ./misc/qa_grid.txt
 
+This command imports the same geometry, but using hypergrams:
+
+    ./qontextium --import hypergram ./misc/grid.hypergraph.txt ./misc/grid.gram.txt
+
 The following command applies the heuristic approach presented in [MG24](#MG24) and outputs in the file filename.txt a list of invalid lines forming a classical-embedded Cayley hexagon, as detailed in [MG24](#MG24). May be long, use CTRL+C to interrupt after ..
 
-    ./qontextium --subspaces 1 3 --solver heuristic --export > misc/filename.txt
+    ./qontextium --subspaces 1 3 --solver heuristic --export invalid > misc/filename.txt
 
 The following command computes one of the results presented in [SHKMGD23](#SHKMGD23), namely the contextuality degree 24 of a complement of a skew embedding of a split Cayley hexagon. The last option removes interaction with the user after computation.
 
