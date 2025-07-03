@@ -23,5 +23,5 @@ Release 1.3.0
 Release 1.4.0
 =============
 
-* Fourth release of Qontextium, in [contextualityDegree](./contextualityDegree), code accompanying Axel Muller PhD's thesis, see details in [contextualityDegree/README.md](./contextualityDegree/README.md).
+* Fifth release of Qontextium, in [contextualityDegree](./contextualityDegree), code accompanying Axel Muller PhD's thesis, see details in [contextualityDegree/README.md](./contextualityDegree/README.md).
 
