@@ -20,12 +20,12 @@ Installation
 
 Linux is required to run this program.
 The program is located in this [folder](https://github.com/quantcert/quantcert.github.io/tree/master/contextualityDegree).
-`flex` and `bison` need to be installed in your machine for the program to run.
+`gcc`,`make`,`flex` and `bison` need to be installed in your machine for the program to run.
 These tools are commonly available and easy to install on most Linux distributions. 
 If you don't have them already, you can typically install them using your distribution's package manager. 
 For example, on Debian-based systems: 
 
-    sudo apt-get install flex bison
+    sudo apt-get install gcc make flex bison
 
 The compilation is automatic when running Qontextium for the first time.
 
@@ -48,6 +48,8 @@ CONFIGURATION [OPTIONS] is the configuration to be generated. It can be one of t
 
 --import hypergram [FILE1] [FILE2]: imports a hypergram from two files, checks assignability. When assignable, estimates the contextuality degree. The first file describes the hypergraph. The second file describes a Gram matrix on the same vertices (see ./misc/grid.hypergraph.txt and ./misc/grid.gram.txt for an example)
 
+--import gram [FILE1]: imports a hypergram from a Gram matrix with all its possible hyperedges (see ./misc/grid.gram.txt for an example)
+
 --elliptic n [--complement]: generates n qubit elliptic configurations (or their complement or all of them)
 
 --hyperbolic n [--complement]: generates n qubit hyperbolic configurations (or their complement or all of them)
@@ -56,7 +58,7 @@ CONFIGURATION [OPTIONS] is the configuration to be generated. It can be one of t
 
 --subspaces k n: generates a n qubit configuration with all subspaces of dimension k as contexts
 
---affine n: generates n qubit affine configurations
+--affine n: generates n qubit configurations of affine planes (planes with a line removed)
 
 --hexagon [skew] [--complement|--all]: generates classical or skew embeddings of split cayley hexagons
 
@@ -68,9 +70,11 @@ SOLVER
 
 --solver retrieve: checks a solution from a solution code
 
-OTHER OPTIONS
+HEURISTIC SOLVER OPTIONS
 
 --heuristic-iter: the number of iterations for the heuristic solver (default: 10000)
+--heuristic-threshold n: the threshold n for the heuristic solver (default: different values per thread)
+--heuristic-flip-prob n: the probability n of flipping a bit for the heuristic solver (default: 0.99)
 
 For example, to compute the contextuality degree of totally isotropic subspaces of dimension 1 (lines) for 2 qubits, run this command:
 
@@ -84,11 +88,15 @@ This command imports the same geometry, but using hypergrams:
 
     ./qontextium --import hypergram ./misc/grid.hypergraph.txt ./misc/grid.gram.txt
 
+This command imports the same geometry, but using the gram method:
+
+    ./qontextium --import gram ./misc/grid.gram.txt
+
 The following command applies the heuristic approach presented in [MG24](#MG24) and outputs in the file filename.txt a list of invalid lines forming a classical-embedded Cayley hexagon, as detailed in [MG24](#MG24). May be long, use CTRL+C to interrupt after ..
 
     ./qontextium --subspaces 1 3 --solver heuristic --export invalid > misc/filename.txt
 
-The following command computes one of the results presented in [SHKMGD23](#SHKMGD23), namely the contextuality degree 24 of a complement of a skew embedding of a split Cayley hexagon. The last option removes interaction with the user after computation.
+The following command computes one of the results presented in [SHKMGD25](#SHKMGD25), namely the contextuality degree 24 of a complement of a skew embedding of a split Cayley hexagon. The last option removes interaction with the user after computation.
 
     ./qontextium --hexagon skew --complement --solver sat --no-interaction
 
@@ -96,12 +104,13 @@ The following command computes one of the results presented in [SHKMGD23](#SHKMG
 
 There are multiple filters you can use to visualize the contextual graphs:
 
-NOTHING
-- This filter always returns false, meaning no lines will pass through this filter. It effectively filters out all lines.
-
 
 ALL
-- This filter always returns true, meaning all lines will pass through this filter.
+- All lines will pass through this filter.
+
+
+NOTHING
+- No lines will pass through this filter.
 
 
 POINT DEGREE
@@ -125,6 +134,6 @@ SYMMETRIC
 |-------------------------|----------------------------------------------------|
 |<a id="MSGDH23"/>[MSGDH23]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *Revealing contextuality of quantum configurations with a SAT solver*. Journées nationales du GDR GPL (Génie de la Programmation et du Logiciel), CNRS, groupe de travail LVP (Langages et Vérification de Programmes), 5-8 juin 2023, Rennes, France. Session posters et démos, 6 juin 2023. [Poster](23poster.pdf){:target="_blank"}|
 |<a id="MSGDH24"/>[MSGDH24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *New and improved bounds on the contextuality degree of multi-qubit configurations*. Mathematical Structures in Computer Science, 2024. [Article](https://doi.org/10.1017/S0960129524000057){:target="_blank"}|
-|<a id="MSGHK24"/>[MSGHK24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and Holweck, Frédéric and Kelleher, Colm. *A new heuristic approach for contextuality degree estimates and its four- to six-qubit portrayals*. [Article](https://doi.org/10.48550/arXiv.2407.02928){:target="_blank"}|
+|<a id="MSGHK24"/>[MSGHK24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and Holweck, Frédéric and Kelleher, Colm. *A new heuristic approach for contextuality degree estimates and its four- to six-qubit portrayals*. [Article](https://iopscience.iop.org/article/10.1088/1751-8121/add22b){:target="_blank"}|
 |<a id="MG24"/>[MG24]|Muller, Axel and Giorgetti, Alain. *An abstract structure determines the contextuality degree of observable-based Kochen-Specker proofs*. [Article](https://arxiv.org/html/2410.14463v1){:target="_blank"}|
-|<a id="SHKMGD23"/>[SHKMGD23]|Saniga, Metod and Holweck, Frédéric and Kelleher, Colm and Muller, Axel and Giorgetti, Alain and de Boutray, Henri. *Classically-embedded split Cayley hexagons rule three-qubit contextuality with three-element contexts*. [Article](https://arxiv.org/abs/2312.07738){:target="_blank"}|
+|<a id="SHKMGD25"/>[SHKMGD25]|Saniga, Metod and Holweck, Frédéric and Kelleher, Colm and Muller, Axel and Giorgetti, Alain and de Boutray, Henri. *Hexagons govern three-qubit contextuality*. [Article](https://quantum-journal.org/papers/q-2025-01-20-1601){:target="_blank"}|

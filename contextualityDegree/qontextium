@@ -33,6 +33,7 @@ CONFIGURATION:                            the configuration to be generated. It 
 
     --import assignment [FILE]:           import a configuration assignment from a file
     --import hypergram [FILE1] [FILE2]:   import a hypergraph from two files (hypergraph + gram matrix)
+    --import gram [FILE1]:                import a hypergraph from a gram matrix with all its possible hyperedges
     --elliptic n [--complement|--all]:    generates a n qubit elliptic configuration (or their complement or all of them)
     --hyperbolic n [--complement|--all]:  generates a n qubit hyperbolic configuration (or their complement or all of them)
     --perpset n [--complement]:           generates a n qubit perpset configuration (or their complement or all of them)
@@ -48,7 +49,9 @@ SOLVER
 
 OTHER OPTIONS
 
-    --heuristic-iter:                     the number of iterations for the heuristic solver (default: 10000)
+    --heuristic-iter n:                     the number n of iterations for the heuristic solver (default: 10000)
+    --heuristic-threshold n:                the threshold n for the heuristic solver (default: different values per thread)
+    --heuristic-flip-prob n:                the probability n of flipping a bit for the heuristic solver (default: 0.99)
 
 GRAPH VISUALIZATION MODES
 
