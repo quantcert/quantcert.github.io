@@ -113,15 +113,15 @@ NOTHING
 - No lines will pass through this filter.
 
 
-POINT DEGREE
-- This filter checks if any of the points in the geometry (for a given line) match a specific point degree specified by the user.
+POINT DEGREE d
+- This filter checks if any of the points in the geometry (for a given line) match a specific point degree d specified by the user.
 
 
-OBSERVABLE VALUE
-- This filter checks if any of the points in the geometry for a line match a specific observable value given by the user.
+OBSERVABLE VALUE d
+- This filter checks if any of the points in the geometry for a line match a specific observable d given by the user.
 
 
-LINE DEGREE
+LINE DEGREE d1,d2,...
 - This filter checks if the sorted degrees of the points in the geometry for each line exactly match the degrees specified by the user.
 
 
@@ -134,6 +134,6 @@ SYMMETRIC
 |-------------------------|----------------------------------------------------|
 |<a id="MSGDH23"/>[MSGDH23]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *Revealing contextuality of quantum configurations with a SAT solver*. Journées nationales du GDR GPL (Génie de la Programmation et du Logiciel), CNRS, groupe de travail LVP (Langages et Vérification de Programmes), 5-8 juin 2023, Rennes, France. Session posters et démos, 6 juin 2023. [Poster](23poster.pdf){:target="_blank"}|
 |<a id="MSGDH24"/>[MSGDH24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and de Boutray, Henri and Holweck, Frédéric. *New and improved bounds on the contextuality degree of multi-qubit configurations*. Mathematical Structures in Computer Science, 2024. [Article](https://doi.org/10.1017/S0960129524000057){:target="_blank"}|
-|<a id="MSGHK24"/>[MSGHK24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and Holweck, Frédéric and Kelleher, Colm. *A new heuristic approach for contextuality degree estimates and its four- to six-qubit portrayals*. [Article](https://iopscience.iop.org/article/10.1088/1751-8121/add22b){:target="_blank"}|
-|<a id="MG24"/>[MG24]|Muller, Axel and Giorgetti, Alain. *An abstract structure determines the contextuality degree of observable-based Kochen-Specker proofs*. [Article](https://arxiv.org/html/2410.14463v1){:target="_blank"}|
+|<a id="MSGHK24"/>[MSGHK24]|Muller, Axel and Saniga, Metod and Giorgetti, Alain and Holweck, Frédéric and Kelleher, Colm. *A new heuristic approach for contextuality degree estimates and its four- to six-qubit portrayals*. Journal of Physics A: Mathematical and Theoretical, 2025. [Article](https://iopscience.iop.org/article/10.1088/1751-8121/add22b){:target="_blank"}|
+|<a id="MG24"/>[MG24]|Muller, Axel and Giorgetti, Alain. *An abstract structure determines the contextuality degree of observable-based Kochen-Specker proofs*. Journal of mathematical Physics, 2025. [Article](https://doi.org/10.1063/5.0245341){:target="_blank"}|
 |<a id="SHKMGD25"/>[SHKMGD25]|Saniga, Metod and Holweck, Frédéric and Kelleher, Colm and Muller, Axel and Giorgetti, Alain and de Boutray, Henri. *Hexagons govern three-qubit contextuality*. [Article](https://quantum-journal.org/papers/q-2025-01-20-1601){:target="_blank"}|
